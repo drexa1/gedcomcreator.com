@@ -3,15 +3,19 @@ import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
 import {CouldNotReadError, EmptyFileError, uploadValidation} from "./upload-validate";
 import {MessageState} from "./app";
-import {useValidationSchemas} from "./upload-validate-schemas";
+import {useValidationFilenames} from "./upload-validate-filenames";
 
 export const UploadDropzone = ({ showMessage }: { showMessage: (message: MessageState) => void }) => {
     const i18n = useIntl();
-    const validationSchemas = useValidationSchemas();
+    const validationFilenames = useValidationFilenames();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [files, setFiles] = useState<File[]>([]);
-    const [fileErrors, setFileErrors] = useState<Record<string, string | null>>(Object.fromEntries(Object.keys(validationSchemas).map(key => [key, null])));
-
+    const [fileErrors, setFileErrors] = useState<Record<string, string | null>>(
+        Array.from(validationFilenames).reduce((acc, filename) => {
+            acc[filename] = null;
+            return acc;
+        }, {})
+    );  // Initialize dict from the keys from validationFilenames
 
     const handleUploadClick = () => {
         fileInputRef.current?.click();
@@ -27,19 +31,14 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
     };
 
     const HandleFiles = async (newFiles: FileList) => {
-        uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
+        uploadValidation(newFiles, files, validationFilenames, (validFiles, errors) => {
             // add to previous files
             setFiles([...files, ...validFiles]);
             // error handling
             errors.forEach(error => {
-                switch (true) {
-                    case error instanceof CouldNotReadError || error instanceof EmptyFileError:
-                        setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
-                        break;
-                    default:
-                        console.error("Unknown error:", error);
-                        break;
-                }
+                if(error instanceof CouldNotReadError || error instanceof EmptyFileError)
+                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
+                console.error(error);
             });
         });
     }

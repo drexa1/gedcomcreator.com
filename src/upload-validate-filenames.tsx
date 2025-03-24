@@ -1,6 +1,6 @@
 import {useIntl} from "react-intl";
 
-export const useValidationSchemas = (): Set<string> => {  // custom hook naming convention
+export const useValidationFilenames = (): Set<string> => {  // custom hook naming convention
     const i18n = useIntl();
     return new Set([
         i18n.formatMessage({ id: "individuals.csv", defaultMessage: "1-individuals.csv" }),
