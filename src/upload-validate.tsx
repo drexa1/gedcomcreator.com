@@ -1,54 +1,51 @@
-import {validateFile, validateFilenames} from "./upload-validate-schemas";
+import {EmptyFileError, validateFile, validateFilenames} from "./upload-validate-schemas";
 
-export const uploadValidation = (newFiles: FileList | null, files: File[], validationSchemas: Record<string, string[]>) => {
-    if (!newFiles || newFiles.length === 0) return null;
-
-    // Validate number of uploaded files
-    if (newFiles.length + files.length > Object.keys(validationSchemas).length) {
-        throw new Error("Too many files");
+export const uploadValidation = (
+    uploadedFiles: FileList,
+    files: File[],
+    validationSchemas: Record<string, string[]>,
+    onComplete: (validFiles: File[], errors: Error[]) => void
+) => {
+    // Check number of uploaded files
+    if (uploadedFiles.length + files.length > Object.keys(validationSchemas).length) {
+        console.log("Too many files uploaded")
     }
 
-    // Validate filenames
-    validateFilenames(Array.from(newFiles), Object.keys(validationSchemas))
+    // Validate filenames and filter out the ones that are not our templates
+    const validFilenames = validateFilenames(uploadedFiles, Object.keys(validationSchemas))
+    const newFiles = Array.from(uploadedFiles).filter(file => validFilenames.has(file.name));
 
-    // Basic schema validation
-    const fileReadPromises = Array.from(newFiles).map(file => {
-        return new Promise<File | null>((resolve) => {
-            const reader = new FileReader();
-            reader.readAsText(file, "UTF-8");
-            reader.onload = () => {
-                const fileContent = reader.result as string;
-                const validFile = validateFile(file.name, fileContent, validationSchemas);
-                if (validFile) {
-                    resolve(file);
-                } else {
-                    resolve(null);
-                }
-            };
-            reader.onerror = () => {
-                console.error("Error reading file:", file.name);
-                // setErrors(["Error reading file:" + file.name])  TODO: add to errors bundle
-                resolve(null); // Resolve as null to exclude invalid files
-            };
+    Promise.allSettled(
+        newFiles.map(file =>
+            new Promise<File | null>((resolve, reject) => {
+                const reader = new FileReader();
+                reader.readAsText(file, "UTF-8");
+                // Basic schema validation
+                reader.onload = () => {
+                    try {
+                        const fileValidated = validateFile(file.name, reader.result as string, validationSchemas)
+                        resolve(fileValidated ? file : null);
+                    } catch (error) {
+                        reject(error);
+                    }
+                };
+                // Generic load error
+                reader.onerror = () => reject(new Error(`Error loading file: ${file.name}`));
+            })
+        )
+    ).then(promiseResults => {
+        const validFiles: File[] = [];
+        const errors: Error[] = [];
+        promiseResults.forEach(result => {
+            if (result.status === "fulfilled") {
+                validFiles.push(result.value!);
+            } else if (result.status === "rejected") {
+                errors.push(result.reason);
+            }
         });
-    });
-
-    // Wait for all file validations to complete
-    Promise.all(fileReadPromises).then(results => {
-        const validFiles = results.filter((file): file is File => file !== null);
-        const invalidFiles = Array.from(newFiles)
-            .filter((file: File) => !validFiles.some(validFile => validFile.name === file.name))
-            .map(file => `'${file.name}'`)
-            .join(", ");
-        if (invalidFiles) {
-            // setErrors(["Files had errors. You can check them in the browser console"])  TODO: add to errors bundle
+        if (validFiles.length < 3) {
+            console.error("Still missing some required files...");
         }
-        // Validate number of files
-        if (!validFiles || validFiles.length < 3 || validFiles.length > 3) {
-            console.error("Wrong number of uploaded files...")
-            return null  // TODO: reject(new Error(`Invalid file format: ${file.name}`));
-        }
-        // (event.target as HTMLInputElement).value = ''; // Reset the file input
-        return validFiles;
+        onComplete(validFiles, errors);
     });
 }

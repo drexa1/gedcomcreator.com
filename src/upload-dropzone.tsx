@@ -3,7 +3,7 @@ import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
 import {uploadValidation} from "./upload-validate";
 import {MessageState} from "./app";
-import {useValidationSchemas} from "./upload-validate-schemas";
+import {EmptyFileError, useValidationSchemas} from "./upload-validate-schemas";
 
 export const UploadDropzone = ({ showMessage }: { showMessage: (message: MessageState) => void }) => {
     const [files, setFiles] = useState<File[]>([]);
@@ -21,25 +21,23 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
     };
 
     const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
-        await HandleFiles(event.target.files);
+        await HandleFiles(event.target.files!);
     };
 
-    const HandleFiles = async (newFiles: FileList | null) => {
-        try {
-            if (newFiles) {
-                const validFiles = uploadValidation(newFiles, files, validationSchemas);
-                if (validFiles) {
-                    setFiles([...files, ...validFiles]);  // add to previous
+    const HandleFiles = async (newFiles: FileList) => {
+        uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
+            // add to previous
+            setFiles([...files, ...validFiles]);
+            // error handling
+            errors.forEach(error => {
+                if (error instanceof EmptyFileError) {
+                    console.error(error);
+                } else {
+                    console.error("File processing error:", error);
                 }
-            }
-        } catch (e: any) {
-            showMessage({
-                type: "negative",
-                header: (<FormattedMessage id={ e.literal } defaultMessage={ e.message } values={ e.details }/>),
-                text: null
             });
-        }
-    };
+        });
+    }
 
     function getFileEmoji(filename: string) {
         if (files.some(file => file.name === filename)) {

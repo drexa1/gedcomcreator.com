@@ -1,6 +1,12 @@
 import {useIntl} from "react-intl";
 import Papa from "papaparse";
 
+export class EmptyFileError extends Error {
+    constructor(message: string) {
+        super(message);
+    }
+}
+
 export const useValidationSchemas = () => {  // custom hook naming convention
     const i18n = useIntl();
 
@@ -23,41 +29,46 @@ export const useValidationSchemas = () => {  // custom hook naming convention
 
     // { filenames: required columns }
     return {
-        individualsFilename: individualsFileColumns,
-        parentsFilename: parentsFileColumns,
-        relationshipsFilename: relationshipsFileColumns
+        [individualsFilename]: individualsFileColumns,
+        [parentsFilename]: parentsFileColumns,
+        [relationshipsFilename]: relationshipsFileColumns
     };
 };
 
-export function validateFilenames(files: File[], validFilenames: string[]): void {
+export function validateFilenames(files: FileList, expectedFilenames: string[]): Set<string> {
+    const validFilenames = new Set<string>();
     const invalidFilenames = new Set<string>();
-    for (const file of files) {
-        if (!validFilenames.includes(file.name)) {
+    for (const file of Array.from(files)) {
+        if (expectedFilenames.includes(file.name)) {
+            validFilenames.add(file.name);
+        } else {
             invalidFilenames.add(file.name);
         }
     }
     if (invalidFilenames.size > 0) {
-        throw new Error("These are not the files we are looking for");
+        console.log("These are not the files we are looking for: " + invalidFilenames);
     }
+    return validFilenames;
 }
 
-export function validateFile(filename: string, content: string, validationSchemas: Record<string, string[]>) {
+export function validateFile(filename: string, content: string, validationSchemas: Record<string, string[]>): boolean {
     const parsedData = Papa.parse(content, { header: true, skipEmptyLines: true });
     if (parsedData.errors.length) {
         console.error("CSV loading errors:", parsedData.errors);
         return false;
     }
     const rows = parsedData.data as Record<string, string>[];
+    if (!rows.length) {
+        throw new EmptyFileError(filename)
+    }
     return validateColumns(filename, rows, validationSchemas[filename])
 }
 
-function validateColumns(filename: string, rows: Record<string, string>[], requiredColumns: string[]) {
-    // Check for missing columns
+function validateColumns(filename: string, rows: Record<string, string>[], requiredColumns: string[]): boolean {
     const headers = Object.keys(rows[0]);
     const missingColumns = requiredColumns.filter(col => !headers.includes(col));
-    if (missingColumns.length) {
-        const error = `${filename}: the following required columns are missing: ${missingColumns.join(", ")}`
-        console.error(error);
+    if (missingColumns.length > 0) {
+        console.error(`${filename}: the following required columns are missing: ${missingColumns.join(", ")}`);
         return false;
     }
     return true;
