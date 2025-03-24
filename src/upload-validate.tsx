@@ -1,12 +1,11 @@
 import {validateFile, validateFilenames} from "./upload-validate-schemas";
-import {TooManyFilesError} from "./upload-exceptions";
 
 export const uploadValidation = (newFiles: FileList | null, files: File[], validationSchemas: Record<string, string[]>) => {
     if (!newFiles || newFiles.length === 0) return null;
 
     // Validate number of uploaded files
     if (newFiles.length + files.length > Object.keys(validationSchemas).length) {
-        throw new TooManyFilesError(newFiles.length);
+        throw new Error("Too many files");
     }
 
     // Validate filenames

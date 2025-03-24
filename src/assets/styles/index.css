@@ -261,7 +261,7 @@ p span {
     justify-content: center;
     width: 100%;
     max-width: 800px;
-    height: 200px;
+    height: 250px;
     background: url('../img/dash-rectangle.svg') no-repeat center;
     transition: background-color 0.3s ease;
     border-radius: 20px;
@@ -278,6 +278,14 @@ p span {
 
 .dropzone p:last-of-type {
     margin-bottom: 20px;
+}
+
+.upload-needed-files {
+    text-align: left;
+}
+
+.upload-needed-files p {
+    font-weight: bold;
 }
 
 /* Responsive: Stack boxes on smaller screens */

@@ -9,7 +9,7 @@
 [x] Examples popup
 [x] Refactor to components
 [x] File upload exceptions
-[ ] Space for upload errors
+[x] Space for upload errors
 [ ] Files upload validation
 [ ] Improve carousel arrows
 

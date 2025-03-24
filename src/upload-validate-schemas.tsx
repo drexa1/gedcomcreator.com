@@ -1,6 +1,5 @@
 import {useIntl} from "react-intl";
 import Papa from "papaparse";
-import {InvalidFilenamesError} from "./upload-exceptions";
 
 export const useValidationSchemas = () => {  // custom hook naming convention
     const i18n = useIntl();
@@ -38,7 +37,7 @@ export function validateFilenames(files: File[], validFilenames: string[]): void
         }
     }
     if (invalidFilenames.size > 0) {
-        throw new InvalidFilenamesError(Array.from(invalidFilenames));
+        throw new Error("These are not the files we are looking for");
     }
 }
 
