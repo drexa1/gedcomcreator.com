@@ -51,6 +51,10 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
         ) : <></>  // don't display anything specifically
     }
 
+    function enableSubmit() {
+        return files.length === validationFilenames.size && Object.keys(fileErrors).length === 0;
+    }
+
     return (
         <div className="ui upload-container">
             <div
@@ -84,7 +88,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
                     <FormattedMessage id="dropzone.button.browse-files" defaultMessage="Browse files"/>
                 </Button>
             </div>
-            <Button primary disabled={true}>
+            <Button primary disabled={!enableSubmit()}>
                 <FormattedMessage id="dropzone.button.submit" defaultMessage="Submit"/>
             </Button>
         </div>
