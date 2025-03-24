@@ -1,9 +1,9 @@
-import React, {ChangeEvent, DragEvent, ReactElement, useRef, useState} from "react";
+import React, {ChangeEvent, DragEvent, useRef, useState} from "react";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
-import {uploadValidation} from "./upload-validate";
+import {CouldNotReadError, EmptyFileError, uploadValidation} from "./upload-validate";
 import {MessageState} from "./app";
-import {CouldNotReadError, EmptyFileError, MissingColumnsError, useValidationSchemas} from "./upload-validate-schemas";
+import {useValidationSchemas} from "./upload-validate-schemas";
 
 export const UploadDropzone = ({ showMessage }: { showMessage: (message: MessageState) => void }) => {
     const i18n = useIntl();
@@ -34,9 +34,6 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
             errors.forEach(error => {
                 switch (true) {
                     case error instanceof CouldNotReadError || error instanceof EmptyFileError:
-                        setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
-                        break;
-                    case error instanceof MissingColumnsError:
                         setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
                         break;
                     default:

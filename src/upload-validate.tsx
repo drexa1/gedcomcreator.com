@@ -1,18 +1,18 @@
-import {EmptyFileError, validateFile, validateFilenames} from "./upload-validate-schemas";
+import Papa from "papaparse";
 
 export const uploadValidation = (
     uploadedFiles: FileList,
     files: File[],
-    validationSchemas: Record<string, string[]>,
+    validationSchemas: Set<string>,
     onComplete: (validFiles: File[], errors: Error[]) => void
 ) => {
     // Check number of uploaded files
-    if (uploadedFiles.length + files.length > Object.keys(validationSchemas).length) {
+    if (uploadedFiles.length + files.length > validationSchemas.size) {
         console.log("Too many files uploaded")
     }
 
     // Validate filenames and filter out the ones that are not our templates
-    const validFilenames = validateFilenames(uploadedFiles, Object.keys(validationSchemas))
+    const validFilenames = validateFilenames(uploadedFiles, validationSchemas)
     const newFiles = Array.from(uploadedFiles).filter(file => validFilenames.has(file.name));
 
     Promise.allSettled(
@@ -23,7 +23,7 @@ export const uploadValidation = (
                 // Basic schema validation
                 reader.onload = () => {
                     try {
-                        const fileValidated = validateFile(file.name, reader.result as string, validationSchemas)
+                        const fileValidated = validateFile(file.name, reader.result as string)
                         resolve(fileValidated ? file : null);
                     } catch (error) {
                         reject(error);
@@ -48,4 +48,29 @@ export const uploadValidation = (
         }
         onComplete(validFiles, errors);
     });
+}
+
+function validateFilenames(files: FileList, expectedFilenames: Set<string>): Set<string> {
+    const validFilenames = new Set<string>();
+    const invalidFilenames = new Set<string>();
+    Array.from(files).forEach(f => (expectedFilenames.has(f.name) ? validFilenames : invalidFilenames).add(f.name));
+    if (invalidFilenames.size > 0) {
+        console.error(`These are not the 🤖 we are looking for: ${[...invalidFilenames].join(", ")}`);
+    }
+    return validFilenames;
+}
+
+export class CouldNotReadError extends Error {}
+export class EmptyFileError extends Error {}
+
+function validateFile(filename: string, content: string): boolean {
+    const parsedData = Papa.parse(content, { header: true, skipEmptyLines: true });
+    if (parsedData.errors.length) {
+        throw new CouldNotReadError(filename)
+    }
+    const rows = parsedData.data as Record<string, string>[];
+    if (!rows.length) {
+        throw new EmptyFileError(filename)
+    }
+    return true
 }
