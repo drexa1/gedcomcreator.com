@@ -30,21 +30,21 @@ export const uploadValidation = (
                     }
                 };
                 // Generic load error
-                reader.onerror = () => reject(new Error(`Error loading file: ${file.name}`));
+                reader.onerror = () => reject(new Error(`Error reading file: ${file.name}`));
             })
         )
     ).then(promiseResults => {
         const validFiles: File[] = [];
         const errors: Error[] = [];
-        promiseResults.forEach(result => {
-            if (result.status === "fulfilled") {
-                validFiles.push(result.value!);
-            } else if (result.status === "rejected") {
-                errors.push(result.reason);
+        promiseResults.forEach(promiseResult => {
+            if (promiseResult.status === "fulfilled") {
+                validFiles.push(promiseResult.value!);
+            } else if (promiseResult.status === "rejected") {
+                errors.push(promiseResult.reason);
             }
         });
         if (validFiles.length < 3) {
-            console.error("Still missing some required files...");
+            console.warn("Still missing some required files...");
         }
         onComplete(validFiles, errors);
     });

@@ -280,12 +280,29 @@ p span {
     margin-bottom: 20px;
 }
 
-.upload-needed-files {
+.needed-files {
     text-align: left;
 }
 
-.upload-needed-files p {
+.needed-files p {
     font-weight: bold;
+}
+
+.needed-files-emojis p {
+    width: 30px;
+    height: 22px;
+}
+
+.needed-files-emoji {
+    cursor: pointer;
+}
+
+.needed-files-emoji[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    color: palevioletred;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Responsive: Stack boxes on smaller screens */

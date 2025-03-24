@@ -3,13 +3,15 @@ import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
 import {uploadValidation} from "./upload-validate";
 import {MessageState} from "./app";
-import {EmptyFileError, useValidationSchemas} from "./upload-validate-schemas";
+import {CouldNotReadError, EmptyFileError, MissingColumnsError, useValidationSchemas} from "./upload-validate-schemas";
 
 export const UploadDropzone = ({ showMessage }: { showMessage: (message: MessageState) => void }) => {
-    const [files, setFiles] = useState<File[]>([]);
-    const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const validationSchemas = useValidationSchemas();
     const i18n = useIntl();
+    const validationSchemas = useValidationSchemas();
+    const fileInputRef = useRef<HTMLInputElement | null>(null);
+    const [files, setFiles] = useState<File[]>([]);
+    const [fileErrors, setFileErrors] = useState<Record<string, string | null>>(Object.fromEntries(Object.keys(validationSchemas).map(key => [key, null])));
+
 
     const handleUploadClick = () => {
         fileInputRef.current?.click();
@@ -26,24 +28,31 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
 
     const HandleFiles = async (newFiles: FileList) => {
         uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
-            // add to previous
+            // add to previous files
             setFiles([...files, ...validFiles]);
             // error handling
             errors.forEach(error => {
-                if (error instanceof EmptyFileError) {
-                    console.error(error);
-                } else {
-                    console.error("File processing error:", error);
+                switch (true) {
+                    case error instanceof CouldNotReadError || error instanceof EmptyFileError:
+                        setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
+                        break;
+                    case error instanceof MissingColumnsError:
+                        setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
+                        break;
+                    default:
+                        console.error("Unknown error:", error);
+                        break;
                 }
             });
         });
     }
 
     function getFileEmoji(filename: string) {
-        if (files.some(file => file.name === filename)) {
-            return "🎉"
-        }
-        return null;
+        return files.some(f => f.name === filename) ? (
+            <span >🎉</span>
+        ) : fileErrors[filename] ? (
+            <span className="needed-files-emoji" data-tooltip={fileErrors[filename]}>⚠️</span>  // TODO: replace by i18n formatted message
+        ) : null  // don't display anything specifically
     }
 
     return (
@@ -61,13 +70,13 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
                 <p style={{marginBottom: 10}}><FormattedMessage id="dropzone.p.files-needed" defaultMessage="We need all the 3 files:"/></p>
                 <div style={{display: "flex"}}>
                     {/* Needed files */}
-                    <div className="upload-needed-files">
+                    <div className="needed-files">
                         <p><FormattedMessage id="individuals.csv"   defaultMessage="1-individuals.csv"/></p>
                         <p><FormattedMessage id="parents.csv"       defaultMessage="2-parents.csv"/></p>
                         <p><FormattedMessage id="relationships.csv" defaultMessage="3-relationships.csv"/></p>
                     </div>
                     {/* Success/warning emojis */}
-                    <div>
+                    <div className="needed-files-emojis">
                         <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "individuals.csv",   defaultMessage: "1-individuals.csv" }))}</p>
                         <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "parents.csv",       defaultMessage: "2-parents.csv" }))}</p>
                         <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "relationships.csv", defaultMessage: "3-relationships.csv" }))}</p>
