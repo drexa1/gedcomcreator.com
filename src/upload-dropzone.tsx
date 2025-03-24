@@ -52,7 +52,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
             <span >🎉</span>
         ) : fileErrors[filename] ? (
             <span className="needed-files-emoji" data-tooltip={fileErrors[filename]}>⚠️</span>  // TODO: replace by i18n formatted message
-        ) : null  // don't display anything specifically
+        ) : <></>  // don't display anything specifically
     }
 
     return (
