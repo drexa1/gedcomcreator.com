@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "target": "es5",
+    "downlevelIteration": true,
     "lib": ["dom", "esnext"],
     "jsx": "react-jsx",
     "module": "esnext",
