@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/gedcomcreator/static/css/main.65e49dee.chunk.css",
-    "main.js": "/gedcomcreator/static/js/main.b1fdd1ef.chunk.js",
-    "main.js.map": "/gedcomcreator/static/js/main.b1fdd1ef.chunk.js.map",
+    "main.css": "/gedcomcreator/static/css/main.388561f0.chunk.css",
+    "main.js": "/gedcomcreator/static/js/main.5369d9f3.chunk.js",
+    "main.js.map": "/gedcomcreator/static/js/main.5369d9f3.chunk.js.map",
     "runtime-main.js": "/gedcomcreator/static/js/runtime-main.92c543c8.js",
     "runtime-main.js.map": "/gedcomcreator/static/js/runtime-main.92c543c8.js.map",
     "static/css/2.8f96662a.chunk.css": "/gedcomcreator/static/css/2.8f96662a.chunk.css",
@@ -10,7 +10,7 @@
     "static/js/2.e35a5d8d.chunk.js.map": "/gedcomcreator/static/js/2.e35a5d8d.chunk.js.map",
     "index.html": "/gedcomcreator/index.html",
     "static/css/2.8f96662a.chunk.css.map": "/gedcomcreator/static/css/2.8f96662a.chunk.css.map",
-    "static/css/main.65e49dee.chunk.css.map": "/gedcomcreator/static/css/main.65e49dee.chunk.css.map",
+    "static/css/main.388561f0.chunk.css.map": "/gedcomcreator/static/css/main.388561f0.chunk.css.map",
     "static/js/2.e35a5d8d.chunk.js.LICENSE.txt": "/gedcomcreator/static/js/2.e35a5d8d.chunk.js.LICENSE.txt",
     "static/media/semantic.min.css": "/gedcomcreator/static/media/outline-icons.ddae9b1b.woff",
     "static/media/index.css": "/gedcomcreator/static/media/dash-rectangle.789e77ef.svg"
@@ -19,7 +19,7 @@
     "static/js/runtime-main.92c543c8.js",
     "static/css/2.8f96662a.chunk.css",
     "static/js/2.e35a5d8d.chunk.js",
-    "static/css/main.65e49dee.chunk.css",
-    "static/js/main.b1fdd1ef.chunk.js"
+    "static/css/main.388561f0.chunk.css",
+    "static/js/main.5369d9f3.chunk.js"
   ]
 }
