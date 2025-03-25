@@ -55,10 +55,10 @@ export const UploadDropzone = () => {
                     setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
                 }
                 console.error(`${error.message}: ${error.name}`);  // file: error type
-                if (files.size !== Object.keys(validationSchemas).length) {
-                    console.warn("Still missing some of the required files...");
-                }
             });
+            if (files.size !== Object.keys(validationSchemas).length) {
+                console.warn("Still missing some of the required files...");
+            }
         });
     }
 
