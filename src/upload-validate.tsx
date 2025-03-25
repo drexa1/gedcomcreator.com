@@ -45,7 +45,7 @@ export const uploadValidation = (
             }
         });
         if (files.size + validFiles.length !== Object.keys(validationSchemas).length) {
-            console.warn("Still missing some required files...");
+            console.warn("Still missing some of the required files...");
         }
         onComplete(validFiles, errors);
     });
