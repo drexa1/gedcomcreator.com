@@ -87,7 +87,8 @@ function validateFile(filename: string, content: string, validationSchemas: Reco
         throw new MissingColumnsError(filename, missingHeaders)
     }
     const missingValues: Set<string> = new Set();
-    const requiredColumns = validationSchemas[filename].filter(col => col.startsWith('*'));
+    // remove the trailing '*' of the required columns
+    const requiredColumns = validationSchemas[filename].filter(col => col.startsWith('*')).map(col => col.replace(/^\*/, ''));
     rows.forEach(row => {
         requiredColumns.forEach(column => {
             if (!row[column] || row[column].trim() === "") {
