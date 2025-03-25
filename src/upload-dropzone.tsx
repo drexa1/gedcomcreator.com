@@ -10,7 +10,7 @@ export const UploadDropzone = () => {
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [files, setFiles] = useState<Map<string, File>>(new Map());
     const [fileErrors, setFileErrors] = useState<Record<string, string | null>>(
-        Object.fromEntries(Object.keys(validationSchemas).map((key) => [key, null]))  // Initialize from the keys from validationSchemas
+        Object.fromEntries(Object.keys(validationSchemas).map(filename => [filename, null]))  // Initialize from the keys from validationSchemas
     );
 
     const handleUploadClick = () => {
@@ -28,10 +28,12 @@ export const UploadDropzone = () => {
 
     const HandleFiles = async (newFiles: FileList) => {
         uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
-            // add to previous files
+            // Add to previous files
             addFiles(validFiles)
-            // error handling
+            // Error handling
             errors.forEach(error => {
+                // Remove existing file (even if it was correct)
+                setFiles(prevFiles => new Map([...prevFiles].filter(([filename]) => filename !== error.message)));
                 if(error instanceof CouldNotReadError) {
                     const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.CouldNotReadError", defaultMessage: "Could not be read" })
                     setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
@@ -56,13 +58,20 @@ export const UploadDropzone = () => {
         // Adding valid files with deduplication based on "name"
         setFiles(prevFiles => {
             const newFiles = new Map(prevFiles);
-            validFiles.forEach(f => newFiles.set(f.name, f));
+            validFiles.forEach(f => {
+                newFiles.set(f.name, f);
+                // Clear errors from previous uploads
+                setFileErrors(prevErrors => {
+                    const { [f.name]: _, ...newErrors } = prevErrors;
+                    return newErrors;
+                });
+            });
             return newFiles;
         });
     };
 
     function getFileEmoji(filename: string) {
-        return files.has(filename) ? (
+        return files.has(filename) && !fileErrors[filename] ? (
             <span >🎉</span>
         ) : fileErrors[filename] ? (
             <span className="needed-files-emoji" data-tooltip={fileErrors[filename]}>⚠️</span>

@@ -17,7 +17,7 @@ export const uploadValidation = (
     onComplete: (validFiles: File[], errors: Error[]) => void
 ) => {
     // Check number of uploaded files
-    if (uploadedFiles.length + files.size > Object.keys(validationSchemas).length) {
+    if (files.size + uploadedFiles.length > Object.keys(validationSchemas).length) {
         console.warn("Too many files uploaded")
     }
 
@@ -53,7 +53,7 @@ export const uploadValidation = (
                 errors.push(promiseResult.reason);
             }
         });
-        if (validFiles.length < 3) {
+        if (files.size + validFiles.length !== Object.keys(validationSchemas).length) {
             console.warn("Still missing some required files...");
         }
         onComplete(validFiles, errors);
