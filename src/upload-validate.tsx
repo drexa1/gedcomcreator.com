@@ -1,18 +1,7 @@
 import Papa from "papaparse";
 
-export class CouldNotReadError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = "CouldNotReadError";  // Explicitly set to avoid class minification
-    }
-}
-
-export class EmptyFileError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = "EmptyFileError";  // Explicitly set to avoid class minification
-    }
-}
+export class CouldNotReadError extends Error {}
+export class EmptyFileError extends Error {}
 
 export const uploadValidation = (
     uploadedFiles: FileList,

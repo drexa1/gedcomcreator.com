@@ -57,8 +57,12 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
         ) : <></>  // don't display anything specifically
     }
 
-    function enableSubmit() {
+    function enableSubmit(): boolean {
         return files.length === validationFilenames.size && Object.keys(fileErrors).length === 0;
+    }
+
+    function submitFiles() {
+        console.info("There goes the files 🚀")
     }
 
     return (
@@ -94,7 +98,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
                     <FormattedMessage id="dropzone.button.browse-files" defaultMessage="Browse files"/>
                 </Button>
             </div>
-            <Button primary disabled={!enableSubmit()}>
+            <Button primary disabled={!enableSubmit()} onClink={submitFiles()}>
                 <FormattedMessage id="dropzone.button.submit" defaultMessage="Submit"/>
             </Button>
         </div>
