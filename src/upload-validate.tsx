@@ -18,7 +18,7 @@ export const uploadValidation = (
 ) => {
     // Check number of uploaded files
     if (uploadedFiles.length + files.length > Object.keys(validationSchemas).length) {
-        console.log("Too many files uploaded")
+        console.warn("Too many files uploaded")
     }
 
     // Validate filenames and filter out the ones that are not our templates
