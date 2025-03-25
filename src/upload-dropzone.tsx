@@ -55,7 +55,7 @@ export const UploadDropzone = () => {
     }
 
     const addFiles = (validFiles: File[]) => {
-        // Adding valid files with deduplication based on "name"
+        // Adding valid files with deduplication based on the filename
         setFiles(prevFiles => {
             const newFiles = new Map(prevFiles);
             validFiles.forEach(f => {
