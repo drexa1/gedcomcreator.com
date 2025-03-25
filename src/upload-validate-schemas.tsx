@@ -9,15 +9,15 @@ export const useValidationSchemas = () => {  // custom hook naming convention
 
     const individualsFileColumns = i18n.formatMessage({
         id: "individuals.file.columns",
-        defaultMessage: "individual_id, name, surname1, surname2, nickname, gender, birth_date, birth_place, notes"
+        defaultMessage: "*individual_id, name, surname1, surname2, nickname, *gender, birth_date, birth_place, notes"
     }).split(", ");
     const parentsFileColumns = i18n.formatMessage({
         id: "parents.file.columns",
-        defaultMessage: "individual_id, father_id, mother_id"
+        defaultMessage: "*individual_id, *father_id, *mother_id"
     }).split(", ");
     const relationshipsFileColumns = i18n.formatMessage({
         id: "relationships.file.columns",
-        defaultMessage: "husband_id, wife_id, notes"
+        defaultMessage: "*husband_id, *wife_id, notes"
     }).split(", ");
 
     // { filenames: required columns }

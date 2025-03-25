@@ -79,14 +79,24 @@ function validateFile(filename: string, content: string, validationSchemas: Reco
     if (!rows.length) {
         throw new EmptyFileError(filename)
     }
-    return validateColumns(filename, rows, validationSchemas[filename])
-}
-
-function validateColumns(filename: string, rows: Record<string, string>[], expectedColumns: string[]): boolean {
     const headers = Object.keys(rows[0]);
-    const missingHeaders = expectedColumns.filter(col => !headers.includes(col));
-    if (missingHeaders.length > 0) {
+    // remove the trailing '*' of the required columns
+    const everyExpectedColumn = validationSchemas[filename].map(col => col.replace(/^\*/, ''));
+    const missingHeaders = everyExpectedColumn.filter(col => !headers.includes(col));
+    if (missingHeaders.length) {
         throw new MissingColumnsError(filename, missingHeaders)
+    }
+    const missingValues: Set<string> = new Set();
+    const requiredColumns = validationSchemas[filename].filter(col => col.startsWith('*'));
+    rows.forEach(row => {
+        requiredColumns.forEach(column => {
+            if (!row[column] || row[column].trim() === "") {
+                missingValues.add(column);
+            }
+        });
+    });
+    if (missingValues.size) {
+        throw new MissingColumnsError(filename, Array.from(missingValues))
     }
     return true;
 }

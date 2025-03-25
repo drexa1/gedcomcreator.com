@@ -3,7 +3,7 @@
   "individuals.csv": "1-individuos.csv",
   "parents.csv": "2-padres.csv",
   "relationships.csv": "3-relaciones.csv",
-  "individuals.file.columns": "id_individuo, nombre, apellido1, apellido2, apodo, genero, fecha_nacimiento, lugar_nacimiento, notas",
-  "parents.file.columns": "id_individuo, id_padre, id_madre",
-  "relationships.file.columns": "id_marido, id_mujer, notas"
+  "individuals.file.columns": "*id_individuo, nombre, apellido1, apellido2, apodo, *genero, fecha_nacimiento, lugar_nacimiento, notas",
+  "parents.file.columns": "*id_individuo, *id_padre, *id_madre",
+  "relationships.file.columns": "*id_marido, *id_mujer, notas"
 }
