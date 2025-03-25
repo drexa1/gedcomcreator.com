@@ -299,7 +299,7 @@ p span {
 
 .needed-files-emoji[data-tooltip]:hover::after {
     content: attr(data-tooltip);
-    color: palevioletred;
+    color: coral;
     font-weight: bold;
     padding: 10px;
     border-radius: 5px;
