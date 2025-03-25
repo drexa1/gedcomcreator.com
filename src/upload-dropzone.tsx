@@ -101,7 +101,7 @@ export const UploadDropzone = () => {
                     <FormattedMessage id="dropzone.button.browse-files" defaultMessage="Browse files"/>
                 </Button>
             </div>
-            <Button primary disabled={!enableSubmit()} onClick={submitFiles}>
+            <Button primary disabled={!enableSubmit()} onClick={() => submitFiles()}>
                 <FormattedMessage id="dropzone.button.submit" defaultMessage="Submit"/>
             </Button>
         </div>

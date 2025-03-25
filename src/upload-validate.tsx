@@ -82,11 +82,11 @@ function validateFile(filename: string, content: string, validationSchemas: Reco
     return validateColumns(filename, rows, validationSchemas[filename])
 }
 
-function validateColumns(filename: string, rows: Record<string, string>[], requiredColumns: string[]): boolean {
+function validateColumns(filename: string, rows: Record<string, string>[], expectedColumns: string[]): boolean {
     const headers = Object.keys(rows[0]);
-    const missingColumns = requiredColumns.filter(col => !headers.includes(col));
-    if (missingColumns.length > 0) {
-        throw new MissingColumnsError(filename, missingColumns)
+    const missingHeaders = expectedColumns.filter(col => !headers.includes(col));
+    if (missingHeaders.length > 0) {
+        throw new MissingColumnsError(filename, missingHeaders)
     }
     return true;
 }
