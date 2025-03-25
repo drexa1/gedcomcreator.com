@@ -10,7 +10,7 @@
 [x] Refactor to components
 [x] File upload exceptions
 [x] Space for upload errors
-[x] Files upload validation
+[ ] Files upload validation
 [ ] Improve carousel arrows
 
 [ ] Backend bootstrap  
