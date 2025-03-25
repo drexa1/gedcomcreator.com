@@ -16,6 +16,7 @@
   "dropzone.button.browse-files": "Explorar archivos",
   "dropzone.upload.error.CouldNotReadError": "No se pudo leer",
   "dropzone.upload.error.EmptyFileError": "Está vacío",
+  "dropzone.upload.error.InvalidHeaderError": "No parece nuestra plantilla",
   "dropzone.upload.error.MissingColumnsError": "Le falta: {missingColumns}",
   "dropzone.button.submit": "Enviar"
 }

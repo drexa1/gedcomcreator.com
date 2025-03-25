@@ -1,7 +1,13 @@
 import React, {ChangeEvent, DragEvent, useRef, useState} from "react";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
-import {CouldNotReadError, EmptyFileError, MissingColumnsError, uploadValidation} from "./upload-validate";
+import {
+    CouldNotReadError,
+    EmptyFileError,
+    InvalidHeaderError,
+    MissingColumnsError,
+    uploadValidation
+} from "./upload-validate";
 import {useValidationSchemas} from "./upload-validate-schemas";
 
 export const UploadDropzone = () => {
@@ -40,6 +46,10 @@ export const UploadDropzone = () => {
                 }
                 if(error instanceof EmptyFileError) {
                     const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.EmptyFileError", defaultMessage: "Looks empty" })
+                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
+                }
+                if(error instanceof InvalidHeaderError) {
+                    const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.InvalidHeaderError", defaultMessage: "Does not look like our template" })
                     setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
                 }
                 if(error instanceof MissingColumnsError) {

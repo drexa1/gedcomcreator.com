@@ -2,6 +2,7 @@ import Papa from "papaparse";
 
 export class CouldNotReadError extends Error {}
 export class EmptyFileError extends Error {}
+export class InvalidHeaderError extends Error {}
 export class MissingColumnsError extends Error {
     missingColumns: string[];
     constructor(message: string, missingColumns: string[]) {
@@ -84,7 +85,7 @@ function validateFile(filename: string, content: string, validationSchemas: Reco
     const everyExpectedColumn = validationSchemas[filename].map(col => col.replace(/^\*/, ''));
     const missingHeaders = everyExpectedColumn.filter(col => !headers.includes(col));
     if (missingHeaders.length) {
-        throw new MissingColumnsError(filename, missingHeaders)
+        throw new InvalidHeaderError(filename)
     }
     const missingValues: Set<string> = new Set();
     // remove the trailing '*' of the required columns
