@@ -54,7 +54,7 @@ export const UploadDropzone = () => {
                     );
                     setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
                 }
-                console.error(error);
+                console.error(`${error.message}: ${error.name}`);  // file: error type
             });
         });
     }

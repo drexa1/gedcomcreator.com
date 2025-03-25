@@ -1,12 +1,28 @@
 import {useIntl} from "react-intl";
 
-export class CouldNotReadError extends Error {}
-export class EmptyFileError extends Error {}
-export class InvalidHeaderError extends Error {}
+export class CouldNotReadError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "CouldNotReadError";
+    }
+}
+export class EmptyFileError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "EmptyFileError";
+    }
+}
+export class InvalidHeaderError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "InvalidHeaderError";
+    }
+}
 export class MissingColumnsError extends Error {
     missingColumns: string[];
     constructor(message: string, missingColumns: string[]) {
         super(message);
+        this.name = "MissingColumnsError";
         this.missingColumns = missingColumns;
     }
 }
