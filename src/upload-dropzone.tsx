@@ -61,7 +61,7 @@ export const UploadDropzone = () => {
     }
 
     function enableSubmit(): boolean {
-        return files.length === Object.keys(validationSchemas).length && Object.keys(fileErrors).length === 0;
+        return files.length === Object.keys(validationSchemas).length && Object.values(fileErrors).every(error => error === null);
     }
 
     function submitFiles() {
