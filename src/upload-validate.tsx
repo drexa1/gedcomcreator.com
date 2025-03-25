@@ -12,12 +12,12 @@ export class MissingColumnsError extends Error {
 
 export const uploadValidation = (
     uploadedFiles: FileList,
-    files: File[],
+    files: Set<File>,
     validationSchemas: Record<string, string[]>,
     onComplete: (validFiles: File[], errors: Error[]) => void
 ) => {
     // Check number of uploaded files
-    if (uploadedFiles.length + files.length > Object.keys(validationSchemas).length) {
+    if (uploadedFiles.length + files.size > Object.keys(validationSchemas).length) {
         console.warn("Too many files uploaded")
     }
 

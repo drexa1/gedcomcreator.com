@@ -8,7 +8,7 @@ export const UploadDropzone = () => {
     const i18n = useIntl();
     const validationSchemas = useValidationSchemas();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
-    const [files, setFiles] = useState<File[]>([]);
+    const [files, setFiles] = useState<Set<File>>(new Set());
     const [fileErrors, setFileErrors] = useState<Record<string, string | null>>(
         Object.fromEntries(Object.keys(validationSchemas).map((key) => [key, null]))  // Initialize from the keys from validationSchemas
     );
@@ -29,7 +29,7 @@ export const UploadDropzone = () => {
     const HandleFiles = async (newFiles: FileList) => {
         uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
             // add to previous files
-            setFiles([...files, ...validFiles]);
+            setFiles(prevFiles => new Set([...prevFiles, ...validFiles]));
             // error handling
             errors.forEach(error => {
                 if(error instanceof CouldNotReadError) {
@@ -53,7 +53,7 @@ export const UploadDropzone = () => {
     }
 
     function getFileEmoji(filename: string) {
-        return files.some(f => f.name === filename) ? (
+        return [...files].some(f => f.name === filename) ? (
             <span >🎉</span>
         ) : fileErrors[filename] ? (
             <span className="needed-files-emoji" data-tooltip={fileErrors[filename]}>⚠️</span>
@@ -61,7 +61,7 @@ export const UploadDropzone = () => {
     }
 
     function enableSubmit(): boolean {
-        return files.length === Object.keys(validationSchemas).length && Object.values(fileErrors).every(error => error === null);
+        return files.size === Object.keys(validationSchemas).length && Object.values(fileErrors).every(error => error === null);
     }
 
     function submitFiles() {
