@@ -51,7 +51,7 @@ export const uploadValidation = (
     });
 }
 
-function validateFilenames(files: FileList, allowedFilenames: string[]): Set<string> {
+const validateFilenames = (files: FileList, allowedFilenames: string[]): Set<string> => {
     const validFilenames = new Set<string>();
     const invalidFilenames = new Set<string>();
     Array.from(files).forEach(f => (allowedFilenames.includes(f.name) ? validFilenames : invalidFilenames).add(f.name));
@@ -61,7 +61,7 @@ function validateFilenames(files: FileList, allowedFilenames: string[]): Set<str
     return validFilenames;
 }
 
-function validateFile(filename: string, content: string, validationSchemas: Record<string, string[]>): boolean {
+const validateFile = (filename: string, content: string, validationSchemas: Record<string, string[]>) => {
     const parsedData = Papa.parse(content, { header: true, skipEmptyLines: true });
     if (parsedData.errors.length) {
         throw new CouldNotReadError(filename)

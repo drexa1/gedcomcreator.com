@@ -1,14 +1,9 @@
 import React, {ChangeEvent, DragEvent, useRef, useState} from "react";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
-import {
-    CouldNotReadError,
-    EmptyFileError,
-    InvalidHeaderError,
-    MissingColumnsError,
-    uploadValidation
-} from "./upload-validate";
+import {CouldNotReadError, EmptyFileError, InvalidHeaderError, MissingColumnsError} from "./upload-validate-schemas";
 import {useValidationSchemas} from "./upload-validate-schemas";
+import {uploadValidation} from "./upload-validate";
 
 export const UploadDropzone = () => {
     const i18n = useIntl();
@@ -21,16 +16,16 @@ export const UploadDropzone = () => {
 
     const handleUploadClick = () => {
         fileInputRef.current?.click();
-    };
+    }
 
     const handleUploadDrop = async (event: DragEvent<HTMLDivElement>) => {
         event.preventDefault();
         await HandleFiles(event.dataTransfer.files);
-    };
+    }
 
     const handleFileChange = async (event: ChangeEvent<HTMLInputElement>) => {
         await HandleFiles(event.target.files!);
-    };
+    }
 
     const HandleFiles = async (newFiles: FileList) => {
         uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
@@ -78,9 +73,9 @@ export const UploadDropzone = () => {
             });
             return newFiles;
         });
-    };
+    }
 
-    function getFileEmoji(filename: string) {
+    const getFileEmoji = (filename: string) => {
         return files.has(filename) && !fileErrors[filename] ? (
             <span >🎉</span>
         ) : fileErrors[filename] ? (
@@ -88,11 +83,11 @@ export const UploadDropzone = () => {
         ) : <></>  // don't display anything specifically
     }
 
-    function enableSubmit(): boolean {
+    const enableSubmit = () => {
         return files.size === Object.keys(validationSchemas).length && Object.values(fileErrors).every(error => error === null);
     }
 
-    function submitFiles() {
+    const submitFiles = () => {
         console.info("There goes the files 🚀")
     }
 

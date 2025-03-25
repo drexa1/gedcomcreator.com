@@ -9,18 +9,11 @@ import resources_pl from "./i18n/resources/pl.json";
 import {IntlProvider} from "react-intl";
 
 const i18nBundle = {
-    es: {
-        ...messages_es,
-        ...resources_es
-    },
-    pl: {
-        ...messages_pl,
-        ...resources_pl
-    }
+    es: {...messages_es, ...resources_es},
+    pl: {...messages_pl, ...resources_pl}
 };
 
 const language = navigator.language && navigator.language.split(/[-_]/)[0];
-
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     <IntlProvider locale={language} messages={i18nBundle[language]}>
         <App/>
