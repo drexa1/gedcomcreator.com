@@ -37,7 +37,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
             // error handling
             errors.forEach(error => {
                 if(error instanceof CouldNotReadError || error instanceof EmptyFileError)
-                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.constructor.name}));
+                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.name}));
                 console.error(error);
             });
         });
