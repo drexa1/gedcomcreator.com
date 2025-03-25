@@ -32,7 +32,7 @@ export const UploadDropzone = () => {
             addFiles(validFiles)
             // Error handling
             errors.forEach(error => {
-                // Remove existing file (even if it was correct)
+                // Remove existing file (even if the previous was correct already) -allows to reupload (despite incorrect)
                 setFiles(prevFiles => new Map([...prevFiles].filter(([filename]) => filename !== error.message)));
                 if(error instanceof CouldNotReadError) {
                     const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.CouldNotReadError", defaultMessage: "Could not be read" })
