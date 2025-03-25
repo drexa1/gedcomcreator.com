@@ -2,20 +2,27 @@ import Papa from "papaparse";
 
 export class CouldNotReadError extends Error {}
 export class EmptyFileError extends Error {}
+export class MissingColumnsError extends Error {
+    missingColumns: string[];
+    constructor(message: string, missingColumns: string[]) {
+        super(message);
+        this.missingColumns = missingColumns;
+    }
+}
 
 export const uploadValidation = (
     uploadedFiles: FileList,
     files: File[],
-    validationSchemas: Set<string>,
+    validationSchemas: Record<string, string[]>,
     onComplete: (validFiles: File[], errors: Error[]) => void
 ) => {
     // Check number of uploaded files
-    if (uploadedFiles.length + files.length > validationSchemas.size) {
+    if (uploadedFiles.length + files.length > Object.keys(validationSchemas).length) {
         console.log("Too many files uploaded")
     }
 
     // Validate filenames and filter out the ones that are not our templates
-    const validFilenames = validateFilenames(uploadedFiles, validationSchemas)
+    const validFilenames = validateFilenames(uploadedFiles, Object.keys(validationSchemas))
     const newFiles = Array.from(uploadedFiles).filter(file => validFilenames.has(file.name));
 
     Promise.allSettled(
@@ -26,7 +33,7 @@ export const uploadValidation = (
                 // Basic schema validation
                 reader.onload = () => {
                     try {
-                        const fileValidated = validateFile(file.name, reader.result as string)
+                        const fileValidated = validateFile(file.name, reader.result as string, validationSchemas)
                         resolve(fileValidated ? file : null);
                     } catch (error) {
                         reject(error);
@@ -53,17 +60,17 @@ export const uploadValidation = (
     });
 }
 
-function validateFilenames(files: FileList, expectedFilenames: Set<string>): Set<string> {
+function validateFilenames(files: FileList, allowedFilenames: string[]): Set<string> {
     const validFilenames = new Set<string>();
     const invalidFilenames = new Set<string>();
-    Array.from(files).forEach(f => (expectedFilenames.has(f.name) ? validFilenames : invalidFilenames).add(f.name));
+    Array.from(files).forEach(f => (allowedFilenames.includes(f.name) ? validFilenames : invalidFilenames).add(f.name));
     if (invalidFilenames.size > 0) {
         console.error(`These are not the 🤖 we are looking for: ${[...invalidFilenames].join(", ")}`);
     }
     return validFilenames;
 }
 
-function validateFile(filename: string, content: string): boolean {
+function validateFile(filename: string, content: string, validationSchemas: Record<string, string[]>): boolean {
     const parsedData = Papa.parse(content, { header: true, skipEmptyLines: true });
     if (parsedData.errors.length) {
         throw new CouldNotReadError(filename)
@@ -72,5 +79,14 @@ function validateFile(filename: string, content: string): boolean {
     if (!rows.length) {
         throw new EmptyFileError(filename)
     }
-    return true
+    return validateColumns(filename, rows, validationSchemas[filename])
+}
+
+function validateColumns(filename: string, rows: Record<string, string>[], requiredColumns: string[]): boolean {
+    const headers = Object.keys(rows[0]);
+    const missingColumns = requiredColumns.filter(col => !headers.includes(col));
+    if (missingColumns.length > 0) {
+        throw new MissingColumnsError(filename, missingColumns)
+    }
+    return true;
 }

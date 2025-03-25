@@ -1,21 +1,17 @@
 import React, {ChangeEvent, DragEvent, useRef, useState} from "react";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Button, Icon} from "semantic-ui-react";
-import {CouldNotReadError, EmptyFileError, uploadValidation} from "./upload-validate";
-import {MessageState} from "./app";
-import {useValidationFilenames} from "./upload-validate-filenames";
+import {CouldNotReadError, EmptyFileError, MissingColumnsError, uploadValidation} from "./upload-validate";
+import {useValidationSchemas} from "./upload-validate-schemas";
 
-export const UploadDropzone = ({ showMessage }: { showMessage: (message: MessageState) => void }) => {
+export const UploadDropzone = () => {
     const i18n = useIntl();
-    const validationFilenames = useValidationFilenames();
+    const validationSchemas = useValidationSchemas();
     const fileInputRef = useRef<HTMLInputElement | null>(null);
     const [files, setFiles] = useState<File[]>([]);
     const [fileErrors, setFileErrors] = useState<Record<string, string | null>>(
-        Array.from(validationFilenames).reduce((acc, filename) => {
-            acc[filename] = null;
-            return acc;
-        }, {})
-    );  // Initialize dict from the keys from validationFilenames
+        Object.fromEntries(Object.keys(validationSchemas).map((key) => [key, null]))  // Initialize from the keys from validationSchemas
+    );
 
     const handleUploadClick = () => {
         fileInputRef.current?.click();
@@ -31,7 +27,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
     };
 
     const HandleFiles = async (newFiles: FileList) => {
-        uploadValidation(newFiles, files, validationFilenames, (validFiles, errors) => {
+        uploadValidation(newFiles, files, validationSchemas, (validFiles, errors) => {
             // add to previous files
             setFiles([...files, ...validFiles]);
             // error handling
@@ -42,6 +38,13 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
                 }
                 if(error instanceof EmptyFileError) {
                     const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.EmptyFileError", defaultMessage: "Looks empty" })
+                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
+                }
+                if(error instanceof MissingColumnsError) {
+                    const formattedMessage = i18n.formatMessage(
+                        { id: "dropzone.upload.error.MissingColumnsError", defaultMessage: "Missing: {missingColumns}"},
+                        { missingColumns: error.missingColumns.join(", ") }
+                    );
                     setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
                 }
                 console.error(error);
@@ -58,7 +61,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
     }
 
     function enableSubmit(): boolean {
-        return files.length === validationFilenames.size && Object.keys(fileErrors).length === 0;
+        return files.length === Object.keys(validationSchemas).length && Object.keys(fileErrors).length === 0;
     }
 
     function submitFiles() {
@@ -98,7 +101,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
                     <FormattedMessage id="dropzone.button.browse-files" defaultMessage="Browse files"/>
                 </Button>
             </div>
-            <Button primary disabled={!enableSubmit()} onClink={submitFiles()}>
+            <Button primary disabled={!enableSubmit()} onClick={submitFiles}>
                 <FormattedMessage id="dropzone.button.submit" defaultMessage="Submit"/>
             </Button>
         </div>
