@@ -1,5 +1,16 @@
 import {useIntl} from "react-intl";
 
+export class CouldNotReadError extends Error {}
+export class EmptyFileError extends Error {}
+export class InvalidHeaderError extends Error {}
+export class MissingColumnsError extends Error {
+    missingColumns: string[];
+    constructor(message: string, missingColumns: string[]) {
+        super(message);
+        this.missingColumns = missingColumns;
+    }
+}
+
 export const useValidationSchemas = () => {  // custom hook naming convention
     const i18n = useIntl();
 

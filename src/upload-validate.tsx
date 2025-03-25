@@ -1,15 +1,5 @@
 import Papa from "papaparse";
-
-export class CouldNotReadError extends Error {}
-export class EmptyFileError extends Error {}
-export class InvalidHeaderError extends Error {}
-export class MissingColumnsError extends Error {
-    missingColumns: string[];
-    constructor(message: string, missingColumns: string[]) {
-        super(message);
-        this.missingColumns = missingColumns;
-    }
-}
+import {CouldNotReadError, EmptyFileError, InvalidHeaderError, MissingColumnsError} from "./upload-validate-schemas";
 
 export const uploadValidation = (
     uploadedFiles: FileList,
