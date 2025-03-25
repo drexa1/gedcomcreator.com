@@ -14,5 +14,7 @@
   "dropzone.p.browse-them": "explore sus archivos",
   "dropzone.p.files-needed": "Necesitaremos los 3 archivos:",
   "dropzone.button.browse-files": "Explorar archivos",
+  "dropzone.upload.error.CouldNotReadError": "No se pudo leer",
+  "dropzone.upload.error.EmptyFileError": "Está vacío",
   "dropzone.button.submit": "Enviar"
 }

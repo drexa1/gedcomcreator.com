@@ -1,5 +1,19 @@
 import Papa from "papaparse";
 
+export class CouldNotReadError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "CouldNotReadError";  // Explicitly set to avoid class minification
+    }
+}
+
+export class EmptyFileError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "EmptyFileError";  // Explicitly set to avoid class minification
+    }
+}
+
 export const uploadValidation = (
     uploadedFiles: FileList,
     files: File[],
@@ -58,20 +72,6 @@ function validateFilenames(files: FileList, expectedFilenames: Set<string>): Set
         console.error(`These are not the 🤖 we are looking for: ${[...invalidFilenames].join(", ")}`);
     }
     return validFilenames;
-}
-
-export class EmptyFileError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = "EmptyFileError";  // Explicitly set to avoid class minification
-    }
-}
-
-export class CouldNotReadError extends Error {
-    constructor(message: string) {
-        super(message);
-        this.name = "CouldNotReadError";  // Explicitly set to avoid class minification
-    }
 }
 
 function validateFile(filename: string, content: string): boolean {

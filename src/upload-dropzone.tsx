@@ -36,8 +36,14 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
             setFiles([...files, ...validFiles]);
             // error handling
             errors.forEach(error => {
-                if(error instanceof CouldNotReadError || error instanceof EmptyFileError)
-                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: error.name}));
+                if(error instanceof CouldNotReadError) {
+                    const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.CouldNotReadError", defaultMessage: "Could not be read" })
+                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
+                }
+                if(error instanceof EmptyFileError) {
+                    const formattedMessage = i18n.formatMessage({ id: "dropzone.upload.error.EmptyFileError", defaultMessage: "Looks empty" })
+                    setFileErrors(prevErrors => ({...prevErrors, [error.message]: formattedMessage}));
+                }
                 console.error(error);
             });
         });
@@ -47,7 +53,7 @@ export const UploadDropzone = ({ showMessage }: { showMessage: (message: Message
         return files.some(f => f.name === filename) ? (
             <span >🎉</span>
         ) : fileErrors[filename] ? (
-            <span className="needed-files-emoji" data-tooltip={fileErrors[filename]}>⚠️</span>  // TODO: replace by i18n formatted message
+            <span className="needed-files-emoji" data-tooltip={fileErrors[filename]}>⚠️</span>
         ) : <></>  // don't display anything specifically
     }
 
