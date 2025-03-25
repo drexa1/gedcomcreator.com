@@ -60,8 +60,19 @@ function validateFilenames(files: FileList, expectedFilenames: Set<string>): Set
     return validFilenames;
 }
 
-export class CouldNotReadError extends Error {}
-export class EmptyFileError extends Error {}
+export class EmptyFileError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "EmptyFileError";  // Explicitly set to avoid class minification
+    }
+}
+
+export class CouldNotReadError extends Error {
+    constructor(message: string) {
+        super(message);
+        this.name = "CouldNotReadError";  // Explicitly set to avoid class minification
+    }
+}
 
 function validateFile(filename: string, content: string): boolean {
     const parsedData = Papa.parse(content, { header: true, skipEmptyLines: true });
