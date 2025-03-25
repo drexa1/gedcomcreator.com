@@ -60,7 +60,7 @@ export const UploadDropzone = () => {
             const newFiles = new Map(prevFiles);
             validFiles.forEach(f => {
                 newFiles.set(f.name, f);
-                // Clear errors from previous uploads
+                // Clear any errors from previous uploads
                 setFileErrors(prevErrors => {
                     const { [f.name]: _, ...newErrors } = prevErrors;
                     return newErrors;
