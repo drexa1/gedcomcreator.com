@@ -12,7 +12,7 @@ export class MissingColumnsError extends Error {
 
 export const uploadValidation = (
     uploadedFiles: FileList,
-    files: Set<File>,
+    files: Map<string, File>,
     validationSchemas: Record<string, string[]>,
     onComplete: (validFiles: File[], errors: Error[]) => void
 ) => {
