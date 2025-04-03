@@ -9,9 +9,9 @@ export const DownloadTemplates = ({ showMessage }: { showMessage: (msg: MessageS
     const templatesFileName = formatMessage({ id: "templates.zip", defaultMessage: "templates.zip" });
     const templatesFilePath = `${process.env.PUBLIC_URL}/templates/${language}/${templatesFileName}`;
 
-    const individualsFilename = formatMessage({ id: "individuals.csv", defaultMessage: "1-individuals.csv" });
-    const parentsFilename = formatMessage({ id: "parents.csv", defaultMessage: "2-parents.csv" });
-    const relationshipsFilename = formatMessage({ id: "relationships.csv", defaultMessage: "3-relationships.csv" });
+    const individualsFilename = formatMessage({ id: "individuals.tsv", defaultMessage: "1-individuals.tsv" });
+    const parentsFilename = formatMessage({ id: "parents.tsv", defaultMessage: "2-parents.tsv" });
+    const relationshipsFilename = formatMessage({ id: "relationships.tsv", defaultMessage: "3-relationships.tsv" });
 
     fetch(templatesFilePath)
         .then((response) => response.blob())

@@ -30,9 +30,9 @@ export class MissingColumnsError extends Error {
 export const useValidationSchemas = () => {  // custom hook naming convention
     const i18n = useIntl();
 
-    const individualsFilename = i18n.formatMessage({id: "individuals.csv", defaultMessage: "1-individuals.csv"});
-    const parentsFilename = i18n.formatMessage({id: "parents.csv", defaultMessage: "2-parents.csv"});
-    const relationshipsFilename = i18n.formatMessage({id: "relationships.csv", defaultMessage: "3-relationships.csv"});
+    const individualsFilename = i18n.formatMessage({id: "individuals.tsv", defaultMessage: "1-individuals.tsv"});
+    const parentsFilename = i18n.formatMessage({id: "parents.tsv", defaultMessage: "2-parents.tsv"});
+    const relationshipsFilename = i18n.formatMessage({id: "relationships.tsv", defaultMessage: "3-relationships.tsv"});
 
     const individualsFileColumns = i18n.formatMessage({
         id: "individuals.file.columns",

@@ -110,15 +110,15 @@ export const UploadDropzone = () => {
                 <div style={{display: "flex"}}>
                     {/* Needed files */}
                     <div className="needed-files">
-                        <p><FormattedMessage id="individuals.csv"   defaultMessage="1-individuals.csv"/></p>
-                        <p><FormattedMessage id="parents.csv"       defaultMessage="2-parents.csv"/></p>
-                        <p><FormattedMessage id="relationships.csv" defaultMessage="3-relationships.csv"/></p>
+                        <p><FormattedMessage id="individuals.tsv"   defaultMessage="1-individuals.tsv"/></p>
+                        <p><FormattedMessage id="parents.tsv"       defaultMessage="2-parents.tsv"/></p>
+                        <p><FormattedMessage id="relationships.tsv" defaultMessage="3-relationships.tsv"/></p>
                     </div>
                     {/* Success/warning emojis */}
                     <div className="needed-files-emojis">
-                        <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "individuals.csv",   defaultMessage: "1-individuals.csv" }))}</p>
-                        <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "parents.csv",       defaultMessage: "2-parents.csv" }))}</p>
-                        <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "relationships.csv", defaultMessage: "3-relationships.csv" }))}</p>
+                        <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "individuals.tsv",   defaultMessage: "1-individuals.tsv" }))}</p>
+                        <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "parents.tsv",       defaultMessage: "2-parents.tsv" }))}</p>
+                        <p>&nbsp;&nbsp;{getFileEmoji(i18n.formatMessage({ id: "relationships.tsv", defaultMessage: "3-relationships.tsv" }))}</p>
                     </div>
                 </div>
 
