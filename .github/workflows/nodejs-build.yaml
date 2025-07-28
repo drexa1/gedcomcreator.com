@@ -28,4 +28,5 @@ jobs:
       - name: Deploy
         run: |
           git remote set-url origin https://git:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
+          echo "gedcomcreator.com" > build/CNAME
           npm run deploy -- -u "github-actions-bot <support+actions@github.com>"
