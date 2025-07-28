@@ -1,0 +1,41 @@
+{
+  "name": "topola",
+  "version": "3.6.2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "build-demo": "browserify src/index.ts -p [ tsify ] -o demo/bundle.js --s topola",
+    "server": "browser-sync start --server demo --files demo",
+    "start": "concurrently \"npm run watch\" \"npm run server\"",
+    "deploy": "gh-pages -d demo"
+  },
+  "author": "Przemek Wiech",
+  "license": "Apache 2.0",
+  "devDependencies": {
+    "@types/d3-array": "^2.9.0",
+    "@types/d3-selection": "^2.0.0",
+    "@types/d3-transition": "^2.0.0",
+    "jsdom": "^16.5.2",
+    "typescript": "^4.2.3"
+  },
+  "dependencies": {
+    "array-flat-polyfill": "^1.0.1",
+    "d3-array": "^2.12.1",
+    "d3-flextree": "^2.1.1",
+    "d3-hierarchy": "^2.0.0",
+    "d3-selection": "^2.0.0",
+    "d3-transition": "^2.0.0",
+    "parse-gedcom": "^1.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/PeWu/topola.git"
+  },
+  "keywords": [
+    "gedcom",
+    "genealogy",
+    "visualization",
+    "family tree"
+  ]
+}
