@@ -1,5 +1,6 @@
 {
   "name": "gedcomcreator.com",
+  "homepage": ".",
   "version": "1.0.0",
   "main": "src/index.tsx",
   "dependencies": {
@@ -76,7 +77,6 @@
     "start": "react-scripts start",
     "deploy": "gh-pages -d build"
   },
-  "homepage": ".",
   "browserslist": [
     ">0.2%",
     "not dead",
