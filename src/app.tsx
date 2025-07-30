@@ -351,8 +351,8 @@ export function App() {
     }, [location.pathname]);
 
     useEffect(() => {
-        analyticsEvent("topola_landing");
-        const rootElement = document.getElementById('root');
+        analyticsEvent("gedcomcreator_landing");
+        const rootElement = document.getElementById("root");
         if (location.pathname === '/') {
             // @ts-ignore
             rootElement.classList.add("bgLogo");
