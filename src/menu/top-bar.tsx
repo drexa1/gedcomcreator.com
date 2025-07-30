@@ -16,6 +16,12 @@ enum ScreenSize {
     SMALL,
 }
 
+interface Props {
+    showingChart: boolean;
+    data?: JsonGedcomData;
+    eventHandlers: EventHandlers;
+}
+
 interface EventHandlers {
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
@@ -23,12 +29,6 @@ interface EventHandlers {
     onDownloadSvg: () => void;
     onDownloadGedcom: () => void;
     onResetView: () => void;
-}
-
-interface Props {
-    showingChart: boolean;
-    data?: JsonGedcomData;
-    eventHandlers: EventHandlers;
 }
 
 export function TopBar(props: Props) {
