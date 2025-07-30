@@ -87,7 +87,8 @@ export function App() {
 
     async function loadDataFromArgs() {
         if (location.pathname !== "/view") {
-            if (state !== AppState.INITIAL) setState(AppState.INITIAL);
+            if (state !== AppState.INITIAL)
+                setState(AppState.INITIAL);
             return;
         }
         const args = getArguments(location, allLanguages);
@@ -110,45 +111,14 @@ export function App() {
                 setShowSidePanel(args.showSidePanel);
                 setState(AppState.SHOWING_CHART);
             } catch (error: any) {
-                setErrorMessage(getI18nMessage(error, intl));
+                setError(getI18nMessage(error, intl));
+                setState(AppState.ERROR);
             }
         } else if (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE) {
             setChartType(args.chartType);
             setState(AppState.SHOWING_CHART);
             updateDisplay(args.selection !== undefined ? args.selection : startIndi(data));
         }
-    }
-
-    function toggleDetails(config: Config, data: TopolaData | undefined, allLanguages: Language[]) {
-        if (data === undefined) return;
-        // Set up if there are languages
-        config.languageOptions = loadLanguageOptions(data, allLanguages)
-        config.renderLanguagesOption = config.languageOptions.length > 0
-        // Set up if there are ethnicities/tribes
-        config.renderEthnicityOption = Array.from(getEthnicities(data)).length > 0
-        idToIndiMap(data.chartData).forEach((indi) => {
-            indi.hideLanguages = config.languages === LanguagesArg.HIDE;
-            indi.hideEthnicity = config.ethnicity === EthnicityArg.HIDE;
-            indi.hideId = config.id === IdsArg.HIDE;
-            indi.hideSex = config.sex === SexArg.HIDE;
-        });
-    }
-
-    /**
-     * Sets the state with a new individual selection and chart type.
-     */
-    function updateDisplay(newSelection: IndiInfo) {
-        if (!selection || selection.id !== newSelection.id || selection!.generation !== newSelection.generation) {
-            setSelection(newSelection);
-        }
-    }
-
-    /**
-     * Sets error message after data load failure.
-     */
-    function setErrorMessage(message: string) {
-        setError(message);
-        setState(AppState.ERROR);
     }
 
     function isNewData(newSourceSpec: DataSourceSpec, newSelection?: IndiInfo) {
@@ -196,6 +166,30 @@ export function App() {
         }
     }
 
+    function toggleDetails(config: Config, data: TopolaData | undefined, allLanguages: Language[]) {
+        if (data === undefined) return;
+        // Set up if there are languages
+        config.languageOptions = loadLanguageOptions(data, allLanguages)
+        config.renderLanguagesOption = config.languageOptions.length > 0
+        // Set up if there are ethnicities/tribes
+        config.renderEthnicityOption = Array.from(getEthnicities(data)).length > 0
+        idToIndiMap(data.chartData).forEach((indi) => {
+            indi.hideLanguages = config.languages === LanguagesArg.HIDE;
+            indi.hideEthnicity = config.ethnicity === EthnicityArg.HIDE;
+            indi.hideId = config.id === IdsArg.HIDE;
+            indi.hideSex = config.sex === SexArg.HIDE;
+        });
+    }
+
+    /**
+     * Sets the state with a new individual selection and chart type.
+     */
+    function updateDisplay(newSelection: IndiInfo) {
+        if (!selection || selection.id !== newSelection.id || selection!.generation !== newSelection.generation) {
+            setSelection(newSelection);
+        }
+    }
+
     function updateUrl(args: queryString.ParsedQuery<any>) {
         const search = queryString.parse(location.search);
         for (const key in args) {
@@ -205,6 +199,10 @@ export function App() {
         history.push(location);
     }
 
+// ---------------------------------------------------------------------------------------------------------------------
+// EVENT HANDLERS
+// ---------------------------------------------------------------------------------------------------------------------
+
     /**
      * Called when the user clicks an individual box in the chart. Updates the browser URL.
      */
@@ -213,11 +211,6 @@ export function App() {
             indi: selection.id,
             gen: selection.generation,
         });
-    }
-
-    function displayErrorPopup(message: string) {
-        setShowErrorPopup(true);
-        setError(message);
     }
 
     async function onDownloadPdf() {
@@ -280,6 +273,12 @@ export function App() {
         setShowErrorPopup(false);
     }
 
+    function displayErrorPopup(message: string) {
+        setShowErrorPopup(true);
+        setError(message);
+    }
+// ---------------------------------------------------------------------------------------------------------------------
+
     /**
      * Shows an error message in the middle of the screen.
      */
@@ -310,7 +309,7 @@ export function App() {
         );
     }
 
-    function renderMainArea() {
+    function renderApp() {
         switch (state) {
             case AppState.SHOWING_CHART:
             case AppState.LOADING_MORE:
@@ -397,7 +396,7 @@ export function App() {
                 )}
             />
             <Switch>
-                <Route exact path="/view" render={renderMainArea}/>
+                <Route exact path="/view" render={renderApp}/>
                 <Redirect to={"/"}/>
             </Switch>
         </>
