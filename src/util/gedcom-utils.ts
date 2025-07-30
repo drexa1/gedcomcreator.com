@@ -1,4 +1,4 @@
-import {parse as parseGedcom} from "gedcom-parse";
+import {GedcomEntry, parse as parseGedcom} from "parse-gedcom";
 import {I18nError} from "./error-i18n";
 import {gedcomEntriesToJson, JsonFam, JsonGedcomData, JsonImage, JsonIndi} from "../topola";
 import {compareDates} from "./date-utils";
@@ -15,15 +15,6 @@ export interface TopolaData {
     chartData: JsonGedcomData;
     gedcom: GedcomData;
 }
-
-export interface GedcomEntry {
-    level: number;
-    pointer: string;
-    tag: string;
-    data: string;
-    tree: GedcomEntry[];
-}
-
 
 export function startIndi(data: TopolaData | undefined) {
     const egoGen = getEgoGen(data)

@@ -1,35 +1,14 @@
-import flatMap from 'array.prototype.flatmap';
-import {
-    dereference,
-    GedcomData,
-    getData,
-    getFileName,
-    getImageFileEntry
-} from '../util/gedcom-utils';
-import {Events} from './events';
-import {GedcomEntry} from 'parse-gedcom';
-import {MultilineText} from './multiline-text';
-import {TranslatedTag} from './translated-tag';
-import {Header, Item} from 'semantic-ui-react';
-import {FormattedMessage} from 'react-intl';
-import {WrappedImage} from './wrapped-image';
+import flatMap from "array.prototype.flatmap";
+import {dereference, GedcomData, getData, getFileName, getImageFileEntry} from "../util/gedcom-utils";
+import {Events} from "./events";
+import {GedcomEntry} from "parse-gedcom";
+import {MultilineText} from "./multiline-text";
+import {TranslatedTag} from "./translated-tag";
+import {Header, Item} from "semantic-ui-react";
+import {FormattedMessage} from "react-intl";
+import {WrappedImage} from "./wrapped-image";
 
-const EXCLUDED_TAGS = [
-    'BIRT',
-    'BAPM',
-    'CHR',
-    'EVEN',
-    'CENS',
-    'DEAT',
-    'BURI',
-    'NAME',
-    'SEX',
-    'FAMC',
-    'FAMS',
-    'NOTE',
-    'SOUR',
-    'LANG',
-];
+const EXCLUDED_TAGS = ["BIRT", "BAPM", "CHR", "EVEN", "CENS", "DEAT", "BURI", "NAME", "SEX", "FAMC", "FAMS", "NOTE", "SOUR", "LANG"];
 
 function dataDetails(entry: GedcomEntry) {
     const lines = [];
@@ -37,7 +16,7 @@ function dataDetails(entry: GedcomEntry) {
         lines.push(...getData(entry));
     }
     entry.tree
-        .filter((subentry) => subentry.tag === 'NOTE')
+        .filter((subentry) => subentry.tag === "NOTE")
         .forEach((note) =>
             getData(note).forEach((line) => lines.push(<i>{line}</i>)),
         );
@@ -62,7 +41,7 @@ function fileDetails(objectEntry: GedcomEntry) {
         <div className="person-image">
             <WrappedImage
                 url={imageFileEntry.data}
-                filename={getFileName(imageFileEntry) || ''}
+                filename={getFileName(imageFileEntry) || ""}
             />
         </div>
     ) : null;
@@ -79,9 +58,9 @@ function noteDetails(entry: GedcomEntry) {
 }
 
 function nameDetails(entry: GedcomEntry) {
-    const fullName = entry.data.replaceAll('/', '');
+    const fullName = entry.data.replaceAll("/", "");
     const nameType = entry.tree.find(
-        (entry) => entry.tag === 'TYPE' && entry.data !== 'Unknown',
+        (entry) => entry.tag === "TYPE" && entry.data !== "Unknown",
     )?.data;
     return (
         <>
@@ -125,7 +104,7 @@ function getDetails(
  * to another entry.
  */
 function hasData(entry: GedcomEntry) {
-    return entry.tree.length > 0 || (entry.data && !entry.data.startsWith('@'));
+    return entry.tree.length > 0 || (entry.data && !entry.data.startsWith("@"));
 }
 
 function getOtherDetails(entries: GedcomEntry[]) {
@@ -181,12 +160,12 @@ export function Details(props: Props) {
     return (
         <div className="details">
             <Item.Group divided>
-                {getDetails(entries, ['NAME'], nameDetails)}
-                {getDetails(entriesWithData, ['OBJE'], fileDetails)}
+                {getDetails(entries, ["NAME"], nameDetails)}
+                {getDetails(entriesWithData, ["OBJE"], fileDetails)}
                 <Events gedcom={props.gedcom} entries={entries} indi={props.indi}/>
-                {getMultilineDetails(entriesWithData, ['LANG'], ['gedcom.languages', 'Languages'])}
+                {getMultilineDetails(entriesWithData, ["LANG"], ["gedcom.languages", "Languages"])}
                 {getOtherDetails(entriesWithData)}
-                {getDetails(entriesWithData, ['NOTE'], noteDetails)}
+                {getDetails(entriesWithData, ["NOTE"], noteDetails)}
             </Item.Group>
         </div>
     );
