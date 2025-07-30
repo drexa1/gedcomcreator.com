@@ -143,8 +143,6 @@ https://github.com/nodeca/pako/blob/main/LICENSE
  * http://www.mozilla.org/MPL/
  */
 
-/*! @source http://purl.eligrey.com/github/canvas-toBlob.js/blob/master/canvas-toBlob.js */
-
 /**
  * lunr - http://lunrjs.com - A bit like Solr, but much smaller and not as bright - 2.3.9
  * Copyright (C) 2020 Oliver Nightingale
