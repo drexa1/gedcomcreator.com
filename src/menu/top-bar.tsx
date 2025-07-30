@@ -22,6 +22,11 @@ interface Props {
     eventHandlers: EventHandlers;
 }
 
+interface ViewMenusProps {
+    currentView: string;
+    changeView: (view: string) => void;
+}
+
 interface EventHandlers {
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
@@ -84,30 +89,6 @@ export function TopBar(props: Props) {
         }
     }
 
-    interface ViewMenusProps {
-        currentView: string;
-        changeView: (view: string) => void;
-    }
-
-    function ViewMenus({ currentView, changeView }: ViewMenusProps) {
-        return (
-            <>
-                {currentView !== "hourglass" && (
-                    <Dropdown.Item onClick={() => changeView("hourglass")}>
-                        <Icon name="hourglass" />
-                        <FormattedMessage id="menu.hourglass" defaultMessage="Hourglass"/>
-                    </Dropdown.Item>
-                )}
-                {currentView !== "relatives" && (
-                    <Dropdown.Item onClick={() => changeView("relatives")}>
-                        <Icon name="users" />
-                        <FormattedMessage id="menu.relatives" defaultMessage="All relatives"/>
-                    </Dropdown.Item>
-                )}
-            </>
-        );
-    }
-
     function ChartMenus(screenSize: ScreenSize) {
         const [currentView, setCurrentView] = useState("hourglass");
         const changeView = (view: string) => {
@@ -120,9 +101,9 @@ export function TopBar(props: Props) {
             }
         };
 
-        if (!props.showingChart) {
+        if (!props.showingChart)
             return null;
-        }
+
         switch (screenSize) {
             case ScreenSize.LARGE:
                 return (
@@ -227,43 +208,56 @@ export function TopBar(props: Props) {
         }
     }
 
-    function desktopMenus() {
+    function ViewMenus({ currentView, changeView }: ViewMenusProps) {
         return (
             <>
-                {FileMenus(ScreenSize.LARGE)}
-                {ChartMenus(ScreenSize.LARGE)}
-            </>
-        );
-    }
-
-    function mobileMenus() {
-        return (
-            <>
-                <Dropdown
-                    trigger={
-                        <div>
-                            <Icon name="sidebar"/>
-                        </div>
-                    }
-                    className="item"
-                    icon={null}
-                >
-                    <Dropdown.Menu>
-                        {FileMenus(ScreenSize.SMALL)}
-                        {ChartMenus(ScreenSize.SMALL)}
-                    </Dropdown.Menu>
-                </Dropdown>
+                {currentView !== "hourglass" && (
+                    <Dropdown.Item onClick={() => changeView("hourglass")}>
+                        <Icon name="hourglass" />
+                        <FormattedMessage id="menu.hourglass" defaultMessage="Hourglass"/>
+                    </Dropdown.Item>
+                )}
+                {currentView !== "relatives" && (
+                    <Dropdown.Item onClick={() => changeView("relatives")}>
+                        <Icon name="users" />
+                        <FormattedMessage id="menu.relatives" defaultMessage="All relatives"/>
+                    </Dropdown.Item>
+                )}
             </>
         );
     }
 
     return (
         <>
+            {/* Desktop menus */}
             <Menu as={Media} greaterThanOrEqual="large" attached="top" color="blue" size="large">
-                {desktopMenus()}
+                {
+                    <>
+                        {FileMenus(ScreenSize.LARGE)}
+                        {ChartMenus(ScreenSize.LARGE)}
+                    </>
+                }
             </Menu>
+            {/* Mobile menus */}
             <Menu as={Media} at="small" attached="top" color="blue" size="large">
-                {mobileMenus()}
+                {
+                    <>
+                        <Dropdown
+                            trigger={
+                                <div>
+                                    <Icon name="sidebar"/>
+                                </div>
+                            }
+                            className="item"
+                            icon={null}
+                        >
+                            <Dropdown.Menu>
+                                {FileMenus(ScreenSize.SMALL)}
+                                {ChartMenus(ScreenSize.SMALL)}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </>
+                }
             </Menu>
         </>
     );
