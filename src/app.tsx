@@ -333,14 +333,16 @@ export function App() {
     }
 
     // Function to load languages from CSV
-    const loadAllLanguages = async () => {
-        const allLanguages = await CSVLoader.loadLanguages("data/language/languages.csv") || [];
-        setAllLanguages(allLanguages);
-    };
-
-    // useEffect to load languages when pathname is '/view'
     useEffect(() => {
-        loadAllLanguages();
+        if (location.pathname === "/") {
+            const loadLanguages = async () => {
+                const allLanguages = await CSVLoader.loadLanguages("data/language/languages.csv") || [];
+                setAllLanguages(allLanguages);
+            };
+            loadLanguages().catch(e => {
+                console.error("Failed to load languages:", e);
+            });
+        }
     }, [location.pathname]);
 
     useEffect(() => {
