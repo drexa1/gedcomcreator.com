@@ -12,7 +12,7 @@ import {IntlProvider} from 'react-intl';
 import {MediaContextProvider, mediaStyles} from './util/media';
 import './index.css';
 import 'semantic-ui-css/semantic.min.css';
-import 'canvas-toBlob';
+
 
 const messages = {
     // de: messages_de,

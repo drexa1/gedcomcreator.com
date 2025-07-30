@@ -8,6 +8,7 @@ import {DateOrRange} from '../topola';
 import {formatDateOrRange} from '../util/date-util';
 import Linkify from 'react-linkify';
 
+
 export interface Image {
     url: string;
     filename: string;
