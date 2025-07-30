@@ -1,15 +1,15 @@
-import * as queryString from 'query-string';
-import {Dropdown, Icon, Menu} from 'semantic-ui-react';
-import {FormattedMessage} from 'react-intl';
-import {IndiInfo, JsonGedcomData} from '../topola';
+import queryString from "query-string";
+import {Dropdown, Icon, Menu} from "semantic-ui-react";
+import {FormattedMessage} from "react-intl";
+import {IndiInfo, JsonGedcomData} from "../topola";
 import {useRef, useState} from "react";
 import {ConvertCSVMenu} from "./convert-menu";
-import {Media} from '../util/media-utils';
-import {MenuType} from './menu-item';
-import {SearchBar} from './search';
-import {UploadMenu} from './upload-menu';
-import {UrlMenu} from './url-menu';
-import {useHistory, useLocation} from 'react-router';
+import {Media} from "../util/media-utils";
+import {MenuType} from "./menu-item";
+import {SearchBar} from "./search";
+import {UploadMenu} from "./upload-menu";
+import {UrlMenu} from "./url-menu";
+import {useHistory, useLocation} from "react-router";
 
 enum ScreenSize {
     LARGE,
@@ -88,6 +88,7 @@ export function TopBar(props: Props) {
         currentView: string;
         changeView: (view: string) => void;
     }
+
     function ViewMenus({ currentView, changeView }: ViewMenusProps) {
         return (
             <>
