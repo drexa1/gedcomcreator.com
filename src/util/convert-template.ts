@@ -176,7 +176,7 @@ async function createGedcomString(
 }
 
 async function createHeader(filename: string | null, egoId: string | null, egoGen: string | null) {
-    const headerFile = await fetch("data/header.ged");
+    const headerFile = await fetch("data/gedcom/header.ged");
     const headerTemplate = await headerFile.text();
     const date = new Date().toLocaleDateString('en-GB', {day: '2-digit', month: 'short', year: 'numeric'});
     let replaced = headerTemplate
@@ -200,7 +200,7 @@ async function createTail(filename: string | null) {
             .replace(/\b\w/g, (char) => char.toUpperCase())} family`;
         repoSection += `0 @R0@ REPO\n1 _UID ${uid}\n1 NAME ${repo}\n`
     }
-    const tailFile = await fetch("data/tail.ged");
+    const tailFile = await fetch("data/gedcom/tail.ged");
     const tailTemplate = await tailFile.text();
     return repoSection + tailTemplate
 }

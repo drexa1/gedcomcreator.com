@@ -14,9 +14,9 @@ import {
 } from "./convert-tables";
 import {
     columnsValidation,
-    validateCSV,
+    validateTemplate,
     validateFilenames
-} from "../model/validate-csv";
+} from "../model/validate-template";
 import {csvToGedcom} from "../util/convert-template";
 import {analyticsEvent} from "../util/google-analytics";
 
@@ -65,7 +65,7 @@ export function ConvertCSVMenu(props: Props) {
                 reader.readAsText(file, "UTF-8");
                 reader.onload = () => {
                     const fileContent = reader.result as string;
-                    const validFile = validateCSV(file.name, fileContent);
+                    const validFile = validateTemplate(file.name, fileContent);
                     if (validFile) {
                         resolve(file);
                     } else {

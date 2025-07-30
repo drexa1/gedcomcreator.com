@@ -42,6 +42,7 @@ import {
     LanguagesArg,
     SexArg
 } from './config';
+import CSVLoader from "./datasource/load-csv";
 
 
 /**
@@ -341,7 +342,7 @@ export function App() {
 
     // Function to load languages from CSV
     const loadAllLanguages = async () => {
-        let allLanguages: Language[] = [];
+        const allLanguages = await CSVLoader.loadLanguages("data/language/languages.csv") || [];
         setAllLanguages(allLanguages);
     };
 

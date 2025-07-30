@@ -25,7 +25,7 @@ export function validateFilenames(files: File[], validFilenames: string[]): bool
     return true;
 }
 
-export function validateCSV(filename: string, content: string) {
+export function validateTemplate(filename: string, content: string) {
     const parsedData = Papa.parse(content, { header: true, skipEmptyLines: true });
     if (parsedData.errors.length) {
         console.error("CSV loading errors:", parsedData.errors);
