@@ -1,17 +1,13 @@
-export interface Language {
-    id: string;
-    name: string;
-    iso?: string | null;
-    abbreviation?: string;
-}
+import {Language} from "../model/language";
+
 
 export default class CSVLoader {
     // Singleton
-    private static csvData: Language[] | null = null;
+    private static languagesData: Language[] | null = null;
 
     static async loadLanguages(filePath: string) {
-        if (CSVLoader.csvData) {
-            return CSVLoader.csvData;
+        if (CSVLoader.languagesData) {
+            return CSVLoader.languagesData;
         }
         try {
             const data = await fetch(filePath);
@@ -24,7 +20,7 @@ export default class CSVLoader {
             const nameIndex = headers.indexOf('name');
             const isoIndex = headers.indexOf('ISO 639-3');
 
-            CSVLoader.csvData = rows.slice(1).map(row => {
+            CSVLoader.languagesData = rows.slice(1).map(row => {
                 const values = row.split(',');
                 return {
                     id: values[idIndex],
@@ -33,15 +29,18 @@ export default class CSVLoader {
                     abbreviation: values[isoIndex].toUpperCase() || (values[nameIndex].slice(0, 3).toUpperCase() + '*')
                 } as Language;
             });
-            return CSVLoader.csvData;
+            return CSVLoader.languagesData;
         } catch (error) {
             console.error(error);
             throw error;
         }
     }
 
+    /**
+     * Split by hyphen, underscore, or space.
+     */
     private static title_fn = (str: string) =>
-        str.split(/[-_\s]/) // Split by hyphen, underscore, or space
+        str.split(/[-_\s]/)
            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
            .join('-');
 }
