@@ -1,7 +1,7 @@
-import {GedcomEntry, parse as parseGedcom} from 'parse-gedcom';
-import {I18nError} from './error-i18n';
-import {gedcomEntriesToJson, JsonFam, JsonGedcomData, JsonImage, JsonIndi} from '../topola';
-import {compareDates} from './date-utils';
+import {parse as parseGedcom} from "gedcom-parse";
+import {I18nError} from "./error-i18n";
+import {gedcomEntriesToJson, JsonFam, JsonGedcomData, JsonImage, JsonIndi} from "../topola";
+import {compareDates} from "./date-utils";
 import {Language} from "../model/language";
 
 export interface GedcomData {
@@ -15,6 +15,15 @@ export interface TopolaData {
     chartData: JsonGedcomData;
     gedcom: GedcomData;
 }
+
+export interface GedcomEntry {
+    level: number;
+    pointer: string;
+    tag: string;
+    data: string;
+    tree: GedcomEntry[];
+}
+
 
 export function startIndi(data: TopolaData | undefined) {
     const egoGen = getEgoGen(data)
@@ -95,14 +104,14 @@ export function idToFamMap(data: JsonGedcomData): Map<string, JsonFam> {
 }
 
 function prepareGedcom(entries: GedcomEntry[]): GedcomData {
-    const head = entries.find((entry) => entry.tag === 'HEAD')!;
+    const head = entries.find((entry) => entry.tag === "HEAD")!;
     const indis: { [key: string]: GedcomEntry } = {};
     const fams: { [key: string]: GedcomEntry } = {};
     const other: { [key: string]: GedcomEntry } = {};
     entries.forEach((entry) => {
-        if (entry.tag === 'INDI') {
+        if (entry.tag === "INDI") {
             indis[pointerToId(entry.pointer)] = entry;
-        } else if (entry.tag === 'FAM') {
+        } else if (entry.tag === "FAM") {
             fams[pointerToId(entry.pointer)] = entry;
         } else if (entry.pointer) {
             other[pointerToId(entry.pointer)] = entry;
@@ -217,10 +226,10 @@ export function dereference(
 export function getData(entry: GedcomEntry) {
     const result = [entry.data];
     entry.tree.forEach((subentry) => {
-        if (subentry.tag === 'CONC' && subentry.data) {
+        if (subentry.tag === "CONC" && subentry.data) {
             const last = result.length - 1;
             result[last] += subentry.data;
-        } else if (subentry.tag === 'CONT' && subentry.data) {
+        } else if (subentry.tag === "CONT" && subentry.data) {
             result.push(subentry.data);
         }
     });
@@ -232,7 +241,7 @@ export function normalizeGedcom(gedcom: JsonGedcomData): JsonGedcomData {
     return sortSpouses(sortChildren(gedcom));
 }
 
-const IMAGE_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.gif'];
+const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".gif"];
 
 /** Returns true if the given file name has a known image extension. */
 export function isImageFile(fileName: string): boolean {
@@ -256,7 +265,7 @@ function filterImage(indi: JsonIndi, images: Map<string, string>): JsonIndi {
             newImages.push({url: images.get(filePath)!, title: image.title});
         } else if (images.has(fileName)) {
             newImages.push({url: images.get(fileName)!, title: image.title});
-        } else if (image.url.startsWith('http') && isImageFile(image.url)) {
+        } else if (image.url.startsWith("http") && isImageFile(image.url)) {
             newImages.push(image);
         }
     });
@@ -297,7 +306,7 @@ export function convertGedcom(
         !json.fams ||
         !json.fams.length
     ) {
-        throw new I18nError('GEDCOM_READ_FAILED', 'Insufficient GEDCOM data');
+        throw new I18nError("GEDCOM_READ_FAILED", "Insufficient GEDCOM data");
     }
     return {
         chartData: filterImages(normalizeGedcom(json), images),
@@ -306,11 +315,11 @@ export function convertGedcom(
 }
 
 export function getName(person: GedcomEntry): string | undefined {
-    const names = person.tree.filter((subEntry) => subEntry.tag === 'NAME');
+    const names = person.tree.filter((subEntry) => subEntry.tag === "NAME");
     const notMarriedName = names.find(
         (subEntry) =>
             subEntry.tree.filter(
-                (nameEntry) => nameEntry.tag === 'TYPE' && nameEntry.data === 'married',
+                (nameEntry) => nameEntry.tag === "TYPE" && nameEntry.data === "married",
             ).length === 0,
     );
     const name = notMarriedName || names[0];
@@ -318,16 +327,16 @@ export function getName(person: GedcomEntry): string | undefined {
 }
 
 export function getFileName(fileEntry: GedcomEntry): string | undefined {
-    const fileTitle = fileEntry?.tree.find((entry) => entry.tag === 'TITL')?.data;
-    const fileExtension = fileEntry?.tree.find((entry) => entry.tag === 'FORM')?.data;
-    return fileTitle && fileExtension && fileTitle + '.' + fileExtension;
+    const fileTitle = fileEntry?.tree.find((entry) => entry.tag === "TITL")?.data;
+    const fileExtension = fileEntry?.tree.find((entry) => entry.tag === "FORM")?.data;
+    return fileTitle && fileExtension && fileTitle + "." + fileExtension;
 }
 
 export function getImageFileEntry(objectEntry: GedcomEntry): GedcomEntry | undefined {
     return objectEntry.tree.find(
         (entry) =>
-            entry.tag === 'FILE' &&
-            entry.data.startsWith('http') &&
+            entry.tag === "FILE" &&
+            entry.data.startsWith("http") &&
             isImageFile(entry.data),
     );
 }
@@ -346,36 +355,36 @@ export function jsonToGedcom(gedcomData: GedcomData): string {
         if (node.pointer) line += `${node.pointer} `;
         line += `${node.tag}`;
         if (node.data) line += ` ${node.data}`;
-        gedcom += line + '\n';
+        gedcom += line + "\n";
         if (node.tree && node.tree.length > 0) {
             node.tree.forEach(child => processNode(child, level + 1));
         }
     }
 
     processNode(gedcomData.head, 0);
-    gedcom += '\n';
+    gedcom += "\n";
     Object.values(gedcomData.other).forEach(record => {
         if (record.tag === "SUBM") {
             processNode(record, 0);
-            gedcom += '\n';
+            gedcom += "\n";
         }
         if (record.tag === "EGO") {
             processNode(record, 0);
-            gedcom += '\n';
+            gedcom += "\n";
         }
     });
     Object.values(gedcomData.indis).forEach(indi => {
         processNode(indi, 0);
-        gedcom += '\n';
+        gedcom += "\n";
     });
     Object.values(gedcomData.fams).forEach(fam => {
         processNode(fam, 0);
-        gedcom += '\n';
+        gedcom += "\n";
     });
     Object.values(gedcomData.other).forEach(record => {
         if (record.tag !== "SUBM" && record.tag !== "EGO") {
             processNode(record, 0);
-            gedcom += '\n';
+            gedcom += "\n";
         }
     });
     gedcom += "0 TRLR";
