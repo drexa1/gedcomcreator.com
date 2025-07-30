@@ -1,6 +1,6 @@
 import debounce from 'debounce';
 import {buildSearchIndex, SearchIndex, SearchResult} from './search-index';
-import {formatDateOrRange} from '../util/date-util';
+import {formatDateOrRange} from '../util/date-utils';
 import {IndiInfo, JsonGedcomData, JsonIndi} from '../topola';
 import {Search, SearchResultProps} from 'semantic-ui-react';
 import {useEffect, useRef, useState} from 'react';

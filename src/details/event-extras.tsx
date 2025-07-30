@@ -5,7 +5,7 @@ import {useState} from 'react';
 import {WrappedImage} from './wrapped-image';
 import {MultilineText} from './multiline-text';
 import {DateOrRange} from '../topola';
-import {formatDateOrRange} from '../util/date-util';
+import {formatDateOrRange} from '../util/date-utils';
 import Linkify from 'react-linkify';
 
 

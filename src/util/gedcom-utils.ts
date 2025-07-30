@@ -1,7 +1,7 @@
 import {GedcomEntry, parse as parseGedcom} from 'parse-gedcom';
 import {I18nError} from './error-i18n';
 import {gedcomEntriesToJson, JsonFam, JsonGedcomData, JsonImage, JsonIndi} from '../topola';
-import {compareDates} from './date-util';
+import {compareDates} from './date-utils';
 import {Language} from "../model/language";
 
 export interface GedcomData {
@@ -14,6 +14,60 @@ export interface GedcomData {
 export interface TopolaData {
     chartData: JsonGedcomData;
     gedcom: GedcomData;
+}
+
+export function startIndi(data: TopolaData | undefined) {
+    const egoGen = getEgoGen(data)
+    return {
+        id: getLowestId(data) || "I0",  // lowest ID on the chart, focus at the root, not at the EGO
+        generation: egoGen !== undefined ? -parseInt(egoGen, 10) : 0
+    };
+}
+
+export function getEgoGen(data: TopolaData | undefined) {
+    return getEgoRecord(data?.gedcom)
+        .map(([_, value]) => value.tree.find(sub => sub.tag === "GEN")?.data)
+        .find(data => data !== undefined);
+}
+
+export function getEgoRecord(gedcom: GedcomData | undefined) {
+    return Object.entries(gedcom?.other || {}).filter(([_, value]) => value.tag === "EGO")
+}
+
+export function getLowestId(data: TopolaData | undefined) {
+    return data?.chartData?.indis?.reduce((lowest, current) =>
+            current.id.startsWith("I") && parseInt(current.id.slice(1), 10) < parseInt(lowest.id.slice(1), 10)
+                ? current
+                : lowest,
+        data?.chartData?.indis?.[0]
+    )?.id;
+}
+
+export function getGedcomLanguages(data: TopolaData | undefined) {
+    return Object.entries(data?.gedcom?.indis || {})
+        .reduce<Set<string>>((acc, [_, value]) => {
+            const langDataArray = value.tree.filter((sub: any) => sub.tag === "LANG");
+            langDataArray.forEach(lang => {
+                if (lang.data) acc.add(lang.data);
+            });
+            return acc;
+        }, new Set<string>());
+}
+
+export function loadLanguageOptions(data: TopolaData | undefined, allLanguages: Language[]) {
+    const gedcomLanguages = Array.from(getGedcomLanguages(data));
+    return allLanguages.filter((l: Language) => gedcomLanguages.includes(l.name)).sort();
+}
+
+export function getEthnicities(data: TopolaData | undefined) {
+    return Object.entries(data?.gedcom?.indis || {})
+        .reduce<Set<string>>((acc, [_, value]) => {
+            const langDataArray = value.tree.filter((sub: any) => sub.tag === "_ETHN");
+            langDataArray.forEach(lang => {
+                if (lang.data) acc.add(lang.data);
+            });
+            return acc;
+        }, new Set<string>());
 }
 
 /**

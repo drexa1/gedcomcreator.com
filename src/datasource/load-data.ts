@@ -1,4 +1,4 @@
-import {convertGedcom, TopolaData} from '../util/gedcom-util';
+import {convertGedcom, TopolaData} from '../util/gedcom-utils';
 import {DataSource, DataSourceEnum, SourceSelection} from './data-source';
 import {IndiInfo, JsonGedcomData} from '../topola';
 import {I18nError} from '../util/error-i18n';

@@ -5,7 +5,7 @@ import {
     getData,
     getFileName,
     getImageFileEntry
-} from '../util/gedcom-util';
+} from '../util/gedcom-utils';
 import {Events} from './events';
 import {GedcomEntry} from 'parse-gedcom';
 import {MultilineText} from './multiline-text';

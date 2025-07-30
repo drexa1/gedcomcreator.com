@@ -1,6 +1,10 @@
 import {IndiInfo} from '../topola';
-import {TopolaData} from '../util/gedcom-util';
+import {TopolaData} from '../util/gedcom-utils';
 import {Language} from "../model/language";
+import {UploadSourceSpec, UrlSourceSpec} from "./load-data";
+import {EmbeddedSourceSpec} from "./embedded";
+
+export type DataSourceSpec = UrlSourceSpec | UploadSourceSpec | EmbeddedSourceSpec;
 
 /** Supported data sources. */
 export enum DataSourceEnum {

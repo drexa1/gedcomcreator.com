@@ -151,18 +151,19 @@ async function createGedcomString(
     let filename = null
 
     if (egoIndiId) {
-        try {
-            egoIndi = individuals.filter(_i => _i.id === egoIndiId);
-            // @ts-ignore
-            lowestEgoIndi = egoIndi.reduce((prev, current) => (prev.id < current.id ? prev : current));
-            egoGeneration = lowestEgoIndi.generation(relationships)
-            filename = `${lowestEgoIndi.givenName?.toLowerCase()}_${lowestEgoIndi.surname?.toLowerCase()}`
-            if (!lowestEgoIndi || !egoGeneration)
-                throw new Error()
-        } catch(e) {
+        egoIndi = individuals.filter(_i => _i.id === egoIndiId);
+        if (egoIndi.length === 0) {
             throw new Error(`Ego individual not found: ${egoIndiId}`);
         }
+        // @ts-ignore
+        lowestEgoIndi = egoIndi.reduce((prev, current) => (prev.id < current.id ? prev : current));
+        egoGeneration = lowestEgoIndi.generation(relationships);
+        if (!lowestEgoIndi || !egoGeneration) {
+            throw new Error(`Ego individual invalid or generation not found: ${egoIndiId}`);
+        }
+        filename = `${lowestEgoIndi.givenName?.toLowerCase()}_${lowestEgoIndi.surname?.toLowerCase()}`;
     }
+
     const header = await createHeader(
         filename,
         lowestEgoIndi ? lowestEgoIndi.id : null,

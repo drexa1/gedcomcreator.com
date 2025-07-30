@@ -4,7 +4,7 @@ import {FormattedMessage} from 'react-intl';
 import {IndiInfo, JsonGedcomData} from '../topola';
 import {useRef, useState} from "react";
 import {ConvertCSVMenu} from "./convert-menu";
-import {Media} from '../util/media';
+import {Media} from '../util/media-utils';
 import {MenuType} from './menu-item';
 import {SearchBar} from './search';
 import {UploadMenu} from './upload-menu';

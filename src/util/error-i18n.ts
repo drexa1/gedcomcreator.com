@@ -1,5 +1,10 @@
 import {IntlShape} from 'react-intl';
 
+export interface ErrorPopupProps {
+    message?: string;
+    open: boolean;
+    onDismiss: () => void;
+}
 
 export class I18nError extends Error {
     constructor(
@@ -27,3 +32,4 @@ export function getI18nMessage(error: Error, intl: IntlShape): string {
         error.args,
     );
 }
+
