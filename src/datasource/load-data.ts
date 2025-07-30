@@ -21,8 +21,8 @@ export interface UrlSourceSpec {
 }
 
 /**
- * Returns a valid IndiInfo object, either with the given indi and generation
- * or with an individual taken from the data and generation 0.
+ * Returns a valid IndiInfo object,
+ * either with the given indi and generation or with an individual taken from the data and generation 0.
  */
 export function getSelection(data: JsonGedcomData, selection?: IndiInfo): IndiInfo {
     // If ID is not given, or it doesn't exist in the data, use the first ID in the data.
@@ -39,9 +39,8 @@ function prepareData(
     images?: Map<string, string>
 ): TopolaData {
     const data = convertGedcom(gedcom, allLanguages, images || new Map());
-    const serializedData = JSON.stringify(data);
     try {
-        sessionStorage.setItem(cacheId, serializedData);
+        sessionStorage.setItem(cacheId, JSON.stringify(data));
     } catch (e) {
         console.warn('Failed to store data in session storage: ' + e);
     }
@@ -67,14 +66,14 @@ async function loadGedzip(blob: Blob): Promise<{ gedcom: string; images: Map<str
         }
     }
     if (!gedcom) {
-        throw new Error("GEDCOM file not found in zip archive.");
+        throw new Error("GEDCOM file not found in Zip archive.");
     }
     return {gedcom, images};
 }
 
 export async function loadFile(blob: Blob): Promise<{ gedcom: string; images: Map<string, string> }> {
     const fileHeader = await blob.slice(0, 2).text();
-    if (fileHeader === 'PK') {
+    if (fileHeader === "PK") {
         return loadGedzip(blob);
     }
     return {gedcom: await blob.text(), images: new Map()};
