@@ -11,12 +11,13 @@ function formatDate(date: TopolaDate, intl: IntlShape) {
     const hasDay = date.day !== undefined;
     const hasMonth = date.month !== undefined;
     const hasYear = date.year !== undefined;
+
     if (!hasDay && !hasMonth && !hasYear) {
         return date.text || '';
     }
+
     const dateObject = toDateObject(date);
     const translatedQualifier = formatDateQualifier(date.qualifier, intl);
-
     const formatOptions: Intl.DateTimeFormatOptions = {
         day: hasDay ? 'numeric' : undefined,
         month: hasMonth ? 'long' : undefined,

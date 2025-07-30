@@ -17,7 +17,7 @@ import {
     validateCSV,
     validateFilenames
 } from "../model/validate-csv";
-import {csvToGedcom} from "../util/convert-csv";
+import {csvToGedcom} from "../util/convert-template";
 import {analyticsEvent} from "../util/analytics";
 
 interface Props {

@@ -7,5 +7,6 @@ const AppMedia = createMedia({
         large: 768,
     },
 });
+
 export const mediaStyles = AppMedia.createMediaStyle();
 export const {Media, MediaContextProvider} = AppMedia;

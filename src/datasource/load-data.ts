@@ -1,7 +1,7 @@
 import {convertGedcom, TopolaData} from '../util/gedcom-util';
 import {DataSource, DataSourceEnum, SourceSelection} from './data-source';
 import {IndiInfo, JsonGedcomData} from '../topola';
-import {TopolaError} from '../util/error';
+import {I18nError} from '../util/error-i18n';
 import JSZip from "jszip";
 import {Language} from "../model/language";
 
@@ -142,7 +142,7 @@ export async function loadGedcom(
         console.warn('Failed to load data from session storage: ' + e);
     }
     if ((!gedcom) || (!allLanguages)) {
-        throw new TopolaError('ERROR_LOADING_UPLOADED_FILE',
+        throw new I18nError('ERROR_LOADING_UPLOADED_FILE',
             'Error loading data. Please upload your file again.',
         );
     }

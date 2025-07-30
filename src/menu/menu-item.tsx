@@ -16,8 +16,7 @@ interface Props {
 
 export function MenuItem(props: Props & MenuItemProps & DropdownItemProps) {
     const newProps = {...props};
-    // Remove menuType from props to avoid error message in the console.
-    delete newProps.menuType;
+    delete newProps.menuType;  // remove from props to avoid error in the console
     return (
         <>
             {props.menuType === MenuType.Menu? (

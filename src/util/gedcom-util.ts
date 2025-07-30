@@ -1,17 +1,13 @@
 import {GedcomEntry, parse as parseGedcom} from 'parse-gedcom';
-import {TopolaError} from './error';
+import {I18nError} from './error-i18n';
 import {gedcomEntriesToJson, JsonFam, JsonGedcomData, JsonImage, JsonIndi} from '../topola';
 import {compareDates} from './date-util';
 import {Language} from "../model/language";
 
 export interface GedcomData {
-    /** The HEAD entry. */
     head: GedcomEntry;
-    /** INDI entries mapped by id. */
     indis: { [key: string]: GedcomEntry };
-    /** FAM entries mapped by id. */
     fams: { [key: string]: GedcomEntry };
-    /** Other entries mapped by id, e.g. NOTE, SOUR. */
     other: { [key: string]: GedcomEntry };
 }
 
@@ -98,8 +94,7 @@ function marriageDatesComparator(gedcom: JsonGedcomData) {
 }
 
 /**
- * Sorts children by birthdate in the given family.
- * Does not modify the input objects.
+ * Sorts children by birthdate in the given family. Does not modify the input objects.
  */
 function sortFamilyChildren(
     fam: JsonFam,
@@ -113,8 +108,7 @@ function sortFamilyChildren(
 }
 
 /**
- * Sorts children by birthdate.
- * Does not modify the input object.
+ * Sorts children by birthdate. Does not modify the input object.
  */
 function sortChildren(gedcom: JsonGedcomData): JsonGedcomData {
     const comparator = birthDatesComparator(gedcom);
@@ -123,8 +117,7 @@ function sortChildren(gedcom: JsonGedcomData): JsonGedcomData {
 }
 
 /**
- * Sorts spouses by marriage date.
- * Does not modify the input objects.
+ * Sorts spouses by marriage date. Does not modify the input objects.
  */
 function sortIndiSpouses(
     indi: JsonIndi,
@@ -194,8 +187,7 @@ export function isImageFile(fileName: string): boolean {
 }
 
 /**
- * Removes images that are not HTTP links or do not have known image extensions.
- * Does not modify the input object.
+ * Removes images that are not HTTP links or do not have known image extensions. Does not modify the input object.
  */
 function filterImage(indi: JsonIndi, images: Map<string, string>): JsonIndi {
     if (!indi.images || indi.images.length === 0) {
@@ -218,8 +210,7 @@ function filterImage(indi: JsonIndi, images: Map<string, string>): JsonIndi {
 }
 
 /**
- * Removes images that are not HTTP links.
- * Does not modify the input object.
+ * Removes images that are not HTTP links. Does not modify the input object.
  */
 function filterImages(
     gedcom: JsonGedcomData,
@@ -252,7 +243,7 @@ export function convertGedcom(
         !json.fams ||
         !json.fams.length
     ) {
-        throw new TopolaError('GEDCOM_READ_FAILED', 'Insufficient GEDCOM data');
+        throw new I18nError('GEDCOM_READ_FAILED', 'Insufficient GEDCOM data');
     }
     return {
         chartData: filterImages(normalizeGedcom(json), images),
