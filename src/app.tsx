@@ -48,7 +48,6 @@ export function App() {
     const [selection, setSelection] = useState<IndiInfo>();
     const [showSidePanel, setShowSidePanel] = useState(false);
     const [sourceSpec, setSourceSpec] = useState<DataSourceSpec>();
-    const [standalone, setStandalone] = useState(true);
     const [chartType, setChartType] = useState<ChartType>(ChartType.Hourglass);
     const [error, setError] = useState<string>();
     const [showErrorPopup, setShowErrorPopup] = useState(false);
@@ -99,7 +98,6 @@ export function App() {
         if (state === AppState.INITIAL || isNewData(args.sourceSpec, args.selection)) {
             setState(AppState.LOADING);
             setSourceSpec(args.sourceSpec);
-            setStandalone(args.standalone);
             setChartType(args.chartType);
             setFreezeAnimation(args.freezeAnimation);
             setConfig(args.config);
@@ -387,7 +385,6 @@ export function App() {
                             history.location.pathname === "/view" &&
                             (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE)
                         }
-                        standalone={standalone}
                         eventHandlers={{
                             onSelection,
                             onDownloadPdf,

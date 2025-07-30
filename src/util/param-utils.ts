@@ -14,7 +14,6 @@ interface Arguments {
     sourceSpec?: DataSourceSpec;
     selection?: IndiInfo;
     chartType: ChartType;
-    standalone: boolean;
     freezeAnimation: boolean;
     showSidePanel: boolean;
     config: Config;
@@ -63,7 +62,6 @@ export function getArguments(location: H.Location<any>, allLanguages: Language[]
         selection,
         chartType: chartTypes.get(view) || ChartType.Hourglass,
         showSidePanel: getParam("sidePanel") !== "false", // True by default.
-        standalone: getParam("standalone") !== "false" && !embedded,
         freezeAnimation: getParam("freeze") === "true", // False by default
         config: argsToConfig(search),
     };

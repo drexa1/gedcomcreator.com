@@ -28,7 +28,6 @@ interface EventHandlers {
 interface Props {
     showingChart: boolean;
     data?: JsonGedcomData;
-    standalone: boolean;
     eventHandlers: EventHandlers;
 }
 
@@ -53,10 +52,6 @@ export function TopBar(props: Props) {
             }
         };
 
-        // Don't show "home" menus in non-standalone mode.
-        if (!props.standalone) {
-            return null;
-        }
         switch (screenSize) {
             case ScreenSize.LARGE:
                 return (
