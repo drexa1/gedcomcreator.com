@@ -1,35 +1,27 @@
-import * as H from 'history';
-import * as queryString from 'query-string';
-import {analyticsEvent} from './util/google-analytics';
-import {DataSourceEnum, SourceSelection} from './datasource/data-source';
-import {Details} from './details/details';
-import {EmbeddedDataSource, EmbeddedSourceSpec} from './datasource/embedded';
-import {FormattedMessage, useIntl} from 'react-intl';
-import {getI18nMessage} from './util/error-i18n';
-import {IndiInfo} from './topola';
-import {Loader, Message, Portal, Tab} from 'semantic-ui-react';
-import {Media} from './util/media';
-import {Redirect, Route, Switch} from 'react-router-dom';
-import {TopBar} from './menu/top-bar';
-import {GedcomData, idToIndiMap, jsonToGedcom, TopolaData} from './util/gedcom-util';
-import {useEffect, useState} from 'react';
-import {useHistory, useLocation} from 'react-router';
-import {
-    Chart,
-    ChartType,
-    downloadGedcom,
-    downloadPdf,
-    downloadPng,
-    downloadSvg,
-    getFilename
-} from './chart';
+import * as H from "history";
+import * as queryString from "query-string";
+import {analyticsEvent} from "./util/google-analytics";
+import {DataSourceEnum, SourceSelection} from "./datasource/data-source";
+import {Details} from "./details/details";
+import {EmbeddedDataSource, EmbeddedSourceSpec} from "./datasource/embedded";
+import {FormattedMessage, useIntl} from "react-intl";
+import {getI18nMessage} from "./util/error-i18n";
+import {IndiInfo} from "./topola";
+import {Loader, Message, Portal, Tab} from "semantic-ui-react";
+import {Media} from "./util/media";
+import {Redirect, Route, Switch} from "react-router-dom";
+import {TopBar} from "./menu/top-bar";
+import {GedcomData, idToIndiMap, jsonToGedcom, TopolaData} from "./util/gedcom-util";
+import {useEffect, useState} from "react";
+import {useHistory, useLocation} from "react-router";
+import {Chart, ChartType, downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./chart";
 import {
     GedcomUrlDataSource,
     getSelection,
     UploadedDataSource,
     UploadSourceSpec,
     UrlSourceSpec
-} from './datasource/load-data';
+} from "./datasource/load-data";
 import {Language} from "./model/language";
 import {
     argsToConfig,
@@ -41,7 +33,7 @@ import {
     IdsArg,
     LanguagesArg,
     SexArg
-} from './config';
+} from "./config";
 import CSVLoader from "./datasource/load-csv";
 
 
@@ -60,7 +52,7 @@ function ErrorMessage(props: { message?: string }) {
             <Message.Header>
                 <FormattedMessage
                     id="error.failed_to_load_file"
-                    defaultMessage={'Failed to load file'}
+                    defaultMessage={"Failed to load file"}
                 />
             </Message.Header>
             <p>{props.message}</p>
@@ -82,7 +74,7 @@ function ErrorPopup(props: ErrorPopupProps) {
         <Portal open={props.open} onClose={props.onDismiss}>
             <Message negative className="errorPopup" onDismiss={props.onDismiss}>
                 <Message.Header>
-                    <FormattedMessage id="error.error" defaultMessage={'Error'}/>
+                    <FormattedMessage id="error.error" defaultMessage={"Error"}/>
                 </Message.Header>
                 <p>{props.message}</p>
             </Message>
@@ -116,13 +108,13 @@ interface Arguments {
 
 function getParamFromSearch(name: string, search: queryString.ParsedQuery) {
     const value = search[name];
-    return typeof value === 'string' ? value : undefined;
+    return typeof value === "string" ? value : undefined;
 }
 
 function startIndi(data: TopolaData | undefined) {
     const egoGen = getEgoGen(data)
     return {
-        id: getLowestId(data) || 'I0',  // lowest ID on the chart, focus at the root, not at the EGO
+        id: getLowestId(data) || "I0",  // lowest ID on the chart, focus at the root, not at the EGO
         generation: egoGen !== undefined ? -parseInt(egoGen, 10) : 0
     };
 }
@@ -139,7 +131,7 @@ export function getEgoRecord(gedcom: GedcomData | undefined) {
 
 function getLowestId(data: TopolaData | undefined) {
     return data?.chartData?.indis?.reduce((lowest, current) =>
-            current.id.startsWith('I') && parseInt(current.id.slice(1), 10) < parseInt(lowest.id.slice(1), 10)
+            current.id.startsWith("I") && parseInt(current.id.slice(1), 10) < parseInt(lowest.id.slice(1), 10)
             ? current
             : lowest,
         data?.chartData?.indis?.[0]
@@ -330,10 +322,10 @@ export function App() {
     function loadData(newSourceSpec: DataSourceSpec, newSelection?: IndiInfo, allLanguages?: Language[]) {
         switch (newSourceSpec.source) {
             case DataSourceEnum.UPLOADED:
-                analyticsEvent('topola_gedcom_upload');
+                analyticsEvent("topola_gedcom_upload");
                 return uploadedDataSource.loadData({spec: newSourceSpec, selection: newSelection, allLanguages: allLanguages});
             case DataSourceEnum.GEDCOM_URL:
-                analyticsEvent('topola_url_load');
+                analyticsEvent("topola_url_load");
                 return gedcomUrlDataSource.loadData({spec: newSourceSpec, selection: newSelection, allLanguages: allLanguages});
             case DataSourceEnum.EMBEDDED:
                 return embeddedDataSource.loadData({spec: newSourceSpec, selection: newSelection, allLanguages: allLanguages});
@@ -354,7 +346,7 @@ export function App() {
     useEffect(() => {
         analyticsEvent("gedcomcreator_landing");
         const rootElement = document.getElementById("root");
-        if (location.pathname === '/') {
+        if (location.pathname === "/") {
             // @ts-ignore
             rootElement.classList.add("bgLogo");
         } else {
@@ -372,7 +364,7 @@ export function App() {
 
             const args = getArguments(location, allLanguages);
             if (!args.sourceSpec) {
-                history.replace({pathname: '/'});
+                history.replace({pathname: "/"});
                 return;
             }
             if (
@@ -585,7 +577,7 @@ export function App() {
             ) : (
                 <Switch>
                     <Route exact path="/view" render={renderMainArea}/>
-                    <Redirect to={'/'}/>
+                    <Redirect to={"/"}/>
                 </Switch>
             )}
         </>
