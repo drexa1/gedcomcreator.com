@@ -18,7 +18,7 @@ import {
     validateFilenames
 } from "../model/validate-csv";
 import {csvToGedcom} from "../util/convert-template";
-import {analyticsEvent} from "../util/analytics";
+import {analyticsEvent} from "../util/google-analytics";
 
 interface Props {
     menuType: MenuType

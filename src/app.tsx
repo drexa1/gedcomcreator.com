@@ -1,6 +1,6 @@
 import * as H from 'history';
 import * as queryString from 'query-string';
-import {analyticsEvent} from './util/analytics';
+import {analyticsEvent} from './util/google-analytics';
 import {DataSourceEnum, SourceSelection} from './datasource/data-source';
 import {Details} from './details/details';
 import {EmbeddedDataSource, EmbeddedSourceSpec} from './datasource/embedded';
