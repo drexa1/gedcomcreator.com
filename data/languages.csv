@@ -1,0 +1,51 @@
+id,name,family,ISO 639-3,latitude,longitude,legend
+1,English,Indo-European,eng,51.5074,-0.1278,#E91E63
+2,Mandarin Chinese,Sino-Tibetan,cmn,39.9042,116.4074,#9C27B0
+3,Hindi,Indo-European,hin,28.6139,77.209,#3F51B5
+4,Spanish,Indo-European,spa,4.6243,-74.0633,#03A9F4
+5,Modern Standard Arabic,Afro-Asiatic,arb,24.7136,46.6753,#00BCD4
+6,Bengali,Indo-European,ben,23.8103,90.4125,#009688
+7,French,Indo-European,fra,48.8566,2.3522,#4CAF50
+8,Russian,Indo-European,rus,55.7558,37.6173,#CDDC39
+9,Portuguese,Indo-European,por,-23.5505,-46.6333,#FFEB3B
+10,Urdu,Indo-European,urd,24.8607,67.0011,#FFC107
+11,Indonesian,Austronesian,ind,-6.2088,106.8456,#FF9800
+12,German,Indo-European,deu,52.52,13.405,#FF5722
+13,Japanese,Japonic,jpn,35.6895,139.6917,#795548
+14,Swahili,Niger-Congo,swa,-1.2921,36.8219,#607D8B
+15,Marathi,Indo-European,mar,18.5204,73.8567,#673AB7
+16,Telugu,Dravidian,tel,17.385,78.4867,#2196F3
+17,Turkish,Turkic,tur,39.9208,32.8541,#00BCD4
+18,Tamil,Dravidian,tam,13.0827,80.2707,#009688
+19,Punjabi,Indo-European,pnb,31.582,74.3294,#4CAF50
+20,Wu Chinese,Sino-Tibetan,wuu,31.2304,121.4737,#8BC34A
+21,Korean,Koreanic,kor,37.5665,126.978,#CDDC39
+22,Vietnamese,Austroasiatic,vie,21.0285,105.8542,#FFEB3B
+23,Hausa,Afro-Asiatic,hau,12.0022,8.5919,#FFC107
+24,Javanese,Austronesian,jav,-7.7971,110.3705,#FF9800
+25,Egyptian Arabic,Afro-Asiatic,arz,30.0444,31.2357,#FF5722
+26,Italian,Indo-European,ita,41.9028,12.4964,#795548
+27,Thai,Kra–Dai,tha,13.7563,100.5018,#9C27B0
+28,Gujarati,Indo-European,guj,23.0225,72.5714,#E91E63
+29,Persian (Farsi) ,Indo-European,fas,35.6892,51.389,#3F51B5
+30,Bhojpuri,Indo-European,bho,25.5941,85.1376,#03A9F4
+31,Southern Min,Sino-Tibetan,nan,24.4798,118.0894,#00BCD4
+32,Hakka,Sino-Tibetan,hak,23.1291,113.2644,#009688
+33,Pashto,Indo-European,pus,34.5553,69.2075,#4CAF50
+34,Kannada,Dravidian,kan,12.9716,77.5946,#8BC34A
+35,Malayalam,Dravidian,mal,8.5241,76.9366,#CDDC39
+36,Sundanese,Austronesian,sun,-6.9039,107.6186,#FFEB3B
+37,Odia (Oriya) ,Indo-European,ori,20.2961,85.8245,#FFC107
+38,Burmese,Sino-Tibetan,mya,19.7633,96.0785,#FF9800
+39,Ukrainian,Indo-European,ukr,50.4501,30.5234,#FF5722
+40,Sindhi,Indo-European,snd,25.396,68.3578,#795548
+41,Azerbaijani,Turkic,azj,40.4093,49.8671,#607D8B
+42,Romanian,Indo-European,ron,44.4268,26.1025,#673AB7
+43,Dutch,Indo-European,nld,52.3676,4.9041,#2196F3
+44,Tagalog (Filipino),Austronesian,tgl,14.5995,120.9842,#00BCD4
+45,Nepali,Indo-European,nep,27.7172,85.324,#009688
+46,Saraiki,Indo-European,skr,30.1575,71.5249,#4CAF50
+47,Sinhalese,Indo-European,sin,6.9271,79.8612,#8BC34A
+48,Khmer,Austroasiatic,khm,11.5449,104.8922,#CDDC39
+49,Assamese,Indo-European,asm,26.2006,92.9376,#FFEB3B
+50,Somali,Afro-Asiatic,som,2.0469,45.3182,#FFC107
