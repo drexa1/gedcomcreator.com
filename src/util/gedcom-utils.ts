@@ -16,6 +16,11 @@ export interface TopolaData {
     gedcom: GedcomData;
 }
 
+export interface GedcomTreeItem {
+    tag: string;
+    data: string;
+}
+
 export function startIndi(data: TopolaData | undefined) {
     const egoGen = getEgoGen(data)
     return {

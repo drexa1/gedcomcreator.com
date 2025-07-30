@@ -1,6 +1,6 @@
-import {Item, Checkbox, Form, Header} from 'semantic-ui-react';
-import {FormattedMessage} from 'react-intl';
-import {ParsedQuery} from 'query-string';
+import {Item, Checkbox, Form, Header} from "semantic-ui-react";
+import {FormattedMessage} from "react-intl";
+import {ParsedQuery} from "query-string";
 import {Language} from "./model/language";
 import {useState} from "react";
 
@@ -58,55 +58,55 @@ export const DEFAULT_CONFIG: Config = {
 };
 
 const COLOR_ARG = new Map<string, ChartColors>([
-    ['n', ChartColors.NO_COLOR],
-    ['g', ChartColors.COLOR_BY_GENERATION],
-    ['s', ChartColors.COLOR_BY_SEX],
-    ['e', ChartColors.COLOR_BY_ETHNICITY],
-    ['nl', ChartColors.COLOR_BY_NR_LANGUAGES],
-    ['l', ChartColors.COLOR_BY_LANGUAGE],
+    ["n", ChartColors.NO_COLOR],
+    ["g", ChartColors.COLOR_BY_GENERATION],
+    ["s", ChartColors.COLOR_BY_SEX],
+    ["e", ChartColors.COLOR_BY_ETHNICITY],
+    ["nl", ChartColors.COLOR_BY_NR_LANGUAGES],
+    ["l", ChartColors.COLOR_BY_LANGUAGE],
 ]);
 const COLOR_ARG_INVERSE = new Map<ChartColors, string>();
 COLOR_ARG.forEach((v, k) => COLOR_ARG_INVERSE.set(v, k));
 
 const LANGUAGES_ARG = new Map<string, LanguagesArg>([
-    ['h', LanguagesArg.HIDE],
-    ['s', LanguagesArg.SHOW],
+    ["h", LanguagesArg.HIDE],
+    ["s", LanguagesArg.SHOW],
 ]);
 const LANGUAGES_ARG_INVERSE = new Map<LanguagesArg, string>();
 LANGUAGES_ARG.forEach((v, k) => LANGUAGES_ARG_INVERSE.set(v, k));
 
 const ETHNICITY_ARG = new Map<string, EthnicityArg>([
-    ['h', EthnicityArg.HIDE],
-    ['s', EthnicityArg.SHOW],
+    ["h", EthnicityArg.HIDE],
+    ["s", EthnicityArg.SHOW],
 ]);
 const ETHNICITY_ARG_INVERSE = new Map<EthnicityArg, string>();
 ETHNICITY_ARG.forEach((v, k) => ETHNICITY_ARG_INVERSE.set(v, k));
 
 const ID_ARG = new Map<string, IdsArg>([
-    ['h', IdsArg.HIDE],
-    ['s', IdsArg.SHOW],
+    ["h", IdsArg.HIDE],
+    ["s", IdsArg.SHOW],
 ]);
 const ID_ARG_INVERSE = new Map<IdsArg, string>();
 ID_ARG.forEach((v, k) => ID_ARG_INVERSE.set(v, k));
 
 const SEX_ARG = new Map<string, SexArg>([
-    ['h', SexArg.HIDE],
-    ['s', SexArg.SHOW],
+    ["h", SexArg.HIDE],
+    ["s", SexArg.SHOW],
 ]);
 const SEX_ARG_INVERSE = new Map<SexArg, string>();
 SEX_ARG.forEach((v, k) => SEX_ARG_INVERSE.set(v, k));
 
 export function argsToConfig(args: ParsedQuery<any>): Config {
     const getParam = (name: string) => {
-        return typeof args[name] === 'string' || typeof args[name] === 'number' ? args[name] : undefined;
+        return typeof args[name] === "string" || typeof args[name] === "number" ? args[name] : undefined;
     };
     return {
-        color: COLOR_ARG.get(getParam('c') ?? '') ?? DEFAULT_CONFIG.color,
-        languages: LANGUAGES_ARG.get(getParam('l') ?? '') ?? DEFAULT_CONFIG.languages,
-        selectedLanguage: getParam('n') ?? DEFAULT_CONFIG.selectedLanguage,
-        ethnicity: ETHNICITY_ARG.get(getParam('e') ?? '') ?? DEFAULT_CONFIG.ethnicity,
-        id: ID_ARG.get(getParam('i') ?? '') ?? DEFAULT_CONFIG.id,
-        sex: SEX_ARG.get(getParam('s') ?? '') ?? DEFAULT_CONFIG.sex,
+        color: COLOR_ARG.get(getParam("c") ?? "") ?? DEFAULT_CONFIG.color,
+        languages: LANGUAGES_ARG.get(getParam("l") ?? "") ?? DEFAULT_CONFIG.languages,
+        selectedLanguage: getParam("n") ?? DEFAULT_CONFIG.selectedLanguage,
+        ethnicity: ETHNICITY_ARG.get(getParam("e") ?? "") ?? DEFAULT_CONFIG.ethnicity,
+        id: ID_ARG.get(getParam("i") ?? "") ?? DEFAULT_CONFIG.id,
+        sex: SEX_ARG.get(getParam("s") ?? "") ?? DEFAULT_CONFIG.sex,
         renderEthnicityOption: DEFAULT_CONFIG.renderEthnicityOption,
         renderLanguagesOption: DEFAULT_CONFIG.renderLanguagesOption,
         languageOptions: DEFAULT_CONFIG.languageOptions
@@ -151,7 +151,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
     for (let i = 0; i < props.config.languageOptions.length; i++) {
         const language = props.config.languageOptions[i];
         languageOptions.push(
-            <Form.Field key={i} className={!props.config.renderLanguagesOption ? 'hidden' : 'no-margin suboption'}>
+            <Form.Field key={i} className={!props.config.renderLanguagesOption ? "hidden" : "no-margin suboption"}>
                 <Checkbox
                     radio
                     label={language.name + " (" + language.abbreviation + ")"}
@@ -253,7 +253,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                                 }
                             />
                         </Form.Field>
-                        <Form.Field className={!props.config.renderEthnicityOption ? 'hidden' : ''}>
+                        <Form.Field className={!props.config.renderEthnicityOption ? "hidden" : ""}>
                             <Checkbox
                                 radio
                                 label={
@@ -277,7 +277,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                                 }
                             />
                         </Form.Field>
-                        <Form.Field className={!props.config.renderLanguagesOption ? 'hidden' : ''}>
+                        <Form.Field className={!props.config.renderLanguagesOption ? "hidden" : ""}>
                             <Checkbox
                                 radio
                                 label={
@@ -305,7 +305,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                     </Item.Content>
                 </Item>
 
-                <Item className={!props.config.renderLanguagesOption ? 'hidden' : ''}>
+                <Item className={!props.config.renderLanguagesOption ? "hidden" : ""}>
                     <Item.Content>
                         <Checkbox toggle
                                   id="languages"
@@ -324,7 +324,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                     </Item.Content>
                 </Item>
 
-                <Item className={!props.config.renderEthnicityOption ? 'hidden' : ''}>
+                <Item className={!props.config.renderEthnicityOption ? "hidden" : ""}>
                     <Item.Content>
                         <Checkbox toggle
                                   id="ethnicity"

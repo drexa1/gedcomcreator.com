@@ -1,38 +1,67 @@
-import {ChartColors, LanguagesArg, EthnicityArg, IdsArg, SexArg} from './config';
-import {interpolateNumber} from 'd3-interpolate';
-import {FormattedMessage, IntlShape, useIntl} from 'react-intl';
-import {max, min} from 'd3-array';
-import {Media} from './util/media-utils';
-import {saveAs} from 'file-saver';
-import {select, Selection} from 'd3-selection';
-import {useEffect, useRef} from 'react';
-import 'd3-transition';
-import {D3ZoomEvent, zoom, ZoomBehavior, ZoomedElementBaseType, zoomTransform,} from 'd3-zoom';
+import {ChartColors, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
+import {interpolateNumber} from "d3-interpolate";
+import {FormattedMessage, IntlShape, useIntl} from "react-intl";
+import {max, min} from "d3-array";
+import {Media} from "./util/media-utils";
+import {saveAs} from "file-saver";
+import {select, Selection} from "d3-selection";
+import {useEffect, useRef} from "react";
+import "d3-transition";
+import {D3ZoomEvent, zoom, ZoomBehavior, ZoomedElementBaseType, zoomTransform,} from "d3-zoom";
 import {
     ChartColors as TopolaChartColors,
     ChartHandle,
     createChart,
     DetailedRenderer,
     HourglassChart,
-    RelativesChart,
     IndiInfo,
     JsonGedcomData,
-} from './topola';
-import {GedcomData} from "./util/gedcom-utils";
+    RelativesChart,
+} from "./topola";
+import {GedcomData, GedcomTreeItem} from "./util/gedcom-utils";
 
-/** How much to zoom when using the +/- buttons. */
+/**
+ * How much to zoom when using the +/- buttons.
+ */
 const ZOOM_FACTOR = 1.3;
 
 /**
+ * Supported chart types.
+ */
+export enum ChartType {
+    Hourglass,
+    Relatives
+}
+
+const chartColors = new Map<ChartColors, TopolaChartColors>([
+    [ChartColors.NO_COLOR, TopolaChartColors.NO_COLOR],
+    [ChartColors.COLOR_BY_GENERATION, TopolaChartColors.COLOR_BY_GENERATION],
+    [ChartColors.COLOR_BY_SEX, TopolaChartColors.COLOR_BY_SEX],
+    [ChartColors.COLOR_BY_ETHNICITY, TopolaChartColors.COLOR_BY_ETHNICITY],
+    [ChartColors.COLOR_BY_NR_LANGUAGES, TopolaChartColors.COLOR_BY_NR_LANGUAGES],
+    [ChartColors.COLOR_BY_LANGUAGE, TopolaChartColors.COLOR_BY_LANGUAGE]
+]);
+
+export interface ChartProps {
+    data: JsonGedcomData;
+    selection: IndiInfo;
+    chartType: ChartType;
+    onSelection: (indiInfo: IndiInfo) => void;
+    freezeAnimation?: boolean;
+    colors?: ChartColors;
+    selectedLanguage?: string | null;
+    hideLanguages?: LanguagesArg;
+    hideEthnicity?: EthnicityArg;
+    hideIds?: IdsArg;
+    hideSex?: SexArg;
+}
+
+/**
  * Called when the view is dragged with the mouse.
- *
  * @param size the size of the chart
  * @param event
  */
-function zoomed(
-    size: [number, number],
-    event: D3ZoomEvent<ZoomedElementBaseType, unknown>,
-) {
+function zoomed(size: [number, number], event: D3ZoomEvent<ZoomedElementBaseType, unknown>) {
     const parent = select("#svgContainer").node() as Element;
     const scale = event.transform.k;
     const offsetX = max([0, (parent.clientWidth - size[0] * scale) / 2]);
@@ -46,7 +75,9 @@ function zoomed(
     parent.scrollTop = -event.transform.y;
 }
 
-/** Called when the scrollbars are used. */
+/**
+ * Called when the scrollbars are used.
+ */
 function scrolled() {
     const parent = select("#svgContainer").node() as Element;
     const x = parent.scrollLeft + parent.clientWidth / 2;
@@ -55,7 +86,9 @@ function scrolled() {
     select(parent).call(zoom().translateTo, x / scale, y / scale);
 }
 
-/** Loads blob as data URL. */
+/**
+ * Loads blob as data URL.
+ */
 function loadAsDataUrl(blob: Blob): Promise<string> {
     const reader = new FileReader();
     reader.readAsDataURL(blob);
@@ -66,9 +99,8 @@ function loadAsDataUrl(blob: Blob): Promise<string> {
 
 async function inlineImage(image: SVGImageElement) {
     const href = image.href.baseVal;
-    if (!href) {
+    if (!href)
         return;
-    }
     try {
         const response = await fetch(href);
         const blob = await response.blob();
@@ -79,16 +111,17 @@ async function inlineImage(image: SVGImageElement) {
 }
 
 /**
- * Fetches all images in the SVG and replaces them with inlined images as data
- * URLs. Images are replaced in place. The replacement is done, the returned
- * promise is resolved.
+ * Fetches all images in the SVG and replaces them with inlined images as data URLs.
+ * Images are replaced in place. The replacement is done, the returned promise is resolved.
  */
 async function inlineImages(svg: Element): Promise<void> {
-    const images = Array.from(svg.getElementsByTagName('image'));
+    const images = Array.from(svg.getElementsByTagName("image"));
     await Promise.all(images.map(inlineImage));
 }
 
-/** Loads a blob into an image object. */
+/**
+ * Loads a blob into an image object.
+ */
 function loadImage(blob: Blob): Promise<HTMLImageElement> {
     const image = new Image();
     image.src = URL.createObjectURL(blob);
@@ -97,7 +130,9 @@ function loadImage(blob: Blob): Promise<HTMLImageElement> {
     });
 }
 
-/** Draw image on a new canvas and return the canvas. */
+/**
+ * Draw image on a new canvas and return the canvas.
+ */
 function drawImageOnCanvas(image: HTMLImageElement) {
     const canvas = document.createElement("canvas");
     // Scale image for better quality.
@@ -124,7 +159,9 @@ function canvasToBlob(canvas: HTMLCanvasElement, type: string) {
     });
 }
 
-/** Return a copy of the SVG chart but without scaling and positioning. */
+/**
+ * Return a copy of the SVG chart but without scaling and positioning.
+ */
 function getStrippedSvg() {
     const svg = document.getElementById("chartSvg")!.cloneNode(true) as Element;
     svg.removeAttribute("transform");
@@ -135,7 +172,7 @@ function getStrippedSvg() {
         "height",
         String(Number(svg.getAttribute("height")) / scale),
     );
-    svg.querySelector('#chart')!.removeAttribute("transform");
+    svg.querySelector("#chart")!.removeAttribute("transform");
     return svg;
 }
 
@@ -164,11 +201,10 @@ export async function downloadPng(filename: string | undefined) {
 }
 
 export async function downloadPdf(filename: string | undefined) {
-    // Lazy load jspdf.
-    const {default: jspdf} = await import("jspdf");
+    const {default: jspdf} = await import("jspdf"); // lazy-load jspdf
     const canvas = await drawOnCanvas();
     const doc = new jspdf({
-        orientation: canvas.width > canvas.height ? 'l' : 'p',
+        orientation: canvas.width > canvas.height ? "l" : "p",
         unit: "pt",
         format: [canvas.width, canvas.height],
     });
@@ -181,23 +217,13 @@ export async function downloadGedcom(gedcom: string, filename: string | undefine
     saveAs(blob, filename ? filename + ".ged" : "genealogy.ged");
 }
 
-interface GedcomTreeItem {
-    tag: string;
-    data: string;
-}
 export function getFilename(gedcom: GedcomData | undefined) {
     const filename = Object.entries(gedcom?.head || {})
         .filter((k) => k[0] === "tree")
         .map(_ => _[1])
-        .map(obj => obj.find((sub: GedcomTreeItem) => sub.tag === 'FILE'))
+        .map(obj => obj.find((sub: GedcomTreeItem) => sub.tag === "FILE"))
         .map(file => file?.data)[0];
-    return !filename ? null : filename.substring(0, filename.lastIndexOf('.')) || filename; // Remove file extension (if any)
-}
-
-/** Supported chart types. */
-export enum ChartType {
-    Hourglass,
-    Relatives
+    return !filename ? null : filename.substring(0, filename.lastIndexOf(".")) || filename; // Remove file extension (if any)
 }
 
 function getChartType(chartType: ChartType) {
@@ -211,38 +237,11 @@ function getChartType(chartType: ChartType) {
     }
 }
 
-const chartColors = new Map<ChartColors, TopolaChartColors>([
-    [ChartColors.NO_COLOR, TopolaChartColors.NO_COLOR],
-    [ChartColors.COLOR_BY_GENERATION, TopolaChartColors.COLOR_BY_GENERATION],
-    [ChartColors.COLOR_BY_SEX, TopolaChartColors.COLOR_BY_SEX],
-    [ChartColors.COLOR_BY_ETHNICITY, TopolaChartColors.COLOR_BY_ETHNICITY],
-    [ChartColors.COLOR_BY_NR_LANGUAGES, TopolaChartColors.COLOR_BY_NR_LANGUAGES],
-    [ChartColors.COLOR_BY_LANGUAGE, TopolaChartColors.COLOR_BY_LANGUAGE]
-]);
-
-export interface ChartProps {
-    data: JsonGedcomData;
-    selection: IndiInfo;
-    chartType: ChartType;
-    onSelection: (indiInfo: IndiInfo) => void;
-    freezeAnimation?: boolean;
-    colors?: ChartColors;
-    selectedLanguage?: string | null;
-    hideLanguages?: LanguagesArg;
-    hideEthnicity?: EthnicityArg;
-    hideIds?: IdsArg;
-    hideSex?: SexArg;
-}
-
 class ChartWrapper {
     private chart?: ChartHandle;
-    /** Animation is in progress. */
     private animating = false;
-    /** Rendering is required after the current animation finishes. */
     private rerenderRequired = false;
-    /** The d3 zoom behavior object. */
     private zoomBehavior?: ZoomBehavior<Element, any>;
-    /** Props that will be used for re-rendering. */
     private rerenderProps?: ChartProps;
     private rerenderResetPosition?: boolean;
 
@@ -261,9 +260,9 @@ class ChartWrapper {
         args: { initialRender: boolean; resetPosition: boolean } = {
             initialRender: false,
             resetPosition: false,
-        },
+        }
     ) {
-        // Wait for animation to finish if animation is in progress.
+        // Wait for animation to finish if animation is in progress
         if (!args.initialRender && this.animating) {
             this.rerenderRequired = true;
             this.rerenderProps = props;
@@ -271,13 +270,13 @@ class ChartWrapper {
             return;
         }
 
-        // Freeze changing selection after initial rendering.
+        // Freeze changing selection after initial rendering
         if (!args.initialRender && props.freezeAnimation) {
             return;
         }
 
         if (args.initialRender) {
-            (select("#chart").node() as HTMLElement).innerHTML = '';
+            (select("#chart").node() as HTMLElement).innerHTML = "";
             this.chart = createChart({
                 json: props.data,
                 chartType: getChartType(props.chartType),
@@ -348,13 +347,12 @@ class ChartWrapper {
         }
 
         this.animating = true;
-        // After the animation is finished, re-render the chart if required.
+        // After the animation is finished, re-render the chart if required
         chartInfo.animationPromise.then(() => {
             this.animating = false;
             if (this.rerenderRequired) {
                 this.rerenderRequired = false;
-                // Use `this.rerenderProps` instead of the props in scope because
-                // the props may have been updated in the meantime.
+                // Use `this.rerenderProps` instead of the props in scope because the props may have been updated in the meantime
                 this.renderChart(this.rerenderProps!, intl, {
                     initialRender: false,
                     resetPosition: !!this.rerenderResetPosition,
@@ -362,14 +360,6 @@ class ChartWrapper {
             }
         });
     }
-}
-
-function usePrevious<T>(value: T): T | undefined {
-    const ref = useRef<T>();
-    useEffect(() => {
-        ref.current = value;
-    });
-    return ref.current;
 }
 
 export function Chart(props: ChartProps) {
@@ -405,6 +395,14 @@ export function Chart(props: ChartProps) {
             });
         }
     });
+
+    function usePrevious<T>(value: T): T | undefined {
+        const ref = useRef<T>();
+        useEffect(() => {
+            ref.current = value;
+        });
+        return ref.current;
+    }
 
     return (
         <div id="svgContainer">
