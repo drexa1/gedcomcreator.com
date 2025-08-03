@@ -77,6 +77,11 @@ export function TopBar(props: Props) {
                             <ConvertCSVMenu menuType={MenuType.Dropdown} {...props} />
                         </Dropdown.Menu>
                     </Dropdown>
+                    // TODO: replace with
+                    // <Menu.Item onClick={props.eventHandlers.onResetView}>
+                    //     <Icon name="home"/>
+                    //     <FormattedMessage id="menu.home" defaultMessage="Home"/>
+                    // </Menu.Item>
                 );
             case ScreenSize.SMALL:
                 return (
@@ -149,7 +154,7 @@ export function TopBar(props: Props) {
                                     )}
                                 </div>
                             }
-                            className="item"
+                            className="item hidden"
                         >
                             <Dropdown.Menu>
                                 <ViewMenus currentView={currentView} changeView={changeView} />

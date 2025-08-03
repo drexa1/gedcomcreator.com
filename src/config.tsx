@@ -178,7 +178,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
             <Item.Group>
                 <Item>
                     <Item.Content>
-                        <Header sub style={{ "margin-bottom": "14px" }}>
+                        <Header sub style={{ "marginBottom": "14px" }}>
                             <FormattedMessage id="config.colors" defaultMessage="Colors"/>
                         </Header>
                         <Form.Field>

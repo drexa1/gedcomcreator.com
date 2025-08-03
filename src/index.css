@@ -66,7 +66,7 @@ body, html {
 div.ui.icon.input {
     width: 318px;
     border: 0;
-    margin: 1px 2px 1px 1px;
+    margin: 2px 3px 1px 1px;
 }
 
 .search .prompt {
@@ -109,7 +109,8 @@ div.zoom {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
     border-radius: 4px;
     position: fixed;
-    margin: 10px;
+    bottom: 10px;
+    left: 10px;
     z-index: 10;
 }
 
@@ -169,6 +170,11 @@ div.zoom {
     cursor: pointer;
 }
 
+.ui.menu, .item:before {
+    border: none !important;
+    background: none !important;
+}
+
 .ui.menu .item > img:not(.ui).menu-icon {
     width: 24px;
     height: 24px;
@@ -186,6 +192,7 @@ div.zoom {
 
 .ui.top.attached.menu {
     margin-top: 0;
+    border: none !important;
 }
 
 .details {

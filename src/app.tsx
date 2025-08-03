@@ -66,10 +66,10 @@ export function App() {
 
     useEffect(() => {
         analyticsEvent("gedcomcreator_landing");
+        loadLanguages().catch(e => console.error("Failed to load languages:", e));
         const rootElement = document.getElementById("root");
         if (location.pathname === "/") {
             rootElement?.classList.add("bgLogo");
-            loadLanguages().catch(e => console.error("Failed to load languages:", e));
         } else {
             rootElement?.classList.remove("bgLogo");
         }

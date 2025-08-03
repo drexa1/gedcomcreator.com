@@ -376,8 +376,7 @@ export function Chart(props: ChartProps) {
                 || props.hideLanguages !== prevProps?.hideLanguages
                 || props.hideEthnicity !== prevProps?.hideEthnicity
                 || props.hideIds !== prevProps?.hideIds
-                || props.hideSex !== prevProps?.hideSex
-                //|| props.selection !== prevProps?.selection;
+                || props.hideSex !== prevProps?.hideSex;
             const resetPosition =
                 props.chartType !== prevProps?.chartType
                 || props.data !== prevProps.data
