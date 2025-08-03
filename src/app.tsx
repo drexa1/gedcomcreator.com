@@ -203,6 +203,10 @@ export function App() {
 // EVENT HANDLERS
 // ---------------------------------------------------------------------------------------------------------------------
 
+    function onHome() {
+        history.push({ pathname: '/' });
+    }
+
     /**
      * Called when the user clicks an individual box in the chart. Updates the browser URL.
      */
@@ -386,6 +390,7 @@ export function App() {
                             (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE)
                         }
                         eventHandlers={{
+                            onHome,
                             onSelection,
                             onDownloadPdf,
                             onDownloadPng,

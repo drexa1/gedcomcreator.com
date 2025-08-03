@@ -28,6 +28,7 @@ interface ViewMenusProps {
 }
 
 interface EventHandlers {
+    onHome: () => void;
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
     onDownloadPng: () => void;
@@ -66,8 +67,8 @@ export function TopBar(props: Props) {
                         open={menuOpen}
                         trigger={
                             <div>
-                                <Icon name="home"/>
-                                <FormattedMessage id="menu.home" defaultMessage="Home"/>
+                                <Icon name="folder open"/>
+                                <FormattedMessage id="menu.open" defaultMessage="Open"/>
                             </div>
                         }
                         className="item">
@@ -113,6 +114,11 @@ export function TopBar(props: Props) {
             case ScreenSize.LARGE:
                 return (
                     <>
+                        {/*TODO: remove*/}
+                        <Menu.Item onClick={props.eventHandlers.onHome}>
+                            <Icon name="home"/>
+                            <FormattedMessage id="menu.open" defaultMessage="Home"/>
+                        </Menu.Item>
                         <Dropdown
                             trigger={
                                 <div>
