@@ -1,8 +1,3 @@
-.ui.menu, .item:before {
-    border: none !important;
-    background: none !important;
-}
-
 .detailed text {
     font-family: verdana, arial, sans-serif;
     font-size: 12px;
@@ -59,6 +54,8 @@ div .ui.sub.header {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
+/* Class by gender                                                                                                    */
+/* ------------------------------------------------------------------------------------------------------------------ */
 .detailed rect.bysex.male {
     fill: #dbffff;
 }
@@ -68,88 +65,69 @@ div .ui.sub.header {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-.detailed rect.bygeneration,
-.detailed rect.bylanguages.l1,
-.detailed rect.bylanguages.l13 {
+/* Class by generation                                                                                                */
+/* ------------------------------------------------------------------------------------------------------------------ */
+.detailed rect.bygeneration {
     fill: #ffffdd;
 }
 
 .generation-11 .detailed rect.bygeneration,
-.generation1 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l2,
-.detailed rect.bylanguages.l14 {
+.generation1 .detailed rect.bygeneration {
     fill: #edffdb;
 }
 
 .generation-10 .detailed rect.bygeneration,
-.generation2 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l3,
-.detailed rect.bylanguages.l15 {
+.generation2 .detailed rect.bygeneration {
     fill: #dbffdb;
 }
 
 .generation-9 .detailed rect.bygeneration,
-.generation3 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l4,
-.detailed rect.bylanguages.l16 {
+.generation3 .detailed rect.bygeneration {
     fill: #dbffed;
 }
 
 .generation-8 .detailed rect.bygeneration,
-.generation4 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l5,
-.detailed rect.bylanguages.l17 {
+.generation4 .detailed rect.bygeneration {
     fill: #dbffff;
 }
 
 .generation-7 .detailed rect.bygeneration,
-.generation5 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l6,
-.detailed rect.bylanguages.l18 {
+.generation5 .detailed rect.bygeneration {
     fill: #dbedff;
 }
 
 .generation-6 .detailed rect.bygeneration,
-.generation6 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l7,
-.detailed rect.bylanguages.l19 {
+.generation6 .detailed rect.bygeneration {
     fill: #dbdbff;
 }
 
 .generation-5 .detailed rect.bygeneration,
-.generation7 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l8,
-.detailed rect.bylanguages.l20 {
+.generation7 .detailed rect.bygeneration {
     fill: #eddbff;
 }
 
 .generation-4 .detailed rect.bygeneration,
-.generation8 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l9,
-.detailed rect.bylanguages.l21 {
+.generation8 .detailed rect.bygeneration {
     fill: #ffdbff;
 }
 
 .generation-3 .detailed rect.bygeneration,
-.generation9 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l10,
-.detailed rect.bylanguages.l22 {
+.generation9 .detailed rect.bygeneration {
     fill: #ffdbed;
 }
 
 .generation-2 .detailed rect.bygeneration,
-.generation10 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l11,
-.detailed rect.bylanguages.l23 {
+.generation10 .detailed rect.bygeneration {
     fill: #ffdbdb;
 }
 
 .generation-1 .detailed rect.bygeneration,
-.generation11 .detailed rect.bygeneration,
-.detailed rect.bylanguages.l12,
-.detailed rect.bylanguages.l24 {
+.generation11 .detailed rect.bygeneration {
     fill: #ffeddb;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Class by number of spoken languages                                                                                */
 /* ------------------------------------------------------------------------------------------------------------------ */
 .detailed rect.bylanguages.n1 {
     fill: #dbedff;
@@ -179,6 +157,102 @@ div .ui.sub.header {
     fill: #ffeddb;
 }
 
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Class by spoken language                                                                                           */
+/* ------------------------------------------------------------------------------------------------------------------ */
+.detailed rect.bylanguages.l1,
+.detailed rect.bylanguages.l7,
+.detailed rect.bylanguages.l12,
+.detailed rect.bylanguages.l26,
+.detailed rect.bylanguages.l43 {
+    fill: #ffdbed;
+}
+
+.detailed rect.bylanguages.l2,
+.detailed rect.bylanguages.l13,
+.detailed rect.bylanguages.l20,
+.detailed rect.bylanguages.l21,
+.detailed rect.bylanguages.l31,
+.detailed rect.bylanguages.l32,
+.detailed rect.bylanguages.l44 {
+    fill: #ffdbff;
+}
+
+.detailed rect.bylanguages.l3,
+.detailed rect.bylanguages.l6,
+.detailed rect.bylanguages.l10,
+.detailed rect.bylanguages.l15,
+.detailed rect.bylanguages.l16,
+.detailed rect.bylanguages.l18,
+.detailed rect.bylanguages.l19,
+.detailed rect.bylanguages.l28,
+.detailed rect.bylanguages.l30,
+.detailed rect.bylanguages.l33,
+.detailed rect.bylanguages.l34,
+.detailed rect.bylanguages.l35,
+.detailed rect.bylanguages.l37,
+.detailed rect.bylanguages.l40,
+.detailed rect.bylanguages.l45,
+.detailed rect.bylanguages.l46,
+.detailed rect.bylanguages.l47,
+.detailed rect.bylanguages.l49 {
+    fill: #ffdbdb;
+}
+
+.detailed rect.bylanguages.l4,
+.detailed rect.bylanguages.l9,
+.detailed rect.bylanguages.l51,
+.detailed rect.bylanguages.l52,
+.detailed rect.bylanguages.l53,
+.detailed rect.bylanguages.l54,
+.detailed rect.bylanguages.l55,
+.detailed rect.bylanguages.l56,
+.detailed rect.bylanguages.l57,
+.detailed rect.bylanguages.l58,
+.detailed rect.bylanguages.l59,
+.detailed rect.bylanguages.l60,
+.detailed rect.bylanguages.l61,
+.detailed rect.bylanguages.l62,
+.detailed rect.bylanguages.l63,
+.detailed rect.bylanguages.l64,
+.detailed rect.bylanguages.l65,
+.detailed rect.bylanguages.l66,
+.detailed rect.bylanguages.l67,
+.detailed rect.bylanguages.l68,
+.detailed rect.bylanguages.l69,
+.detailed rect.bylanguages.l70 {
+    fill: #eddbff;
+}
+
+.detailed rect.bylanguages.l5,
+.detailed rect.bylanguages.l8,
+.detailed rect.bylanguages.l17,
+.detailed rect.bylanguages.l25,
+.detailed rect.bylanguages.l29,
+.detailed rect.bylanguages.l39,
+.detailed rect.bylanguages.l41,
+.detailed rect.bylanguages.l42 {
+    fill: #dbedff;
+}
+
+.detailed rect.bylanguages.l11,
+.detailed rect.bylanguages.l22,
+.detailed rect.bylanguages.l24,
+.detailed rect.bylanguages.l27,
+.detailed rect.bylanguages.l36,
+.detailed rect.bylanguages.l38,
+.detailed rect.bylanguages.l48 {
+    fill: #dbdbff;
+}
+
+.detailed rect.bylanguages.l14,
+.detailed rect.bylanguages.l23,
+.detailed rect.bylanguages.l50 {
+    fill: #ffeddb;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Class by ethnicity                                                                                                 */
 /* ------------------------------------------------------------------------------------------------------------------ */
 .detailed rect.byethnicity.ego {
     fill: #ffffdd;

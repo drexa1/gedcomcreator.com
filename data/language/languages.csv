@@ -2,12 +2,12 @@ id,name,family,ISO 639-3,latitude,longitude,legend
 1,English,Indo-European,eng,51.5074,-0.1278,#E91E63
 2,Mandarin Chinese,Sino-Tibetan,cmn,39.9042,116.4074,#9C27B0
 3,Hindi,Indo-European,hin,28.6139,77.209,#3F51B5
-4,Spanish,Indo-European,spa,4.6243,-74.0633,#03A9F4
+4,Español,Indo-European,spa,4.6243,-74.0633,#03A9F4
 5,Modern Standard Arabic,Afro-Asiatic,arb,24.7136,46.6753,#00BCD4
 6,Bengali,Indo-European,ben,23.8103,90.4125,#009688
 7,French,Indo-European,fra,48.8566,2.3522,#4CAF50
 8,Russian,Indo-European,rus,55.7558,37.6173,#CDDC39
-9,Portuguese,Indo-European,por,-23.5505,-46.6333,#FFEB3B
+9,Portugues,Indo-European,por,-23.5505,-46.6333,#FFEB3B
 10,Urdu,Indo-European,urd,24.8607,67.0011,#FFC107
 11,Indonesian,Austronesian,ind,-6.2088,106.8456,#FF9800
 12,German,Indo-European,deu,52.52,13.405,#FF5722
@@ -49,3 +49,23 @@ id,name,family,ISO 639-3,latitude,longitude,legend
 48,Khmer,Austroasiatic,khm,11.5449,104.8922,#CDDC39
 49,Assamese,Indo-European,asm,26.2006,92.9376,#FFEB3B
 50,Somali,Afro-Asiatic,som,2.0469,45.3182,#FFC107
+51,resigaro,arawak,rgr,-1.17,-71.61,#8D6E63
+52,bora,boran,boa,-2.00,-72.26,#A5D6A7
+53,andoke,isolate,ano,-0.54,-72.09,#9E9E9E
+54,minika-witoto,witotoan,hto,-1.55,-73.11,#A31515
+55,muinane,boran,bmr,-0.80,-72.04,#4CAF50
+56,okaina,witotoan,oca,-2.16,-72.14,#FF7043
+57,nonuya,witotoan,noj,-1.25,-72.50,#FF8A65
+58,murui-witoto,witotoan,huu,-1.14,-73.83,#B71C1C
+59,nipode-witoto,witotoan,hux,-2.34,-70.96,#D50000
+60,mika-witoto,witotoan,,-1.63,-73.28,#FF3D00
+61,yucuna,arawakan,ycn,-0.76,-71.00,#795548
+62,kokama,tupian,cod,-5.00,-74.50,#CDDC39
+63,makuna,tucanoan,myy,-0.33,-70.17,#90CAF9
+64,binika-witoto,witotoan,,-1.40,-72.78,#8B0000
+65,tikuna,tikuna-yuri,tca,-4.00,-70.50,#FF5722
+66,tucano,tucanoan,tuo,0.50,-69.17,#2196F3
+67,miraña,boran,,-1.32,-70.81,#1B5E20
+68,matapi,arawakan,,-0.76,-71.00,#4E342E
+69,tanimuca,tucanoan,tnc,-0.59,-70.39,#1976D2
+70,cubeo,tucanoan,cub,1.32,-70.19,#0D47A1
