@@ -282,17 +282,17 @@ export function TopBar(props: Props) {
         }
     }
 
-    function SearchMenus({currentView, changeView }: ViewMenusProps) {
-        return (
-            <>
-                <Dropdown.Item onClick={() => changeView("hourglass")}>
-                    <Icon name="hourglass" />
-                    <FormattedMessage id="menu.hourglass" defaultMessage="Hourglass"/>
-                </Dropdown.Item>
-
-            </>
-        );
-    }
+    // function SearchMenus({currentView, changeView }: ViewMenusProps) {
+    //     return (
+    //         <>
+    //             <Dropdown.Item onClick={() => changeView("hourglass")}>
+    //                 <Icon name="hourglass" />
+    //                 <FormattedMessage id="menu.hourglass" defaultMessage="Hourglass"/>
+    //             </Dropdown.Item>
+    //
+    //         </>
+    //     );
+    // }
 
     function ViewMenus({ currentView, changeView }: ViewMenusProps) {
         return (
