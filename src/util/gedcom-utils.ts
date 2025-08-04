@@ -2,7 +2,7 @@ import {GedcomEntry, parse as parseGedcom} from "parse-gedcom";
 import {I18nError} from "./error-i18n";
 import {gedcomEntriesToJson, JsonFam, JsonGedcomData, JsonImage, JsonIndi} from "../topola";
 import {compareDates} from "./date-utils";
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 
 export interface GedcomData {
     head: GedcomEntry;
@@ -59,9 +59,9 @@ export function getGedcomLanguages(data: TopolaData | undefined) {
         }, new Set<string>());
 }
 
-export function loadLanguageOptions(data: TopolaData | undefined, allLanguages: Language[]) {
+export function loadLanguageOptions(data: TopolaData | undefined, allLanguages: IndividualLanguage[]) {
     const gedcomLanguages = Array.from(getGedcomLanguages(data));
-    return allLanguages.filter((l: Language) => gedcomLanguages.includes(l.name)).sort();
+    return allLanguages.filter((l: IndividualLanguage) => gedcomLanguages.includes(l.name)).sort();
 }
 
 export function getEthnicities(data: TopolaData | undefined) {
@@ -290,7 +290,7 @@ function filterImages(
  */
 export function convertGedcom(
     gedcom: string,
-    allLanguages: Language[],
+    allLanguages: IndividualLanguage[],
     images: Map<string, string>
 ): TopolaData {
     const entries = parseGedcom(gedcom, allLanguages);

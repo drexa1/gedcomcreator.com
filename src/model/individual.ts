@@ -6,6 +6,16 @@ export enum Sex {
     F = "F"
 }
 
+/**
+ * GEDCOM extension (_LANG)
+ */
+export interface IndividualLanguage {
+    id: string;
+    name: string;
+    iso?: string | null;
+    abbreviation?: string;
+}
+
 export class Individual {
     id: string | null = null;
     sex: Sex | null = null;

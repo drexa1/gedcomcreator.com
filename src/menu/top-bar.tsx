@@ -10,6 +10,8 @@ import {SearchBar} from "./search";
 import {UploadMenu} from "./upload-menu";
 import {UrlMenu} from "./url-menu";
 import {useHistory, useLocation} from "react-router";
+import {i18nMessages} from "../index";
+import {ContactForm} from "./contact-form";
 
 enum ScreenSize {
     LARGE,
@@ -22,6 +24,11 @@ interface Props {
     eventHandlers: EventHandlers;
 }
 
+type ContactMenusProps = {
+    screenSize: ScreenSize;
+    onContactClick: () => void;
+};
+
 interface ViewMenusProps {
     currentView: string;
     changeView: (view: string) => void;
@@ -29,6 +36,7 @@ interface ViewMenusProps {
 
 interface EventHandlers {
     onHome: () => void;
+    onChangeI18nLanguage: (lang: string) => void
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
     onDownloadPng: () => void;
@@ -40,12 +48,12 @@ interface EventHandlers {
 export function TopBar(props: Props) {
     const history = useHistory();
     const location = useLocation();
+    const [contactModalOpen, setContactModalOpen] = useState(false);
 
     function FileMenus(screenSize: ScreenSize) {
         const [menuOpen, setMenuOpen] = useState(false);
         const cooldown = useRef(false);
 
-        // Debug handler
         const toggleMenu = (state: boolean) => {
             if (!state) {
                 cooldown.current = true;
@@ -71,7 +79,7 @@ export function TopBar(props: Props) {
                                 <FormattedMessage id="menu.open" defaultMessage="Open"/>
                             </div>
                         }
-                        className="item">
+                        className="item right">
                         <Dropdown.Menu onClick={() => toggleMenu(false)}>
                             <UploadMenu menuType={MenuType.Dropdown} {...props} />
                             <UrlMenu menuType={MenuType.Dropdown} {...props} />
@@ -90,6 +98,61 @@ export function TopBar(props: Props) {
                         <UploadMenu menuType={MenuType.Dropdown} {...props} />
                         <UrlMenu menuType={MenuType.Dropdown} {...props} />
                         {/*<ConvertCSVMenu menuType={MenuType.Dropdown} {...props} />*/}
+                    </>
+                );
+        }
+    }
+
+    function ContactMenus({ screenSize, onContactClick }: ContactMenusProps) {
+        switch (screenSize) {
+            case ScreenSize.LARGE:
+                return (
+                    <Menu.Item onClick={onContactClick}>
+                        <Icon name="mail"/>Contact
+                    </Menu.Item>
+                );
+            case ScreenSize.SMALL:
+                return (
+                    <>
+                    </>
+                );
+        }
+    }
+
+    function LanguageMenus(screenSize: ScreenSize) {
+        const [currentI18nLanguage, setCurrentI18nLanguage] = useState("en");
+        const i18nLanguages = Object.keys(i18nMessages).filter(lang => lang !== "en");
+
+        const changeI18nLanguage = (i18nLanguage: string) => {
+            setCurrentI18nLanguage(i18nLanguage);
+            props.eventHandlers.onChangeI18nLanguage(i18nLanguage);  // calls setI18nLanguage from App → Root
+        };
+
+        switch (screenSize) {
+            case ScreenSize.LARGE:
+                return (
+                    <>
+                        <Dropdown
+                            trigger={
+                                <div>
+                                    <Icon name="language"/>
+                                    &nbsp;<FormattedMessage id={`i18n.language.${currentI18nLanguage}`} defaultMessage={currentI18nLanguage}/>
+                                </div>
+                            }
+                            className="item no-arrow">
+                            <Dropdown.Menu>
+                                {i18nLanguages.map(lang => (
+                                    <Dropdown.Item key={lang} onClick={() => changeI18nLanguage(lang)}>
+                                        <FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang}/>
+                                    </Dropdown.Item>
+                                ))}
+                            </Dropdown.Menu>
+                        </Dropdown>
+                    </>
+                );
+            case ScreenSize.SMALL:
+                return (
+                    <>
                     </>
                 );
         }
@@ -211,12 +274,24 @@ export function TopBar(props: Props) {
                             <Dropdown.Divider/>
                             <Menu.Item onClick={props.eventHandlers.onResetView}>
                                 <Icon name="eye" />
-                                <FormattedMessage id="menu.view.reset" defaultMessage="Reset view" />
+                                <FormattedMessage id="menu.view.reset" defaultMessage="Reset view"/>
                             </Menu.Item>
                         </>
                     );
                 }
         }
+    }
+
+    function SearchMenus({currentView, changeView }: ViewMenusProps) {
+        return (
+            <>
+                <Dropdown.Item onClick={() => changeView("hourglass")}>
+                    <Icon name="hourglass" />
+                    <FormattedMessage id="menu.hourglass" defaultMessage="Hourglass"/>
+                </Dropdown.Item>
+
+            </>
+        );
     }
 
     function ViewMenus({ currentView, changeView }: ViewMenusProps) {
@@ -246,6 +321,15 @@ export function TopBar(props: Props) {
                     <>
                         {FileMenus(ScreenSize.LARGE)}
                         {ChartMenus(ScreenSize.LARGE)}
+                        <ContactMenus
+                            screenSize={ScreenSize.LARGE}
+                            onContactClick={() => setContactModalOpen(true)}
+                        />
+                        <ContactForm
+                            open={contactModalOpen}
+                            onClose={() => setContactModalOpen(false)}
+                        />
+                        {LanguageMenus(ScreenSize.LARGE)}
                     </>
                 }
             </Menu>

@@ -14,31 +14,46 @@ import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 
 
-const messages = {
+export const i18nMessages = {
     // de: messages_de,
+    es: messages_es,
     // fr: messages_fr,
     // it: messages_it,
-    es: messages_es,
-    pl: messages_pl
+    pl: messages_pl,
+    /**
+     * Fallback labels for the i18n selector
+     */
+    en: {
+        "i18n.language.de": "Deutsch",
+        "i18n.language.en": "English",
+        "i18n.language.es": "Español",
+        "i18n.language.fr": "Français",
+        "i18n.language.it": "Italiano",
+        "i18n.language.pl": "Polski"
+    }
 };
-const language = navigator.language && navigator.language.split(/[-_]/)[0];
-const browser = detect();
+const defaultLang = navigator.language?.split(/[-_]/)[0];
 
-if (browser && browser.name === "ie") {
-    ReactDOM.render(
-        <p>Genealogy Viewer does not support Internet Explorer. Please try a different (modern) browser.</p>,
-        document.querySelector("#root"),
-    );
-} else {
-    ReactDOM.render(
-        <IntlProvider locale={language} messages={messages[language]}>
+function Root() {
+    const [i18nLanguage, setI18nLanguage] = React.useState(defaultLang);
+    return (
+        <IntlProvider locale={i18nLanguage} messages={i18nMessages[i18nLanguage]}>
             <MediaContextProvider>
                 <style>{mediaStyles}</style>
                 <Router>
-                    <Route component={App}/>
+                    <App setI18nLanguage={setI18nLanguage}/>
                 </Router>
             </MediaContextProvider>
-        </IntlProvider>,
-        document.querySelector("#root"),
+        </IntlProvider>
     );
 }
+
+const browser = detect();
+ReactDOM.render(
+    browser?.name === "ie" ? (
+        <p>GEDCOM Creator does not support Internet Explorer. Please try a modern browser.</p>
+    ) : (
+        <Root/>
+    ),
+    document.getElementById("root")
+);

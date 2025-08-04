@@ -1,7 +1,7 @@
 import {DataSource, DataSourceEnum, SourceSelection} from './data-source';
 import {TopolaData} from '../util/gedcom-utils';
 import {loadGedcom} from './load-data';
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 
 /**
  * Message types used in embedded mode.
@@ -24,7 +24,7 @@ interface EmbeddedMessage {
 interface GedcomMessage extends EmbeddedMessage {
     message: EmbeddedMessageType.GEDCOM;
     gedcom?: string;
-    allLanguages?: Language[]
+    allLanguages?: IndividualLanguage[]
 }
 
 export interface EmbeddedSourceSpec {

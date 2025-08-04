@@ -1,7 +1,7 @@
 import * as H from "history";
 import {IndiInfo} from '../topola';
 import * as queryString from "query-string";
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 import {ChartType} from "../chart";
 import {DataSourceEnum, DataSourceSpec} from "../datasource/data-source";
 import {argsToConfig, Config} from "../config";
@@ -22,7 +22,7 @@ interface Arguments {
 /**
  * Retrieve arguments passed into the application through the URL and uploaded data.
  */
-export function getArguments(location: H.Location<any>, allLanguages: Language[]): Arguments {
+export function getArguments(location: H.Location<any>, allLanguages: IndividualLanguage[]): Arguments {
     const search = queryString.parse(location.search);
     const getParam = (name: string) => getParamFromSearch(name, search);
     const view = getParam("view");

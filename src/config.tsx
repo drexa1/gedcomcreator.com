@@ -1,7 +1,7 @@
 import {Item, Checkbox, Form, Header} from "semantic-ui-react";
 import {FormattedMessage} from "react-intl";
 import {ParsedQuery} from "query-string";
-import {Language} from "./model/language";
+import {IndividualLanguage} from "./model/individual";
 import {useState} from "react";
 
 export enum ChartColors {
@@ -41,7 +41,7 @@ export interface Config {
     sex: SexArg;
     renderLanguagesOption: boolean
     renderEthnicityOption: boolean
-    languageOptions: Language[],
+    languageOptions: IndividualLanguage[],
     selectedLanguage: string | null
 }
 

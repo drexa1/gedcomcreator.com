@@ -1,9 +1,9 @@
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 
 
 export default class CSVLoader {
     // Singleton
-    private static languagesData: Language[] | null = null;
+    private static languagesData: IndividualLanguage[] | null = null;
 
     static async loadLanguages(filePath: string) {
         if (CSVLoader.languagesData) {
@@ -27,7 +27,7 @@ export default class CSVLoader {
                     name: CSVLoader.title_fn(values[nameIndex]),
                     iso: values[isoIndex],
                     abbreviation: values[isoIndex].toUpperCase() || (values[nameIndex].slice(0, 3).toUpperCase() + '*')
-                } as Language;
+                } as IndividualLanguage;
             });
             return CSVLoader.languagesData;
         } catch (error) {

@@ -28,7 +28,7 @@ import {
     UploadSourceSpec,
     UrlSourceSpec
 } from "./datasource/load-data";
-import {Language} from "./model/language";
+import {IndividualLanguage} from "./model/individual";
 import {Config, ConfigPanel, configToArgs, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
 import CSVLoader from "./datasource/load-csv";
 import {getArguments} from "./util/param-utils";
@@ -42,7 +42,13 @@ enum AppState {
     LOADING_MORE
 }
 
-export function App() {
+interface AppProps {
+    setI18nLanguage: (lang: string) => void;
+}
+
+export function App(props: AppProps) {
+    const setI18nLanguage = props.setI18nLanguage;
+
     const [state, setState] = useState<AppState>(AppState.INITIAL);
     const [data, setData] = useState<TopolaData>();
     const [selection, setSelection] = useState<IndiInfo>();
@@ -54,7 +60,7 @@ export function App() {
     const [gedcomString, setGedcomString] = useState<String>()
     const [freezeAnimation, setFreezeAnimation] = useState(false);
     const [config, setConfig] = useState(DEFAULT_CONFIG);
-    const [allLanguages, setAllLanguages] = useState<Language[]>([]);
+    const [allLanguages, setAllLanguages] = useState<IndividualLanguage[]>([]);
 
     const location = useLocation();
     const history = useHistory();
@@ -153,7 +159,7 @@ export function App() {
         }
     }
 
-    function loadData(newSourceSpec: DataSourceSpec, newSelection?: IndiInfo, allLanguages?: Language[]) {
+    function loadData(newSourceSpec: DataSourceSpec, newSelection?: IndiInfo, allLanguages?: IndividualLanguage[]) {
         switch (newSourceSpec.source) {
             case DataSourceEnum.UPLOADED:
                 analyticsEvent("gedcomcreator_gedcom_upload");
@@ -166,7 +172,7 @@ export function App() {
         }
     }
 
-    function toggleDetails(config: Config, data: TopolaData | undefined, allLanguages: Language[]) {
+    function toggleDetails(config: Config, data: TopolaData | undefined, allLanguages: IndividualLanguage[]) {
         if (data === undefined) return;
         // Set up if there are languages
         config.languageOptions = loadLanguageOptions(data, allLanguages)
@@ -391,6 +397,7 @@ export function App() {
                         }
                         eventHandlers={{
                             onHome,
+                            onChangeI18nLanguage: setI18nLanguage,
                             onSelection,
                             onDownloadPdf,
                             onDownloadPng,

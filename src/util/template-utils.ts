@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from 'uuid';
 import {Individual, Sex} from "../model/individual";
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 import {Family} from "../model/family";
 
 type Relationships = Record<string, [string, string]>;
@@ -48,7 +48,7 @@ function parseIndividuals(individualsContent: string): Individual[] {
 
 }
 
-function parseLanguages(languagesContents: string): Language[] {
+function parseLanguages(languagesContents: string): IndividualLanguage[] {
     const rows = parseCSV(languagesContents);
     return rows.map(row => ({
         id: row["id"],
@@ -94,7 +94,7 @@ function parseFamilies(familiesContent: string): Family[] {
 function mapIndividualsLanguages(
     individuals: Individual[],
     individualsLanguages: Record<string, string[]>,
-    languages: Language[]
+    languages: IndividualLanguage[]
 ): void {
     Object.entries(individualsLanguages).forEach(([personId, langIds]) => {
         const individual = individuals.find(ind => ind.id === personId);

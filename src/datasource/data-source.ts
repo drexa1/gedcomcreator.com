@@ -1,6 +1,6 @@
 import {IndiInfo} from '../topola';
 import {TopolaData} from '../util/gedcom-utils';
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 import {UploadSourceSpec, UrlSourceSpec} from "./load-data";
 import {EmbeddedSourceSpec} from "./embedded";
 
@@ -17,7 +17,7 @@ export enum DataSourceEnum {
 export interface SourceSelection<SourceSpecT> {
     spec: SourceSpecT;
     selection?: IndiInfo;
-    allLanguages?: Language[];
+    allLanguages?: IndividualLanguage[];
 }
 
 /** Interface encapsulating functions specific for a data source. */

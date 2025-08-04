@@ -3,12 +3,12 @@ import {DataSource, DataSourceEnum, SourceSelection} from './data-source';
 import {IndiInfo, JsonGedcomData} from '../topola';
 import {I18nError} from '../util/error-i18n';
 import JSZip from "jszip";
-import {Language} from "../model/language";
+import {IndividualLanguage} from "../model/individual";
 
 export interface UploadSourceSpec {
     source: DataSourceEnum.UPLOADED;
     gedcom: string;
-    allLanguages: Language[];
+    allLanguages: IndividualLanguage[];
     hash: string;
     images?: Map<string, string>;
 }
@@ -16,7 +16,7 @@ export interface UploadSourceSpec {
 export interface UrlSourceSpec {
     source: DataSourceEnum.GEDCOM_URL;
     url: string;
-    allLanguages: Language[];
+    allLanguages: IndividualLanguage[];
     handleCors: boolean;
 }
 
@@ -35,7 +35,7 @@ export function getSelection(data: JsonGedcomData, selection?: IndiInfo): IndiIn
 function prepareData(
     gedcom: string,
     cacheId: string,
-    allLanguages: Language[],
+    allLanguages: IndividualLanguage[],
     images?: Map<string, string>
 ): TopolaData {
     const data = convertGedcom(gedcom, allLanguages, images || new Map());
@@ -83,7 +83,7 @@ export async function loadFile(blob: Blob): Promise<{ gedcom: string; images: Ma
 export async function loadFromUrl(
     url: string,
     handleCors: boolean,
-    allLanguages: Language[]
+    allLanguages: IndividualLanguage[]
 ) {
     try {
         const cachedData = sessionStorage.getItem(url);
@@ -129,7 +129,7 @@ export async function loadFromUrl(
 export async function loadGedcom(
     hash: string,
     gedcom?: string,
-    allLanguages?: Language[],
+    allLanguages?: IndividualLanguage[],
     images?: Map<string, string>
 ): Promise<TopolaData> {
     try {
