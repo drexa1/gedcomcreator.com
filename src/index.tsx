@@ -14,23 +14,24 @@ import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 
 
+/**
+ * Initial captions for the i18n selector.
+ */
+const supportedLanguages = {
+    "i18n.language.de": "Deutsch",
+    "i18n.language.en": "English",
+    "i18n.language.es": "Español",
+    "i18n.language.fr": "Français",
+    "i18n.language.it": "Italiano",
+    "i18n.language.pl": "Polski"
+}
 export const i18nMessages = {
     // de: messages_de,
     es: messages_es,
     // fr: messages_fr,
     // it: messages_it,
     pl: messages_pl,
-    /**
-     * Fallback labels for the i18n selector
-     */
-    en: {
-        "i18n.language.de": "Deutsch",
-        "i18n.language.en": "English",
-        "i18n.language.es": "Español",
-        "i18n.language.fr": "Français",
-        "i18n.language.it": "Italiano",
-        "i18n.language.pl": "Polski"
-    }
+    en: supportedLanguages
 };
 const defaultLang = navigator.language?.split(/[-_]/)[0];
 
