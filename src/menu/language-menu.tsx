@@ -15,8 +15,7 @@ export function LanguageMenu(screenSize: ScreenSize, props: Props) {
         case ScreenSize.LARGE:
             return (
                 <>
-                    <Dropdown className="item no-arrow" floating direction="left"
-                        trigger={
+                    <Dropdown floating direction="left" className="item no-arrow" trigger={
                             <div>
                                 <Icon name="language"/>
                             </div>
