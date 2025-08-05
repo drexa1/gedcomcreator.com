@@ -1,7 +1,7 @@
 import debounce from "debounce";
-import {buildSearchIndex, SearchUtils, SearchResult, getDescriptionLine} from "../utils/search-utils";
+import {buildSearchIndex, getDescriptionLine, SearchResult, SearchUtils} from "../utils/search-utils";
 import {IndiInfo, JsonGedcomData} from "../topola";
-import {Search, SearchResultProps} from "semantic-ui-react";
+import {Menu, Search, SearchResultProps} from "semantic-ui-react";
 import {useEffect, useRef, useState} from "react";
 import {useIntl} from "react-intl";
 
@@ -71,15 +71,17 @@ export function SearchBar(props: Props) {
 // ---------------------------------------------------------------------------------------------------------------------
 
     return (
-        <Search
-            onSearchChange={(_, data) => onChange(data.value!)}
-            onResultSelect={(_, data) => onResultSelect(data.result.id)}
-            results={searchResults}
-            noResultsMessage={intl.formatMessage({id: "menu.search.no_results", defaultMessage: "No results found"})}
-            placeholder={intl.formatMessage({id: "menu.search.placeholder", defaultMessage: "Search for people"})}
-            selectFirstResult={true}
-            value={searchString}
-            id="search"
-        />
+        <Menu.Menu position="left">
+            <Search
+                onSearchChange={(_, data) => onChange(data.value!)}
+                onResultSelect={(_, data) => onResultSelect(data.result.id)}
+                results={searchResults}
+                noResultsMessage={intl.formatMessage({id: "menu.search.no_results", defaultMessage: "No results found"})}
+                placeholder={intl.formatMessage({id: "menu.search.placeholder", defaultMessage: "Search for people"})}
+                selectFirstResult={true}
+                value={searchString}
+                id="search"
+            />
+        </Menu.Menu>
     );
 }

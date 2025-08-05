@@ -6,6 +6,7 @@ import {ContactForm, ContactMenu} from "./contact-form";
 import {LanguageMenu} from "./language-menu";
 import {ChartMenu} from "./chart-menu";
 import {FileMenu} from "./file-menu";
+import {SearchBar} from "./search-bar";
 
 
 export enum ScreenSize {
@@ -38,11 +39,18 @@ export function TopBar(props: Props) {
             {FileMenu(ScreenSize.LARGE, props)}
             {/* HOME | DOWNLOAD | RESET VIEW */}
             {ChartMenu(ScreenSize.LARGE, props)}
-            {/* CONTACT */}
-            <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
-            <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
-            {/* I18N LANGUAGE */}
-            {LanguageMenu(ScreenSize.LARGE, props)}
+            {/* CONTACT | I18N LANGUAGE */}
+            {!props.showingChart &&
+                <>
+                    <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
+                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
+                    {LanguageMenu(ScreenSize.LARGE, props)}
+                </>
+            }
+            {/* SEARCH */}
+            {props.showingChart &&
+                <SearchBar data={props.data!} onSelection={props.eventHandlers.onSelection}{...props}/>
+            }
         </Menu>;
     }
 

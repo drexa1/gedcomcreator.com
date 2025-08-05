@@ -568,11 +568,7 @@ var DetailedRenderer = /** @class */ (function (_super) {
                 return _this.getSelectedStroke(node.indi.id);
             })
             .attr("stroke-dasharray", function (node) {
-                if (node.indi.hiddenRelatives) {
-                    return "5, 5"
-                } else {
-                    return "0, 0"
-                }
+                return node.indi.hiddenRelatives ? "5, 5" : "0, 0";
             })
             .merge(update.select("rect.border"));
         this.transition(border)

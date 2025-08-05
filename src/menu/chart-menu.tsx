@@ -3,7 +3,6 @@ import {Dropdown, Icon, Menu} from "semantic-ui-react";
 import {FormattedMessage} from "react-intl";
 import {useState} from "react";
 import {MenuType} from "./menu-item";
-import {SearchBar} from "./search-bar";
 import {UrlMenu} from "./url-menu";
 import {Props, ScreenSize} from "./top-bar";
 import {useHistory, useLocation} from "react-router";
@@ -24,9 +23,6 @@ export function ChartMenu(screenSize: ScreenSize, props: Props) {
             history.push(location);
         }
     };
-
-    if (!props.showingChart)
-        return null;
 
     switch (screenSize) {
         case ScreenSize.LARGE:
@@ -87,14 +83,6 @@ export function ChartMenu(screenSize: ScreenSize, props: Props) {
                         <Icon name="target" />
                         <FormattedMessage id="menu.view.reset" defaultMessage="Reset view" />
                     </Menu.Item>
-                    {/* SEARCH */}
-                    <Menu.Menu position="right">
-                        <SearchBar
-                            data={props.data!}
-                            onSelection={props.eventHandlers.onSelection}
-                            {...props}
-                        />
-                    </Menu.Menu>
                 </>
             );
         case ScreenSize.SMALL:
