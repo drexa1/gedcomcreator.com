@@ -1,5 +1,5 @@
 import flatMap from "array.prototype.flatmap";
-import {dereference, GedcomData, getData, getFileName, getImageFileEntry} from "../util/gedcom-utils";
+import {dereference, GedcomData, getData, getFileName, getImageFileEntry} from "../utils/gedcom-utils";
 import {Events} from "./events";
 import {GedcomEntry} from "parse-gedcom";
 import {MultilineText} from "./multiline-text";

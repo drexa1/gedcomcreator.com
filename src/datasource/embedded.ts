@@ -1,5 +1,5 @@
 import {DataSource, DataSourceEnum, SourceSelection} from './data-source';
-import {TopolaData} from '../util/gedcom-utils';
+import {TopolaData} from '../utils/gedcom-utils';
 import {loadGedcom} from './load-data';
 import {IndividualLanguage} from "../model/individual";
 

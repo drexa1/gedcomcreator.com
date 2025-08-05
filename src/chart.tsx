@@ -2,7 +2,7 @@ import {ChartColors, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config"
 import {interpolateNumber} from "d3-interpolate";
 import {FormattedMessage, IntlShape, useIntl} from "react-intl";
 import {max, min} from "d3-array";
-import {Media} from "./util/media-utils";
+import {Media} from "./utils/media-utils";
 import {saveAs} from "file-saver";
 import {select, Selection} from "d3-selection";
 import {useEffect, useRef} from "react";
@@ -18,7 +18,7 @@ import {
     JsonGedcomData,
     RelativesChart,
 } from "./topola";
-import {GedcomData, GedcomTreeItem} from "./util/gedcom-utils";
+import {GedcomData, GedcomTreeItem} from "./utils/gedcom-utils";
 
 /**
  * How much to zoom when using the +/- buttons.

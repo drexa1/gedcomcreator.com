@@ -2,9 +2,12 @@ BACKLOG
 
 [x] i18 menu working  
 [x] Working contact form  
+[ ] Reorganize menus  
 [ ] Contact form styling
-[ ] Reorganize menus 
 [ ] Buttons styling  
+[ ] How it works  
+[ ] More relatives explanations  
+[ ] Privacy policy  
 [ ] Fat-trimming  
 [ ] Landing page  
 [ ] Convert templates  

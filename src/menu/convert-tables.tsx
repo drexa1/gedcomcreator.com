@@ -1,5 +1,6 @@
 import {SemanticCOLORS, Table, TableBody, TableCell, TableHeader, TableHeaderCell, TableRow} from "semantic-ui-react";
 
+
 export function IndividualsTableExample({ headerColor }: { headerColor?: SemanticCOLORS }) {
     return (
         <Table compact size="small" color={headerColor}>

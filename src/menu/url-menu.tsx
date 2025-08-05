@@ -1,34 +1,33 @@
-import * as queryString from 'query-string';
-import {Button, Form, Header, Icon, Input, Modal} from 'semantic-ui-react';
-import {FormattedMessage} from 'react-intl';
-import {MenuItem, MenuType} from './menu-item';
-import {useEffect, useRef, useState} from 'react';
-import {useHistory} from 'react-router';
+import * as queryString from "query-string";
+import {Button, Form, Header, Icon, Input, Modal} from "semantic-ui-react";
+import {FormattedMessage} from "react-intl";
+import {MenuItem, MenuType} from "./menu-item";
+import {useEffect, useRef, useState} from "react";
+import {useHistory} from "react-router";
+
 
 interface Props {
     menuType: MenuType;
 }
 
-/** Displays and handles the "Open URL" menu. */
 export function UrlMenu(props: Props) {
     const [dialogOpen, setDialogOpen] = useState(false);
-    const [url, setUrl] = useState('');
+    const [url, setUrl] = useState("");
     const inputRef = useRef<Input>(null);
     const history = useHistory();
 
     useEffect(() => {
         if (dialogOpen) {
-            setUrl('');
+            setUrl("");
             inputRef.current!.focus();
         }
     }, [dialogOpen]);
 
-    /** Load button clicked in the "Load from URL" dialog. */
     function handleLoad() {
         setDialogOpen(false);
         if (url) {
             history.push({
-                pathname: '/view',
+                pathname: "/view",
                 search: queryString.stringify({url})
             });
         }
@@ -54,7 +53,7 @@ export function UrlMenu(props: Props) {
                             <FormattedMessage
                                 id="load_from_url.comment"
                                 defaultMessage={
-                                    'Data from the URL will be loaded through {link} to avoid CORS issues.'
+                                    "Data from the URL will be loaded through {link} to avoid CORS issues."
                                 }
                                 values={{
                                     link: (

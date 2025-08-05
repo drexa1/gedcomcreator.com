@@ -1,5 +1,5 @@
 import {IndiInfo} from '../topola';
-import {TopolaData} from '../util/gedcom-utils';
+import {TopolaData} from '../utils/gedcom-utils';
 import {IndividualLanguage} from "../model/individual";
 import {UploadSourceSpec, UrlSourceSpec} from "./load-data";
 import {EmbeddedSourceSpec} from "./embedded";

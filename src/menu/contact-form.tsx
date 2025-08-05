@@ -1,11 +1,35 @@
 import React from 'react';
 import { useForm, ValidationError } from '@formspree/react';
-import { Modal } from 'semantic-ui-react';
+import {Icon, Menu, Modal} from 'semantic-ui-react';
+import {ScreenSize} from "./top-bar";
+import {FormattedMessage} from "react-intl";
+
+type ContactMenusProps = {
+    screenSize: ScreenSize;
+    onContactClick: () => void;
+};
 
 type ContactFormProps = {
     open: boolean;
     onClose: () => void;
 };
+
+export function ContactMenu({ screenSize, onContactClick }: ContactMenusProps) {
+    switch (screenSize) {
+        case ScreenSize.LARGE:
+            return (
+                <Menu.Item onClick={onContactClick}>
+                    <Icon name="mail"/><FormattedMessage id="menu.contact" defaultMessage="Contact"/>
+                </Menu.Item>
+            );
+        case ScreenSize.SMALL:
+            return (
+                <>
+                    {/* TODO: review */}
+                </>
+            );
+    }
+}
 
 export function ContactForm({ open, onClose }: ContactFormProps) {
     const [state, handleSubmit] = useForm("mwpqrkle");

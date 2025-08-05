@@ -1,6 +1,6 @@
 import * as queryString from "query-string";
 import flatMap from "array.prototype.flatmap";
-import {compareDates, formatDateOrRange} from "../util/date-utils";
+import {compareDates, formatDateOrRange} from "../utils/date-utils";
 import {
     dereference,
     GedcomData,
@@ -9,7 +9,7 @@ import {
     getImageFileEntry,
     getName,
     pointerToId,
-} from "../util/gedcom-utils";
+} from "../utils/gedcom-utils";
 import {GedcomEntry} from "parse-gedcom";
 import {FormattedMessage, useIntl} from "react-intl";
 import {Link, useLocation} from "react-router-dom";

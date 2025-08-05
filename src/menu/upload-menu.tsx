@@ -1,15 +1,16 @@
-import * as queryString from 'query-string';
-import md5 from 'md5';
-import {Dropdown, Icon, Menu} from 'semantic-ui-react';
-import {FormattedMessage} from 'react-intl';
-import {MenuType} from './menu-item';
-import {SyntheticEvent} from 'react';
-import {useHistory, useLocation} from 'react-router';
-import {loadFile} from '../datasource/load-data';
+import * as queryString from "query-string";
+import md5 from "md5";
+import {Dropdown, Icon, Menu} from "semantic-ui-react";
+import {FormattedMessage} from "react-intl";
+import {MenuType} from "./menu-item";
+import {SyntheticEvent} from "react";
+import {useHistory, useLocation} from "react-router";
+import {loadFile} from "../datasource/load-data";
+
 
 function isImageFileName(fileName: string) {
     const lower = fileName.toLowerCase();
-    return lower.endsWith('.jpg') || lower.endsWith('.png');
+    return lower.endsWith(".jpg") || lower.endsWith(".png");
 }
 
 interface Props {
@@ -27,12 +28,12 @@ export function UploadMenu(props: Props) {
             return;
         }
         const filesArray = Array.from(files);
-        (event.target as HTMLInputElement).value = ''; // Reset the file input.
+        (event.target as HTMLInputElement).value = ""; // Reset the file input.
 
         const gedcomFile =
             filesArray.length === 1
                 ? filesArray[0]
-                : filesArray.find((file) => file.name.toLowerCase().endsWith('.ged')) ||
+                : filesArray.find((file) => file.name.toLowerCase().endsWith(".ged")) ||
                 filesArray[0];
         const {gedcom, images} = await loadFile(gedcomFile);
 
@@ -42,7 +43,7 @@ export function UploadMenu(props: Props) {
             .forEach((file) => images.set(file.name, URL.createObjectURL(file)));
 
         // Hash GEDCOM contents with uploaded image file names.
-        const imageFileNames = Array.from(images.keys()).sort().join('|');
+        const imageFileNames = Array.from(images.keys()).sort().join("|");
         const hash = md5(md5(gedcom) + imageFileNames);
 
         // Use history.replace() when re-uploading the same file and history.push() when loading a new file.
@@ -50,7 +51,7 @@ export function UploadMenu(props: Props) {
         const historyPush = search.file === hash ? history.replace : history.push;
 
         historyPush({
-            pathname: '/view',
+            pathname: "/view",
             search: queryString.stringify({file: hash}),
             state: {data: gedcom, images}
         });
@@ -62,6 +63,7 @@ export function UploadMenu(props: Props) {
             <FormattedMessage id="menu.open_file" defaultMessage="Open file"/>
         </>
     );
+
     return (
         <>
             {props.menuType === MenuType.Menu ? (

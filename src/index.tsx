@@ -9,7 +9,7 @@ import {App} from "./app";
 import {detect} from "detect-browser";
 import {BrowserRouter as Router} from "react-router-dom";
 import {IntlProvider} from "react-intl";
-import {MediaContextProvider, mediaStyles} from "./util/media-utils";
+import {MediaContextProvider, mediaStyles} from "./utils/media-utils";
 import "./index.css";
 import "semantic-ui-css/semantic.min.css";
 

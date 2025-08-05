@@ -17,8 +17,9 @@ import {
     validateTemplate,
     validateFilenames
 } from "../model/validate-template";
-import {csvToGedcom} from "../util/template-utils";
-import {analyticsEvent} from "../util/google-analytics";
+import {csvToGedcom} from "../utils/template-utils";
+import {analyticsEvent} from "../utils/google-analytics";
+
 
 interface Props {
     menuType: MenuType

@@ -3,7 +3,8 @@ import {
     Dropdown,
     MenuItemProps,
     DropdownItemProps,
-} from 'semantic-ui-react';
+} from "semantic-ui-react";
+
 
 export enum MenuType {
     Menu,
@@ -16,7 +17,7 @@ interface Props {
 
 export function MenuItem(props: Props & MenuItemProps & DropdownItemProps) {
     const newProps = {...props};
-    delete newProps.menuType;  // remove from props to avoid error in the console
+    delete newProps.menuType;  // Remove from props to avoid error in the console
     return (
         <>
             {props.menuType === MenuType.Menu? (

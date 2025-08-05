@@ -1,13 +1,13 @@
 import queryString from "query-string";
-import {analyticsEvent} from "./util/google-analytics";
+import {analyticsEvent} from "./utils/google-analytics";
 import {DataSourceEnum, DataSourceSpec, SourceSelection} from "./datasource/data-source";
 import {Details} from "./details/details";
 import {EmbeddedDataSource, EmbeddedSourceSpec} from "./datasource/embedded";
 import {FormattedMessage, useIntl} from "react-intl";
-import {ErrorPopupProps, getI18nMessage} from "./util/error-i18n";
+import {ErrorPopupProps, getI18nMessage} from "./utils/error-i18n";
 import {IndiInfo} from "./topola";
 import {Loader, Message, Portal, Tab} from "semantic-ui-react";
-import {Media} from "./util/media-utils";
+import {Media} from "./utils/media-utils";
 import {Redirect, Route, Switch} from "react-router-dom";
 import {TopBar} from "./menu/top-bar";
 import {
@@ -17,7 +17,7 @@ import {
     loadLanguageOptions,
     startIndi,
     TopolaData
-} from "./util/gedcom-utils";
+} from "./utils/gedcom-utils";
 import {useEffect, useState} from "react";
 import {useHistory, useLocation} from "react-router";
 import {Chart, ChartType, downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./chart";
@@ -31,7 +31,7 @@ import {
 import {IndividualLanguage} from "./model/individual";
 import {Config, ConfigPanel, configToArgs, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
 import CSVLoader from "./datasource/load-csv";
-import {getArguments} from "./util/param-utils";
+import {getArguments} from "./utils/param-utils";
 
 
 enum AppState {

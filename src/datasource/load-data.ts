@@ -1,7 +1,7 @@
-import {convertGedcom, TopolaData} from '../util/gedcom-utils';
+import {convertGedcom, TopolaData} from '../utils/gedcom-utils';
 import {DataSource, DataSourceEnum, SourceSelection} from './data-source';
 import {IndiInfo, JsonGedcomData} from '../topola';
-import {I18nError} from '../util/error-i18n';
+import {I18nError} from '../utils/error-i18n';
 import JSZip from "jszip";
 import {IndividualLanguage} from "../model/individual";
 

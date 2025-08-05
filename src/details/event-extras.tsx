@@ -1,12 +1,12 @@
-import {FormattedMessage, IntlShape, useIntl} from 'react-intl';
-import {Icon, Item, List, Menu, MenuItemProps, Popup, Tab,} from 'semantic-ui-react';
-import * as React from 'react';
-import {useState} from 'react';
-import {WrappedImage} from './wrapped-image';
-import {MultilineText} from './multiline-text';
-import {DateOrRange} from '../topola';
-import {formatDateOrRange} from '../util/date-utils';
-import Linkify from 'react-linkify';
+import {FormattedMessage, IntlShape, useIntl} from "react-intl";
+import {Icon, Item, List, Menu, MenuItemProps, Popup, Tab,} from "semantic-ui-react";
+import * as React from "react";
+import {useState} from "react";
+import {WrappedImage} from "./wrapped-image";
+import {MultilineText} from "./multiline-text";
+import {DateOrRange} from "../topola";
+import {formatDateOrRange} from "../utils/date-utils";
+import Linkify from "react-linkify";
 
 
 export interface Image {
@@ -71,16 +71,16 @@ function eventSources(sources: Source[] | undefined, intl: IntlShape) {
                         <List.Icon verticalAlign="middle" name="circle" size="tiny"/>
                         <List.Content>
                             <List.Header>
-                                <Linkify properties={{target: '_blank'}}>
+                                <Linkify properties={{target: "_blank"}}>
                                     {[source.author, source.title, source.publicationInfo]
                                         .filter((sourceElement) => sourceElement)
-                                        .join(', ')}
+                                        .join(", ")}
                                 </Linkify>
                             </List.Header>
                             <List.Description>
-                                <Linkify properties={{target: '_blank'}}>{source.page}</Linkify>
+                                <Linkify properties={{target: "_blank"}}>{source.page}</Linkify>
                                 {source.date
-                                    ? ' [' + formatDateOrRange(source.date, intl) + ']'
+                                    ? " [" + formatDateOrRange(source.date, intl) + "]"
                                     : null}
                             </List.Description>
                         </List.Content>
@@ -94,7 +94,7 @@ function eventSources(sources: Source[] | undefined, intl: IntlShape) {
 export function EventExtras(props: Props) {
     const intl = useIntl();
     const [activeIndex, setActiveIndex] = useState(-1);
-    const [indi, setIndi] = useState('');
+    const [indi, setIndi] = useState("");
 
     if (!indi || indi !== props.indi) {
         setActiveIndex(-1);

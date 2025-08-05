@@ -1,4 +1,4 @@
-import Linkify from 'react-linkify';
+import Linkify from "react-linkify";
 
 interface Props {
     lines: (JSX.Element | string)[];
