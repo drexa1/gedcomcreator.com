@@ -41,24 +41,26 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
                     <p>Thanks for your message!</p>
                 ) : (
                     <form onSubmit={handleSubmit}>
-                        <label htmlFor="name">Name</label>
-                        <input id="name" type="text" name="name" />
+                        <div>
+                            <label htmlFor="name">Name</label>
+                            <input id="name" type="text" name="name" />
 
-                        <label htmlFor="email">Email address</label>
-                        <input id="email" type="email" name="email" />
-                        <ValidationError prefix="Email" field="email" errors={state.errors} />
+                            <label htmlFor="email">Email address</label>
+                            <input id="email" type="email" name="email" />
+                            <ValidationError prefix="Email" field="email" errors={state.errors} />
 
-                        <label htmlFor="phone">Phone number</label>
-                        <input id="phone" type="tel" name="phone" />
-                        <ValidationError prefix="Phone" field="phone" errors={state.errors} />
+                            <label htmlFor="phone">Phone number</label>
+                            <input id="phone" type="tel" name="phone" />
+                            <ValidationError prefix="Phone" field="phone" errors={state.errors} />
 
-                        <label htmlFor="message">Message</label>
-                        <textarea id="message" name="message" />
-                        <ValidationError prefix="Message" field="message" errors={state.errors} />
+                            <label htmlFor="message">Message</label>
+                            <textarea id="message" name="message" />
+                            <ValidationError prefix="Message" field="message" errors={state.errors} />
 
-                        <button type="submit" disabled={state.submitting}>
-                            Submit
-                        </button>
+                            <button type="submit" disabled={state.submitting}>
+                                Submit
+                            </button>
+                        </div>
                     </form>
                 )}
             </Modal.Content>

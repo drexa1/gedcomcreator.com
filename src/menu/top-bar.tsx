@@ -21,7 +21,7 @@ export interface Props {
 
 interface EventHandlers {
     onHome: () => void;
-    onChangeI18nLanguage: (lang: string) => void
+    onI18nLanguage: (lang: string) => void
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
     onDownloadPng: () => void;

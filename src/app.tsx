@@ -47,7 +47,7 @@ interface AppProps {
 }
 
 export function App(props: AppProps) {
-    const setI18nLanguage = props.setI18nLanguage;
+    const onI18nLanguage = props.setI18nLanguage;
 
     const [state, setState] = useState<AppState>(AppState.INITIAL);
     const [data, setData] = useState<TopolaData>();
@@ -397,7 +397,7 @@ export function App(props: AppProps) {
                         }
                         eventHandlers={{
                             onHome,
-                            onChangeI18nLanguage: setI18nLanguage,
+                            onI18nLanguage,
                             onSelection,
                             onDownloadPdf,
                             onDownloadPng,
