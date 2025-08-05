@@ -9,8 +9,7 @@ import {FileMenu} from "./file-menu";
 
 
 export enum ScreenSize {
-    LARGE,
-    SMALL,
+    LARGE, SMALL
 }
 
 export interface Props {
@@ -21,13 +20,13 @@ export interface Props {
 
 interface EventHandlers {
     onHome: () => void;
-    onI18nLanguage: (lang: string) => void
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
     onDownloadPng: () => void;
     onDownloadSvg: () => void;
     onDownloadGedcom: () => void;
     onResetView: () => void;
+    onI18nLanguage: (lang: string) => void
 }
 
 export function TopBar(props: Props) {
