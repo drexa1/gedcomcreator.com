@@ -133,7 +133,7 @@ export function ConvertCSVMenu({ menuType }: ConvertMenuProps) {
             ])
             const individualsLanguagesContent = individualsLanguagesFile ? await readFileContents(individualsLanguagesFile) : null;
 
-            const languagesFile = await fetch("data/languages.csv");
+            const languagesFile = await fetch("data/languages/languages.csv");
             const languagesContents = await languagesFile.text();
 
             const gedcomString = await csvToGedcom(

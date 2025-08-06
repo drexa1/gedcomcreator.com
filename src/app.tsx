@@ -84,7 +84,7 @@ export function App(props: AppProps) {
 
     async function loadLanguages() {
         try {
-            const allLanguages = await CSVLoader.loadLanguages("data/language/languages.csv") || [];
+            const allLanguages = await CSVLoader.loadLanguages("data/languages/languages.csv") || [];
             setAllLanguages(allLanguages);
         } catch (e) {
             console.error("Failed to load languages:", e);

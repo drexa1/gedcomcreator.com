@@ -4,11 +4,11 @@ BACKLOG
 [x] i18 menu working  
 [x] Working contact form  
 [x] Excel templates  
-[ ] Reorganize menus  
-[ ] How it works menu  
-[ ] Contact form styling  
+[x] Reorganize menus  
+[ ] Contact form styling
+[ ] How it works menu
 [ ] Buttons styling  
-[ ] Example templates   
+[ ] Different i18n gedcoms   
 [ ] More relatives explanations  
 [ ] Privacy policy  
 [ ] Fat-trimming  
