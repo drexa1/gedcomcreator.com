@@ -32,7 +32,7 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
         case ScreenSize.LARGE:
             return (
                 <>
-                    <Menu secondary className="chart-menu">
+                    <Menu className="chart-menu">
                         {/* HOME */}
                         <Menu.Item onClick={eventHandlers.onHome}>
                             <Icon name="home"/>
@@ -48,14 +48,14 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
                             }
                             className="item">
                             <Dropdown.Menu>
-                                <Dropdown.Item onClick={eventHandlers.onDownloadPdf}>
-                                    <FormattedMessage id="menu.download_pdf" defaultMessage="Download PDF"/>
-                                </Dropdown.Item>
                                 <Dropdown.Item onClick={eventHandlers.onDownloadPng}>
                                     <FormattedMessage id="menu.download_png" defaultMessage="Download PNG"/>
                                 </Dropdown.Item>
                                 <Dropdown.Item onClick={eventHandlers.onDownloadSvg}>
                                     <FormattedMessage id="menu.download_svg" defaultMessage="Download SVG"/>
+                                </Dropdown.Item>
+                                <Dropdown.Item onClick={eventHandlers.onDownloadPdf}>
+                                    <FormattedMessage id="menu.download_pdf" defaultMessage="Download PDF"/>
                                 </Dropdown.Item>
                                 <Dropdown.Divider/>
                                 <Dropdown.Item onClick={eventHandlers.onDownloadGedcom}>
@@ -63,7 +63,7 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
                                 </Dropdown.Item>
                             </Dropdown.Menu>
                         </Dropdown>
-                        {/* VIEW */}
+                        {/* VIEW (deprecated) */}
                         <Dropdown className="item hidden" trigger={
                                 <div>
                                     {currentView === "hourglass" ? (

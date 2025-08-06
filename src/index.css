@@ -185,6 +185,10 @@ div.zoom {
     margin-right: 5px
 }
 
+.ui.menu .dropdown.item .menu {
+    margin-top: 0 !important;
+}
+
 .ui.tabular.menu .active.item {
     border-radius: 0 0 !important;
     border-top-width: 0 !important;
@@ -204,12 +208,13 @@ div.zoom {
     justify-content: center;
     align-items: center;
     width: 100%;
-    gap: 1.5rem; /* spacing between items */
+    box-shadow: none !important;
 }
 
 .chart-menu .item {
     display: flex;
     align-items: center;
+    font-size: 1.07142857rem;
 }
 
 .details {
