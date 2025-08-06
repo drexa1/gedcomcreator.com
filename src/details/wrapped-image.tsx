@@ -6,9 +6,9 @@ import {
     Message,
     Modal,
     Placeholder,
-} from 'semantic-ui-react';
-import {SyntheticEvent, useState} from 'react';
-import {FormattedMessage} from 'react-intl';
+} from "semantic-ui-react";
+import {SyntheticEvent, useState} from "react";
+import {FormattedMessage} from "react-intl";
 
 interface Props {
     url: string;
@@ -20,7 +20,7 @@ export function WrappedImage(props: Props) {
     const [imageOpen, setImageOpen] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageFailed, setImageFailed] = useState(false);
-    const [imageSrc, setImageSrc] = useState('');
+    const [imageSrc, setImageSrc] = useState("");
 
     if (imageLoaded && imageSrc !== props.url) {
         setImageLoaded(false);
@@ -28,7 +28,7 @@ export function WrappedImage(props: Props) {
     return (
         <>
             <Image
-                className={imageLoaded ? 'loaded-image-thumbnail' : 'hidden-image'}
+                className={imageLoaded ? "loaded-image-thumbnail" : "hidden-image"}
                 onClick={() => setImageOpen(true)}
                 onLoad={() => {
                     setImageLoaded(true);
@@ -39,13 +39,13 @@ export function WrappedImage(props: Props) {
                     setImageLoaded(true);
                     setImageSrc(props.url);
                     setImageFailed(true);
-                    e.currentTarget.alt = '';
+                    e.currentTarget.alt = "";
                 }}
                 src={props.url}
                 alt={props.title || props.filename}
                 centered={true}
             />
-            <Placeholder className={!imageLoaded ? 'image-placeholder' : 'hidden-image'}>
+            <Placeholder className={!imageLoaded ? "image-placeholder" : "hidden-image"}>
                 <Placeholder.Image square/>
             </Placeholder>
             {imageFailed && (
@@ -54,7 +54,7 @@ export function WrappedImage(props: Props) {
                         <Message.Header>
                             <FormattedMessage
                                 id="error.failed_to_load_image"
-                                defaultMessage={'Failed to load image file'}
+                                defaultMessage={"Failed to load image file"}
                             />
                         </Message.Header>
                     </Message>

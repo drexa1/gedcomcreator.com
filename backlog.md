@@ -5,10 +5,10 @@ BACKLOG
 [x] Working contact form  
 [x] Excel templates  
 [ ] Reorganize menus  
+[ ] How it works menu  
 [ ] Contact form styling  
 [ ] Buttons styling  
-[ ] Example templates  
-[ ] How it works  
+[ ] Example templates   
 [ ] More relatives explanations  
 [ ] Privacy policy  
 [ ] Fat-trimming  

@@ -21,7 +21,7 @@ import {csvToGedcom} from "../utils/template-utils";
 import {analyticsEvent} from "../utils/google-analytics";
 
 
-interface Props {
+interface ConvertMenuProps {
     menuType: MenuType
 }
 
@@ -32,8 +32,7 @@ export const initialHeaderColors: Record<string, SemanticCOLORS> = {
     "4_individuals_languages.csv": "blue"
 }
 
-/** Displays and handles the "Convert CSV's" menu. */
-export function ConvertCSVMenu(props: Props) {
+export function ConvertCSVMenu({ menuType }: ConvertMenuProps) {
     const [dialogOpen, setDialogOpen] = useState(false)
     const[inputFiles, setInputFiles] = useState<File[]>([])
     const[headerColors, setHeaderColors] = useState<Record<string, SemanticCOLORS>>(initialHeaderColors)
@@ -181,8 +180,12 @@ export function ConvertCSVMenu(props: Props) {
         });
     };
 
-    function convertCSVModal() {
-        return (
+    return (
+        <>
+            <MenuItem onClick={() => setDialogOpen(true)} menuType={menuType}>
+                <Icon name="file excel"/>
+                <FormattedMessage id="menu.convert_csv_gedcom" defaultMessage="Convert CSV's"/>
+            </MenuItem>
             <Modal open={dialogOpen} onClose={closeDialog} centered={true}>
                 <Header>
                     <Icon name="sitemap"/>
@@ -222,7 +225,7 @@ export function ConvertCSVMenu(props: Props) {
                                        !["1_individuals.csv", "2_relationships.csv", "3_families.csv"].every(fileName =>
                                            inputFiles.some((file: File) => file.name === fileName)
                                        )
-                                    }
+                                   }
                                    fluid
                                    size="small"
                                    label="Ego ID"
@@ -248,24 +251,14 @@ export function ConvertCSVMenu(props: Props) {
                         <FormattedMessage id="load_from_url.cancel" defaultMessage="Cancel"/>
                     </Button>
                     <Button primary
-                        disabled={!["1_individuals.csv", "2_relationships.csv", "3_families.csv"].every(fileName =>
-                            inputFiles.some((file: File) => file.name === fileName)
-                        )}
-                        onClick={() => convert2gedcom()}>
-                            <FormattedMessage id="load_from_gedcom.generate" defaultMessage="Generate"/>
+                            disabled={!["1_individuals.csv", "2_relationships.csv", "3_families.csv"].every(fileName =>
+                                inputFiles.some((file: File) => file.name === fileName)
+                            )}
+                            onClick={() => convert2gedcom()}>
+                        <FormattedMessage id="load_from_gedcom.generate" defaultMessage="Generate"/>
                     </Button>
                 </Modal.Actions>
             </Modal>
-        );
-    }
-
-    return (
-        <>
-            <MenuItem onClick={() => setDialogOpen(true)} menuType={props.menuType}>
-                <Icon name="file excel"/>
-                <FormattedMessage id="menu.convert_csv_gedcom" defaultMessage="Convert CSV's"/>
-            </MenuItem>
-            {convertCSVModal()}
         </>
     );
 }

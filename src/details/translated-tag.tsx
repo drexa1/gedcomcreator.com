@@ -1,36 +1,36 @@
-import {FormattedMessage} from 'react-intl';
+import {FormattedMessage} from "react-intl";
 
 const TAG_DESCRIPTIONS = new Map([
-    ['ADOP', 'Adoption'],
-    ['BAPM', 'Baptism'],
-    ['BIRT', 'Birth'],
-    ['BURI', 'Burial'],
-    ['CENS', 'Census'],
-    ['CHR', 'Christening'],
-    ['CREM', 'Cremation'],
-    ['DEAT', 'Death'],
-    ['EDUC', 'Education'],
-    ['EMAIL', 'E-mail'],
-    ['EMIG', 'Emigration'],
-    ['EVEN', 'Event'],
-    ['FACT', 'Fact'],
-    ['IMMI', 'Immigration'],
-    ['MARR', 'Marriage'],
-    ['MARS', 'Marriage settlement'],
-    ['ETHN', 'Ethnic'],
-    ['TRIB', 'Clan'],
-    ['LANG', 'Language'],
-    ['DIV', 'Divorce'],
-    ['MILT', 'Military services'],
-    ['NATU', 'Naturalization'],
-    ['OCCU', 'Occupation'],
-    ['TITL', 'Title'],
-    ['WWW', 'WWW'],
-    ['birth', 'Birth name'],
-    ['married', 'Married name'],
-    ['maiden', 'Maiden name'],
-    ['immigrant', 'Immigrant name'],
-    ['aka', 'Also known as'],
+    ["ADOP", "Adoption"],
+    ["BAPM", "Baptism"],
+    ["BIRT", "Birth"],
+    ["BURI", "Burial"],
+    ["CENS", "Census"],
+    ["CHR", "Christening"],
+    ["CREM", "Cremation"],
+    ["DEAT", "Death"],
+    ["EDUC", "Education"],
+    ["EMAIL", "E-mail"],
+    ["EMIG", "Emigration"],
+    ["EVEN", "Event"],
+    ["FACT", "Fact"],
+    ["IMMI", "Immigration"],
+    ["MARR", "Marriage"],
+    ["MARS", "Marriage settlement"],
+    ["ETHN", "Ethnic"],
+    ["TRIB", "Clan"],
+    ["LANG", "Language"],
+    ["DIV", "Divorce"],
+    ["MILT", "Military services"],
+    ["NATU", "Naturalization"],
+    ["OCCU", "Occupation"],
+    ["TITL", "Title"],
+    ["WWW", "WWW"],
+    ["birth", "Birth name"],
+    ["married", "Married name"],
+    ["maiden", "Maiden name"],
+    ["immigrant", "Immigrant name"],
+    ["aka", "Also known as"],
 ]);
 
 interface Props {
@@ -38,7 +38,7 @@ interface Props {
 }
 
 export function TranslatedTag(props: Props) {
-    const normalizedTag = props.tag.replace(/_/g, '');
+    const normalizedTag = props.tag.replace(/_/g, "");
     return (
         <FormattedMessage
             id={`gedcom.${normalizedTag}`}

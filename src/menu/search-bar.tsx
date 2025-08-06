@@ -6,12 +6,12 @@ import {useEffect, useRef, useState} from "react";
 import {useIntl} from "react-intl";
 
 
-interface Props {
+interface SearchBarProps {
     data: JsonGedcomData;
     onSelection: (indiInfo: IndiInfo) => void;
 }
 
-export function SearchBar(props: Props) {
+export function SearchBar({ data, onSelection}: SearchBarProps) {
     const [searchResults, setSearchResults] = useState<SearchResultProps[]>([]);
     const [searchString, setSearchString] = useState("");
     const searchIndex = useRef<SearchUtils>();
@@ -19,8 +19,17 @@ export function SearchBar(props: Props) {
     const intl = useIntl();
 
     useEffect(() => {
-        searchIndex.current = buildSearchIndex(props.data);
-    }, [props.data]);
+        searchIndex.current = buildSearchIndex(data);
+    }, [data]);
+
+    function handleSearch(input: string | undefined) {
+        if (!input)
+            return;
+        const results = searchIndex.current!
+            .search(input)
+            .map((result) => displaySearchResult(result));
+        setSearchResults(results);
+    }
 
     /**
      * Produces an object that is displayed in the Semantic UI Search results.
@@ -34,15 +43,6 @@ export function SearchBar(props: Props) {
         } as SearchResultProps;
     }
 
-    function handleSearch(input: string | undefined) {
-        if (!input)
-            return;
-        const results = searchIndex.current!
-            .search(input)
-            .map((result) => displaySearchResult(result));
-        setSearchResults(results);
-    }
-
     function getNameLine(result: SearchResult) {
         const name = [result.indi.firstName, result.indi.lastName].join(" ").trim();
         if (result.id.length > 8)
@@ -54,24 +54,22 @@ export function SearchBar(props: Props) {
         );
     }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// EVENT HANDLERS
-// ---------------------------------------------------------------------------------------------------------------------
-
+    // -----------------------------------------------------------------------------------------------------------------
+    // EVENT HANDLERS
+    // -----------------------------------------------------------------------------------------------------------------
     function onChange(value: string) {
         debouncedHandleSearch.current(value);
         setSearchString(value);
     }
 
     function onResultSelect(id: string) {
-        props.onSelection({id, generation: 0});
+        onSelection({id, generation: 0});
         setSearchString("");
     }
-
-// ---------------------------------------------------------------------------------------------------------------------
+    // -----------------------------------------------------------------------------------------------------------------
 
     return (
-        <Menu.Menu position="left">
+        <Menu.Menu position="right">
             <Search
                 onSearchChange={(_, data) => onChange(data.value!)}
                 onResultSelect={(_, data) => onResultSelect(data.result.id)}

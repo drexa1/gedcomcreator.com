@@ -1,14 +1,19 @@
 import {Dropdown, Icon} from "semantic-ui-react";
 import {FormattedMessage} from "react-intl";
 import {i18nMessages} from "../index";
-import {ScreenSize, Props} from "./top-bar";
+import {ScreenSize} from "./top-bar";
 
 
-export function LanguageMenu(screenSize: ScreenSize, props: Props) {
+type LanguageMenuProps = {
+    screenSize: ScreenSize;
+    onI18nLanguage: (lang: string) => void;
+};
+
+export function LanguageMenu({ screenSize, onI18nLanguage }: LanguageMenuProps) {
     const i18nLanguages = Object.keys(i18nMessages).sort();
 
     const changeI18nLanguage = (i18nLanguage: string) => {
-        props.eventHandlers.onI18nLanguage(i18nLanguage);
+        onI18nLanguage(i18nLanguage);
     };
 
     switch (screenSize) {

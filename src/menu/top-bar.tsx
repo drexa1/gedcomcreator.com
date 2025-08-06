@@ -1,25 +1,26 @@
 import {Dropdown, Icon, Menu} from "semantic-ui-react";
 import {IndiInfo, JsonGedcomData} from "../topola";
-import {useState} from "react";
+import React, {useState} from "react";
 import {Media} from "../utils/media-utils";
-import {ContactForm, ContactMenu} from "./contact-form";
+import {ContactForm} from "../contact";
 import {LanguageMenu} from "./language-menu";
 import {ChartMenu} from "./chart-menu";
 import {FileMenu} from "./file-menu";
 import {SearchBar} from "./search-bar";
+import {ContactMenu} from "./contact-menu";
 
 
 export enum ScreenSize {
     LARGE, SMALL
 }
 
-export interface Props {
+export interface TopBarProps {
     showingChart: boolean;
     eventHandlers: EventHandlers;
     data?: JsonGedcomData;
 }
 
-interface EventHandlers {
+export interface EventHandlers {
     onHome: () => void;
     onSelection: (indiInfo: IndiInfo) => void;
     onDownloadPdf: () => void;
@@ -30,26 +31,36 @@ interface EventHandlers {
     onI18nLanguage: (lang: string) => void
 }
 
-export function TopBar(props: Props) {
+export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
     const [contactModalOpen, setContactModalOpen] = useState(false);
 
     function desktopMenu() {
         return <Menu as={Media} greaterThanOrEqual="large" attached="top" color="blue" size="large">
             {/* OPEN */}
-            {FileMenu(ScreenSize.LARGE, props)}
+            <FileMenu screenSize={ScreenSize.LARGE} showingChart={showingChart}/>
             {/* HOME | DOWNLOAD | RESET VIEW */}
-            {ChartMenu(ScreenSize.LARGE, props)}
-            {/* CONTACT | I18N LANGUAGE */}
-            {!props.showingChart &&
+            {showingChart &&
+                <ChartMenu
+                    screenSize={ScreenSize.LARGE}
+                    showingChart={showingChart}
+                    eventHandlers={eventHandlers}
+                />
+            }
+            {/* HOW IT WORKS | CONTACT | I18N LANGUAGE */}
+            {!showingChart &&
                 <>
                     <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
-                    {LanguageMenu(ScreenSize.LARGE, props)}
+                    {/*TODO: PrivacyMenu*/}
+                    <Menu.Item onClick={alert}>
+                        <Icon name="privacy"/>Privacy policy
+                    </Menu.Item>
+                    <LanguageMenu screenSize={ScreenSize.LARGE} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </>
             }
             {/* SEARCH */}
-            {props.showingChart &&
-                <SearchBar data={props.data!} onSelection={props.eventHandlers.onSelection}{...props}/>
+            {showingChart &&
+                <SearchBar data={data!} onSelection={eventHandlers.onSelection}/>
             }
         </Menu>;
     }
@@ -63,14 +74,22 @@ export function TopBar(props: Props) {
             }>
                 <Dropdown.Menu>
                     {/* OPEN */}
-                    {FileMenu(ScreenSize.SMALL, props)}
+                    <FileMenu screenSize={ScreenSize.LARGE} showingChart={showingChart}/>
                     {/* HOME | DOWNLOAD | RESET VIEW */}
-                    {ChartMenu(ScreenSize.SMALL, props)}
+                    <ChartMenu
+                        screenSize={ScreenSize.LARGE}
+                        showingChart={showingChart}
+                        eventHandlers={eventHandlers}
+                    />
                     {/* CONTACT */}
                     <ContactMenu screenSize={ScreenSize.SMALL} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
+                    {/*TODO: PrivacyMenu*/}
+                    <Menu.Item onClick={alert}>
+                        <Icon name="privacy"/>Privacy policy
+                    </Menu.Item>
                     {/* I18N LANGUAGE */}
-                    {LanguageMenu(ScreenSize.SMALL, props)}
+                    <LanguageMenu screenSize={ScreenSize.SMALL} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </Dropdown.Menu>
             </Dropdown>
         </Menu>;

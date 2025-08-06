@@ -4,10 +4,15 @@ import {useRef, useState} from "react";
 import {ConvertCSVMenu} from "./convert-menu";
 import {MenuType} from "./menu-item";
 import {UploadMenu} from "./upload-menu";
-import {Props, ScreenSize} from "./top-bar";
+import {ScreenSize} from "./top-bar";
 
 
-export function FileMenu(screenSize: ScreenSize, props: Props) {
+type ChartMenusProps = {
+    screenSize: ScreenSize;
+    showingChart: boolean;
+};
+
+export function FileMenu({ screenSize, showingChart }: ChartMenusProps) {
     const [menuOpen, setMenuOpen] = useState(false);
     const cooldown = useRef(false);
 
@@ -36,20 +41,20 @@ export function FileMenu(screenSize: ScreenSize, props: Props) {
                             <FormattedMessage id="menu.open" defaultMessage="Open"/>
                         </div>
                     }
-                    className="item left">
+                    className={"item left" + (showingChart ? " hidden" : "")}>
                     <Dropdown.Menu onClick={() => toggleMenu(false)}>
-                        <UploadMenu menuType={MenuType.Dropdown} {...props} />
-                        {/*<UrlMenu menuType={MenuType.Dropdown} {...props} />*/}
-                        <ConvertCSVMenu menuType={MenuType.Dropdown} {...props} />
+                        <UploadMenu menuType={MenuType.Dropdown}/>
+                        {/*<UrlMenu menuType={MenuType.Dropdown}/>*/}
+                        <ConvertCSVMenu menuType={MenuType.Dropdown}/>
                     </Dropdown.Menu>
                 </Dropdown>
             );
         case ScreenSize.SMALL:
             return (
                 <>
-                    <UploadMenu menuType={MenuType.Dropdown} {...props} />
-                    {/*<UrlMenu menuType={MenuType.Dropdown} {...props} />*/}
-                    <ConvertCSVMenu menuType={MenuType.Dropdown} {...props} />
+                    <UploadMenu menuType={MenuType.Dropdown}/>
+                    {/*<UrlMenu menuType={MenuType.Dropdown}/>*/}
+                    <ConvertCSVMenu menuType={MenuType.Dropdown}/>
                 </>
             );
     }

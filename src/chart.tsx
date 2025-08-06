@@ -352,7 +352,7 @@ class ChartWrapper {
             this.animating = false;
             if (this.rerenderRequired) {
                 this.rerenderRequired = false;
-                // Use `this.rerenderProps` instead of the props in scope because the props may have been updated in the meantime
+                // Use this.rerenderProps instead of the props in scope because the props may have been updated in the meantime
                 this.renderChart(this.rerenderProps!, intl, {
                     initialRender: false,
                     resetPosition: !!this.rerenderResetPosition,

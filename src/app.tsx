@@ -210,7 +210,7 @@ export function App(props: AppProps) {
 // ---------------------------------------------------------------------------------------------------------------------
 
     function onHome() {
-        history.push({ pathname: '/' });
+        history.push({ pathname: "/" });
     }
 
     /**

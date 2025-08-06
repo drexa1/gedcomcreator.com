@@ -9,7 +9,7 @@ export function MultilineText(props: Props) {
         <>
             {props.lines.map((line, index) => (
                 <div key={index}>
-                    <Linkify properties={{target: '_blank'}}>{line}</Linkify>
+                    <Linkify properties={{target: "_blank"}}>{line}</Linkify>
                     <br/>
                 </div>
             ))}

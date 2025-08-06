@@ -38,7 +38,7 @@ body, html {
 }
 
 .bgLogo {
-    background-image: url('topola.png');
+    background-image: url("landing.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 40%;
@@ -197,6 +197,19 @@ div.zoom {
 .ui.top.attached.menu {
     margin-top: 0;
     border: none !important;
+}
+
+.chart-menu {
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1.5rem; /* spacing between items */
+}
+
+.chart-menu .item {
+    display: flex;
+    align-items: center;
 }
 
 .details {

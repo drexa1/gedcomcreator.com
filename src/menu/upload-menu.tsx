@@ -7,18 +7,12 @@ import {SyntheticEvent} from "react";
 import {useHistory, useLocation} from "react-router";
 import {loadFile} from "../datasource/load-data";
 
-
-function isImageFileName(fileName: string) {
-    const lower = fileName.toLowerCase();
-    return lower.endsWith(".jpg") || lower.endsWith(".png");
-}
-
-interface Props {
+interface UploadMenuProps {
     menuType: MenuType;
 }
 
 /** Displays and handles the "Open file" menu. */
-export function UploadMenu(props: Props) {
+export function UploadMenu({ menuType }: UploadMenuProps) {
     const history = useHistory();
     const location = useLocation();
 
@@ -57,6 +51,11 @@ export function UploadMenu(props: Props) {
         });
     }
 
+    function isImageFileName(fileName: string) {
+        const lower = fileName.toLowerCase();
+        return lower.endsWith(".jpg") || lower.endsWith(".png");
+    }
+
     const content = (
         <>
             <Icon name="folder open"/>
@@ -66,7 +65,7 @@ export function UploadMenu(props: Props) {
 
     return (
         <>
-            {props.menuType === MenuType.Menu ? (
+            {menuType === MenuType.Menu ? (
                 <label htmlFor="fileInput">
                     <Menu.Item as="a">{content}</Menu.Item>
                 </label>
