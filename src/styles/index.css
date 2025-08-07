@@ -38,7 +38,7 @@ body, html {
 }
 
 .bgLogo {
-    background-image: url("landing.png");
+    background-image: url("../assets/landing.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 40%;
@@ -59,7 +59,6 @@ body, html {
 .sidePanel {
     flex: 0 0 320px;
     overflow: auto;
-    /*border-left: solid #ccc 1px;*/
     overflow-x: hidden;
 }
 
@@ -312,3 +311,75 @@ div.zoom {
     padding: 14px 0 0;
 }
 
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Contact form                                                                                                       */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.ui.modal > .header {
+    text-align: center;
+    border-bottom: none !important;
+    font-size: 1.8rem;
+    padding-bottom: 1rem;
+    margin-top: 50px;
+}
+
+.ui.modal > .content {
+    padding: 2rem;
+}
+
+.ui.form input,
+.ui.form textarea {
+    border-radius: 0.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+}
+
+.contact-form-grid {
+    height: 100%;
+}
+
+.contact-form-grid > .column {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form-column {
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.contact-form-column .ui.form {
+    width: 100%;
+}
+
+.narrow-select {
+    position: relative;
+    max-width: 300px;
+    width: 100%;
+}
+
+.narrow-select select {
+    width: 100%;
+    padding: 0.75rem 2rem 0.75rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+.narrow-select::after {
+    /*content: "\1F5FA";*/
+    content: "\1F30D";
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #666;
+    font-size: 1.2rem;
+    user-select: none;
+}

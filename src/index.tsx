@@ -3,14 +3,14 @@ import * as ReactDOM from "react-dom";
 // import messages_de from "./translations/de.json";
 // import messages_fr from "./translations/fr.json";
 // import messages_it from "./translations/it.json";
-import messages_es from "./translations/es.json";
-import messages_pl from "./translations/pl.json";
+import messages_es from "././i18n/es.json";
+import messages_pl from "././i18n/pl.json";
 import {App} from "./app";
 import {detect} from "detect-browser";
 import {BrowserRouter as Router} from "react-router-dom";
 import {IntlProvider} from "react-intl";
 import {MediaContextProvider, mediaStyles} from "./utils/media-utils";
-import "./index.css";
+import "./styles/index.css";
 import "semantic-ui-css/semantic.min.css";
 
 
