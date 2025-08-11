@@ -5,7 +5,7 @@ BACKLOG
 [x] Working contact form  
 [x] Excel templates  
 [x] Reorganize menus  
-[x] Contact form styling
+[x] Contact form styling  
 [x] Contact form content  
 [x] Contact form validation  
 [ ] Different i18n gedcoms  
