@@ -12,7 +12,7 @@
   "contact.country": "País",
   "contact.country.placeholder": "Seleccione un país",
   "contact.message": "¿En qué podemos ayudarte?",
-  "contact.message.placeholder": "• ¿Has experimentado algún comportamiento extraño o error?\n• ¿Crees que hay algo que podríamos añadir o cambiar?\n• ¿La aplicación resulta fácil e intuitiva?\n• ¿Necesitas ayuda para usar algo de la aplicación?\n• ¿Estás interesado/a en asociarte o colaborar con nosotros?\n\nSi hay algo que desees compartir, no dudes en ponerte en contacto con nosotros.",
+  "contact.message.placeholder": "• ¿Has experimentado algún comportamiento extraño o error?\n• ¿Crees que hay algo que deberíamos añadir o modificar?\n• ¿La aplicación resulta fácil e intuitiva?\n• ¿Necesitas ayuda para usar algo de la aplicación?\n• ¿Estás interesado/a en asociarte o colaborar con nosotros?\n\nSi hay algo que desees compartir, no dudes en ponerte en contacto con nosotros.",
   "contact.submit": "Enviar",
   "contact.success.header": "¡Gracias por tu mensaje!",
   "contact.success.body": "Nos pondremos en contacto tan pronto como podamos.",
