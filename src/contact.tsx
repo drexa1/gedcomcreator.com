@@ -29,7 +29,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     return (
         <Modal /* closeIcon */ open={open} onClose={onClose} size="large">
             <Modal.Header style={{ marginTop: "30px" }}>
-                💬️&nbsp;&nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
+                💬️&nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
             </Modal.Header>
             <Modal.Content>
                 <Grid stackable columns={2} className="contact-form-grid">
