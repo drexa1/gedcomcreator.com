@@ -8,7 +8,7 @@ BACKLOG
 [x] Contact form styling  
 [x] Contact form content  
 [x] Contact form validation  
-[ ] Css arrange  
+[x] Css arrange  
 [ ] Different i18n gedcoms  
 [ ] How it works menu  
 [ ] More relatives explanations  
