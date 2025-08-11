@@ -319,12 +319,11 @@ div.zoom {
     text-align: center;
     border-bottom: none !important;
     font-size: 1.8rem;
-    padding-bottom: 1rem;
     margin-top: 50px;
 }
 
 .ui.modal > .content {
-    padding: 2rem;
+    margin-bottom: 50px;
 }
 
 .ui.form input,
@@ -382,4 +381,14 @@ div.zoom {
     color: #666;
     font-size: 1.1rem;
     user-select: none;
+}
+
+#message::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+#message:focus::placeholder {
+    color: #bbb; /* keep same color on focus */
+    opacity: 1;
 }

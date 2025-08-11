@@ -27,39 +27,38 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     const sortedCountries = Object.entries(i18nCountryNames).sort(([, nameA], [, nameB]) => nameA.localeCompare(nameB, lang));
 
     return (
-        <Modal closeIcon open={open} onClose={onClose} size="large">
-            <Modal.Header>
-                <FormattedMessage id="contact.title" defaultMessage="Contact us" />
+        <Modal /* closeIcon */ open={open} onClose={onClose} size="large">
+            <Modal.Header style={{ marginTop: "30px" }}>
+                💬&nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
             </Modal.Header>
             <Modal.Content>
                 <Grid stackable columns={2} className="contact-form-grid">
-                    <Grid.Column width={8} textAlign="center" verticalAlign="middle">
+                    {/* IMAGE */}
+                    <Grid.Column width={7} textAlign="center" verticalAlign="bottom">
                         <Image src="/assets/contact-form.png" style={{ maxWidth: "100%", height: "auto" }}/>
                     </Grid.Column>
-                    <Grid.Column width={8} className="contact-form-column">
+                    {/* FORM */}
+                    <Grid.Column width={7} className="contact-form-column" verticalAlign="bottom">
                         {state.succeeded ? (
-                            <Message success header={
-                                <FormattedMessage id="contact.success.header" defaultMessage="Thanks for your message!"/>
+                            <Message success header={<FormattedMessage id="contact.success.header" defaultMessage="Thanks for your message!"/>
                             }
-                                content={
-                                    <FormattedMessage id="contact.success.body" defaultMessage="We'll get back to you soon."/>
-                                }
+                                content={<FormattedMessage id="contact.success.body" defaultMessage="We'll get back to you soon."/>}
                             />
                         ) : (
                             <Form onSubmit={handleSubmit}>
 
-                                <Form.Field>
+                                <Form.Field >
                                     <label htmlFor="name">
-                                        <FormattedMessage id="contact.name" defaultMessage="Name"/>&nbsp;*
+                                        <FormattedMessage id="contact.name" defaultMessage="Your name"/>&nbsp;*
                                     </label>
                                     <input id="name" type="text" name="name" placeholder={
-                                        intl.formatMessage({id: "contact.name.placeholder", defaultMessage: "Your name"})
+                                        intl.formatMessage({id: "contact.name.placeholder", defaultMessage: "You"})
                                     }/>
                                 </Form.Field>
 
                                 <Form.Field>
                                     <label htmlFor="email">
-                                        <FormattedMessage id="contact.email" defaultMessage="E-mail address"/>&nbsp;*
+                                        <FormattedMessage id="contact.email" defaultMessage="Your e-mail address"/>&nbsp;*
                                     </label>
                                     <input id="email" type="email" name="email" placeholder="you@email.com"/>
                                     <ValidationError prefix="Email" field="email" errors={state.errors}/>
@@ -67,7 +66,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
 
                                 <Form.Field>
                                     <label htmlFor="country">
-                                        <FormattedMessage id="contact.country" defaultMessage="Country"/>
+                                        <FormattedMessage id="contact.country" defaultMessage="Your country"/>
                                     </label>
                                     <div className="narrow-select">
                                         <select id="country" name="country" defaultValue="">
@@ -84,10 +83,19 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
                                     <label htmlFor="message">
                                         <FormattedMessage id="contact.message" defaultMessage="Message"/>
                                     </label>
-                                    <Form.TextArea id="message" name="message" placeholder={
-                                        intl.formatMessage({id: "contact.message.placeholder", defaultMessage: "What's on your mind?"})
-                                    }
-                                    />
+                                    <Form.TextArea id="message" name="message" rows={8} placeholder={
+                                        intl.formatMessage({
+                                            id: "contact.message.placeholder",
+                                            defaultMessage:
+                                                "• Did you encounter any unexpected behavior or errors?\n" +
+                                                "• Is there’s anything you think we could add or change?\n" +
+                                                "• Do you need assistance with using the app?\n" +
+                                                "• Is the app easy and intuitive to use?\n" +
+                                                "• Are you interested in partnering or collaborating with us?\n\n" +
+                                                "If there is anything you’d like to share, please don’t hesitate to reach us." +
+                                                ""
+                                        })
+                                    }/>
                                     <ValidationError prefix="Message" field="message" errors={state.errors}/>
                                 </Form.Field>
 
