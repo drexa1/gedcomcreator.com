@@ -89,8 +89,8 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
                                             defaultMessage:
                                                 "• Did you encounter any unexpected behavior or errors?\n" +
                                                 "• Is there’s anything you think we could add or change?\n" +
-                                                "• Do you need assistance with using the app?\n" +
                                                 "• Is the app easy and intuitive to use?\n" +
+                                                "• Do you need assistance with using the app?\n" +
                                                 "• Are you interested in partnering or collaborating with us?\n\n" +
                                                 "If there is anything you’d like to share, please don’t hesitate to reach us." +
                                                 ""
