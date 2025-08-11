@@ -8,11 +8,12 @@ BACKLOG
 [x] Contact form styling  
 [x] Contact form content  
 [x] Contact form validation  
+[ ] Css arrange  
 [ ] Different i18n gedcoms  
 [ ] How it works menu  
-[ ] Buttons styling  
 [ ] More relatives explanations  
 [ ] Privacy policy view  
+[ ] Buttons styling  
 [ ] Fat-trimming  
 [ ] Landing page  
 [ ] Convert templates  
