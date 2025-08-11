@@ -29,7 +29,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     return (
         <Modal /* closeIcon */ open={open} onClose={onClose} size="large">
             <Modal.Header style={{ marginTop: "30px" }}>
-                💬️&nbsp;&nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
+                💬️ &nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
             </Modal.Header>
             <Modal.Content>
                 <Grid stackable columns={2} className="contact-form-grid">
@@ -40,9 +40,8 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
                     {/* FORM */}
                     <Grid.Column width={7} className="contact-form-column" verticalAlign="bottom">
                         {state.succeeded ? (
-                            <Message success header={<FormattedMessage id="contact.success.header" defaultMessage="Thanks for your message!"/>
-                            }
-                                content={<FormattedMessage id="contact.success.body" defaultMessage="We'll get back to you soon."/>}
+                            <Message success header={<FormattedMessage id="contact.success.header" defaultMessage="Thanks for your message!"/>}
+                                content={<FormattedMessage id="contact.success.body" defaultMessage="We'll get back to you as soon as we can."/>}
                             />
                         ) : (
                             <Form onSubmit={handleSubmit}>
@@ -81,18 +80,18 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
 
                                 <Form.Field>
                                     <label htmlFor="message">
-                                        <FormattedMessage id="contact.message" defaultMessage="Message"/>
+                                        <FormattedMessage id="contact.message" defaultMessage="How can you help you?"/>
                                     </label>
                                     <Form.TextArea id="message" name="message" rows={8} placeholder={
                                         intl.formatMessage({
                                             id: "contact.message.placeholder",
                                             defaultMessage:
                                                 "• Did you encounter any unexpected behavior or errors?\n" +
-                                                "• Is there’s anything you think we could add or change?\n" +
+                                                "• Is there's anything you think we could add or change?\n" +
                                                 "• Is the app easy and intuitive to use?\n" +
                                                 "• Do you need assistance with using the app?\n" +
                                                 "• Are you interested in partnering or collaborating with us?\n\n" +
-                                                "If there is anything you’d like to share, please don’t hesitate to reach us." +
+                                                "If there is anything you'd like to share, please don’t hesitate to reach us." +
                                                 ""
                                         })
                                     }/>
