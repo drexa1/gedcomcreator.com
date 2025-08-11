@@ -1,15 +1,14 @@
-import React from "react";
+import React, {useEffect, useRef, useState} from "react";
 import {useForm, ValidationError} from "@formspree/react";
 import {Button, Form, Grid, Image, Message, Modal,} from "semantic-ui-react";
 import {FormattedMessage, useIntl} from "react-intl";
 import countries from "i18n-iso-countries";
-
-
-// Register country locales
 import enCountries from "i18n-iso-countries/langs/en.json";
 import esCountries from "i18n-iso-countries/langs/es.json";
 import plCountries from "i18n-iso-countries/langs/pl.json";
 
+
+// Register country locales
 countries.registerLocale(enCountries);
 countries.registerLocale(esCountries);
 countries.registerLocale(plCountries);
@@ -20,14 +19,64 @@ type ContactFormProps = {
 };
 
 export function ContactForm({ open, onClose }: ContactFormProps) {
-    const [state, handleSubmit] = useForm("mwpqrkle");
+    const [state, handleSubmit, reset] = useForm("mwpqrkle");
     const intl = useIntl();
     const lang = intl.locale;
     const i18nCountryNames = countries.getNames(lang, { select: "official" });
     const sortedCountries = Object.entries(i18nCountryNames).sort(([, nameA], [, nameB]) => nameA.localeCompare(nameB, lang));
+    const [formData, setFormData] = useState({name: "", email: "", country: "", message: ""});
+    const formRef = useRef<HTMLFormElement>(null);
+    const isFormValid = formData.name?.trim() !== "" && formData.email?.trim() !== "" && formData.country?.trim() !== "" && formData.message?.trim() !== "";
+
+    /**
+     * When submission succeeds, update cooldown timer in localStorage.
+     */
+    useEffect(() => {
+        if (state.succeeded) {
+            localStorage.setItem("lastSubmitTime", Date.now().toString());
+        }
+    }, [state.succeeded]);
+
+    /**
+     * Submit handler with cooldown enforcement.
+     */
+    const handleSubmitWithCooldown = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!submitCooldown()) {
+            return;
+        }
+        await handleSubmit(event);
+    };
+
+    /**
+     * 1 minute cooldown check.
+     */
+    const submitCooldown = () => {
+        const last = localStorage.getItem("lastSubmitTime");
+        if (!last)
+            return true;
+        return Date.now() - Number(last) > 60_000;
+    };
+
+    /**
+     * Update on input change.
+     */
+    const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+
+    /**
+     * Wrap onClose to reset form state before closing modal.
+     */
+    const onCloseReset = () => {
+        reset(); // reset Formspree state
+        Object.keys(formData).forEach(field => formData[field] = "");
+        onClose();
+    };
 
     return (
-        <Modal /* closeIcon */ open={open} onClose={onClose} size="large">
+        <Modal /* closeIcon */ open={open} onClose={onCloseReset} size="large">
             <Modal.Header style={{ marginTop: "30px" }}>
                 💬️ &nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
             </Modal.Header>
@@ -39,70 +88,77 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
                     </Grid.Column>
                     {/* FORM */}
                     <Grid.Column width={7} className="contact-form-column" verticalAlign="bottom">
-                        {state.succeeded ? (
-                            <Message success header={<FormattedMessage id="contact.success.header" defaultMessage="Thanks for your message!"/>}
-                                content={<FormattedMessage id="contact.success.body" defaultMessage="We'll get back to you as soon as we can."/>}
-                            />
-                        ) : (
-                            <Form onSubmit={handleSubmit}>
+                        <Form ref={formRef} onSubmit={handleSubmitWithCooldown} style={{ position: "relative" }}>
 
-                                <Form.Field >
-                                    <label htmlFor="name">
-                                        <FormattedMessage id="contact.name" defaultMessage="Your name"/>&nbsp;*
-                                    </label>
-                                    <input id="name" type="text" name="name" placeholder={
-                                        intl.formatMessage({id: "contact.name.placeholder", defaultMessage: "You"})
-                                    }/>
-                                </Form.Field>
+                            <Form.Field >
+                                <label htmlFor="name">
+                                    <FormattedMessage id="contact.name" defaultMessage="Your name"/>&nbsp;*
+                                </label>
+                                <input id="name" name="name" type="text" onChange={onChange} placeholder={
+                                    intl.formatMessage({id: "contact.name.placeholder", defaultMessage: "You"})
+                                } value={formData.name ?? ""}/>
+                            </Form.Field>
 
-                                <Form.Field>
-                                    <label htmlFor="email">
-                                        <FormattedMessage id="contact.email" defaultMessage="Your e-mail address"/>&nbsp;*
-                                    </label>
-                                    <input id="email" type="email" name="email" placeholder="you@email.com"/>
-                                    <ValidationError prefix="Email" field="email" errors={state.errors}/>
-                                </Form.Field>
+                            <Form.Field>
+                                <label htmlFor="email">
+                                    <FormattedMessage id="contact.email" defaultMessage="Your e-mail address"/>&nbsp;*
+                                </label>
+                                <input id="email" name="email" type="email" onChange={onChange} placeholder="you@email.com" value={formData.email ?? ""}/>
+                                <ValidationError prefix="Email" field="email" errors={state.errors}/>
+                            </Form.Field>
 
-                                <Form.Field>
-                                    <label htmlFor="country">
-                                        <FormattedMessage id="contact.country" defaultMessage="Your country"/>
-                                    </label>
-                                    <div className="narrow-select">
-                                        <select id="country" name="country" defaultValue="">
-                                            <option value="">
-                                                {intl.formatMessage({id: "contact.country.placeholder", defaultMessage: "Select a country"})}
-                                            </option>
-                                            {sortedCountries.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
-                                        </select>
-                                    </div>
-                                    <ValidationError prefix="Country" field="country" errors={state.errors}/>
-                                </Form.Field>
+                            <Form.Field>
+                                <label htmlFor="country">
+                                    <FormattedMessage id="contact.country" defaultMessage="Your country"/>
+                                </label>
+                                <div className="narrow-select">
+                                    <select id="country" name="country" onChange={onChange} value={formData.country ?? ""}>
+                                        <option value="">
+                                            {intl.formatMessage({id: "contact.country.placeholder", defaultMessage: "Select a country"})}
+                                        </option>
+                                        {sortedCountries.map(([code, name]) => <option key={code} value={code}>{name}</option>)}
+                                    </select>
+                                </div>
+                                <ValidationError prefix="Country" field="country" errors={state.errors}/>
+                            </Form.Field>
 
-                                <Form.Field>
-                                    <label htmlFor="message">
-                                        <FormattedMessage id="contact.message" defaultMessage="How can you help you?"/>
-                                    </label>
-                                    <Form.TextArea id="message" name="message" rows={8} placeholder={
-                                        intl.formatMessage({
-                                            id: "contact.message.placeholder",
-                                            defaultMessage:
-                                                "• Did you encounter any unexpected behavior or errors?\n" +
-                                                "• Is there's anything you think we could add or change?\n" +
-                                                "• Is the app easy and intuitive to use?\n" +
-                                                "• Do you need assistance with using the app?\n" +
-                                                "• Are you interested in partnering or collaborating with us?\n\n" +
-                                                "If there is anything you'd like to share, please don’t hesitate to reach us." +
-                                                ""
-                                        })
-                                    }/>
-                                    <ValidationError prefix="Message" field="message" errors={state.errors}/>
-                                </Form.Field>
+                            <Form.Field>
+                                <label htmlFor="message">
+                                    <FormattedMessage id="contact.message" defaultMessage="How can you help you?"/>
+                                </label>
+                                <Form.TextArea id="message" name="message" rows={8} onChange={onChange} placeholder={
+                                    intl.formatMessage({
+                                        id: "contact.message.placeholder",
+                                        defaultMessage:
+                                            "• Did you encounter any unexpected behavior or errors?\n" +
+                                            "• Is there's anything you think we could add or change?\n" +
+                                            "• Is the app easy and intuitive to use?\n" +
+                                            "• Do you need assistance with using the app?\n" +
+                                            "• Are you interested in partnering or collaborating with us?\n\n" +
+                                            "If there is anything you'd like to share, please don’t hesitate to reach us."
+                                    })
+                                } value={formData.message ?? ""}/>
+                                <ValidationError prefix="Message" field="message" errors={state.errors}/>
+                            </Form.Field>
 
-                                <Button type="submit" primary disabled={state.submitting} fluid>
-                                    <FormattedMessage id="contact.submit" defaultMessage="Submit"/>
-                                </Button>
-                            </Form>
-                        )}
+
+                            {state.succeeded ? (
+                                <Message positive className="contact-message" content={
+                                    <FormattedMessage id="contact.success.body" defaultMessage="Thanks! We have received your message."/>
+                                }/>
+                            ) : (
+                                <>
+                                    <Button primary fluid type="submit" disabled={state.submitting || !isFormValid}>
+                                        <FormattedMessage id="contact.submit" defaultMessage="Submit" />
+                                    </Button>
+                                    {!submitCooldown() && (
+                                        <Message negative className="contact-message cooldown-message" content={
+                                            <FormattedMessage id="contact.cooldown" defaultMessage="Please wait 1 minute before posting again."/>
+                                        }/>
+                                    )}
+                                </>
+                            )}
+                        </Form>
                     </Grid.Column>
                 </Grid>
             </Modal.Content>

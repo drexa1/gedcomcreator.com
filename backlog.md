@@ -7,7 +7,7 @@ BACKLOG
 [x] Reorganize menus  
 [x] Contact form styling
 [x] Contact form content  
-[ ] Contact form validation  
+[x] Contact form validation  
 [ ] Different i18n gedcoms  
 [ ] How it works menu  
 [ ] Buttons styling  
