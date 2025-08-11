@@ -372,14 +372,14 @@ div.zoom {
 }
 
 .narrow-select::after {
-    /*content: "\1F5FA";*/
-    content: "\1F30D";
+    /*content: "\1F30D";*/
+    content: "\1F310";
     position: absolute;
     right: 10px;
     top: 50%;
     transform: translateY(-50%);
     pointer-events: none;
     color: #666;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     user-select: none;
 }
