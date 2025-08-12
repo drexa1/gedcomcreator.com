@@ -14,7 +14,7 @@ export function ContactMenu({ screenSize, onContactClick }: ContactMenusProps) {
         case ScreenSize.LARGE:
             return (
                 <Menu.Item onClick={onContactClick}>
-                    <Icon name="mail"/><FormattedMessage id="menu.contact" defaultMessage="Contact"/>
+                    <Icon name="mail"/><FormattedMessage id="menu.contact" defaultMessage="Contact us"/>
                 </Menu.Item>
             );
         case ScreenSize.SMALL:

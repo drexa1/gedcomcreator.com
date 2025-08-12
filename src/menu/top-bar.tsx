@@ -49,15 +49,16 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
             {/* HOW IT WORKS | CONTACT | I18N LANGUAGE */}
             {!showingChart &&
                 <>
+                    {/* TODO: HowItWorksMenu */}
                     <Menu.Item onClick={alert}>
                         <Icon name="question circle"/>How it works
                     </Menu.Item>
-                    <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
-                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
-                    {/*TODO: PrivacyMenu*/}
+                    {/* TODO: PrivacyMenu */}
                     <Menu.Item onClick={alert}>
                         <Icon name="privacy"/>Privacy policy
                     </Menu.Item>
+                    <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
+                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
                     <LanguageMenu screenSize={ScreenSize.LARGE} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </>
             }
@@ -87,10 +88,6 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
                     {/* CONTACT */}
                     <ContactMenu screenSize={ScreenSize.SMALL} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
-                    {/*TODO: PrivacyMenu*/}
-                    <Menu.Item onClick={alert}>
-                        <Icon name="privacy"/>Privacy policy
-                    </Menu.Item>
                     {/* I18N LANGUAGE */}
                     <LanguageMenu screenSize={ScreenSize.SMALL} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </Dropdown.Menu>

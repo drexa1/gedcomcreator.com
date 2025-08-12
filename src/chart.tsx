@@ -413,11 +413,16 @@ export function Chart(props: ChartProps) {
                 <g id="chart"/>
             </svg>
             <Media greaterThanOrEqual="large">
+                <div className="legend-emoji">👋</div>
                 <div className="legend">
                     <svg>
                         <rect x="10" y="10" width="260" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
-                        <text x="20" y="35" fontSize="16" fill="black"><FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/></text>
-                        <text x="60" y="55" fontSize="16" fill="black"><FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/></text>
+                        <text x="20" y="35" fontSize="16" fill="black">
+                            <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
+                        </text>
+                        <text x="60" y="55" fontSize="16" fill="black">
+                            <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>
+                        </text>
                     </svg>
                 </div>
             </Media>

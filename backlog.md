@@ -9,15 +9,16 @@ BACKLOG
 [x] Contact form content  
 [x] Contact form validation  
 [x] Css arrange  
-[ ] Different i18n gedcoms  
 [ ] How it works menu  
 [ ] More relatives explanations  
 [ ] Privacy policy view  
+[ ] Smoke mobile  
+[ ] Different i18n gedcoms  
 [ ] Buttons styling  
-[ ] Fat-trimming  
 [ ] Landing page  
 [ ] Convert templates  
 [ ] Convert XLSX  
 [ ] Backend  
 [ ] PSP integration  
+[ ] Fat-trimming  
 [ ] Review the other language packs
