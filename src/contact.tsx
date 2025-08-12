@@ -76,7 +76,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     };
 
     return (
-        <Modal /* closeIcon */ open={open} onClose={onCloseReset} size="large">
+        <Modal /* closeIcon */ open={open} onClose={onCloseReset} size="large" dimmer="blurring" transition={{ animation: "scale", duration: 1 }}>
             <Modal.Header style={{ marginTop: "30px" }}>
                 💬️ &nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
             </Modal.Header>
