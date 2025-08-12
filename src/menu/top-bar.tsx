@@ -49,6 +49,9 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
             {/* HOW IT WORKS | CONTACT | I18N LANGUAGE */}
             {!showingChart &&
                 <>
+                    <Menu.Item onClick={alert}>
+                        <Icon name="question circle"/>How it works
+                    </Menu.Item>
                     <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
                     {/*TODO: PrivacyMenu*/}
