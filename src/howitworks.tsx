@@ -19,6 +19,7 @@ export function HowItWorks({ open, onClose }: HowItWorksProps) {
 
                 {/* dificil aprender codigo gedcom */}
                 {/* casi toda el mundo quiere verlo */}
+                {/* i18n code and chart examples */}
 
                 {/* story */}
                 {/* investigaciones academicas (papers) */}
