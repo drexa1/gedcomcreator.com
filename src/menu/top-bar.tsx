@@ -3,7 +3,7 @@ import {IndiInfo, JsonGedcomData} from "../topola";
 import React, {useState} from "react";
 import {Media} from "../utils/media-utils";
 import {ContactForm} from "../contact";
-import {LanguageMenu} from "./language-menu";
+import {I18nLanguageMenu} from "./i18n-language-menu";
 import {ChartMenu} from "./chart-menu";
 import {FileMenu} from "./file-menu";
 import {SearchBar} from "./search-bar";
@@ -61,7 +61,7 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
                     </Menu.Item>
                     <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
-                    <LanguageMenu screenSize={ScreenSize.LARGE} onI18nLanguage={eventHandlers.onI18nLanguage}/>
+                    <I18nLanguageMenu screenSize={ScreenSize.LARGE} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </>
             }
             {/* SEARCH */}
@@ -91,7 +91,7 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
                     <ContactMenu screenSize={ScreenSize.SMALL} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
                     {/* I18N LANGUAGE */}
-                    <LanguageMenu screenSize={ScreenSize.SMALL} onI18nLanguage={eventHandlers.onI18nLanguage}/>
+                    <I18nLanguageMenu screenSize={ScreenSize.SMALL} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </Dropdown.Menu>
             </Dropdown>
         </Menu>;

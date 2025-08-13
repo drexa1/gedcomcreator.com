@@ -9,45 +9,6 @@ body, html {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-/* Legend and tooltips                                                                                                */
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-.legend {
-    position: absolute;
-    bottom: 15px;
-    right: 15px;
-    background: rgba(255, 255, 255, 0.9);
-    padding: 12px;
-    border-radius: 6px;
-    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
-    display: flex;
-    align-items: center;
-}
-
-.legend:hover {
-    background: rgba(77, 171, 247, 0.1);
-    transition: background 0.3s ease;
-    cursor: pointer;
-}
-
-.legend svg {
-    width: 280px;
-    height: 80px;
-}
-
-.legend-emoji {
-    position: absolute;
-    bottom: 150px;
-    right: 15px;
-    width: 320px;
-    text-align: center;
-    font-size: 50px;
-    pointer-events: none;
-    user-select: none;
-    z-index: 101;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
 /* Meta and links                                                                                                     */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
@@ -94,33 +55,6 @@ body, html {
     flex: 0 0 320px;
     overflow: auto;
     overflow-x: hidden;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-/* Inputs and dropdowns                                                                                               */
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-.ui.form .field.no-margin {
-    margin: 0;
-}
-
-.ui.tabular.menu a {
-    text-transform: uppercase;
-}
-
-div.ui.icon.input {
-    width: 318px;
-    border: 0;
-    margin: 2px 3px 1px 1px;
-}
-
-.ui.dropdown.no-arrow > .dropdown.icon {
-    display: none !important;
-}
-
-.search .prompt {
-    border-radius: 0 !important;
-    background: #4183c4;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -236,12 +170,108 @@ div.zoom {
     display: block;
 }
 
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Details section                                                                                                    */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.details {
+    padding: 15px 0;
+}
+
+.no-border-bottom {
+    border-bottom: 0 !important;
+}
+
+.details .ui.items .item .content {
+    padding: 0 15px;
+}
+
+.details .event-header {
+    justify-content: space-between;
+    display: flex;
+    word-break: break-word;
+}
+
+.details .event-header .header {
+    text-transform: uppercase;
+    margin: 0;
+    min-width: 40%;
+}
+
+.details .person-image {
+    max-width: 289px;
+    width: 289px;
+    padding: 0 10px;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Event extras                                                                                                       */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.event-extras .ui.attached.menu {
+    border: none;
+    min-height: auto;
+}
+
+.event-extras .ui.attached.segment.tab {
+    border: none;
+}
+
+.event-extras .ui.tabular.menu .item {
+    border: none;
+}
+
+.ui.divided.items>.item {
+    border-top: 0 !important;
+}
+
+.event-extras .ui.menu .active.item .icon {
+    background-color: #1b1c1d;
+    color: #ffffff;
+}
+
+.event-extras .ui.attached.segment.active.tab {
+    word-break: normal;
+    overflow-wrap: anywhere;
+    max-width: 289px;
+    padding: 14px 0 0;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Inputs and dropdowns                                                                                               */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+.ui.form .field.no-margin {
+    margin: 0;
+}
+
+.ui.tabular.menu a {
+    text-transform: uppercase;
+}
+
+div.ui.icon.input {
+    width: 318px;
+    border: 0;
+    margin: 2px 3px 1px 1px;
+}
+
+.ui.dropdown.no-arrow > .dropdown.icon {
+    display: none !important;
+}
+
+.search .prompt {
+    border-radius: 0 !important;
+    background: #4183c4;
+}
+
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Menu and tabs                                                                                                      */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 .ui.menu, .item:before {
     border: none !important;
+    background: none !important;
     color: red !important;
 }
 
@@ -287,38 +317,55 @@ div.zoom {
     font-size: 1.07142857rem;
 }
 
+.i18n-menu {
+    min-width: 77px;
+    justify-content: center;
+}
+
+.i18n-icon {
+    font-size: 1.5rem !important;
+    line-height: 1 !important;
+    display: block !important;
+    vertical-align: middle;
+}
+
 /* ------------------------------------------------------------------------------------------------------------------ */
-/* Details section                                                                                                    */
+/* Legend and tooltips                                                                                                */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-.details {
-    padding: 15px 0;
-}
-
-.no-border-bottom {
-    border-bottom: 0 !important;
-}
-
-.details .ui.items .item .content {
-    padding: 0 15px;
-}
-
-.details .event-header {
-    justify-content: space-between;
+.legend {
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 12px;
+    border-radius: 6px;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
     display: flex;
-    word-break: break-word;
+    align-items: center;
 }
 
-.details .event-header .header {
-    text-transform: uppercase;
-    margin: 0;
-    min-width: 40%;
+.legend:hover {
+    background: rgba(77, 171, 247, 0.1);
+    transition: background 0.3s ease;
+    cursor: pointer;
 }
 
-.details .person-image {
-    max-width: 289px;
-    width: 289px;
-    padding: 0 10px;
+.legend svg {
+    width: 280px;
+    height: 80px;
+}
+
+.legend-emoji {
+    position: absolute;
+    bottom: 150px;
+    right: 15px;
+    width: 320px;
+    text-align: center;
+    font-size: 50px;
+    pointer-events: none;
+    user-select: none;
+    z-index: 101;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -342,39 +389,6 @@ div.zoom {
 .modal-image .ui.attached.label {
     width: auto;
     min-width: 100%;
-}
-
-/* ------------------------------------------------------------------------------------------------------------------ */
-/* Event extras                                                                                                       */
-/* ------------------------------------------------------------------------------------------------------------------ */
-
-.event-extras .ui.attached.menu {
-    border: none;
-    min-height: auto;
-}
-
-.event-extras .ui.attached.segment.tab {
-    border: none;
-}
-
-.event-extras .ui.tabular.menu .item {
-    border: none;
-}
-
-.ui.divided.items>.item {
-    border-top: 0 !important;
-}
-
-.event-extras .ui.menu .active.item .icon {
-    background-color: #1b1c1d;
-    color: #ffffff;
-}
-
-.event-extras .ui.attached.segment.active.tab {
-    word-break: normal;
-    overflow-wrap: anywhere;
-    max-width: 289px;
-    padding: 14px 0 0;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */

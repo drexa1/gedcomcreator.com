@@ -10,13 +10,14 @@ BACKLOG
 [x] Contact form validation  
 [x] Css arrange  
 [x] Review menu literals  
-[ ] More relatives text alignment  
+[x] More relatives text alignment  
+[x] Narrow i18n menu  
+[ ] Buttons styling  
 [ ] Different i18n gedcoms  
 [ ] How it works menu  
 [ ] Privacy policy view  
 [ ] More relatives explanations  
 [ ] Smoke mobile
-[ ] Buttons styling  
 [ ] Landing page  
 [ ] Convert templates  
 [ ] Convert XLSX  

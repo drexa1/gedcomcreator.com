@@ -417,11 +417,13 @@ export function Chart(props: ChartProps) {
                 <div className="legend">
                     <svg>
                         <rect x="10" y="10" width="260" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
-                        <text x="20" y="35" fontSize="16" fill="black">
-                            <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
-                        </text>
-                        <text x="60" y="55" fontSize="16" fill="black">
-                            <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>
+                        <text x={10 + 260 / 2} y={35} fontSize="16" fill="black" textAnchor="middle">
+                            <tspan x={10 + 260 / 2} dy="0">
+                                <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
+                            </tspan>
+                            <tspan x={10 + 260 / 2} dy="20">
+                                <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>
+                            </tspan>
                         </text>
                     </svg>
                 </div>

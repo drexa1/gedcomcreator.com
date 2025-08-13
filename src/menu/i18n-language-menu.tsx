@@ -9,7 +9,7 @@ type LanguageMenuProps = {
     onI18nLanguage: (lang: string) => void;
 };
 
-export function LanguageMenu({ screenSize, onI18nLanguage }: LanguageMenuProps) {
+export function I18nLanguageMenu({ screenSize, onI18nLanguage }: LanguageMenuProps) {
     const i18nLanguages = Object.keys(i18nMessages).sort();
 
     const changeI18nLanguage = (i18nLanguage: string) => {
@@ -20,11 +20,9 @@ export function LanguageMenu({ screenSize, onI18nLanguage }: LanguageMenuProps) 
         case ScreenSize.LARGE:
             return (
                 <>
-                    <Dropdown floating direction="left" className="item no-arrow" trigger={
-                            <div>
-                                <Icon name="language"/>
-                            </div>
-                        }>
+                    <Dropdown floating direction="left" className="item no-arrow i18n-menu" trigger={
+                        <Icon className="i18n-icon" name="language"/>
+                    }>
                         <Dropdown.Menu>
                             {i18nLanguages.map(lang => (
                                 <Dropdown.Item key={lang} onClick={() => changeI18nLanguage(lang)}>
