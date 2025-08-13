@@ -32,7 +32,7 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
         case ScreenSize.LARGE:
             return (
                 <>
-                    <Menu className="chart-menu">
+                    <Menu className="chart-menu linkblue">
                         {/* HOME */}
                         <Menu.Item onClick={eventHandlers.onHome}>
                             <Icon name="home"/>

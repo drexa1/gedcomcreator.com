@@ -39,7 +39,7 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
     const [contactModalOpen, setContactModalOpen] = useState(false);
 
     function desktopMenu() {
-        return <Menu as={Media} greaterThanOrEqual="large" attached="top" color="blue" size="large">
+        return <Menu as={Media} greaterThanOrEqual="large" attached="top" className="ui linkblue menu" size="large">
             {/* OPEN */}
             <FileMenu screenSize={ScreenSize.LARGE} showingChart={showingChart}/>
             {/* HOME | DOWNLOAD | RESET VIEW */}

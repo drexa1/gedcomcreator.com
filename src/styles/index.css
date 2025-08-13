@@ -262,7 +262,7 @@ div.ui.icon.input {
 
 .search .prompt {
     border-radius: 0 !important;
-    background: #4183c4;
+    background: #4dabf7;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -272,7 +272,6 @@ div.ui.icon.input {
 .ui.menu, .item:before {
     border: none !important;
     background: none !important;
-    color: red !important;
 }
 
 .ui.menu .item > img:not(.ui).menu-icon {
@@ -297,6 +296,20 @@ div.ui.icon.input {
 .ui.top.attached.menu {
     margin-top: 0;
     border: none !important;
+}
+
+.ui.linkblue.menu .active.item,
+.ui.menu .linkblue.active.item {
+    color: #4dabf7 !important;
+    background-color: transparent !important;
+}
+
+.ui.linkblue.menu > .item:hover {
+    color: #4dabf7   !important;
+}
+
+.ui.linkblue.menu .ui.dropdown .menu > .item:not(.active):hover {
+    color: #4dabf7 !important;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */

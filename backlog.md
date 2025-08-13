@@ -12,7 +12,7 @@ BACKLOG
 [x] Review menu literals  
 [x] More relatives text alignment  
 [x] Narrow i18n menu  
-[ ] Buttons styling  
+[x] Buttons styling  
 [ ] Different i18n gedcoms  
 [ ] How it works menu  
 [ ] Privacy policy view  
