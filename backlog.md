@@ -15,8 +15,7 @@ BACKLOG
 [x] Buttons styling  
 [x] Iglesias gedcom hidden relatives bug  
 [x] Hidden relatives conditional  
-[x] i18n gedcom examples  
-[ ] What happens with inverted i18n gedcom examples  
+[x] i18n gedcom examples
 [ ] Review i18n gedcom examples IRL  
 [ ] How it works menu  
 [ ] Privacy policy view  
