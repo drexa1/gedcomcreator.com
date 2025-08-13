@@ -15,7 +15,26 @@ export function HowItWorks({ open, onClose }: HowItWorksProps) {
                 <FormattedMessage id="howitworks.title" defaultMessage="How does this app work?"/>
             </Modal.Header>
             <Modal.Content>
-                hi
+                {/* GEDCOM como estandar de digitalizacion */}
+
+                {/* dificil aprender codigo gedcom */}
+                {/* casi toda el mundo quiere verlo */}
+
+                {/* story */}
+                {/* investigaciones academicas (papers) */}
+                {/* no habia herramientas o estaban desconectadas */}
+                {/* based on Topola lib, tuvimos que vitaminarlo */}
+                {/* enfasis en los ratos con la familia */}
+                {/* el brillo en sus ojos */}
+                {/* y para nosotros el rato que pasamos con ellos */}
+
+                {/* how to fill excel */}
+                {/* start by either YOU or ELDEST */}
+
+                {/* si necesitas ayuda puedes contactar con nosotros, fees */}
+                {/* idiomas soportados + traductor */}
+
+                {/* Be patient, is like a puzzle */}
             </Modal.Content>
         </Modal>
     );

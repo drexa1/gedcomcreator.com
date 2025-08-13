@@ -39,7 +39,7 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
                             <FormattedMessage id="menu.home" defaultMessage="Home"/>
                         </Menu.Item>
                         {/* DOWNLOAD */}
-                        <Dropdown className="item" direction="right" trigger={
+                        <Dropdown className="item" trigger={
                             <div>
                                 <Icon name="download"/>
                                 <FormattedMessage id="menu.download" defaultMessage="Download"/>

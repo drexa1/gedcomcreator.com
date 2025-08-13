@@ -256,13 +256,16 @@ div.ui.icon.input {
     margin: 2px 3px 1px 1px;
 }
 
+.ui.input > input:focus {
+    border-color: dodgerblue !important;
+}
+
 .ui.dropdown.no-arrow > .dropdown.icon {
     display: none !important;
 }
 
 .search .prompt {
     border-radius: 0 !important;
-    background: dodgerblue;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */

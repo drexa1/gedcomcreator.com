@@ -7,6 +7,17 @@
 1 LANG English
 1 FILE kennedy.ged
 
+0 @I0@ INDI
+1 NAME Joseph Patrick /KENNEDY/ Sr.
+1 SEX M
+1 BIRT
+2 DATE 6 SEP 1888
+2 PLAC Boston, Massachusetts, USA
+1 DEAT
+2 DATE 18 NOV 1969
+2 PLAC Hyannis Port, Massachusetts, USA
+1 FAMS @F2@
+
 0 @I1@ INDI
 1 NAME John Fitzgerald /KENNEDY/
 1 SEX M
@@ -59,6 +70,7 @@
 2 DATE 6 JUN 1968
 2 PLAC Los Angeles, California, USA
 1 FAMC @F2@
+1 FAMS @F5@
 
 0 @I6@ INDI
 1 NAME Edward Moore /KENNEDY/
@@ -72,17 +84,6 @@
 1 FAMC @F2@
 
 0 @I7@ INDI
-1 NAME Joseph Patrick /KENNEDY Sr./
-1 SEX M
-1 BIRT
-2 DATE 6 SEP 1888
-2 PLAC Boston, Massachusetts, USA
-1 DEAT
-2 DATE 18 NOV 1969
-2 PLAC Hyannis Port, Massachusetts, USA
-1 FAMS @F2@
-
-0 @I8@ INDI
 1 NAME Rose Fitzgerald /KENNEDY/
 1 SEX F
 1 BIRT
@@ -93,7 +94,7 @@
 2 PLAC Hyannis Port, Massachusetts, USA
 1 FAMS @F2@
 
-0 @I9@ INDI
+0 @I8@ INDI
 1 NAME Joseph P. /KENNEDY/ Jr.
 1 SEX M
 1 BIRT
@@ -104,7 +105,7 @@
 2 PLAC Over the English Channel (WWII), USA
 1 FAMC @F2@
 
-0 @I10@ INDI
+0 @I9@ INDI
 1 NAME Kathleen /KENNEDY/
 1 NICK Kick
 1 SEX F
@@ -116,7 +117,7 @@
 2 PLAC Saint-Bleu-sur-Loire, France
 1 FAMC @F2@
 
-0 @I11@ INDI
+0 @I10@ INDI
 1 NAME Eunice /KENNEDY/ Shriver
 1 SEX F
 1 BIRT
@@ -127,7 +128,7 @@
 2 PLAC Hyannis Port, Massachusetts, USA
 1 FAMC @F2@
 
-0 @I12@ INDI
+0 @I11@ INDI
 1 NAME Patricia /KENNEDY/ Lawford
 1 NICK Pat
 1 SEX F
@@ -139,7 +140,7 @@
 2 PLAC New York City, New York, USA
 1 FAMC @F2@
 
-0 @I13@ INDI
+0 @I12@ INDI
 1 NAME Jean /KENNEDY/ Smith
 1 SEX F
 1 BIRT
@@ -150,7 +151,7 @@
 2 PLAC Bethesda, Maryland, USA
 1 FAMC @F2@
 
-0 @I14@ INDI
+0 @I13@ INDI
 1 NAME Patrick Joseph /KENNEDY/
 1 SEX M
 1 BIRT
@@ -158,7 +159,7 @@
 2 PLAC Boston, Massachusetts, USA
 1 FAMC @F5@
 
-0 @I15@ INDI
+0 @I14@ INDI
 1 NAME Robert F. /KENNEDY/ Jr.
 1 SEX M
 1 BIRT
@@ -167,15 +168,15 @@
 1 FAMC @F5@
 
 0 @F2@ FAM
-1 HUSB @I7@
-1 WIFE @I8@
-1 CHIL @I9@
+1 HUSB @I0@
+1 WIFE @I7@
+1 CHIL @I8@
 1 CHIL @I1@
 1 CHIL @I5@
+1 CHIL @I9@
 1 CHIL @I10@
 1 CHIL @I11@
 1 CHIL @I12@
-1 CHIL @I13@
 
 0 @F3@ FAM
 1 HUSB @I1@
@@ -185,8 +186,8 @@
 
 0 @F5@ FAM
 1 HUSB @I5@
-1 WIFE @I11@
+1 WIFE @I10@
+1 CHIL @I13@
 1 CHIL @I14@
-1 CHIL @I15@
 
 0 TRLR

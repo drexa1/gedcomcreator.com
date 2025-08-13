@@ -1,21 +1,21 @@
 Object.defineProperty(exports, "__esModule", { value: true });
-
 exports.ChartUtil = exports.getChartInfoWithoutMargin = exports.getChartInfo = exports.linkId = exports.V_SPACING = exports.H_SPACING = void 0;
+
 const d3_selection_1 = require("d3-selection");
 const d3_flextree_1 = require("d3-flextree");
 const d3_array_1 = require("d3-array");
+
 require("d3-transition");
 
-/** Horizontal distance between boxes. */
-exports.H_SPACING = 15;
-/** Vertical distance between boxes. */
-exports.V_SPACING = 30;
-/** Margin around the whole drawing. */
-const MARGIN = 15;
+exports.H_SPACING = 15;      // Horizontal distance between boxes
+exports.V_SPACING = 30;      // Vertical distance between boxes
+const MARGIN = 15;  // Margin around the whole drawing
 const HIDE_TIME_MS = 200;
 const MOVE_TIME_MS = 500;
 
-/** Assigns an identifier to a link. */
+/**
+ * Assigns an identifier to a link.
+ */
 function linkId(node) {
     if (!node.parent) {
         return node.id + ":A";
@@ -66,14 +66,18 @@ function getChartInfoWithoutMargin(nodes) {
 }
 exports.getChartInfoWithoutMargin = getChartInfoWithoutMargin;
 
-/** Utility class with common code for all chart types. */
+/**
+ * Utility class with common code for all chart types.
+ */
 let ChartUtil = /** @class */ (function () {
 
     function ChartUtil(options) {
         this.options = options;
     }
 
-    /** Creates a path from parent to the child node (horizontal layout). */
+    /**
+     * Creates a path from parent to the child node (horizontal layout).
+     */
     ChartUtil.prototype.linkHorizontal = function (s, d) {
         const sAnchor = this.options.renderer.getFamilyAnchor(s.data);
         const dAnchor = s.id === d.data.spouseParentNodeId
@@ -85,7 +89,9 @@ let ChartUtil = /** @class */ (function () {
         return "M " + sx + " " + sy + "\n            L " + midX + " " + sy + ",\n              " + midX + " " + dy + ",\n              " + dx + " " + dy;
     };
 
-    /** Creates a path from parent to the child node (vertical layout). */
+    /**
+     * Creates a path from parent to the child node (vertical layout).
+     */
     ChartUtil.prototype.linkVertical = function (s, d) {
         const sAnchor = this.options.renderer.getFamilyAnchor(s.data);
         const dAnchor = s.id === d.data.spouseParentNodeId
@@ -112,11 +118,11 @@ let ChartUtil = /** @class */ (function () {
 
     ChartUtil.prototype.updateSvgDimensions = function (chartInfo) {
         const svg = d3_selection_1.select(this.options.svgSelector);
-        const group = svg.select('g');
+        const group = svg.select("g");
         const transition = this.options.animate
             ? group.transition().delay(HIDE_TIME_MS).duration(MOVE_TIME_MS)
             : group;
-        transition.attr('transform', "translate(" + chartInfo.origin[0] + ", " + chartInfo.origin[1] + ")");
+        transition.attr("transform", "translate(" + chartInfo.origin[0] + ", " + chartInfo.origin[1] + ")");
     };
 
     ChartUtil.prototype.layOutChart = function (root, layoutOptions) {
@@ -124,8 +130,8 @@ let ChartUtil = /** @class */ (function () {
         if (layoutOptions === void 0) { layoutOptions = {}; }
         // Add styles so that calculating text size is correct.
         const svg = d3_selection_1.select(this.options.svgSelector);
-        if (svg.select('style').empty()) {
-            svg.append('style').text(this.options.renderer.getCss());
+        if (svg.select("style").empty()) {
+            svg.append("style").text(this.options.renderer.getCss());
         }
         // Assign generation number.
         root.each(function (node) {
@@ -208,12 +214,12 @@ let ChartUtil = /** @class */ (function () {
         const _this = this;
         return new Promise(function (resolve) {
             const boundNodes = svg
-                .select('g')
-                .selectAll('g.node')
+                .select("g")
+                .selectAll("g.node")
                 .data(nodes, function (d) {
                     return d.id;
                 });
-            const nodeEnter = boundNodes.enter().append('g');
+            const nodeEnter = boundNodes.enter().append("g");
             let transitionsPending = boundNodes.exit().size() + boundNodes.size() + nodeEnter.size();
             const transitionDone = function () {
                 transitionsPending--;
@@ -226,29 +232,29 @@ let ChartUtil = /** @class */ (function () {
             }
             nodeEnter
                 .merge(boundNodes)
-                .attr('class', function (node) {
+                .attr("class", function (node) {
                     return "node generation" + node.data.generation;
                 });
-            nodeEnter.attr('transform', function (node) {
+            nodeEnter.attr("transform", function (node) {
                 return "translate(" + (node.x - node.data.width / 2) + ", " + (node.y - node.data.height / 2) + ")";
             });
             if (_this.options.animate) {
                 nodeEnter
-                    .style('opacity', 0)
+                    .style("opacity", 0)
                     .transition()
                     .delay(HIDE_TIME_MS + MOVE_TIME_MS)
                     .duration(HIDE_TIME_MS)
-                    .style('opacity', 1)
-                    .on('end', transitionDone);
+                    .style("opacity", 1)
+                    .on("end", transitionDone);
             }
             const updateTransition = _this.options.animate
                 ? boundNodes
                     .transition()
                     .delay(HIDE_TIME_MS)
                     .duration(MOVE_TIME_MS)
-                    .on('end', transitionDone)
+                    .on("end", transitionDone)
                 : boundNodes;
-            updateTransition.attr('transform', function (node) {
+            updateTransition.attr("transform", function (node) {
                 return "translate(" + (node.x - node.data.width / 2) + ", " + (node.y - node.data.height / 2) + ")";
             });
             _this.options.renderer.options.startIndi = _this.options.startIndi
@@ -258,9 +264,9 @@ let ChartUtil = /** @class */ (function () {
                     .exit()
                     .transition()
                     .duration(HIDE_TIME_MS)
-                    .style('opacity', 0)
+                    .style("opacity", 0)
                     .remove()
-                    .on('end', transitionDone);
+                    .on("end", transitionDone);
             } else {
                 boundNodes.exit().remove();
             }
@@ -290,16 +296,16 @@ let ChartUtil = /** @class */ (function () {
                 return !!n.parent || n.data.additionalMarriage;
             });
             const boundLinks = svg
-                .select('g')
-                .selectAll('path.link')
+                .select("g")
+                .selectAll("path.link")
                 .data(links, linkId);
             const path = boundLinks
                 .enter()
-                .insert('path', 'g')
-                .attr('class', function (node) {
-                    return node.data.additionalMarriage ? 'link additional-marriage' : 'link';
+                .insert("path", "g")
+                .attr("class", function (node) {
+                    return node.data.additionalMarriage ? "link additional-marriage" : "link";
                 })
-                .attr('d', function (node) {
+                .attr("d", function (node) {
                     return link(node.parent, node);
                 });
             let transitionsPending = boundLinks.exit().size() + boundLinks.size() + path.size();
@@ -317,28 +323,28 @@ let ChartUtil = /** @class */ (function () {
                     .transition()
                     .delay(HIDE_TIME_MS)
                     .duration(MOVE_TIME_MS)
-                    .on('end', transitionDone)
+                    .on("end", transitionDone)
                 : boundLinks;
-            linkTransition.attr('d', function (node) {
+            linkTransition.attr("d", function (node) {
                 return link(node.parent, node);
             });
             if (_this.options.animate) {
                 path
-                    .style('opacity', 0)
+                    .style("opacity", 0)
                     .transition()
                     .delay(2 * HIDE_TIME_MS + MOVE_TIME_MS)
                     .duration(0)
-                    .style('opacity', 1)
-                    .on('end', transitionDone);
+                    .style("opacity", 1)
+                    .on("end", transitionDone);
             }
             if (_this.options.animate) {
                 boundLinks
                     .exit()
                     .transition()
                     .duration(0)
-                    .style('opacity', 0)
+                    .style("opacity", 0)
                     .remove()
-                    .on('end', transitionDone);
+                    .on("end", transitionDone);
             } else {
                 boundLinks.exit().remove();
             }
@@ -347,28 +353,31 @@ let ChartUtil = /** @class */ (function () {
 
     ChartUtil.prototype.getSvgForRendering = function () {
         const svg = d3_selection_1.select(this.options.svgSelector);
-        if (svg.select('g').empty()) {
-            svg.append('g');
+        if (svg.select("g").empty()) {
+            svg.append("g");
         }
         return svg;
     };
 
     ChartUtil.prototype.markHiddenRelatives = function (nodes, gedcomData) {
-        const displayedIndiIDs = nodes.sort((a, b) => {
-            const numA = parseInt(a.id.slice(1));
-            const numB = parseInt(b.id.slice(1));
-            return numA - numB;
-        }).map(function (n) { return n.id });
-
-        for (var n = 0; n < nodes.length; n++) {
-            this.markHiddenAncestorsForIndi(nodes[n], gedcomData, displayedIndiIDs);
-            this.markHiddenDescendantsForIndi(nodes[n], gedcomData, displayedIndiIDs);
+        const displayedIndiIDs = nodes
+            .sort((a, b) => parseInt(a.id.slice(1)) - parseInt(b.id.slice(1)))
+            .map(n => n.id);
+        let foundHidden = false;
+        for (let n = 0; n < nodes.length; n++) {
+            const node = nodes[n];
+            const hiddenAncestors = this.markHiddenAncestorsForIndi(node, gedcomData, displayedIndiIDs);
+            const hiddenDescendants = this.markHiddenDescendantsForIndi(node, gedcomData, displayedIndiIDs);
+            if (hiddenAncestors || hiddenDescendants) {
+                foundHidden = true;
+            }
         }
+        return foundHidden;
     }
 
     ChartUtil.prototype.markHiddenAncestorsForIndi = function (node, gedcomData, displayedIndiIDs) {
         // go through each family to find the parents of this indi
-        for (var f = 0; f < gedcomData.fams.size; f++) {
+        for (let f = 0; f < gedcomData.fams.size; f++) {
             const fam = Array.from(gedcomData.fams.values())[f]
             if (fam.json.children.length > 0) {
                 if (fam.json.children.includes(node.id)) {
@@ -377,31 +386,33 @@ let ChartUtil = /** @class */ (function () {
                     const motherID = fam.json.wife
                     if (!displayedIndiIDs.includes(fatherID) || !displayedIndiIDs.includes(motherID)) {
                         node.hiddenRelatives = true
-                        break;
+                        return true; // hidden ancestor found
                     }
                 }
             }
         }
+        return false;
     }
 
     ChartUtil.prototype.markHiddenDescendantsForIndi = function (node, gedcomData, displayedIndiIDs) {
         // go through each family to find the children
-        for (var f = 0; f < gedcomData.fams.size; f++) {
+        for (let f = 0; f < gedcomData.fams.size; f++) {
             const fam = Array.from(gedcomData.fams.values())[f]
             if (fam.json.husb === node.id) {  // || fam.json.wife === node.id mark only the father. Otherwise difficult to distinguish from women with missing parents
                 // family found
                 if (fam.json.children.length > 0) {
-                    for (var c = 0; c < fam.json.children.length; c++) {
+                    for (let c = 0; c < fam.json.children.length; c++) {
                         const childId = fam.json.children[c]
                         if (!displayedIndiIDs.includes(childId)) {
                             // some children are not displayed
                             node.hiddenRelatives = true
-                            break;
+                            return true; // hidden descendant found
                         }
                     }
                 }
             }
         }
+        return false; // no hidden descendants
     }
 
     return ChartUtil;

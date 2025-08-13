@@ -20,7 +20,7 @@ import {
 } from "./utils/gedcom-utils";
 import {useEffect, useState} from "react";
 import {useHistory, useLocation} from "react-router";
-import {Chart, ChartType, downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./chart";
+import {Chart, ChartType} from "./chart";
 import {
     GedcomUrlDataSource,
     getSelection,
@@ -32,6 +32,7 @@ import {IndividualLanguage} from "./model/individual";
 import {Config, ConfigPanel, configToArgs, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
 import CSVLoader from "./datasource/load-csv";
 import {getArguments} from "./utils/param-utils";
+import {downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./utils/chart-utils";
 
 
 enum AppState {

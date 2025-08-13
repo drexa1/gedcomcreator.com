@@ -1,4 +1,5 @@
-var __extends = (this && this.__extends) || (function () {
+const __extends = (this && this.__extends) || (function () {
+
     let extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({__proto__: []} instanceof Array && function (d, b) {
@@ -9,11 +10,16 @@ var __extends = (this && this.__extends) || (function () {
             };
         return extendStatics(d, b);
     };
+
     return function (d, b) {
         if (typeof b !== "function" && b !== null)
             throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
         extendStatics(d, b);
-        function __() { this.constructor = d; }
+
+        function __() {
+            this.constructor = d;
+        }
+
         if (b === null) {
             d.prototype = Object.create(b);
         } else {
@@ -26,7 +32,7 @@ var __extends = (this && this.__extends) || (function () {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DetailedRenderer = exports.getLength = void 0;
 
-var chart_util_1 = require("./chart-util");
+const chart_util_1 = require("./chart-util");
 const d3_selection_1 = require("d3-selection");
 const _1 = require("./index");
 const date_format_1 = require("./date-format");
@@ -38,9 +44,7 @@ const INDI_MIN_WIDTH = 64;
 const FAM_MIN_HEIGHT = 10;
 const FAM_MIN_WIDTH = 15;
 const IMAGE_WIDTH = 70;
-
-/** Minimum box height when an image is present. */
-const IMAGE_HEIGHT = 90;
+const IMAGE_HEIGHT = 90;  // Minimum box height when an image is present
 const ETHNICITY_HEIGHT = 17;
 const LANGUAGES_HEIGHT = 17;
 const DETAILS_HEIGHT = 17;
@@ -48,13 +52,15 @@ const ANIMATION_DELAY_MS = 200;
 const ANIMATION_DURATION_MS = 500;
 const textLengthCache = new Map();
 
-/** Calculates the length of the given text in pixels when rendered. */
+/**
+ * Calculates the length of the given text in pixels when rendered.
+ */
 function getLength(text, textClass) {
-    const cacheKey = text + '|' + textClass;
+    const cacheKey = text + "|" + textClass;
     if (textLengthCache.has(cacheKey)) {
         return textLengthCache.get(cacheKey);
     }
-    const g = d3_selection_1.select("svg").append('g').attr("class", "detailed node");
+    const g = d3_selection_1.select("svg").append("g").attr("class", "detailed node");
     const x = g.append("text").attr("class", textClass).text(text);
     const length = x.node().getComputedTextLength();
     g.remove();
@@ -64,19 +70,18 @@ function getLength(text, textClass) {
 exports.getLength = getLength;
 
 const SEX_SYMBOLS = new Map([
-    ['F', '\u2640'],
-    ['M', '\u2642'],
+    ["F", "\u2640"],
+    ["M", "\u2642"],
 ]);
 
 /**
- * Renders some details about a person such as date and place of birth
- * and death.
+ * Renders some details about a person such as date and place of birth and death.
  */
-var DetailedRenderer = /** @class */ (function (_super) {
+const DetailedRenderer = /** @class */ (function (_super) {
     __extends(DetailedRenderer, _super);
 
     function DetailedRenderer(options) {
-        var _this = _super.call(this, options) || this;
+        const _this = _super.call(this, options) || this;
         _this.options = options;
         this.util = new chart_util_1.ChartUtil(options);
         return _this;
@@ -101,7 +106,9 @@ var DetailedRenderer = /** @class */ (function (_super) {
         }
     };
 
-    /** Extracts lines of details for a person. */
+    /**
+     * Extracts lines of details for a person.
+     */
     DetailedRenderer.prototype.getIndiDetails = function (indi) {
         const detailsList = [];
         const birthDate = indi.getBirthDate() && date_format_1.formatDateOrRange(indi.getBirthDate(), this.options.locale);
@@ -109,26 +116,25 @@ var DetailedRenderer = /** @class */ (function (_super) {
         const deathDate = indi.getDeathDate() && date_format_1.formatDateOrRange(indi.getDeathDate(), this.options.locale);
         const deathPlace = indi.getDeathPlace();
         if (birthDate) {
-            detailsList.push({ symbol: '', text: birthDate });
+            detailsList.push({symbol: "", text: birthDate});
         }
         if (birthPlace) {
-            detailsList.push({ symbol: '', text: birthPlace });
+            detailsList.push({symbol: "", text: birthPlace});
         }
         if (birthDate || birthPlace) {
-            detailsList[0].symbol = '*';
+            detailsList[0].symbol = "*";
         }
         const listIndex = detailsList.length;
         if (deathDate) {
-            detailsList.push({ symbol: '', text: deathDate });
+            detailsList.push({symbol: "", text: deathDate});
         }
         if (deathPlace) {
-            detailsList.push({ symbol: '', text: deathPlace });
+            detailsList.push({symbol: "", text: deathPlace});
         }
         if (deathDate || deathPlace) {
-            detailsList[listIndex].symbol = '+';
-        }
-        else if (indi.isConfirmedDeath()) {
-            detailsList.push({ symbol: '+', text: '' });
+            detailsList[listIndex].symbol = "+";
+        } else if (indi.isConfirmedDeath()) {
+            detailsList.push({symbol: "+", text: ""});
         }
         return detailsList;
     };
@@ -148,8 +154,8 @@ var DetailedRenderer = /** @class */ (function (_super) {
         const maxDetailsWidth = d3_array_1.max(details.map(detail => getLength(detail.text, "details")));
         const width = d3_array_1.max([
             maxDetailsWidth + 22,
-            getLength(indi.getFirstName() || '', "name") + 8,
-            getLength(indi.getLastName() || '', "name") + 8,
+            getLength(indi.getFirstName() || "", "name") + 8,
+            getLength(indi.getLastName() || "", "name") + 8,
             indi.showLanguages() && indi.getLanguages().length > 0 ? (getLength(indi.getLanguagesLabel(), "languages") + 28) : 0,
             indi.showEthnicity() && indi.getEthnicity() != null ? (getLength(indi.getEthnicity(), "ethnicity") + 28) : 0,
             getLength(id, "id") + 32,
@@ -158,20 +164,22 @@ var DetailedRenderer = /** @class */ (function (_super) {
         return [width, height];
     };
 
-    /** Extracts lines of details for a family. */
+    /**
+     * Extracts lines of details for a family.
+     */
     DetailedRenderer.prototype.getFamDetails = function (fam) {
         const detailsList = [];
         const marriageDate = fam.getMarriageDate() &&
             date_format_1.formatDateOrRange(fam.getMarriageDate(), this.options.locale);
         const marriagePlace = fam.getMarriagePlace();
         if (marriageDate) {
-            detailsList.push({ symbol: '', text: marriageDate });
+            detailsList.push({symbol: "", text: marriageDate});
         }
         if (marriagePlace) {
-            detailsList.push({ symbol: '', text: marriagePlace });
+            detailsList.push({symbol: "", text: marriagePlace});
         }
         if (marriageDate || marriagePlace) {
-            detailsList[0].symbol = '\u26AD';
+            detailsList[0].symbol = "\u26AD";
         }
         return detailsList;
     };
@@ -180,7 +188,9 @@ var DetailedRenderer = /** @class */ (function (_super) {
         const fam = this.options.data.getFam(id);
         const details = this.getFamDetails(fam);
         const height = d3_array_1.max([10 + details.length * DETAILS_HEIGHT, FAM_MIN_HEIGHT]);
-        const maxDetailsWidth = d3_array_1.max(details.map(function (x) { return getLength(x.text, "details"); }));
+        const maxDetailsWidth = d3_array_1.max(details.map(function (x) {
+            return getLength(x.text, "details");
+        }));
         const width = d3_array_1.max([maxDetailsWidth + 22, FAM_MIN_WIDTH]);
         return [width, height];
     };
@@ -188,8 +198,8 @@ var DetailedRenderer = /** @class */ (function (_super) {
     let indisToStroke = []
     DetailedRenderer.prototype.render = function (enter, update) {
         const _this = this;
-        enter = enter.append('g').attr("class", "detailed");
-        update = update.select('g');
+        enter = enter.append("g").attr("class", "detailed");
+        update = update.select("g");
 
         indisToStroke = []
         const indiUpdate = enter
@@ -223,14 +233,25 @@ var DetailedRenderer = /** @class */ (function (_super) {
                     });
                 }
                 return result;
-        }, function (data) { return data.indi.id; });
+            }, function (data) {
+                return data.indi.id;
+            });
 
-        // dash the stroke of indis having non-visible relatives
-        this.util.markHiddenRelatives(indisToStroke, this.options.data)
+        // Dash the stroke of indis having non-visible relatives
+        const foundHidden = this.util.markHiddenRelatives(indisToStroke, this.options.data)
+        if (foundHidden) {
+            // Show hint
+            document.getElementById("legend").classList.remove("hidden");
+            document.getElementById("legend-emoji").classList.remove("hidden");
+        } else {
+            // Hide hint
+            document.getElementById("legend").classList.add("hidden");
+            document.getElementById("legend-emoji").classList.add("hidden");
+        }
 
         const indiEnter = indiUpdate
             .enter()
-            .append('g')
+            .append("g")
             .attr("class", "indi");
         this.transition(indiEnter.merge(indiUpdate)).attr("transform", function (node) {
             return "translate(" + node.xOffset + ", " + node.yOffset + ")";
@@ -239,7 +260,7 @@ var DetailedRenderer = /** @class */ (function (_super) {
 
         const familyEnter = enter.select(function (node) {
             return node.data.family ? this : null;
-        }).append('g').attr("class", "family");
+        }).append("g").attr("class", "family");
         const familyUpdate = update.select(function (node) {
             return node.data.family ? this : null;
         }).select("g.family");
@@ -257,7 +278,8 @@ var DetailedRenderer = /** @class */ (function (_super) {
             if (xhr.status === 200) {
                 return xhr.responseText;
             } else {
-                throw new Error("Failed to load CSS file:" + xhr.statusText);
+                console.error("Failed to load CSS file:", xhr.statusText);
+                return null;
             }
         } catch (error) {
             console.error("Error occurred while loading CSS:", error);
@@ -291,9 +313,9 @@ var DetailedRenderer = /** @class */ (function (_super) {
         let _a;
         const sex = (_a = this.options.data.getIndi(indiId)) === null || _a === void 0 ? void 0 : _a.getSex();
         switch (sex) {
-            case 'M':
+            case "M":
                 return "male";
-            case 'F':
+            case "F":
                 return "female";
             default:
                 break;
@@ -310,7 +332,7 @@ var DetailedRenderer = /** @class */ (function (_super) {
         if (ethnicity) {
             return ethnicityCss.get(ethnicity);
         }
-        return ''  // Blank if no ethnicity
+        return ""  // Blank if no ethnicity
     };
 
     DetailedRenderer.prototype.buildEthnicityMap = function () {
@@ -324,7 +346,7 @@ var DetailedRenderer = /** @class */ (function (_super) {
             }
             ethnicityCss.set("Blanco", "blanco")
             ethnicityCss.set("Afroamerican", "afroamerican")
-            // Assign the ethnicities of the the rest individuals
+            // Assign the ethnicities of the rest of individuals
             Array.from(this.options.data.indis?.values() || [])
                 .filter(indi => indi.getEthnicity() != null)
                 .forEach(indi => {
@@ -345,7 +367,7 @@ var DetailedRenderer = /** @class */ (function (_super) {
 
     DetailedRenderer.prototype.getSelectedStroke = function (indiId) {
         if (this.options.startIndi && this.options.startIndi === indiId) {
-            return 'selected-stroke'
+            return "selected-stroke"
         }
     }
 
@@ -360,9 +382,9 @@ var DetailedRenderer = /** @class */ (function (_super) {
             }
         } else {
             // By nr. languages
-            return languages.length > 0 ? 'n' + Math.min(languages.length, 7) : '';
+            return languages.length > 0 ? "n" + Math.min(languages.length, 7) : "";
         }
-        return '' // Blank if no language
+        return "" // Blank if no language
     }
 
     DetailedRenderer.prototype.resetCss = function () {
@@ -375,9 +397,11 @@ var DetailedRenderer = /** @class */ (function (_super) {
 
         if (this.options.indiHrefFunc) {
             enter = enter
-                .append('a')
-                .attr("href", function (data) { return _this.options.indiHrefFunc(data.indi.id); });
-            update = update.select('a');
+                .append("a")
+                .attr("href", function (data) {
+                    return _this.options.indiHrefFunc(data.indi.id);
+                });
+            update = update.select("a");
         }
 
         if (this.options.indiCallback) {
@@ -405,8 +429,12 @@ var DetailedRenderer = /** @class */ (function (_super) {
             .merge(update.select("rect.background"));
 
         this.transition(background)
-            .attr("width", function (node) { return node.indi.width; })
-            .attr("height", function (node) { return node.indi.height; });
+            .attr("width", function (node) {
+                return node.indi.width;
+            })
+            .attr("height", function (node) {
+                return node.indi.height;
+            });
 
         // Clip path
         const getClipId = function (id) {
@@ -414,12 +442,18 @@ var DetailedRenderer = /** @class */ (function (_super) {
         };
         enter
             .append("clipPath")
-            .attr("id", function (node) { return getClipId(node.indi.id); })
+            .attr("id", function (node) {
+                return getClipId(node.indi.id);
+            })
             .append("rect")
             .attr("rx", 5)
             .merge(update.select("clipPath rect"))
-            .attr("width", function (node) { return node.indi.width; })
-            .attr("height", function (node) { return node.indi.height; });
+            .attr("width", function (node) {
+                return node.indi.width;
+            })
+            .attr("height", function (node) {
+                return node.indi.height;
+            });
         const getIndi = function (data) {
             return _this.options.data.getIndi(data.indi.id);
         };
@@ -432,14 +466,22 @@ var DetailedRenderer = /** @class */ (function (_super) {
             .append("text")
             .attr("text-anchor", "middle")
             .attr("class", "name")
-            .attr("transform", function (node) { return "translate(" + getDetailsWidth(node) / 2 + ", 17)"; })
-            .text(function (node) { return getIndi(node).getFirstName(); });
+            .attr("transform", function (node) {
+                return "translate(" + getDetailsWidth(node) / 2 + ", 17)";
+            })
+            .text(function (node) {
+                return getIndi(node).getFirstName();
+            });
         enter
             .append("text")
             .attr("text-anchor", "middle")
             .attr("class", "name")
-            .attr("transform", function (node) { return "translate(" + getDetailsWidth(node) / 2 + ", 33)"; })
-            .text(function (node) { return getIndi(node).getLastName(); })
+            .attr("transform", function (node) {
+                return "translate(" + getDetailsWidth(node) / 2 + ", 33)";
+            })
+            .text(function (node) {
+                return getIndi(node).getLastName();
+            })
 
         // Languages
         const languages = enter
@@ -454,7 +496,7 @@ var DetailedRenderer = /** @class */ (function (_super) {
             });
         this.transition(languages).attr("transform", function (node) {
             // if the indi does not have languages to show, the height start does not apply
-            const languages_height_start =  getIndi(node).showLanguages() && getIndi(node).getLanguages().length > 0 ? 52 : null
+            const languages_height_start = getIndi(node).showLanguages() && getIndi(node).getLanguages().length > 0 ? 52 : null
             return "translate(" + getDetailsWidth(node) / 2 + ", " + languages_height_start + ")";
         });
 
@@ -466,10 +508,10 @@ var DetailedRenderer = /** @class */ (function (_super) {
             .append("text")
             .attr("class", "ethnicity")
             .text(function (node) {
-                return '¤ ' + getIndi(node).getEthnicity()
+                return "¤ " + getIndi(node).getEthnicity()
             });
         this.transition(ethnicity).attr("transform", function (node) {
-            let ethnicity_height_start =  null
+            let ethnicity_height_start = null
             if (getIndi(node).showLanguages() && getIndi(node).getLanguages().length > 0) {
                 ethnicity_height_start = 71
             } else if (getIndi(node).showEthnicity() && getIndi(node).getEthnicity() != null) {
@@ -530,10 +572,12 @@ var DetailedRenderer = /** @class */ (function (_super) {
             .append("text")
             .attr("class", "id")
             .text(function (node) {
-                return (getIndi(node).showId() ? node.indi.id : '');
+                return (getIndi(node).showId() ? node.indi.id : "");
             })
             .merge(update.select("text.id"));
-        this.transition(id).attr("transform", function (node) { return "translate(9, " + (node.indi.height - 5) + ")"; });
+        this.transition(id).attr("transform", function (node) {
+            return "translate(9, " + (node.indi.height - 5) + ")";
+        });
 
         // Render sex
         const sex = enter
@@ -541,8 +585,8 @@ var DetailedRenderer = /** @class */ (function (_super) {
             .attr("class", "details sex")
             .attr("text-anchor", "end")
             .text(function (node) {
-                const sexSymbol = SEX_SYMBOLS.get(getIndi(node).getSex() || '') || '';
-                return getIndi(node).showSex() ? sexSymbol : '';
+                const sexSymbol = SEX_SYMBOLS.get(getIndi(node).getSex() || "") || "";
+                return getIndi(node).showSex() ? sexSymbol : "";
             })
             .merge(update.select("text.sex"));
         this.transition(sex).attr("transform", function (node) {
@@ -550,14 +594,24 @@ var DetailedRenderer = /** @class */ (function (_super) {
         });
 
         // Image
-        enter.filter(function (node) { return !!getIndi(node).getImageUrl(); })
+        enter.filter(function (node) {
+            return !!getIndi(node).getImageUrl();
+        })
             .append("image")
             .attr("width", IMAGE_WIDTH)
-            .attr("height", function (node) { return node.indi.height; })
+            .attr("height", function (node) {
+                return node.indi.height;
+            })
             .attr("preserveAspectRatio", "xMidYMin")
-            .attr("transform", function (node) { return "translate(" + (node.indi.width - IMAGE_WIDTH) + ", 0)"; })
-            .attr("clip-path", function (node) { return "url(#" + getClipId(node.indi.id) + ")"; })
-            .attr("href", function (node) { return getIndi(node).getImageUrl(); });
+            .attr("transform", function (node) {
+                return "translate(" + (node.indi.width - IMAGE_WIDTH) + ", 0)";
+            })
+            .attr("clip-path", function (node) {
+                return "url(#" + getClipId(node.indi.id) + ")";
+            })
+            .attr("href", function (node) {
+                return getIndi(node).getImageUrl();
+            });
 
         // Border on top
         const border = enter
@@ -572,8 +626,12 @@ var DetailedRenderer = /** @class */ (function (_super) {
             })
             .merge(update.select("rect.border"));
         this.transition(border)
-            .attr("width", function (node) { return node.indi.width; })
-            .attr("height", function (node) { return node.indi.height; });
+            .attr("width", function (node) {
+                return node.indi.width;
+            })
+            .attr("height", function (node) {
+                return node.indi.height;
+            });
     };
 
     DetailedRenderer.prototype.renderFamily = function (enter) {
@@ -581,10 +639,10 @@ var DetailedRenderer = /** @class */ (function (_super) {
 
         if (this.options.famHrefFunc) {
             enter = enter
-                .append('a')
+                .append("a")
                 .attr("href", function (node) {
-                return _this.options.famHrefFunc(node.data.family.id);
-            });
+                    return _this.options.famHrefFunc(node.data.family.id);
+                });
         }
 
         if (this.options.famCallback) {
@@ -610,14 +668,18 @@ var DetailedRenderer = /** @class */ (function (_super) {
 
         // Box
         enter.filter(function (node) {
-                const detail = details.get(node.data.family.id);
-                return 0 < detail.length;
+            const detail = details.get(node.data.family.id);
+            return 0 < detail.length;
         }).append("rect")
-        .attr("class", this.getColoringClass())
-        .attr("rx", 5)
-        .attr("ry", 5)
-        .attr("width", function (node) { return node.data.family.width; })
-        .attr("height", function (node) { return node.data.family.height; });
+            .attr("class", this.getColoringClass())
+            .attr("rx", 5)
+            .attr("ry", 5)
+            .attr("width", function (node) {
+                return node.data.family.width;
+            })
+            .attr("height", function (node) {
+                return node.data.family.height;
+            });
         const _loop_2 = function (i) {
             const lineGroup = enter.filter(function (node) {
                 return details.get(node.data.family.id).length > i;
