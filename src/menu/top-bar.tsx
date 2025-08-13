@@ -8,6 +8,9 @@ import {ChartMenu} from "./chart-menu";
 import {FileMenu} from "./file-menu";
 import {SearchBar} from "./search-bar";
 import {ContactMenu} from "./contact-menu";
+import {FormattedMessage} from "react-intl";
+import {HowItWorksMenu} from "./howitworks-menu";
+import {HowItWorks} from "../howitworks";
 
 
 export enum ScreenSize {
@@ -32,6 +35,7 @@ export interface EventHandlers {
 }
 
 export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
+    const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false);
     const [contactModalOpen, setContactModalOpen] = useState(false);
 
     function desktopMenu() {
@@ -49,13 +53,11 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
             {/* HOW IT WORKS | CONTACT | I18N LANGUAGE */}
             {!showingChart &&
                 <>
-                    {/* TODO: HowItWorksMenu */}
-                    <Menu.Item onClick={alert}>
-                        <Icon name="question circle"/>How it works
-                    </Menu.Item>
+                    <HowItWorksMenu screenSize={ScreenSize.LARGE} onHowItWorksClick={() => setHowItWorksModalOpen(true)}/>
+                    <HowItWorks open={howItWorksModalOpen} onClose={() => setHowItWorksModalOpen(false)}/>
                     {/* TODO: PrivacyMenu */}
                     <Menu.Item onClick={alert}>
-                        <Icon name="shield"/>Privacy policy
+                        <Icon name="shield"/><FormattedMessage id="menu.privacy" defaultMessage="Privacy policy"/>
                     </Menu.Item>
                     <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>

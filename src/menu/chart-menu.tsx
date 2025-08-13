@@ -36,7 +36,7 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
                         {/* HOME */}
                         <Menu.Item onClick={eventHandlers.onHome}>
                             <Icon name="home"/>
-                            <FormattedMessage id="menu.open" defaultMessage="Home"/>
+                            <FormattedMessage id="menu.home" defaultMessage="Home"/>
                         </Menu.Item>
                         {/* DOWNLOAD */}
                         <Dropdown className="item" trigger={

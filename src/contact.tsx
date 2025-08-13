@@ -24,8 +24,8 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     const lang = intl.locale;
     const i18nCountryNames = countries.getNames(lang, { select: "official" });
     const sortedCountries = Object.entries(i18nCountryNames).sort(([, nameA], [, nameB]) => nameA.localeCompare(nameB, lang));
-    const [formData, setFormData] = useState({name: "", email: "", country: "", message: ""});
     const formRef = useRef<HTMLFormElement>(null);
+    const [formData, setFormData] = useState({name: "", email: "", country: "", message: ""});
     const isFormValid = formData.name?.trim() !== "" && formData.email?.trim() !== "" && formData.country?.trim() !== "" && formData.message?.trim() !== "";
 
     /**

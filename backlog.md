@@ -9,13 +9,13 @@ BACKLOG
 [x] Contact form content  
 [x] Contact form validation  
 [x] Css arrange  
-[ ] More relatives text alignment
-[ ] Review menu literals  
+[x] Review menu literals  
+[ ] More relatives text alignment  
+[ ] Different i18n gedcoms  
 [ ] How it works menu  
 [ ] Privacy policy view  
 [ ] More relatives explanations  
-[ ] Smoke mobile  
-[ ] Different i18n gedcoms  
+[ ] Smoke mobile
 [ ] Buttons styling  
 [ ] Landing page  
 [ ] Convert templates  
