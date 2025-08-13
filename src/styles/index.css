@@ -13,11 +13,11 @@ body, html {
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 .meta a {
-    color: #4dabf7 !important;
+    color: dodgerblue !important;
 }
 
 .meta a:hover {
-    color: #82cfff !important;
+    color: deepskyblue !important;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -262,7 +262,7 @@ div.ui.icon.input {
 
 .search .prompt {
     border-radius: 0 !important;
-    background: #4dabf7;
+    background: dodgerblue;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -300,16 +300,16 @@ div.ui.icon.input {
 
 .ui.linkblue.menu .active.item,
 .ui.menu .linkblue.active.item {
-    color: #4dabf7 !important;
+    color: dodgerblue !important;
     background-color: transparent !important;
 }
 
 .ui.linkblue.menu > .item:hover {
-    color: #4dabf7   !important;
+    color: dodgerblue !important;
 }
 
 .ui.linkblue.menu .ui.dropdown .menu > .item:not(.active):hover {
-    color: #4dabf7 !important;
+    color: dodgerblue !important;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -359,7 +359,7 @@ div.ui.icon.input {
 }
 
 .legend:hover {
-    background: rgba(77, 171, 247, 0.1);
+    background: rgb(from deepskyblue r g b / 0.1);
     transition: background 0.3s ease;
     cursor: pointer;
 }

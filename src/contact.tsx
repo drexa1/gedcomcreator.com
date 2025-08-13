@@ -92,7 +92,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
 
                             <Form.Field >
                                 <label htmlFor="name">
-                                    <FormattedMessage id="contact.name" defaultMessage="Your name"/>&nbsp;*
+                                    <FormattedMessage id="contact.name" defaultMessage="Your name"/>
                                 </label>
                                 <input id="name" name="name" type="text" onChange={onChange} placeholder={
                                     intl.formatMessage({id: "contact.name.placeholder", defaultMessage: "You"})
@@ -101,7 +101,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
 
                             <Form.Field>
                                 <label htmlFor="email">
-                                    <FormattedMessage id="contact.email" defaultMessage="Your e-mail address"/>&nbsp;*
+                                    <FormattedMessage id="contact.email" defaultMessage="Your e-mail address"/>
                                 </label>
                                 <input id="email" name="email" type="email" onChange={onChange} placeholder="you@email.com" value={formData.email ?? ""}/>
                                 <ValidationError prefix="Email" field="email" errors={state.errors}/>
