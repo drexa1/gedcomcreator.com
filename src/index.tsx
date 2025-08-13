@@ -18,12 +18,12 @@ import "semantic-ui-css/semantic.min.css";
  * Initial captions for the i18n selector.
  */
 const supportedLanguages = {
-    "i18n.language.de": "🇩🇪 DE",
-    "i18n.language.en": "🇬🇧 EN",
-    "i18n.language.es": "🇪🇸 ES",
-    "i18n.language.fr": "🇫🇷 FR",
-    "i18n.language.it": "🇮🇹 IT",
-    "i18n.language.pl": "🇵🇱 PL"
+    "i18n.language.de": "🇩🇪 Deutsch",
+    "i18n.language.en": "🇬🇧 English",
+    "i18n.language.es": "🇪🇸 Español",
+    "i18n.language.fr": "🇫🇷 Français",
+    "i18n.language.it": "🇮🇹 Italiano",
+    "i18n.language.pl": "🇵🇱 Polski"
 }
 export const i18nMessages = {
     // de: messages_de,

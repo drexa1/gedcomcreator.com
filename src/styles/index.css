@@ -318,8 +318,8 @@ div.ui.icon.input {
 }
 
 .i18n-menu {
-    min-width: 77px;
-    justify-content: center;
+    /*min-width: 77px;*/
+    justify-content: left;
 }
 
 .i18n-icon {
