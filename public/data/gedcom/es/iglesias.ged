@@ -1,0 +1,176 @@
+0 HEAD
+1 GEDC
+2 VERS 5.5.5
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 DATE 13 Aug 2025
+1 LANG Spanish
+1 FILE iglesias.ged
+
+0 @I1@ INDI
+1 NAME Julio /IGLESIAS/
+1 SEX M
+1 BIRT
+2 DATE 23 SEP 1943
+2 PLAC Madrid, España
+1 FAMC @F5@
+1 FAMS @F1@
+1 FAMS @F2@
+
+0 @I2@ INDI
+1 NAME Isabel /PREYSLER/
+1 SEX F
+1 BIRT
+2 DATE 18 FEB 1951
+2 PLAC Manila, Philippines
+1 FAMS @F1@
+
+0 @I3@ INDI
+1 NAME Enrique /IGLESIAS/
+1 SEX M
+1 BIRT
+2 DATE 8 MAY 1975
+2 PLAC Madrid, España
+1 FAMC @F1@
+1 FAMS @F3@
+
+0 @I4@ INDI
+1 NAME María Isabel /IGLESIAS/ Preysler
+1 NICK Chábeli
+1 SEX F
+1 BIRT
+2 DATE 3 SEP 1971
+2 PLAC Cascais, Portugal
+1 FAMC @F1@
+
+0 @I5@ INDI
+1 NAME Julio José /IGLESIAS/ Preysler
+1 SEX M
+1 BIRT
+2 DATE 25 FEB 1973
+2 PLAC Madrid, España
+1 FAMC @F1@
+
+0 @I6@ INDI
+1 NAME Miranda /RIJNSBURGER/
+1 SEX F
+1 BIRT
+2 DATE 5 OCT 1965
+2 PLAC Leimuiden, Netherlands
+1 FAMS @F2@
+
+0 @I7@ INDI
+1 NAME Miguel Alejandro /IGLESIAS/ Rijnsburger
+1 SEX M
+1 BIRT
+2 DATE 12 SEP 1997
+2 PLAC Miami, Florida, USA
+1 FAMC @F2@
+
+0 @I8@ INDI
+1 NAME Rodrigo /IGLESIAS/ Rijnsburger
+1 SEX M
+1 BIRT
+2 DATE 3 APR 1999
+2 PLAC Miami, Florida, USA
+1 FAMC @F2@
+
+0 @I9@ INDI
+1 NAME Victoria /IGLESIAS/ Rijnsburger
+1 SEX F
+1 BIRT
+2 DATE 1 MAY 2001
+2 PLAC Miami, Florida, USA
+1 FAMC @F2@
+
+0 @I10@ INDI
+1 NAME Cristina /IGLESIAS/ Rijnsburger
+1 SEX F
+1 BIRT
+2 DATE 1 MAY 2001
+2 PLAC Miami, Florida, USA
+1 FAMC @F2@
+
+0 @I11@ INDI
+1 NAME Guillermo /IGLESIAS/ Rijnsburger
+1 SEX M
+1 BIRT
+2 DATE 5 MAY 2007
+2 PLAC Miami, Florida, USA
+1 FAMC @F2@
+
+0 @I12@ INDI
+1 NAME Anna /KOURNIKOVA/
+1 SEX F
+1 BIRT
+2 DATE 7 JUN 1981
+2 PLAC Moscow, Russia
+1 FAMS @F3@
+
+0 @I13@ INDI
+1 NAME Julio /IGLESIAS/ Puga
+1 SEX M
+1 BIRT
+2 DATE 25 JUL 1915
+2 PLAC Ourense, España
+1 DEAT
+2 DATE 19 DEC 2005
+2 PLAC Madrid, España
+1 FAMS @F5@
+
+0 @I14@ INDI
+1 NAME María del Rosario /DE LA CUEVA Y PERIGNAT/
+1 SEX F
+1 BIRT
+2 DATE 1925
+2 PLAC Manila, Philippines
+1 DEAT
+2 DATE 2002
+2 PLAC Madrid, España
+1 FAMS @F5@
+
+0 @I15@ INDI
+1 NAME Tamara /FALCÓ/ Preysler
+1 SEX F
+1 BIRT
+2 DATE 20 NOV 1981
+2 PLAC Madrid, España
+1 FAMC @F4@
+
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 MARR
+2 DATE 1971
+2 PLAC Illescas, Toledo, España
+1 CHIL @I3@
+1 CHIL @I4@
+1 CHIL @I5@
+
+0 @F2@ FAM
+1 HUSB @I1@
+1 WIFE @I6@
+1 MARR
+2 DATE 2010
+2 PLAC Marbella, España
+1 CHIL @I7@
+1 CHIL @I8@
+1 CHIL @I9@
+1 CHIL @I10@
+1 CHIL @I11@
+
+0 @F3@ FAM
+1 HUSB @I3@
+1 WIFE @I12@
+
+0 @F4@ FAM
+1 HUSB @I13@
+1 WIFE @I2@
+1 CHIL @I15@
+
+0 @F5@ FAM
+1 HUSB @I13@
+1 WIFE @I14@
+1 CHIL @I1@
+
+0 TRLR

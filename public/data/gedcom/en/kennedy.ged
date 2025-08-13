@@ -1,0 +1,192 @@
+0 HEAD
+1 GEDC
+2 VERS 5.5.5
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 DATE 13 Aug 2025
+1 LANG English
+1 FILE kennedy.ged
+
+0 @I1@ INDI
+1 NAME John Fitzgerald /KENNEDY/
+1 SEX M
+1 BIRT
+2 DATE 29 MAY 1917
+2 PLAC Brookline, Massachusetts, USA
+1 DEAT
+2 DATE 22 NOV 1963
+2 PLAC Dallas, Texas, USA
+1 FAMC @F2@
+1 FAMS @F3@
+
+0 @I2@ INDI
+1 NAME Jacqueline /BOUVIER/
+1 SEX F
+1 BIRT
+2 DATE 28 JUL 1929
+2 PLAC Southampton, New York, USA
+1 DEAT
+2 DATE 19 SEP 1994
+2 PLAC New York City, New York, USA
+1 FAMS @F3@
+
+0 @I3@ INDI
+1 NAME Caroline /KENNEDY/
+1 SEX F
+1 BIRT
+2 DATE 27 NOV 1957
+2 PLAC New York City, New York, USA
+1 FAMC @F3@
+
+0 @I4@ INDI
+1 NAME John Fitzgerald /KENNEDY/ Jr.
+1 SEX M
+1 BIRT
+2 DATE 25 NOV 1960
+2 PLAC Washington, D.C., USA
+1 DEAT
+2 DATE 16 JUL 1999
+2 PLAC Off coast of Martha's Vineyard, Massachusetts, USA
+1 FAMC @F3@
+
+0 @I5@ INDI
+1 NAME Robert Francis /KENNEDY/
+1 SEX M
+1 BIRT
+2 DATE 20 NOV 1925
+2 PLAC Brookline, Massachusetts, USA
+1 DEAT
+2 DATE 6 JUN 1968
+2 PLAC Los Angeles, California, USA
+1 FAMC @F2@
+
+0 @I6@ INDI
+1 NAME Edward Moore /KENNEDY/
+1 SEX M
+1 BIRT
+2 DATE 22 FEB 1932
+2 PLAC Boston, Massachusetts, USA
+1 DEAT
+2 DATE 25 AUG 2009
+2 PLAC Hyannis Port, Massachusetts, USA
+1 FAMC @F2@
+
+0 @I7@ INDI
+1 NAME Joseph Patrick /KENNEDY Sr./
+1 SEX M
+1 BIRT
+2 DATE 6 SEP 1888
+2 PLAC Boston, Massachusetts, USA
+1 DEAT
+2 DATE 18 NOV 1969
+2 PLAC Hyannis Port, Massachusetts, USA
+1 FAMS @F2@
+
+0 @I8@ INDI
+1 NAME Rose Fitzgerald /KENNEDY/
+1 SEX F
+1 BIRT
+2 DATE 22 JUL 1890
+2 PLAC Boston, Massachusetts, USA
+1 DEAT
+2 DATE 22 JAN 1995
+2 PLAC Hyannis Port, Massachusetts, USA
+1 FAMS @F2@
+
+0 @I9@ INDI
+1 NAME Joseph P. /KENNEDY/ Jr.
+1 SEX M
+1 BIRT
+2 DATE 25 JUL 1915
+2 PLAC Boston, Massachusetts, USA
+1 DEAT
+2 DATE 12 AUG 1944
+2 PLAC Over the English Channel (WWII), USA
+1 FAMC @F2@
+
+0 @I10@ INDI
+1 NAME Kathleen /KENNEDY/
+1 NICK Kick
+1 SEX F
+1 BIRT
+2 DATE 20 FEB 1920
+2 PLAC Brookline, Massachusetts, USA
+1 DEAT
+2 DATE 13 MAY 1948
+2 PLAC Saint-Bleu-sur-Loire, France
+1 FAMC @F2@
+
+0 @I11@ INDI
+1 NAME Eunice /KENNEDY/ Shriver
+1 SEX F
+1 BIRT
+2 DATE 10 JUL 1921
+2 PLAC Brookline, Massachusetts, USA
+1 DEAT
+2 DATE 11 AUG 2009
+2 PLAC Hyannis Port, Massachusetts, USA
+1 FAMC @F2@
+
+0 @I12@ INDI
+1 NAME Patricia /KENNEDY/ Lawford
+1 NICK Pat
+1 SEX F
+1 BIRT
+2 DATE 6 MAY 1924
+2 PLAC Brookline, Massachusetts, USA
+1 DEAT
+2 DATE 17 SEP 2006
+2 PLAC New York City, New York, USA
+1 FAMC @F2@
+
+0 @I13@ INDI
+1 NAME Jean /KENNEDY/ Smith
+1 SEX F
+1 BIRT
+2 DATE 20 FEB 1928
+2 PLAC Brookline, Massachusetts, USA
+1 DEAT
+2 DATE 17 JUN 2020
+2 PLAC Bethesda, Maryland, USA
+1 FAMC @F2@
+
+0 @I14@ INDI
+1 NAME Patrick Joseph /KENNEDY/
+1 SEX M
+1 BIRT
+2 DATE 24 SEP 1952
+2 PLAC Boston, Massachusetts, USA
+1 FAMC @F5@
+
+0 @I15@ INDI
+1 NAME Robert F. /KENNEDY/ Jr.
+1 SEX M
+1 BIRT
+2 DATE 17 JAN 1954
+2 PLAC Washington, D.C., USA
+1 FAMC @F5@
+
+0 @F2@ FAM
+1 HUSB @I7@
+1 WIFE @I8@
+1 CHIL @I9@
+1 CHIL @I1@
+1 CHIL @I5@
+1 CHIL @I10@
+1 CHIL @I11@
+1 CHIL @I12@
+1 CHIL @I13@
+
+0 @F3@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 CHIL @I4@
+
+0 @F5@ FAM
+1 HUSB @I5@
+1 WIFE @I11@
+1 CHIL @I14@
+1 CHIL @I15@
+
+0 TRLR
