@@ -359,7 +359,7 @@ div.ui.icon.input {
 }
 
 .legend:hover {
-    background: rgb(from deepskyblue r g b / 0.1);
+    background: rgb(from deepskyblue r g b / 0.3);
     transition: background 0.3s ease;
     cursor: pointer;
 }
