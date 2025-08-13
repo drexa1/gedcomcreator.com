@@ -149,10 +149,15 @@ class ChartWrapper {
         const offsetX = max([0, (parent.clientWidth - chartInfo.size[0] * scale) / 2]);
         const offsetY = max([0, (parent.clientHeight - chartInfo.size[1] * scale) / 2]);
         const svgTransition = svg.transition().delay(200).duration(500);
-        const transition = (args.initialRender ? svg : svgTransition).transition();
-        transition.attr("transform", `translate(${offsetX}, ${offsetY})`)
-                  .attr("width", chartInfo.size[0] * scale)
-                  .attr("height", chartInfo.size[1] * scale);
+        if (args.initialRender) {
+            svg.attr("transform", `translate(${offsetX}, ${offsetY})`)
+                .attr("width", chartInfo.size[0] * scale)
+                .attr("height", chartInfo.size[1] * scale);
+        } else {
+            svgTransition.attr("transform", `translate(${offsetX}, ${offsetY})`)
+                .attr("width", chartInfo.size[0] * scale)
+                .attr("height", chartInfo.size[1] * scale);
+        }
         if (args.resetPosition) {
             if (args.initialRender) {
                 parent.scrollLeft = -dx;
