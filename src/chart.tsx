@@ -1,4 +1,3 @@
-import {ChartColors, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
 import {interpolateNumber} from "d3-interpolate";
 import {FormattedMessage, IntlShape, useIntl} from "react-intl";
 import {max, min} from "d3-array";
@@ -16,6 +15,9 @@ import {
     JsonGedcomData,
 } from "./topola";
 import {enoughLegendSpace, getChartType, scrolled, zoomed} from "./utils/chart-utils";
+import {EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
+import {IndividualLanguage} from "./model/individual";
+
 
 /**
  * How much to zoom when using the +/- buttons.
@@ -30,27 +32,19 @@ export enum ChartType {
     Relatives
 }
 
-const chartColors = new Map<ChartColors, TopolaChartColors>([
-    [ChartColors.NO_COLOR, TopolaChartColors.NO_COLOR],
-    [ChartColors.COLOR_BY_GENERATION, TopolaChartColors.COLOR_BY_GENERATION],
-    [ChartColors.COLOR_BY_SEX, TopolaChartColors.COLOR_BY_SEX],
-    [ChartColors.COLOR_BY_ETHNICITY, TopolaChartColors.COLOR_BY_ETHNICITY],
-    [ChartColors.COLOR_BY_NR_LANGUAGES, TopolaChartColors.COLOR_BY_NR_LANGUAGES],
-    [ChartColors.COLOR_BY_LANGUAGE, TopolaChartColors.COLOR_BY_LANGUAGE]
-]);
-
 export interface ChartProps {
     data: JsonGedcomData;
     selection: IndiInfo;
     chartType: ChartType;
     onSelection: (indiInfo: IndiInfo) => void;
     freezeAnimation?: boolean;
-    colors?: ChartColors;
+    colors?: TopolaChartColors;
     selectedLanguage?: string | null;
     hideLanguages?: LanguagesArg;
     hideEthnicity?: EthnicityArg;
     hideIds?: IdsArg;
     hideSex?: SexArg;
+    languageOptions?: IndividualLanguage[];
 }
 
 class ChartWrapper {
@@ -99,7 +93,7 @@ class ChartWrapper {
                 renderer: DetailedRenderer,
                 svgSelector: "#chart",
                 indiCallback: (info) => props.onSelection(info),
-                colors: chartColors.get(props.colors!),
+                colors: props.colors!,
                 selectedLanguage: props.selectedLanguage,
                 animate: true,
                 updateSvgSize: false,
@@ -233,8 +227,8 @@ export function Chart(props: ChartProps) {
             <svg id="chartSvg">
                 <g id="chart"/>
             </svg>
-            <Media greaterThanOrEqual="large">
-                {enoughLegendSpace(props.data) && (
+            {enoughLegendSpace(props.languageOptions) && (
+                <Media greaterThanOrEqual="large">
                     <>
                         <div id="legend-emoji" className="legend-emoji">👋</div>
                         <div id="legend" className="legend">
@@ -251,8 +245,8 @@ export function Chart(props: ChartProps) {
                             </svg>
                         </div>
                     </>
-                )}
-            </Media>
+                </Media>
+            )}
         </div>
     );
 }

@@ -12,35 +12,27 @@ import {ReactNode} from "react";
 
 const EXCLUDED_TAGS = ["BIRT", "BAPM", "CHR", "EVEN", "CENS", "DEAT", "BURI", "NAME", "SEX", "FAMC", "FAMS", "NOTE", "SOUR", "LANG"];
 
-
 interface DetailsProps {
     gedcom: GedcomData;
     indi: string;
 }
 
-function getDetails(
-    entries: GedcomEntry[],
-    tags: string[],
-    detailsFunction: (entry: GedcomEntry) => ReactNode | null,
-): ReactNode {
-    return flatMap(tags, (tag) =>
-        entries
-            .filter((entry) => entry.tag === tag)
-            .map((entry) => detailsFunction(entry)),
-    )
+function getDetails(entries: GedcomEntry[], tags: string[], detailsFunction: (entry: GedcomEntry) => ReactNode | null): ReactNode {
+    return flatMap(tags, (tag) => entries
+        .filter((entry) => entry.tag === tag)
+        .map((entry) => detailsFunction(entry)))
         .filter((element) => element !== null)
         .map((element, index) => (
             <Item key={index}>
-                <Item.Content>{element}</Item.Content>
+                <Item.Content className="details event-header header">{element}</Item.Content>
             </Item>
         ));
 }
 
 function nameDetails(entry: GedcomEntry) {
     const fullName = entry.data.replaceAll("/", "");
-    const nameType = entry.tree.find(
-        (entry) => entry.tag === "TYPE" && entry.data !== "Unknown",
-    )?.data;
+    const nameType = entry.tree.find((entry) => entry.tag === "TYPE" && entry.data !== "Unknown")?.data;
+
     return (
         <>
             <Header as="span" size="large">
@@ -57,18 +49,14 @@ function nameDetails(entry: GedcomEntry) {
     );
 }
 
-function getMultilineDetails(
-    entries: GedcomEntry[],
-    tags: string[],
-    title: [string, string],
-) {
+function getMultilineDetails(entries: GedcomEntry[], tags: string[], title: [string, string]) {
     const lines= entries
         .filter((entry) => tags.includes(entry.tag))
         .filter(hasData)
         .map((element) => element.data)
-    if (!lines.length) {
+    if (!lines.length)
         return null;
-    }
+
     return (
         <Item key="languages">
             <Item.Content>
@@ -106,17 +94,14 @@ function getOtherDetails(entries: GedcomEntry[]) {
 
 function dataDetails(entry: GedcomEntry) {
     const lines = [];
-    if (entry.data) {
+    if (entry.data)
         lines.push(...getData(entry));
-    }
     entry.tree
         .filter((subentry) => subentry.tag === "NOTE")
-        .forEach((note) =>
-            getData(note).forEach((line) => lines.push(<i>{line}</i>)),
-        );
-    if (!lines.length) {
+        .forEach((note) => getData(note).forEach((line) => lines.push(<span>{line}</span>)),);
+    if (!lines.length)
         return null;
-    }
+
     return (
         <>
             <Header>
@@ -145,10 +130,9 @@ function noteDetails(entry: GedcomEntry) {
     return (
         <>
             <Header as="span" className="small">
-                {/* TODO: add i18n for NOTES */}
                 <TranslatedTag tag={entry.tag}/>
             </Header>
-            <MultilineText lines={getData(entry).map((line, index) => (<i key={index}>{line}</i>))}/>
+            <MultilineText lines={getData(entry).map((line, index) => (<span key={index}>{line}</span>))}/>
         </>
     );
 }
@@ -164,7 +148,7 @@ export function Details(props: DetailsProps) {
             <Item.Group divided>
                 {getDetails(entries, ["NAME"], nameDetails)}
                 {getDetails(entriesWithData, ["OBJE"], fileDetails)}
-                <Events gedcom={props.gedcom} entries={entries} indi={props.indi}/>
+                <Events gedcom={props.gedcom} indi={props.indi} entries={entries}/>
                 {getMultilineDetails(entriesWithData, ["LANG"], ["gedcom.languages", "Languages"])}
                 {getOtherDetails(entriesWithData)}
                 {getDetails(entriesWithData, ["NOTE"], noteDetails)}

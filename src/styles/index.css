@@ -301,6 +301,14 @@ div.ui.icon.input {
     border: none !important;
 }
 
+.ui.tabular.menu .item .icon {
+    color: lightgray;
+}
+
+.ui.tabular.menu .item.active .icon {
+    color: black;
+}
+
 .ui.linkblue.menu .active.item,
 .ui.menu .linkblue.active.item {
     color: dodgerblue !important;
@@ -405,6 +413,13 @@ div.ui.icon.input {
 .modal-image .ui.attached.label {
     width: auto;
     min-width: 100%;
+}
+
+.ui.modal > .close {
+    top: 0.5rem !important;
+    right: 0.5rem !important;
+    color: dimgray !important;
+    opacity: 1 !important;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */

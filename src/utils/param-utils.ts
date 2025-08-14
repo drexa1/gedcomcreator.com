@@ -4,7 +4,8 @@ import * as queryString from "query-string";
 import {IndividualLanguage} from "../model/individual";
 import {ChartType} from "../chart";
 import {DataSourceEnum, DataSourceSpec} from "../datasource/data-source";
-import {argsToConfig, Config} from "../config";
+import {Config} from "../config";
+import {argsToConfig} from "./config-utils";
 
 
 /**

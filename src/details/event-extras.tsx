@@ -18,15 +18,10 @@ interface EventExtrasProps {
 
 function eventImages(images: Image[] | undefined) {
     return (
-        !!images &&
-        images.map((image, index) => (
+        !!images && images.map((image, index) => (
             <List key={index}>
                 <List.Item>
-                    <WrappedImage
-                        url={image.url}
-                        filename={image.filename}
-                        title={image.title}
-                    />
+                    <WrappedImage url={image.url} filename={image.filename} title={image.title}/>
                 </List.Item>
             </List>
         ))
@@ -35,14 +30,11 @@ function eventImages(images: Image[] | undefined) {
 
 function eventNotes(notes: string[][] | undefined) {
     return (
-        !!notes?.length &&
-        notes.map((note, index) => (
+        !!notes?.length && notes.map((note, index) => (
             <div key={index}>
-                <MultilineText
-                    lines={note.map((line, index) => (
-                        <i key={index}>{line}</i>
-                    ))}
-                />
+                <MultilineText lines={note.map((line, index) =>
+                    <span key={index}>{line}</span>
+                )}/>
             </div>
         ))
     );
@@ -58,16 +50,16 @@ function eventSources(sources: Source[] | undefined, intl: IntlShape) {
                         <List.Content>
                             <List.Header>
                                 <Linkify properties={{target: "_blank"}}>
-                                    {[source.author, source.title, source.publicationInfo]
+                                    {
+                                        [source.author, source.title, source.publicationInfo]
                                         .filter((sourceElement) => sourceElement)
-                                        .join(", ")}
+                                        .join(", ")
+                                    }
                                 </Linkify>
                             </List.Header>
                             <List.Description>
                                 <Linkify properties={{target: "_blank"}}>{source.page}</Linkify>
-                                {source.date
-                                    ? " [" + formatDateOrRange(source.date, intl) + "]"
-                                    : null}
+                                {source.date ? " [" + formatDateOrRange(source.date, intl) + "]" : null}
                             </List.Description>
                         </List.Content>
                     </List.Item>
@@ -88,7 +80,7 @@ export function EventExtras(props: EventExtrasProps) {
     }
 
     function handleTabOnClick(
-        event: React.MouseEvent<HTMLAnchorElement>,
+        _event: React.MouseEvent<HTMLAnchorElement>,
         menuItemProps: MenuItemProps,
     ) {
         menuItemProps.index !== undefined && activeIndex !== menuItemProps.index
@@ -100,9 +92,7 @@ export function EventExtras(props: EventExtrasProps) {
         menuItem: (
             <Menu.Item fitted key="images" onClick={handleTabOnClick}>
                 <Popup
-                    content={
-                        <FormattedMessage id="extras.images" defaultMessage="Images"/>
-                    }
+                    content={<FormattedMessage id="extras.images" defaultMessage="Images"/>}
                     size="mini"
                     position="bottom center"
                     trigger={<Icon circular name="camera"/>}
@@ -116,9 +106,7 @@ export function EventExtras(props: EventExtrasProps) {
         menuItem: (
             <Menu.Item fitted key="notes" onClick={handleTabOnClick}>
                 <Popup
-                    content={
-                        <FormattedMessage id="extras.notes" defaultMessage="Notes"/>
-                    }
+                    content={<FormattedMessage id="extras.notes" defaultMessage="Notes"/>}
                     size="mini"
                     position="bottom center"
                     trigger={<Icon circular name="sticky note outline"/>}
@@ -132,9 +120,7 @@ export function EventExtras(props: EventExtrasProps) {
         menuItem: (
             <Menu.Item fitted key="sources" onClick={handleTabOnClick}>
                 <Popup
-                    content={
-                        <FormattedMessage id="extras.sources" defaultMessage="Sources"/>
-                    }
+                    content={<FormattedMessage id="extras.sources" defaultMessage="Sources"/>}
                     size="mini"
                     position="bottom center"
                     trigger={<Icon circular name="quote right"/>}
@@ -154,6 +140,7 @@ export function EventExtras(props: EventExtrasProps) {
                 <Tab
                     className="event-extras"
                     activeIndex={activeIndex}
+                    panes={panes}
                     renderActiveOnly={true}
                     menu={{
                         tabular: true,
@@ -161,7 +148,6 @@ export function EventExtras(props: EventExtrasProps) {
                         compact: true,
                         borderless: true,
                     }}
-                    panes={panes}
                 />
             </Item.Description>
         );

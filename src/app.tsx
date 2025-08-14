@@ -29,10 +29,11 @@ import {
     UrlSourceSpec
 } from "./datasource/load-data";
 import {IndividualLanguage} from "./model/individual";
-import {Config, ConfigPanel, configToArgs, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
+import {configToArgs} from "./utils/config-utils";
 import CSVLoader from "./datasource/load-csv";
 import {getArguments} from "./utils/param-utils";
 import {downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./utils/chart-utils";
+import {ConfigPanel, Config, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
 
 
 enum AppState {
@@ -328,13 +329,13 @@ export function App(props: AppProps) {
                 const updatedSelection = getSelection(data!.chartData, selection);
                 const sidePanelTabs = [
                     {
-                        menuItem: intl.formatMessage({id: "tab.info", defaultMessage: "Info"}),
-                        render: () => (
-                            <Details gedcom={data!.gedcom} indi={updatedSelection.id}/>
-                        ),
+                        key: "info",
+                        menuItem: { icon: "info circle", content: intl.formatMessage({ id: "tab.info", defaultMessage: "Info" }) },
+                        render: () => <Details gedcom={data!.gedcom} indi={updatedSelection.id} />
                     },
                     {
-                        menuItem: intl.formatMessage({id: "tab.settings", defaultMessage: "Settings",}),
+                        key: "settings",
+                        menuItem: { icon: "setting", content: intl.formatMessage({ id: "tab.settings", defaultMessage: "Settings" }) },
                         render: () => (
                             <ConfigPanel config={config} onChange={(config) => {
                                 setConfig(config);
@@ -352,7 +353,6 @@ export function App(props: AppProps) {
                             data={data!.chartData}
                             selection={updatedSelection}
                             chartType={chartType}
-                            onSelection={onSelection}
                             freezeAnimation={freezeAnimation}
                             colors={config.color}
                             selectedLanguage={config.selectedLanguage}
@@ -360,6 +360,8 @@ export function App(props: AppProps) {
                             hideEthnicity={config.ethnicity}
                             hideIds={config.id}
                             hideSex={config.sex}
+                            onSelection={onSelection}
+                            languageOptions={config.languageOptions}
                         />
                         {showSidePanel ? (
                             <Media greaterThanOrEqual="large" className="sidePanel">

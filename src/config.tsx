@@ -1,37 +1,14 @@
 import {Item, Checkbox, Form, Header} from "semantic-ui-react";
 import {FormattedMessage} from "react-intl";
-import {ParsedQuery} from "query-string";
 import {IndividualLanguage} from "./model/individual";
 import {useState} from "react";
+import {ChartColors} from "./topola";
 
-export enum ChartColors {
-    NO_COLOR,
-    COLOR_BY_SEX,
-    COLOR_BY_GENERATION,
-    COLOR_BY_ETHNICITY,
-    COLOR_BY_NR_LANGUAGES = 4,
-    COLOR_BY_LANGUAGE = 5,
-}
 
-export enum LanguagesArg {
-    HIDE,
-    SHOW,
-}
-
-export enum EthnicityArg {
-    HIDE,
-    SHOW,
-}
-
-export enum IdsArg {
-    HIDE,
-    SHOW,
-}
-
-export enum SexArg {
-    HIDE,
-    SHOW,
-}
+export enum LanguagesArg { HIDE, SHOW}
+export enum EthnicityArg {HIDE, SHOW}
+export enum IdsArg {HIDE, SHOW}
+export enum SexArg {HIDE, SHOW}
 
 export interface Config {
     color: ChartColors;
@@ -57,74 +34,7 @@ export const DEFAULT_CONFIG: Config = {
     selectedLanguage: null,
 };
 
-const COLOR_ARG = new Map<string, ChartColors>([
-    ["n", ChartColors.NO_COLOR],
-    ["g", ChartColors.COLOR_BY_GENERATION],
-    ["s", ChartColors.COLOR_BY_SEX],
-    ["e", ChartColors.COLOR_BY_ETHNICITY],
-    ["nl", ChartColors.COLOR_BY_NR_LANGUAGES],
-    ["l", ChartColors.COLOR_BY_LANGUAGE],
-]);
-const COLOR_ARG_INVERSE = new Map<ChartColors, string>();
-COLOR_ARG.forEach((v, k) => COLOR_ARG_INVERSE.set(v, k));
-
-const LANGUAGES_ARG = new Map<string, LanguagesArg>([
-    ["h", LanguagesArg.HIDE],
-    ["s", LanguagesArg.SHOW],
-]);
-const LANGUAGES_ARG_INVERSE = new Map<LanguagesArg, string>();
-LANGUAGES_ARG.forEach((v, k) => LANGUAGES_ARG_INVERSE.set(v, k));
-
-const ETHNICITY_ARG = new Map<string, EthnicityArg>([
-    ["h", EthnicityArg.HIDE],
-    ["s", EthnicityArg.SHOW],
-]);
-const ETHNICITY_ARG_INVERSE = new Map<EthnicityArg, string>();
-ETHNICITY_ARG.forEach((v, k) => ETHNICITY_ARG_INVERSE.set(v, k));
-
-const ID_ARG = new Map<string, IdsArg>([
-    ["h", IdsArg.HIDE],
-    ["s", IdsArg.SHOW],
-]);
-const ID_ARG_INVERSE = new Map<IdsArg, string>();
-ID_ARG.forEach((v, k) => ID_ARG_INVERSE.set(v, k));
-
-const SEX_ARG = new Map<string, SexArg>([
-    ["h", SexArg.HIDE],
-    ["s", SexArg.SHOW],
-]);
-const SEX_ARG_INVERSE = new Map<SexArg, string>();
-SEX_ARG.forEach((v, k) => SEX_ARG_INVERSE.set(v, k));
-
-export function argsToConfig(args: ParsedQuery<any>): Config {
-    const getParam = (name: string) => {
-        return typeof args[name] === "string" || typeof args[name] === "number" ? args[name] : undefined;
-    };
-    return {
-        color: COLOR_ARG.get(getParam("c") ?? "") ?? DEFAULT_CONFIG.color,
-        languages: LANGUAGES_ARG.get(getParam("l") ?? "") ?? DEFAULT_CONFIG.languages,
-        selectedLanguage: getParam("n") ?? DEFAULT_CONFIG.selectedLanguage,
-        ethnicity: ETHNICITY_ARG.get(getParam("e") ?? "") ?? DEFAULT_CONFIG.ethnicity,
-        id: ID_ARG.get(getParam("i") ?? "") ?? DEFAULT_CONFIG.id,
-        sex: SEX_ARG.get(getParam("s") ?? "") ?? DEFAULT_CONFIG.sex,
-        renderEthnicityOption: DEFAULT_CONFIG.renderEthnicityOption,
-        renderLanguagesOption: DEFAULT_CONFIG.renderLanguagesOption,
-        languageOptions: DEFAULT_CONFIG.languageOptions
-    };
-}
-
-export function configToArgs(config: Config): ParsedQuery<any> {
-    return {
-        c: COLOR_ARG_INVERSE.get(config.color),
-        l: LANGUAGES_ARG_INVERSE.get(config.languages),
-        e: ETHNICITY_ARG_INVERSE.get(config.ethnicity),
-        i: ID_ARG_INVERSE.get(config.id),
-        s: SEX_ARG_INVERSE.get(config.sex),
-        n: config.selectedLanguage
-    };
-}
-
-export function ConfigPanel(props: {config: Config; onChange: (config: Config) => void}) {
+export function ConfigPanel(props: { config: Config; onChange: (config: Config) => void }) {
     const [languagesEnabled, setLanguagesEnabled] = useState(props.config.languages === LanguagesArg.SHOW);
     const [ethnicityEnabled, setEthnicityEnabled] = useState(props.config.ethnicity === EthnicityArg.SHOW);
     const [idsEnabled, setIdsEnabled] = useState(props.config.id === IdsArg.SHOW);
@@ -178,14 +88,15 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
             <Item.Group>
                 <Item>
                     <Item.Content>
-                        <Header sub style={{ "marginBottom": "14px" }}>
+                        <Header sub style={{"marginBottom": "14px"}}>
                             <FormattedMessage id="config.colors" defaultMessage="Colors"/>
                         </Header>
                         <Form.Field>
                             <Checkbox
                                 radio
                                 label={
-                                    <FormattedMessage tagName="label" id="config.colors.NO_COLOR" defaultMessage="none"/>
+                                    <FormattedMessage tagName="label" id="config.colors.NO_COLOR"
+                                                      defaultMessage="none"/>
                                 }
                                 name="checkboxRadioGroup"
                                 value="none"
@@ -209,7 +120,8 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                             <Checkbox
                                 radio
                                 label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_GENERATION" defaultMessage="by generation"/>
+                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_GENERATION"
+                                                      defaultMessage="by generation"/>
                                 }
                                 name="checkboxRadioGroup"
                                 value="generation"
@@ -233,7 +145,8 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                             <Checkbox
                                 radio
                                 label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_SEX" defaultMessage="by gender"/>
+                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_SEX"
+                                                      defaultMessage="by gender"/>
                                 }
                                 name="checkboxRadioGroup"
                                 value="gender"
@@ -257,7 +170,8 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                             <Checkbox
                                 radio
                                 label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_ETHNICITY" defaultMessage="by ethnicity"/>
+                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_ETHNICITY"
+                                                      defaultMessage="by ethnicity"/>
                                 }
                                 name="checkboxRadioGroup"
                                 value="ethnicity"
@@ -281,7 +195,8 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                             <Checkbox
                                 radio
                                 label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_LANGUAGES" defaultMessage="by no. languages"/>
+                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_LANGUAGES"
+                                                      defaultMessage="by no. languages"/>
                                 }
                                 name="checkboxRadioGroup"
                                 value="languages"
@@ -313,7 +228,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                                   onClick={() => toggleLanguages(languagesEnabled ? LanguagesArg.HIDE : LanguagesArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <label style={{ verticalAlign: "top" }}>
+                        <label style={{verticalAlign: "top"}}>
                             {languagesEnabled ?
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
@@ -332,7 +247,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                                   onClick={() => toggleEthnicity(ethnicityEnabled ? EthnicityArg.HIDE : EthnicityArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <label style={{ verticalAlign: "top" }}>
+                        <label style={{verticalAlign: "top"}}>
                             {ethnicityEnabled ?
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
@@ -351,7 +266,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                                   onClick={() => toggleIds(idsEnabled ? IdsArg.HIDE : IdsArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <label style={{ verticalAlign: "top" }}>
+                        <label style={{verticalAlign: "top"}}>
                             {idsEnabled ?
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
@@ -370,7 +285,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                                   onClick={() => toggleSex(sexEnabled ? SexArg.HIDE : SexArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
-                        <label style={{ verticalAlign: "top" }}>
+                        <label style={{verticalAlign: "top"}}>
                             {sexEnabled ?
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
@@ -382,7 +297,7 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                 </Item>
             </Item.Group>
             <div style={{textAlign: "center"}}>
-                <Form.Button primary onClick={
+                <Form.Button primary style={{ "marginLeft": "0" }} onClick={
                     () => {
                         props.onChange(DEFAULT_CONFIG);
                         setEthnicityEnabled(false);
@@ -395,6 +310,5 @@ export function ConfigPanel(props: {config: Config; onChange: (config: Config) =
                 </Form.Button>
             </div>
         </Form>
-
-);
+    );
 }

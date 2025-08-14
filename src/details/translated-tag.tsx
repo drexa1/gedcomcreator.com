@@ -1,7 +1,6 @@
 import {FormattedMessage} from "react-intl";
 
 
-// TODO: sort
 const TAG_DESCRIPTIONS = new Map([
     ["ADOP", "Adoption"],
     ["BAPM", "Baptism"],
@@ -11,40 +10,34 @@ const TAG_DESCRIPTIONS = new Map([
     ["CHR", "Christening"],
     ["CREM", "Cremation"],
     ["DEAT", "Death"],
+    ["DIV", "Divorce"],
     ["EDUC", "Education"],
     ["EMAIL", "E-mail"],
     ["EMIG", "Emigration"],
+    ["ETHN", "Ethnic"],
     ["EVEN", "Event"],
     ["FACT", "Fact"],
     ["IMMI", "Immigration"],
+    ["LANG", "Language"],
     ["MARR", "Marriage"],
     ["MARS", "Marriage settlement"],
-    ["ETHN", "Ethnic"],
-    ["TRIB", "Clan"],
-    ["LANG", "Language"],
-    ["DIV", "Divorce"],
     ["MILT", "Military services"],
+    ["NOTE", "Comments"],
     ["NATU", "Naturalization"],
     ["OCCU", "Occupation"],
     ["TITL", "Title"],
+    ["TRIB", "Clan"],
     ["WWW", "WWW"],
-    ["birth", "Birth name"],
-    ["married", "Married name"],
-    ["maiden", "Maiden name"],
-    ["immigrant", "Immigrant name"],
     ["aka", "Also known as"],
+    ["birth", "Birth name"],
+    ["immigrant", "Immigrant name"],
+    ["maiden", "Maiden name"],
+    ["married", "Married name"]
 ]);
 
-interface Props {
-    tag: string;
-}
-
-export function TranslatedTag(props: Props) {
-    const normalizedTag = props.tag.replace(/_/g, "");
+export function TranslatedTag({ tag }: { tag: string }) {
+    const normalizedTag = tag.replace(/_/g, "");
     return (
-        <FormattedMessage
-            id={`gedcom.${normalizedTag}`}
-            defaultMessage={TAG_DESCRIPTIONS.get(normalizedTag) || normalizedTag}
-        />
+        <FormattedMessage id={`gedcom.${normalizedTag}`} defaultMessage={TAG_DESCRIPTIONS.get(normalizedTag) || normalizedTag}/>
     );
 }

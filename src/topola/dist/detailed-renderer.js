@@ -239,15 +239,12 @@ const DetailedRenderer = /** @class */ (function (_super) {
 
         // Dash the stroke of indis having non-visible relatives
         const foundHidden = this.util.markHiddenRelatives(indisToStroke, this.options.data)
-        if (foundHidden) {
-            // Show hint
-            document.getElementById("legend").classList.remove("hidden");
-            document.getElementById("legend-emoji").classList.remove("hidden");
-        } else {
-            // Hide hint
-            document.getElementById("legend").classList.add("hidden");
-            document.getElementById("legend-emoji").classList.add("hidden");
-        }
+        const legend = document.getElementById("legend");
+        const legendEmoji = document.getElementById("legend-emoji");
+        [legend, legendEmoji].forEach(element => {
+            if (element)
+                element.classList.toggle("hidden", !foundHidden);
+        });
 
         const indiEnter = indiUpdate
             .enter()

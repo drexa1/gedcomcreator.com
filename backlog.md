@@ -18,9 +18,10 @@ BACKLOG
 [x] i18n gedcom examples  
 [x] Replace emojis with react icons  
 [x] Fix marriage details margin  
-[ ] Add literal for NOTES  
-[ ] Hide legend if long settings (many languages)  
-[ ] Icons for details|settings  
+[x] Add literal for NOTES  
+[x] Hide legend if long settings (many languages)  
+[x] Enable close button for modal but move it inside  
+[x] Icons for details|settings  
 [ ] Add gedcom examples marriage dates  
 [ ] Review i18n gedcom examples IRL  
 [ ] Privacy policy view  

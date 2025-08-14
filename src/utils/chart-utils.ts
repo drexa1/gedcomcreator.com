@@ -3,8 +3,9 @@ import {select} from "d3-selection";
 import {max} from "d3-array";
 import {saveAs} from "file-saver";
 import {GedcomData, GedcomTreeItem} from "./gedcom-utils";
-import {HourglassChart, JsonGedcomData, RelativesChart} from "../topola";
+import {HourglassChart, RelativesChart} from "../topola";
 import {ChartType} from "../chart";
+import {IndividualLanguage} from "../model/individual";
 
 export function getChartType(chartType: ChartType) {
     switch (chartType) {
@@ -155,9 +156,11 @@ export async function drawOnCanvas(): Promise<HTMLCanvasElement> {
     return drawImageOnCanvas(await loadImage(blob));
 }
 
-export function enoughLegendSpace(data: JsonGedcomData): boolean {
-    // TODO: check how many items are in the config stack
-    return true
+export function enoughLegendSpace(languageOptions?: IndividualLanguage[]): boolean {
+    const enoughSpace = !languageOptions || languageOptions.length <= 10;
+    if (!enoughSpace)
+        console.log("Not enough space for the hidden relatives advice");
+    return enoughSpace;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */

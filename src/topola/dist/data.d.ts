@@ -1,6 +1,7 @@
 import { DataProvider, Fam, Indi } from './api';
 import {Language} from "../../../languages/languages-loader";
 
+
 export interface Date {
     qualifier?: string;
     day?: number;
@@ -8,25 +9,32 @@ export interface Date {
     year?: number;
     text?: string;
 }
+
 export interface DateRange {
     from?: Date;
     to?: Date;
 }
+
 export interface DateOrRange {
     date?: Date;
     dateRange?: DateRange;
 }
+
 export interface JsonEvent extends DateOrRange {
     type?: string;
     place?: string;
     confirmed?: boolean;
     notes?: string[];
 }
+
 export interface JsonImage {
     url: string;
     title?: string;
 }
-/** Json representation of an individual. */
+
+/**
+ * JSON representation of a GEDCOM individual.
+ */
 export interface JsonIndi {
     id: string;
     isEgo: boolean;
@@ -52,7 +60,10 @@ export interface JsonIndi {
     hideId?: boolean;
     hideSex?: boolean;
 }
-/** Json representation of a family. */
+
+/**
+ * JSON representation of a GEDCOM family.
+ */
 export interface JsonFam {
     id: string;
     children?: string[];
@@ -60,12 +71,18 @@ export interface JsonFam {
     husb?: string;
     marriage?: JsonEvent;
 }
-/** Json representation of Gedcom data. */
+
+/**
+ * JSON representation of GEDCOM data.
+ */
 export interface JsonGedcomData {
     indis: JsonIndi[];
     fams: JsonFam[];
 }
-/** Details of an individual record. */
+
+/**
+ * Details of an individual record.
+ */
 export interface IndiDetails extends Indi {
     getFirstName(): string | null;
     getLastName(): string | null;
@@ -91,12 +108,18 @@ export interface IndiDetails extends Indi {
     showId(): boolean;
     showSex(): boolean;
 }
-/** Details of a family record. */
+
+/**
+ * Details of a family record.
+ */
 export interface FamDetails extends Fam {
     getMarriageDate(): DateOrRange | null;
     getMarriagePlace(): string | null;
 }
-/** Implementation of the DataProvider interface based on Json input. */
+
+/**
+ * Implementation of the DataProvider interface based on JSON input.
+ */
 export declare class JsonDataProvider implements DataProvider<IndiDetails, FamDetails> {
     readonly json: JsonGedcomData;
     readonly indis: Map<string, IndiDetails>;
