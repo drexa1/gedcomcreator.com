@@ -23,7 +23,7 @@ BACKLOG
 [x] Enable close button for modal but move it inside  
 [x] Icons for details|settings  
 [x] Add gedcom examples marriage dates  
-[ ] Review i18n gedcom examples IRL  
+[x] Review i18n gedcom examples IRL  
 [ ] Landing page  
 [ ] Privacy policy view  
 [ ] How it works menu
