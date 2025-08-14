@@ -8,7 +8,7 @@ import {ErrorPopupProps, getI18nMessage} from "./utils/error-i18n";
 import {IndiInfo} from "./topola";
 import {Loader, Message, Portal, Tab} from "semantic-ui-react";
 import {Media} from "./utils/media-utils";
-import {Redirect, Route, Switch} from "react-router-dom";
+import { Routes, Route, Navigate } from 'react-router-dom';
 import {TopBar} from "./menu/top-bar";
 import {
     getEthnicities,
@@ -19,7 +19,7 @@ import {
     TopolaData
 } from "./utils/gedcom-utils";
 import {useEffect, useState} from "react";
-import {useHistory, useLocation} from "react-router";
+import {useNavigate, useLocation} from "react-router";
 import {Chart, ChartType} from "./chart";
 import {
     GedcomUrlDataSource,
@@ -65,7 +65,7 @@ export function App(props: AppProps) {
     const [allLanguages, setAllLanguages] = useState<IndividualLanguage[]>([]);
 
     const location = useLocation();
-    const history = useHistory();
+    const navigate = useNavigate();
     const intl = useIntl();
 
     const uploadedDataSource = new UploadedDataSource();
@@ -101,7 +101,7 @@ export function App(props: AppProps) {
         }
         const args = getArguments(location, allLanguages);
         if (!args.sourceSpec) {
-            history.replace({ pathname: "/" });
+            navigate("/", { replace: true });
             return;
         }
         if (state === AppState.INITIAL || isNewData(args.sourceSpec, args.selection)) {
@@ -204,7 +204,7 @@ export function App(props: AppProps) {
             search[key] = args[key];
         }
         location.search = queryString.stringify(search);
-        history.push(location);
+        navigate(location);
     }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -212,7 +212,7 @@ export function App(props: AppProps) {
 /* ------------------------------------------------------------------------------------------------------------------ */
 
     function onHome() {
-        history.push({ pathname: "/" });
+        navigate("/");
     }
 
     /**
@@ -278,7 +278,7 @@ export function App(props: AppProps) {
             delete search[key]
         }
         location.search = queryString.stringify(search);
-        history.push(location);
+        navigate(location);
     }
 
     function onDismissErrorPopup() {
@@ -378,17 +378,17 @@ export function App(props: AppProps) {
 
     return (
         <>
-            <Route render={() => (
-                <TopBar
-                    data={data?.chartData}
-                    showingChart={history.location.pathname === "/view" && (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE)}
-                    eventHandlers={{onHome, onI18nLanguage, onSelection, onDownloadPdf, onDownloadPng, onDownloadSvg, onDownloadGedcom, onResetView}}
-                />
-            )}/>
-            <Switch>
-                <Route exact path="/view" render={renderApp}/>
-                <Redirect to={"/"}/>
-            </Switch>
+            <TopBar
+                data={data?.chartData}
+                showingChart={location.pathname === "/view" && (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE)}
+                eventHandlers={{onHome, onI18nLanguage, onSelection, onDownloadPdf, onDownloadPng, onDownloadSvg, onDownloadGedcom, onResetView}}
+            />
+            <Routes>
+                {/* <Route path="/create" element={<Creator/>} /> */}
+                <Route path="/view" element={renderApp()}/>
+                {/* <Route path="/privacy" element={<Privacy/>} /> */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
         </>
     );
 }

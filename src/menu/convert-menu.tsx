@@ -3,7 +3,7 @@ import {Button, Icon, SemanticCOLORS, Input, Form, Header, Label, Modal, Message
 import {FormattedMessage} from "react-intl";
 import {SyntheticEvent, useState} from "react";
 import * as queryString from "query-string";
-import {useHistory} from "react-router";
+import {useNavigate} from "react-router";
 import {loadFile} from "../datasource/load-data";
 import md5 from "md5";
 import {
@@ -38,7 +38,7 @@ export function ConvertCSVMenu({ menuType }: ConvertMenuProps) {
     const[headerColors, setHeaderColors] = useState<Record<string, SemanticCOLORS>>(initialHeaderColors)
     const [egoIndiId, setEgoIndiId] = useState<string | null>(null);
     const [errors, setErrors] = useState<string[]>([]);
-    const history = useHistory()
+    const navigate = useNavigate()
 
     function closeDialog() {
         setInputFiles([])
@@ -84,7 +84,7 @@ export function ConvertCSVMenu({ menuType }: ConvertMenuProps) {
             const validFiles = results.filter((file): file is File => file !== null);
             const invalidFiles = Array.from(files)
                 .filter((file: File) => !validFiles.some(validFile => validFile.name === file.name))
-                .map(file => `'${file.name}'`)
+                .map(file => `"${file.name}"`)
                 .join(", ");
             if (invalidFiles) {
                 setErrors(["Files had errors. You can check them in the browser console"])
@@ -104,7 +104,7 @@ export function ConvertCSVMenu({ menuType }: ConvertMenuProps) {
                 egoTag.style.setProperty("background-color", "orange");
                 egoTag.style.setProperty("color", "white");
             }
-            // (event.target as HTMLInputElement).value = ''; // Reset the file input
+            // (event.target as HTMLInputElement).value = ""; // Reset the file input
         });
     }
 
@@ -148,19 +148,15 @@ export function ConvertCSVMenu({ menuType }: ConvertMenuProps) {
             const {gedcom, images} = await loadFile(gedcomFile);
 
             // Hash GEDCOM contents with uploaded image file names.
-            const imageFileNames = Array.from(images.keys()).sort().join('|');
+            const imageFileNames = Array.from(images.keys()).sort().join("|");
             const hash = md5(md5(gedcom) + imageFileNames);
 
             const search = queryString.parse(window.location.search);
-            const historyPush = search.file === hash ? history.replace : history.push;
-
-            historyPush({
-                pathname: '/view',
-                search: queryString.stringify({file: hash}),
-                state: {data: gedcom, images}
-            });
+            const historyPush = (to: string, state?: any, replace?: boolean) =>
+                navigate(to, { replace: replace ?? (search.file === hash), state });
+            historyPush(`/view?${queryString.stringify({ file: hash })}`, { data: gedcom, images });
             // Finally
-            analyticsEvent('topola_convert_csv');
+            analyticsEvent("topola_convert_csv");
             closeDialog()
         } catch (e) {
             const err = e as Error;

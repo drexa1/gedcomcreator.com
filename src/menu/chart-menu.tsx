@@ -3,7 +3,7 @@ import {Dropdown, Icon, Menu} from "semantic-ui-react";
 import {FormattedMessage} from "react-intl";
 import {useState} from "react";
 import {EventHandlers, ScreenSize} from "./top-bar";
-import {useHistory, useLocation} from "react-router";
+import {useNavigate, useLocation} from "react-router";
 import {ViewMenu} from "./view-menu";
 
 
@@ -14,7 +14,7 @@ type ChartMenusProps = {
 };
 
 export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMenusProps) {
-    const history = useHistory();
+    const navigate = useNavigate();
     const location = useLocation();
     const [currentView, setCurrentView] = useState("hourglass");
 
@@ -24,7 +24,7 @@ export function ChartMenu({ screenSize, showingChart, eventHandlers } : ChartMen
         if (search.view !== view) {
             search.view = view;
             location.search = queryString.stringify(search);
-            history.push(location);
+            navigate(location);
         }
     };
 
