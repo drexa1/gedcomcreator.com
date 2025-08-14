@@ -26,9 +26,9 @@ BACKLOG
 [x] Review i18n gedcom examples IRL  
 [ ] Landing page  
 [ ] Privacy policy view  
-[ ] How it works menu
-[ ] More relatives explanations
-[ ] Smoke mobile
+[ ] How it works menu  
+[ ] More relatives explanations  
+[ ] Smoke mobile  
 [ ] Convert XLSX  
 [ ] Backend  
 [ ] PSP integration  
