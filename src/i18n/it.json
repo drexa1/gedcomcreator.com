@@ -96,7 +96,7 @@
   "config.sex": "genere",
   "config.toggle.SHOW": "Mostrare",
   "config.toggle.HIDE": "Nascondere",
-  "config.reset": "Reset",
+  "config.reset": "Resettare",
 
   "name.unknown_name": "N.N.",
   "extras.notes": "Note",

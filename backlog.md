@@ -22,14 +22,13 @@ BACKLOG
 [x] Hide legend if long settings (many languages)  
 [x] Enable close button for modal but move it inside  
 [x] Icons for details|settings  
-[ ] Add gedcom examples marriage dates  
+[x] Add gedcom examples marriage dates  
 [ ] Review i18n gedcom examples IRL  
+[ ] Landing page  
 [ ] Privacy policy view  
 [ ] How it works menu
-[ ] More relatives explanations  
-[ ] Landing page  
-[ ] Smoke mobile  
-[ ] Convert templates  
+[ ] More relatives explanations
+[ ] Smoke mobile
 [ ] Convert XLSX  
 [ ] Backend  
 [ ] PSP integration  

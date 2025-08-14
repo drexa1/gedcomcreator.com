@@ -116,6 +116,7 @@
 2 DATE 13 MAY 1948
 2 PLAC Saint-Bleu-sur-Loire, France
 1 FAMC @F2@
+1 FAMS @F6@
 
 0 @I10@ INDI
 1 NAME Eunice /KENNEDY/ Shriver
@@ -167,9 +168,32 @@
 2 PLAC Washington, D.C., USA
 1 FAMC @F5@
 
+0 @I15@ INDI
+1 NAME Ethel /SKAKEL/
+1 SEX F
+1 BIRT
+2 DATE 11 APR 1928
+2 PLAC Chicago, Illinois, USA
+1 FAMS @F5@
+
+0 @I16@ INDI
+1 NAME William /CAVENDISH/
+1 TITL Marquess of Hartington
+1 SEX M
+1 BIRT
+2 DATE 10 DEC 1917
+2 PLAC London, England
+1 DEAT
+2 DATE 9 SEP 1944
+2 PLAC Belgium
+1 FAMS @F6@
+
 0 @F2@ FAM
 1 HUSB @I0@
 1 WIFE @I7@
+1 MARR
+2 DATE 7 OCT 1914
+2 PLAC Boston, Massachusetts, USA
 1 CHIL @I8@
 1 CHIL @I1@
 1 CHIL @I5@
@@ -181,13 +205,26 @@
 0 @F3@ FAM
 1 HUSB @I1@
 1 WIFE @I2@
+1 MARR
+2 DATE 12 SEP 1953
+2 PLAC Newport, Rhode Island, USA
 1 CHIL @I3@
 1 CHIL @I4@
 
 0 @F5@ FAM
 1 HUSB @I5@
-1 WIFE @I10@
+1 WIFE @I15@
+1 MARR
+2 DATE 17 JUN 1950
+2 PLAC Greenwich, Connecticut, USA
 1 CHIL @I13@
 1 CHIL @I14@
+
+0 @F6@ FAM
+1 HUSB @I16@
+1 WIFE @I9@
+1 MARR
+2 DATE 6 MAY 1944
+2 PLAC London, England
 
 0 TRLR

@@ -5,131 +5,43 @@
 1 CHAR UTF-8
 1 DATE 13 Aug 2025
 1 LANG Polish
-1 FILE chopin_reversed.ged
+1 FILE chopin.ged
 
 0 @I0@ INDI
-1 NAME Helena /CHOPIN/
-1 SEX F
+1 NAME Jean /CHOPIN/
+1 SEX M
 1 BIRT
-2 DATE 1846
-2 PLAC Paryż, Francja
+2 DATE 1771
+2 PLAC Żelazowa Wola, Polska
 1 DEAT
-2 DATE 1920
-2 PLAC Paryż, Francja
-1 FAMC @F0@
+2 DATE 1844
+2 PLAC Żelazowa Wola, Polska
+1 FAMS @F0@
 
 0 @I1@ INDI
+1 NAME Tekla /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1776
+2 PLAC Żelazowa Wola, Polska
+1 DEAT
+2 DATE 1849
+2 PLAC Żelazowa Wola, Polska
+1 FAMS @F0@
+
+0 @I2@ INDI
 1 NAME Mikołaj /CHOPIN/
 1 SEX M
 1 BIRT
-2 DATE 1844
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1900
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I2@ INDI
-1 NAME Janina /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1842
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1910
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I3@ INDI
-1 NAME Władysław /CHOPIN/
-1 SEX M
-1 BIRT
-2 DATE 1840
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1895
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I4@ INDI
-1 NAME Karolina /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1838
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1905
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I5@ INDI
-1 NAME Antoni /CHOPIN/
-1 SEX M
-1 BIRT
-2 DATE 1836
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1890
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I6@ INDI
-1 NAME Emilia /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1834
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1880
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I7@ INDI
-1 NAME Izabela /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1832
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1902
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I8@ INDI
-1 NAME Ludwika /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1830
-2 PLAC Paryż, Francja
-1 DEAT
-2 DATE 1900
-2 PLAC Paryż, Francja
-1 FAMC @F0@
-
-0 @I9@ INDI
-1 NAME Maria /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1812
+2 DATE 1806
 2 PLAC Żelazowa Wola, Polska
 1 DEAT
-2 DATE 1850
-2 PLAC Paryż, Francja
+2 DATE 1844
+2 PLAC Żelazowa Wola, Polska
+1 FAMC @F0@
 1 FAMS @F1@
 
-0 @I10@ INDI
-1 NAME Frédéric François /CHOPIN/
-1 SEX M
-1 BIRT
-2 DATE 1 MAR 1810
-2 PLAC Żelazowa Wola, Polska
-1 DEAT
-2 DATE 17 OCT 1849
-2 PLAC Paryż, Francja
-1 FAMC @F1@
-1 FAMS @F0@
-
-0 @I11@ INDI
+0 @I3@ INDI
 1 NAME Justyna /CHOPIN/
 1 SEX F
 1 BIRT
@@ -140,63 +52,158 @@
 2 PLAC Żelazowa Wola, Polska
 1 FAMS @F1@
 
+0 @I4@ INDI
+1 NAME Frédéric François /CHOPIN/
+1 SEX M
+1 BIRT
+2 DATE 1 MAR 1810
+2 PLAC Żelazowa Wola, Polska
+1 DEAT
+2 DATE 17 OCT 1849
+2 PLAC Paryż, Francja
+1 FAMC @F1@
+1 FAMS @F2@
+
+0 @I5@ INDI
+1 NAME Maria /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1812
+2 PLAC Żelazowa Wola, Polska
+1 DEAT
+2 DATE 1850
+2 PLAC Paryż, Francja
+1 FAMS @F2@
+
+0 @I6@ INDI
+1 NAME Ludwika /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1830
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1900
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
+0 @I7@ INDI
+1 NAME Izabela /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1832
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1902
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
+0 @I8@ INDI
+1 NAME Emilia /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1834
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1880
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
+0 @I9@ INDI
+1 NAME Antoni /CHOPIN/
+1 SEX M
+1 BIRT
+2 DATE 1836
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1890
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
+0 @I10@ INDI
+1 NAME Karolina /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1838
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1905
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
+0 @I11@ INDI
+1 NAME Władysław /CHOPIN/
+1 SEX M
+1 BIRT
+2 DATE 1840
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1895
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
 0 @I12@ INDI
+1 NAME Janina /CHOPIN/
+1 SEX F
+1 BIRT
+2 DATE 1842
+2 PLAC Paryż, Francja
+1 DEAT
+2 DATE 1910
+2 PLAC Paryż, Francja
+1 FAMC @F2@
+
+0 @I13@ INDI
 1 NAME Mikołaj /CHOPIN/
 1 SEX M
 1 BIRT
-2 DATE 1806
-2 PLAC Żelazowa Wola, Polska
-1 DEAT
 2 DATE 1844
-2 PLAC Żelazowa Wola, Polska
-1 FAMC @F2@
-1 FAMS @F1@
-
-0 @I13@ INDI
-1 NAME Tekla /CHOPIN/
-1 SEX F
-1 BIRT
-2 DATE 1776
-2 PLAC Żelazowa Wola, Polska
+2 PLAC Paryż, Francja
 1 DEAT
-2 DATE 1849
-2 PLAC Żelazowa Wola, Polska
-1 FAMS @F2@
+2 DATE 1900
+2 PLAC Paryż, Francja
+1 FAMC @F2@
 
 0 @I14@ INDI
-1 NAME Jean /CHOPIN/
-1 SEX M
+1 NAME Helena /CHOPIN/
+1 SEX F
 1 BIRT
-2 DATE 1771
-2 PLAC Żelazowa Wola, Polska
+2 DATE 1846
+2 PLAC Paryż, Francja
 1 DEAT
-2 DATE 1844
-2 PLAC Żelazowa Wola, Polska
-1 FAMS @F2@
+2 DATE 1920
+2 PLAC Paryż, Francja
+1 FAMC @F2@
 
 0 @F0@ FAM
-1 HUSB @I10@
-1 WIFE @I9@
-1 CHIL @I0@
-1 CHIL @I1@
+1 HUSB @I0@
+1 WIFE @I1@
 1 CHIL @I2@
-1 CHIL @I3@
+1 MARR
+2 DATE 1780
+2 PLAC Żelazowa Wola, Polska
+
+0 @F1@ FAM
+1 HUSB @I2@
+1 WIFE @I3@
 1 CHIL @I4@
-1 CHIL @I5@
+1 MARR
+2 DATE 1805
+2 PLAC Żelazowa Wola, Polska
+
+0 @F2@ FAM
+1 HUSB @I4@
+1 WIFE @I5@
 1 CHIL @I6@
 1 CHIL @I7@
 1 CHIL @I8@
-
-0 @F1@ FAM
-1 HUSB @I12@
-1 WIFE @I11@
+1 CHIL @I9@
 1 CHIL @I10@
-
-0 @F2@ FAM
-1 HUSB @I14@
-1 WIFE @I13@
+1 CHIL @I11@
 1 CHIL @I12@
-1 CHIL @I12@
-1 CHIL @I12@
+1 CHIL @I13@
+1 CHIL @I14@
+1 MARR
+2 DATE 1830
+2 PLAC Paryż, Francja
 
 0 TRLR
