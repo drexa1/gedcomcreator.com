@@ -46,6 +46,7 @@
 2 DATE 18 FEB 1951
 2 PLAC Manila, Filipinas
 1 FAMS @F2@
+1 FAMS @F4@
 
 0 @I4@ INDI
 1 NAME María Isabel /IGLESIAS/ Preysler
@@ -143,6 +144,9 @@
 1 HUSB @I0@
 1 WIFE @I1@
 1 CHIL @I2@
+1 MARR
+2 DATE 13 AUG 1943
+2 PLAC Madrid, España
 
 0 @F2@ FAM
 1 HUSB @I2@
@@ -150,6 +154,9 @@
 1 CHIL @I4@
 1 CHIL @I5@
 1 CHIL @I6@
+1 MARR
+2 DATE 8 JUL 1971
+2 PLAC Madrid, España
 
 0 @F3@ FAM
 1 HUSB @I2@
@@ -159,10 +166,16 @@
 1 CHIL @I10@
 1 CHIL @I11@
 1 CHIL @I12@
+1 MARR
+2 DATE 8 APR 1990
+2 PLAC Marbella, España
 
 0 @F4@ FAM
 1 HUSB @I13@
 1 WIFE @I3@
 1 CHIL @I14@
+1 MARR
+2 DATE 1980
+2 PLAC Madrid, España
 
 0 TRLR
