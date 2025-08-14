@@ -3,6 +3,7 @@ import {Individual, Sex} from "../model/individual";
 import {IndividualLanguage} from "../model/individual";
 import {Family} from "../model/family";
 
+
 type Relationships = Record<string, [string, string]>;
 
 export async function csvToGedcom(
@@ -206,7 +207,9 @@ async function createTail(filename: string | null) {
     return repoSection + tailTemplate
 }
 
-// CSV parser utility
+/**
+ * CSV parser utility.
+ */
 function parseCSV(data: string): Record<string, string>[] {
     const [header, ...rows] = data.split("\n").filter(line => line.trim() !== "");
     const keys = header.split(",");

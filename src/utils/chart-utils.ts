@@ -3,7 +3,7 @@ import {select} from "d3-selection";
 import {max} from "d3-array";
 import {saveAs} from "file-saver";
 import {GedcomData, GedcomTreeItem} from "./gedcom-utils";
-import {HourglassChart, RelativesChart} from "../topola";
+import {HourglassChart, JsonGedcomData, RelativesChart} from "../topola";
 import {ChartType} from "../chart";
 
 export function getChartType(chartType: ChartType) {
@@ -155,6 +155,24 @@ export async function drawOnCanvas(): Promise<HTMLCanvasElement> {
     return drawImageOnCanvas(await loadImage(blob));
 }
 
+export function enoughLegendSpace(data: JsonGedcomData): boolean {
+    // TODO: check how many items are in the config stack
+    return true
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* EVENT HANDLERS HELPERS                                                                                             */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
+export function getFilename(gedcom: GedcomData | undefined) {
+    const filename = Object.entries(gedcom?.head || {})
+        .filter((k) => k[0] === "tree")
+        .map(_ => _[1])
+        .map(obj => obj.find((sub: GedcomTreeItem) => sub.tag === "FILE"))
+        .map(file => file?.data)[0];
+    return !filename ? null : filename.substring(0, filename.lastIndexOf(".")) || filename; // Remove file extension (if any)
+}
+
 export async function downloadPng(filename: string | undefined) {
     const canvas = await drawOnCanvas();
     const blob = await canvasToBlob(canvas, "image/png");
@@ -176,13 +194,4 @@ export async function downloadPdf(filename: string | undefined) {
 export async function downloadGedcom(gedcom: string, filename: string | undefined) {
     const blob = new Blob([gedcom], {type: "text/plain"});
     saveAs(blob, filename ? filename + ".ged" : "genealogy.ged");
-}
-
-export function getFilename(gedcom: GedcomData | undefined) {
-    const filename = Object.entries(gedcom?.head || {})
-        .filter((k) => k[0] === "tree")
-        .map(_ => _[1])
-        .map(obj => obj.find((sub: GedcomTreeItem) => sub.tag === "FILE"))
-        .map(file => file?.data)[0];
-    return !filename ? null : filename.substring(0, filename.lastIndexOf(".")) || filename; // Remove file extension (if any)
 }

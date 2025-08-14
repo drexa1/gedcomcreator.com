@@ -1,7 +1,8 @@
 import Linkify from "react-linkify";
+import {ReactNode} from "react";
 
 interface Props {
-    lines: (JSX.Element | string)[];
+    lines: (ReactNode | string)[];
 }
 
 export function MultilineText(props: Props) {

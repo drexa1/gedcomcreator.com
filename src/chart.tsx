@@ -15,7 +15,7 @@ import {
     IndiInfo,
     JsonGedcomData,
 } from "./topola";
-import {getChartType, scrolled, zoomed} from "./utils/chart-utils";
+import {enoughLegendSpace, getChartType, scrolled, zoomed} from "./utils/chart-utils";
 
 /**
  * How much to zoom when using the +/- buttons.
@@ -234,20 +234,24 @@ export function Chart(props: ChartProps) {
                 <g id="chart"/>
             </svg>
             <Media greaterThanOrEqual="large">
-                <div id="legend-emoji" className="legend-emoji">👋</div>
-                <div id="legend" className="legend">
-                    <svg>
-                        <rect x="10" y="10" width="260" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
-                        <text x={10 + 260 / 2} y={35} fontSize="16" fill="black" textAnchor="middle">
-                            <tspan x={10 + 260 / 2} dy="0">
-                                <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
-                            </tspan>
-                            <tspan x={10 + 260 / 2} dy="20">
-                                <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>
-                            </tspan>
-                        </text>
-                    </svg>
-                </div>
+                {enoughLegendSpace(props.data) && (
+                    <>
+                        <div id="legend-emoji" className="legend-emoji">👋</div>
+                        <div id="legend" className="legend">
+                            <svg>
+                                <rect x="10" y="10" width="260" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
+                                <text x={10 + 260 / 2} y={35} fontSize="16" fill="black" textAnchor="middle">
+                                    <tspan x={10 + 260 / 2} dy="0">
+                                        <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
+                                    </tspan>
+                                    <tspan x={10 + 260 / 2} dy="20">
+                                        <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>
+                                    </tspan>
+                                </text>
+                            </svg>
+                        </div>
+                    </>
+                )}
             </Media>
         </div>
     );

@@ -15,13 +15,19 @@ BACKLOG
 [x] Buttons styling  
 [x] Iglesias gedcom hidden relatives bug  
 [x] Hidden relatives conditional  
-[x] i18n gedcom examples
+[x] i18n gedcom examples  
+[x] Replace emojis with react icons  
+[x] Fix marriage details margin  
+[ ] Add literal for NOTES  
+[ ] Hide legend if long settings (many languages)  
+[ ] Icons for details|settings  
+[ ] Add gedcom examples marriage dates  
 [ ] Review i18n gedcom examples IRL  
-[ ] How it works menu  
 [ ] Privacy policy view  
+[ ] How it works menu
 [ ] More relatives explanations  
-[ ] Smoke mobile
 [ ] Landing page  
+[ ] Smoke mobile  
 [ ] Convert templates  
 [ ] Convert XLSX  
 [ ] Backend  

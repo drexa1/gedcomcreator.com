@@ -1,6 +1,6 @@
 import React, {useEffect, useRef, useState} from "react";
 import {useForm, ValidationError} from "@formspree/react";
-import {Button, Form, Grid, Image, Message, Modal,} from "semantic-ui-react";
+import {Button, Form, Grid, Icon, Image, Message, Modal,} from "semantic-ui-react";
 import {FormattedMessage, useIntl} from "react-intl";
 import countries from "i18n-iso-countries";
 import enCountries from "i18n-iso-countries/langs/en.json";
@@ -78,7 +78,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
     return (
         <Modal /* closeIcon */ open={open} onClose={onCloseReset} size="large" dimmer="blurring" transition={{ animation: "scale", duration: 1 }}>
             <Modal.Header style={{ marginTop: "30px" }}>
-                💬️ &nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
+                <Icon name="comments" size="large"/>&nbsp;<FormattedMessage id="contact.title" defaultMessage="We are genuinely happy to hear from you"/>
             </Modal.Header>
             <Modal.Content>
                 <Grid stackable columns={2} className="contact-form-grid">

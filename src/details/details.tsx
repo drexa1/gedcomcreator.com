@@ -7,6 +7,7 @@ import {TranslatedTag} from "./translated-tag";
 import {Header, Item} from "semantic-ui-react";
 import {FormattedMessage} from "react-intl";
 import {WrappedImage} from "./wrapped-image";
+import {ReactNode} from "react";
 
 
 const EXCLUDED_TAGS = ["BIRT", "BAPM", "CHR", "EVEN", "CENS", "DEAT", "BURI", "NAME", "SEX", "FAMC", "FAMS", "NOTE", "SOUR", "LANG"];
@@ -20,8 +21,8 @@ interface DetailsProps {
 function getDetails(
     entries: GedcomEntry[],
     tags: string[],
-    detailsFunction: (entry: GedcomEntry) => JSX.Element | null,
-): JSX.Element[] {
+    detailsFunction: (entry: GedcomEntry) => ReactNode | null,
+): ReactNode {
     return flatMap(tags, (tag) =>
         entries
             .filter((entry) => entry.tag === tag)
@@ -43,9 +44,7 @@ function nameDetails(entry: GedcomEntry) {
     return (
         <>
             <Header as="span" size="large">
-                {fullName ? (
-                    fullName
-                ) : (
+                {fullName ? (fullName) : (
                     <FormattedMessage id="name.unknown_name" defaultMessage="N.N."/>
                 )}
             </Header>
@@ -120,7 +119,7 @@ function dataDetails(entry: GedcomEntry) {
     }
     return (
         <>
-            <Header sub>
+            <Header>
                 <TranslatedTag tag={entry.tag}/>
             </Header>
             <span>
@@ -144,11 +143,13 @@ function fileDetails(objectEntry: GedcomEntry) {
 
 function noteDetails(entry: GedcomEntry) {
     return (
-        <MultilineText
-            lines={getData(entry).map((line, index) => (
-                <i key={index}>{line}</i>
-            ))}
-        />
+        <>
+            <Header as="span" className="small">
+                {/* TODO: add i18n for NOTES */}
+                <TranslatedTag tag={entry.tag}/>
+            </Header>
+            <MultilineText lines={getData(entry).map((line, index) => (<i key={index}>{line}</i>))}/>
+        </>
     );
 }
 

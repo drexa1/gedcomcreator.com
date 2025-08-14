@@ -206,9 +206,9 @@ export function App(props: AppProps) {
         history.push(location);
     }
 
-// ---------------------------------------------------------------------------------------------------------------------
-// EVENT HANDLERS
-// ---------------------------------------------------------------------------------------------------------------------
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* EVENT HANDLERS                                                                                                     */
+/* ------------------------------------------------------------------------------------------------------------------ */
 
     function onHome() {
         history.push({ pathname: "/" });
@@ -289,7 +289,7 @@ export function App(props: AppProps) {
         setError(message);
     }
 
-// ---------------------------------------------------------------------------------------------------------------------
+/* ------------------------------------------------------------------------------------------------------------------ */
 
     /**
      * Shows an error message in the middle of the screen.
@@ -334,32 +334,20 @@ export function App(props: AppProps) {
                         ),
                     },
                     {
-                        menuItem: intl.formatMessage({
-                            id: "tab.settings",
-                            defaultMessage: "Settings",
-                        }),
+                        menuItem: intl.formatMessage({id: "tab.settings", defaultMessage: "Settings",}),
                         render: () => (
-                            <ConfigPanel
-                                config={config}
-                                onChange={(config) => {
-                                    setConfig(config);
-                                    toggleDetails(config, data, allLanguages);
-                                    updateUrl(configToArgs(config));
-                                }}
-                            />
-                        ),
-                    },
+                            <ConfigPanel config={config} onChange={(config) => {
+                                setConfig(config);
+                                toggleDetails(config, data, allLanguages);
+                                updateUrl(configToArgs(config));
+                            }}/>
+                        )
+                    }
                 ];
                 return (
                     <div id="content">
-                        <ErrorPopup
-                            open={showErrorPopup}
-                            message={error}
-                            onDismiss={onDismissErrorPopup}
-                        />
-                        {state === AppState.LOADING_MORE ? (
-                            <Loader active size="small" className="loading-more"/>
-                        ) : null}
+                        <ErrorPopup open={showErrorPopup} message={error} onDismiss={onDismissErrorPopup}/>
+                        {state === AppState.LOADING_MORE ? (<Loader active size="small" className="loading-more"/>) : null}
                         <Chart
                             data={data!.chartData}
                             selection={updatedSelection}
@@ -388,27 +376,13 @@ export function App(props: AppProps) {
 
     return (
         <>
-            <Route
-                render={() => (
-                    <TopBar
-                        data={data?.chartData}
-                        showingChart={
-                            history.location.pathname === "/view" &&
-                            (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE)
-                        }
-                        eventHandlers={{
-                            onHome,
-                            onI18nLanguage,
-                            onSelection,
-                            onDownloadPdf,
-                            onDownloadPng,
-                            onDownloadSvg,
-                            onDownloadGedcom,
-                            onResetView,
-                        }}
-                    />
-                )}
-            />
+            <Route render={() => (
+                <TopBar
+                    data={data?.chartData}
+                    showingChart={history.location.pathname === "/view" && (state === AppState.SHOWING_CHART || state === AppState.LOADING_MORE)}
+                    eventHandlers={{onHome, onI18nLanguage, onSelection, onDownloadPdf, onDownloadPng, onDownloadSvg, onDownloadGedcom, onResetView}}
+                />
+            )}/>
             <Switch>
                 <Route exact path="/view" render={renderApp}/>
                 <Redirect to={"/"}/>

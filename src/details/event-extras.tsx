@@ -4,26 +4,12 @@ import * as React from "react";
 import {useState} from "react";
 import {WrappedImage} from "./wrapped-image";
 import {MultilineText} from "./multiline-text";
-import {DateOrRange} from "../topola";
 import {formatDateOrRange} from "../utils/date-utils";
 import Linkify from "react-linkify";
+import {Image, Source} from "../utils/event-utils";
 
 
-export interface Image {
-    url: string;
-    filename: string;
-    title?: string;
-}
-
-export interface Source {
-    title?: string;
-    author?: string;
-    page?: string;
-    date?: DateOrRange;
-    publicationInfo?: string;
-}
-
-interface Props {
+interface EventExtrasProps {
     images?: Image[];
     notes?: string[][];
     sources?: Source[];
@@ -91,7 +77,7 @@ function eventSources(sources: Source[] | undefined, intl: IntlShape) {
     );
 }
 
-export function EventExtras(props: Props) {
+export function EventExtras(props: EventExtrasProps) {
     const intl = useIntl();
     const [activeIndex, setActiveIndex] = useState(-1);
     const [indi, setIndi] = useState("");

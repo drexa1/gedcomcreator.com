@@ -1,5 +1,7 @@
 import {FormattedMessage} from "react-intl";
 
+
+// TODO: sort
 const TAG_DESCRIPTIONS = new Map([
     ["ADOP", "Adoption"],
     ["BAPM", "Baptism"],

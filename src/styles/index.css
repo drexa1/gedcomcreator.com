@@ -467,8 +467,8 @@ div.ui.icon.input {
 }
 
 .narrow-select::after {
-    /*content: "\1F30D";*/
-    content: "\1F310";
+    /* content: "\1F310"; */
+    content: "\1F30D";
     position: absolute;
     right: 10px;
     top: 50%;

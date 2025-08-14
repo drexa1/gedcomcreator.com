@@ -1,14 +1,7 @@
-import {
-    Container,
-    Icon,
-    Image,
-    Label,
-    Message,
-    Modal,
-    Placeholder,
-} from "semantic-ui-react";
+import {Container, Icon, Image, Label, Message, Modal, Placeholder,} from "semantic-ui-react";
 import {SyntheticEvent, useState} from "react";
 import {FormattedMessage} from "react-intl";
+
 
 interface Props {
     url: string;
@@ -22,9 +15,9 @@ export function WrappedImage(props: Props) {
     const [imageFailed, setImageFailed] = useState(false);
     const [imageSrc, setImageSrc] = useState("");
 
-    if (imageLoaded && imageSrc !== props.url) {
+    if (imageLoaded && imageSrc !== props.url)
         setImageLoaded(false);
-    }
+
     return (
         <>
             <Image
