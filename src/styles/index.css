@@ -191,6 +191,7 @@ div.zoom {
     justify-content: space-between;
     display: flex;
     word-break: break-word;
+    margin-bottom: 15px;
 }
 
 .details .event-header .header {
