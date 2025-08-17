@@ -71,14 +71,14 @@ export function SearchBar({ data, onSelection}: SearchBarProps) {
     return (
         <Menu.Menu position="right">
             <Search
+                id="search"
+                noResultsMessage={intl.formatMessage({id: "menu.search.no_results", defaultMessage: "No results found"})}
+                placeholder={intl.formatMessage({id: "menu.search.placeholder", defaultMessage: "Search for people"})}
                 onSearchChange={(_, data) => onChange(data.value!)}
                 onResultSelect={(_, data) => onResultSelect(data.result.id)}
                 results={searchResults}
-                noResultsMessage={intl.formatMessage({id: "menu.search.no_results", defaultMessage: "No results found"})}
-                placeholder={intl.formatMessage({id: "menu.search.placeholder", defaultMessage: "Search for people"})}
-                selectFirstResult={true}
                 value={searchString}
-                id="search"
+                selectFirstResult={true}
             />
         </Menu.Menu>
     );

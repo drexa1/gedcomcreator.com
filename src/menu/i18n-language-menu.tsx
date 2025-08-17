@@ -24,13 +24,13 @@ export function I18nLanguageMenu({ screenSize, onI18nLanguage }: LanguageMenuPro
                         <Icon className="i18n-icon" name="globe"/>
                     }>
                         <Dropdown.Menu>
-                            {i18nLanguages.map(lang => (
-                                <Dropdown.Item key={lang} onClick={() => changeI18nLanguage(lang)}>
-                                    <FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang}/>
-                                </Dropdown.Item>
-                            ))}
-                        </Dropdown.Menu>
-                    </Dropdown>
+                        {i18nLanguages.map(lang => (
+                            <Dropdown.Item key={lang} onClick={() => changeI18nLanguage(lang)}>
+                                <FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang}/>
+                            </Dropdown.Item>
+                        ))}
+                    </Dropdown.Menu>
+                </Dropdown>
                 </>
             );
         case ScreenSize.SMALL:

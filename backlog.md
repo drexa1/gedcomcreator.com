@@ -24,6 +24,11 @@ BACKLOG
 [x] Icons for details|settings  
 [x] Add gedcom examples marriage dates  
 [x] Review i18n gedcom examples IRL  
+[x] Reduce search to fix i18n  
+[ ] Relocate contact form reasons  
+[ ] Improve Info | Settings (half, background, hover)  
+[ ] Legend is touching chart  
+[ ] Create i18n illustrations of code & graphs  
 [ ] Landing page  
 [ ] Privacy policy view  
 [ ] How it works menu  

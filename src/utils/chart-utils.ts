@@ -157,7 +157,7 @@ export async function drawOnCanvas(): Promise<HTMLCanvasElement> {
 }
 
 export function enoughLegendSpace(languageOptions?: IndividualLanguage[]): boolean {
-    const enoughSpace = !languageOptions || languageOptions.length <= 10;
+    const enoughSpace = !languageOptions || languageOptions.length <= 5;
     if (!enoughSpace)
         console.log("Not enough space for the hidden relatives advice");
     return enoughSpace;

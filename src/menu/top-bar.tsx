@@ -9,8 +9,6 @@ import {FileMenu} from "./file-menu";
 import {SearchBar} from "./search-bar";
 import {ContactMenu} from "./contact-menu";
 import {FormattedMessage} from "react-intl";
-import {HowItWorksMenu} from "./howitworks-menu";
-import {HowItWorks} from "../howitworks";
 
 
 export enum ScreenSize {
@@ -35,7 +33,7 @@ export interface EventHandlers {
 }
 
 export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
-    const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false);
+    // const [howItWorksModalOpen, setHowItWorksModalOpen] = useState(false);
     const [contactModalOpen, setContactModalOpen] = useState(false);
 
     function desktopMenu() {
@@ -53,21 +51,21 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
             {/* HOW IT WORKS | CONTACT | I18N LANGUAGE */}
             {!showingChart &&
                 <>
-                    <HowItWorksMenu screenSize={ScreenSize.LARGE} onHowItWorksClick={() => setHowItWorksModalOpen(true)}/>
-                    <HowItWorks open={howItWorksModalOpen} onClose={() => setHowItWorksModalOpen(false)}/>
-                    {/* TODO: PrivacyMenu */}
+                    <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
+                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
+                    {/*<HowItWorksMenu screenSize={ScreenSize.LARGE} onHowItWorksClick={() => setHowItWorksModalOpen(true)}/>*/}
+                    {/*<HowItWorks open={howItWorksModalOpen} onClose={() => setHowItWorksModalOpen(false)}/>*/}
+                    {/* TODO: Privacy */}
                     <Menu.Item onClick={alert}>
                         <Icon name="shield"/><FormattedMessage id="menu.privacy" defaultMessage="Privacy policy"/>
                     </Menu.Item>
-                    <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
-                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
-                    <I18nLanguageMenu screenSize={ScreenSize.LARGE} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </>
             }
             {/* SEARCH */}
             {showingChart &&
                 <SearchBar data={data!} onSelection={eventHandlers.onSelection}/>
             }
+            <I18nLanguageMenu screenSize={ScreenSize.LARGE} onI18nLanguage={eventHandlers.onI18nLanguage}/>
         </Menu>;
     }
 
