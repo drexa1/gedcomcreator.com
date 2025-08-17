@@ -76,7 +76,7 @@ export function App(props: AppProps) {
     useEffect(() => {
         analyticsEvent("gedcomcreator_landing");
         loadLanguages().catch(e => console.error("Failed to load languages:", e));
-        const rootElement = document.getElementById("root");
+        // const rootElement = document.getElementById("root");
         // if (location.pathname === "/") {
         //     rootElement?.classList.add("bgLogo");
         // } else {
