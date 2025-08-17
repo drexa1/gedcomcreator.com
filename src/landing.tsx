@@ -50,18 +50,7 @@ export function Landing() {
                     }}>
                         <Icon name="upload" size="huge" color="yellow" />
                         <Header as="h2">Upload GEDCOM</Header>
-                        <div style={{
-                            border: "2px dashed #ccc",
-                            borderRadius: "8px",
-                            color: "#bbb",
-                            flexGrow: 1,
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            alignSelf: "stretch"
-                        }}>
-                            Drop a GEDCOM file here
-                        </div>
+                        <div className="dropzone">Drop a GEDCOM file here</div>
                     </Segment>
                 </Grid.Column>
 

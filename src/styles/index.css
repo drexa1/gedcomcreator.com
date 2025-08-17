@@ -5,11 +5,9 @@ html, body, #root {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Meta and links                                                                                                     */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .meta a {
     color: dodgerblue !important;
 }
-
 .meta a:hover {
     color: deepskyblue !important;
 }
@@ -17,7 +15,6 @@ html, body, #root {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Nodes                                                                                                              */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .node {
     cursor: pointer;
 }
@@ -25,26 +22,22 @@ html, body, #root {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Background and containers                                                                                          */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .bgLogo {
     background-image: url("../assets/landing.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: 40%;
 }
-
 #content {
     flex: 1 1 auto;
     display: flex;
     overflow: hidden;
     height: 100%;
 }
-
 #svgContainer {
     flex: 1 1 auto;
     overflow: hidden;
 }
-
 .sidePanel {
     flex: 0 0 320px;
     overflow: auto;
@@ -53,15 +46,12 @@ html, body, #root {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Utility classes                                                                                                    */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .hidden {
     display: none !important;
 }
-
 .suboption {
     margin-left: 15px !important;
 }
-
 p.comment {
     margin-top: 16px;
 }
@@ -69,11 +59,9 @@ p.comment {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Error messages                                                                                                     */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 div.ui.error.message {
     margin: auto;
 }
-
 div.ui.errorPopup.message {
     left: 40px;
     bottom: 40px;
@@ -83,7 +71,6 @@ div.ui.errorPopup.message {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Cards                                                                                                              */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 div.ui.card.intro {
     width: 770px;
     margin: auto;
@@ -92,7 +79,6 @@ div.ui.card.intro {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Zoom controls                                                                                                      */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 div.zoom {
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
     border-radius: 4px;
@@ -101,7 +87,6 @@ div.zoom {
     left: 10px;
     z-index: 10;
 }
-
 .zoom button {
     font-family: monospace;
     font-weight: bold;
@@ -118,15 +103,12 @@ div.zoom {
     cursor: pointer;
     padding: 0;
 }
-
 .zoom button:hover {
     background-color: #eee;
 }
-
 .zoom button:focus {
     outline: 0;
 }
-
 .zoom-in {
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
@@ -135,7 +117,6 @@ div.zoom {
     border-left: 0;
     border-right: 0;
 }
-
 .zoom-out {
     border: 0;
     border-bottom-left-radius: 4px;
@@ -145,7 +126,6 @@ div.zoom {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Scrollable areas                                                                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .limit-height {
     height: 300px;
     overflow-y: auto;
@@ -154,45 +134,33 @@ div.zoom {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Images and links                                                                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
-/*.image-placeholder {*/
-/*    height: 100%;*/
-/*}*/
-
 .content .ui.image.blockImage {
     display: block;
 }
 
-
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Details section                                                                                                    */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .details {
     padding: 15px 0;
 }
-
 .no-border-bottom {
     border-bottom: 0 !important;
 }
-
 .details .ui.items .item .content {
     padding: 0 15px;
 }
-
 .details .event-header {
     justify-content: space-between;
     display: flex;
     word-break: break-word;
     margin-bottom: 15px;
 }
-
 .details .event-header .header {
     text-transform: uppercase;
     margin: 0;
     min-width: 40%;
 }
-
 .details .person-image {
     max-width: 289px;
     width: 289px;
@@ -202,22 +170,18 @@ div.zoom {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Event extras                                                                                                       */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .event-extras .ui.attached.menu,
 .event-extras .ui.attached.segment.tab,
 .event-extras .ui.tabular.menu .item {
     border: none;
 }
-
 .ui.divided.items>.item {
     border-top: 0 !important;
 }
-
 .event-extras .ui.menu .active.item .icon {
     background-color: #1b1c1d;
     color: #ffffff;
 }
-
 .event-extras .ui.attached.segment.active.tab {
     word-break: normal;
     overflow-wrap: anywhere;
@@ -228,29 +192,23 @@ div.zoom {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Inputs and dropdowns                                                                                               */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .ui.form .field.no-margin {
     margin: 0;
 }
-
 .ui.tabular.menu a {
     text-transform: uppercase;
 }
-
 div.ui.icon.input {
     width: 318px;
     border: 0;
     margin: 2px 3px 1px 1px;
 }
-
 .ui.input > input:focus {
     border-color: dodgerblue !important;
 }
-
 .ui.dropdown.no-arrow > .dropdown.icon {
     display: none !important;
 }
-
 .search .prompt {
     border-radius: 0 !important;
 }
@@ -258,44 +216,35 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Menu and tabs                                                                                                      */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .ui.menu, .item:before {
     border: none !important;
     background: none !important;
 }
-
 .ui.menu .item > img:not(.ui).menu-icon {
     width: 24px;
     height: 24px;
     margin-right: 5px
 }
-
 .ui.menu .dropdown.item .menu {
     margin-top: 0 !important;
 }
-
 .ui.tabular.menu .active.item {
     border-radius: 0 0 !important;
     border-top-width: 0 !important;
 }
-
 .ui.tabular.menu .item:first-child {
     border-left-width: 0 !important;
 }
-
 .ui.top.attached.menu {
     margin-top: 0;
     border: none !important;
 }
-
 .ui.tabular.menu .item .icon {
     color: lightgray;
 }
-
 .ui.tabular.menu .item.active .icon {
     color: black;
 }
-
 .ui.linkblue.menu .active.item,
 .ui.menu .linkblue.active.item,
 .ui.linkblue.menu > .item:hover,
@@ -307,7 +256,6 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Chart menu                                                                                                         */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .chart-menu {
     display: flex !important;
     justify-content: center;
@@ -315,18 +263,15 @@ div.ui.icon.input {
     width: 100%;
     box-shadow: none !important;
 }
-
 .chart-menu .item {
     display: flex;
     align-items: center;
     font-size: 1.07142857rem;
 }
-
 .i18n-menu {
     /* min-width: 77px; */
     justify-content: left;
 }
-
 .i18n-icon {
     font-size: 1.5rem !important;
     line-height: 1 !important;
@@ -337,7 +282,6 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Legend and tooltips                                                                                                */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .legend {
     position: absolute;
     bottom: 15px;
@@ -349,18 +293,15 @@ div.ui.icon.input {
     display: flex;
     align-items: center;
 }
-
 .legend:hover {
     background: rgb(from deepskyblue r g b / 0.3);
     transition: background 0.3s ease;
     cursor: pointer;
 }
-
 .legend svg {
     width: 280px;
     height: 80px;
 }
-
 .legend-emoji {
     position: absolute;
     bottom: 150px;
@@ -376,26 +317,21 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Modal                                                                                                    */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .loaded-image-thumbnail {
     cursor: zoom-in;
 }
-
 .hidden-image {
     display: none !important;
 }
-
 .modal-image {
     display: block;
     margin-left: auto;
     margin-right: auto;
 }
-
 .modal-image .ui.attached.label {
     width: auto;
     min-width: 100%;
 }
-
 .ui.modal > .close {
     top: 0.5rem !important;
     right: 0.5rem !important;
@@ -406,49 +342,40 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Contact                                                                                                            */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .ui.modal > .header {
     text-align: center;
     border-bottom: none !important;
     font-size: 1.8rem;
     margin-top: 50px;
 }
-
 .ui.modal > .content {
     margin-bottom: 50px;
 }
-
 .ui.form input,
 .ui.form textarea {
     border-radius: 0.5rem;
     padding: 1rem;
     font-size: 1rem;
 }
-
 .contact-form-grid,
 .contact-form-column {
     height: 100%;
 }
-
 .contact-form-grid > .column {
     display: flex;
     flex-direction: column;
 }
-
 .contact-form-column {
     justify-content: flex-end;
 }
-
 .contact-form-column .ui.form {
     width: 100%;
 }
-
 .narrow-select {
     position: relative;
     max-width: 300px;
     width: 100%;
 }
-
 .narrow-select select {
     width: 100%;
     padding: 0.75rem 2rem 0.75rem 1rem;
@@ -461,9 +388,7 @@ div.ui.icon.input {
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
-
 .narrow-select::after {
-    /* content: "\1F310"; */
     content: "\1F30D";
     position: absolute;
     right: 10px;
@@ -474,44 +399,21 @@ div.ui.icon.input {
     font-size: 1.1rem;
     user-select: none;
 }
-
-#name::placeholder {
-    color: #bbb;
-    opacity: 1;
-}
-
-#name:focus::placeholder {
-    color: #bbb; /* keep same color on focus */
-    opacity: 1;
-}
-
-#email::placeholder {
-    color: #bbb;
-    opacity: 1;
-}
-
-#email:focus::placeholder {
-    color: #bbb; /* keep same color on focus */
-    opacity: 1;
-}
-
-#message::placeholder {
-    color: #bbb;
-    opacity: 1;
-}
-
+#name::placeholder,
+#email::placeholder,
+#message::placeholder,
+#name:focus::placeholder,
+#email:focus::placeholder,
 #message:focus::placeholder {
-    color: #bbb; /* keep same color on focus */
+    color: #bbb;
     opacity: 1;
 }
-
 .contact-message {
     height: 36px;
     display: flex !important;
     align-items: center;
     justify-content: center;
 }
-
 .cooldown-message {
     composes: contact-message;
     margin-top: 5px !important;
@@ -520,8 +422,18 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Landing                                                                                                            */
 /* ------------------------------------------------------------------------------------------------------------------ */
-
 .landing {
     padding: 5rem 20rem;
     min-height: 90vh;
+}
+
+.dropzone {
+    border: 2px dashed #ccc;
+    border-radius: 8px;
+    color: #bbb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1;
+    align-self: stretch;
 }
