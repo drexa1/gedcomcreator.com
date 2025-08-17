@@ -124,7 +124,7 @@ export function ContactForm({ open, onClose }: ContactFormProps) {
 
                             <Form.Field>
                                 <label htmlFor="message">
-                                    <FormattedMessage id="contact.message" defaultMessage="How can you help you?"/>
+                                    <FormattedMessage id="contact.message" defaultMessage="How can we help you?"/>
                                 </label>
                                 <Form.TextArea id="message" name="message" rows={8} onChange={onChange} placeholder={
                                     intl.formatMessage({

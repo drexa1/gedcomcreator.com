@@ -34,6 +34,7 @@ import CSVLoader from "./datasource/load-csv";
 import {getArguments} from "./utils/param-utils";
 import {downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./utils/chart-utils";
 import {ConfigPanel, Config, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
+import {Landing} from "./landing";
 
 
 enum AppState {
@@ -76,11 +77,11 @@ export function App(props: AppProps) {
         analyticsEvent("gedcomcreator_landing");
         loadLanguages().catch(e => console.error("Failed to load languages:", e));
         const rootElement = document.getElementById("root");
-        if (location.pathname === "/") {
-            rootElement?.classList.add("bgLogo");
-        } else {
-            rootElement?.classList.remove("bgLogo");
-        }
+        // if (location.pathname === "/") {
+        //     rootElement?.classList.add("bgLogo");
+        // } else {
+        //     rootElement?.classList.remove("bgLogo");
+        // }
         loadDataFromArgs().catch(e => console.error("Failed to load data:", e));
     });
 
@@ -384,7 +385,8 @@ export function App(props: AppProps) {
                 eventHandlers={{onHome, onI18nLanguage, onSelection, onDownloadPdf, onDownloadPng, onDownloadSvg, onDownloadGedcom, onResetView}}
             />
             <Routes>
-                {/* <Route path="/create" element={<Creator/>} /> */}
+                <Route path="/" element={<Landing/>}/>
+                {/* <Route path="/create" element={<Creator/>}/> */}
                 <Route path="/view" element={renderApp()}/>
                 {/* <Route path="/privacy" element={<Privacy/>} /> */}
                 <Route path="*" element={<Navigate to="/" replace />} />

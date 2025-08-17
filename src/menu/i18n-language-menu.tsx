@@ -21,7 +21,7 @@ export function I18nLanguageMenu({ screenSize, onI18nLanguage }: LanguageMenuPro
             return (
                 <>
                     <Dropdown floating direction="left" className="item no-arrow i18n-menu" trigger={
-                        <Icon className="i18n-icon" name="language"/>
+                        <Icon className="i18n-icon" name="globe"/>
                     }>
                         <Dropdown.Menu>
                             {i18nLanguages.map(lang => (
