@@ -21,12 +21,12 @@ export function Landing() {
                             <Header as="h2">Create XLS</Header>
                             <div style={{
                                 display: "grid",
-                                gridTemplateColumns: "repeat(5, 40px)",
+                                gridTemplateColumns: "repeat(12, 40px)",
                                 gap: "4px",
                                 justifyContent: "center",
                                 margin: "1.5rem 0"
                             }}>
-                                {[...Array(15)].map((_, i) => (
+                                {[...Array(48)].map((_, i) => (
                                     <div key={i} style={{
                                         width: "40px",
                                         height: "30px",
