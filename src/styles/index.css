@@ -1,11 +1,5 @@
-body, html {
+html, body, #root {
     height: 100%;
-}
-
-#root {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -54,7 +48,6 @@ body, html {
 .sidePanel {
     flex: 0 0 320px;
     overflow: auto;
-    overflow-x: hidden;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -155,16 +148,16 @@ div.zoom {
 
 .limit-height {
     height: 300px;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
 /* Images and links                                                                                                   */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-.image-placeholder {
-    height: 100%;
-}
+/*.image-placeholder {*/
+/*    height: 100%;*/
+/*}*/
 
 .content .ui.image.blockImage {
     display: block;
@@ -210,15 +203,8 @@ div.zoom {
 /* Event extras                                                                                                       */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
-.event-extras .ui.attached.menu {
-    border: none;
-    min-height: auto;
-}
-
-.event-extras .ui.attached.segment.tab {
-    border: none;
-}
-
+.event-extras .ui.attached.menu,
+.event-extras .ui.attached.segment.tab,
 .event-extras .ui.tabular.menu .item {
     border: none;
 }
@@ -311,17 +297,11 @@ div.ui.icon.input {
 }
 
 .ui.linkblue.menu .active.item,
-.ui.menu .linkblue.active.item {
-    color: dodgerblue !important;
-    background-color: transparent !important;
-}
-
-.ui.linkblue.menu > .item:hover {
-    color: dodgerblue !important;
-}
-
+.ui.menu .linkblue.active.item,
+.ui.linkblue.menu > .item:hover,
 .ui.linkblue.menu .ui.dropdown .menu > .item:not(.active):hover {
     color: dodgerblue !important;
+    background-color: transparent !important;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -424,7 +404,7 @@ div.ui.icon.input {
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
-/* Contact form                                                                                                       */
+/* Contact                                                                                                            */
 /* ------------------------------------------------------------------------------------------------------------------ */
 
 .ui.modal > .header {
@@ -445,7 +425,8 @@ div.ui.icon.input {
     font-size: 1rem;
 }
 
-.contact-form-grid {
+.contact-form-grid,
+.contact-form-column {
     height: 100%;
 }
 
@@ -456,7 +437,6 @@ div.ui.icon.input {
 
 .contact-form-column {
     justify-content: flex-end;
-    height: 100%;
 }
 
 .contact-form-column .ui.form {
@@ -476,7 +456,7 @@ div.ui.icon.input {
     border-radius: 0.5rem;
     appearance: none;
     -webkit-appearance: none;
-    -moz-appearance: none;
+    -moz-appearance: none;  /* for Firefox */
     background-color: white;
     border: 1px solid #ccc;
     box-sizing: border-box;
@@ -493,6 +473,26 @@ div.ui.icon.input {
     color: #666;
     font-size: 1.1rem;
     user-select: none;
+}
+
+#name::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+#name:focus::placeholder {
+    color: #bbb; /* keep same color on focus */
+    opacity: 1;
+}
+
+#email::placeholder {
+    color: #bbb;
+    opacity: 1;
+}
+
+#email:focus::placeholder {
+    color: #bbb; /* keep same color on focus */
+    opacity: 1;
 }
 
 #message::placeholder {
@@ -516,3 +516,8 @@ div.ui.icon.input {
     composes: contact-message;
     margin-top: 5px !important;
 }
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Landing                                                                                                            */
+/* ------------------------------------------------------------------------------------------------------------------ */
+
