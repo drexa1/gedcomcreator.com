@@ -55,7 +55,6 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
                     <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
                     {/*<HowItWorksMenu screenSize={ScreenSize.LARGE} onHowItWorksClick={() => setHowItWorksModalOpen(true)}/>*/}
                     {/*<HowItWorks open={howItWorksModalOpen} onClose={() => setHowItWorksModalOpen(false)}/>*/}
-                    {/* TODO: Privacy */}
                     <Menu.Item onClick={alert}>
                         <Icon name="shield"/><FormattedMessage id="menu.privacy" defaultMessage="Privacy policy"/>
                     </Menu.Item>
