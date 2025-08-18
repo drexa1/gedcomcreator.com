@@ -18,12 +18,12 @@ import "./styles/index.css";
  * Initial captions for the i18n selector.
  */
 const supportedLanguages = {
-    "i18n.language.de": "🇩🇪 Deutsch",
-    "i18n.language.en": "🇬🇧 English",
-    "i18n.language.es": "🇪🇸 Español",
-    "i18n.language.fr": "🇫🇷 Français",
-    "i18n.language.it": "🇮🇹 Italiano",
-    "i18n.language.pl": "🇵🇱 Polski"
+    "i18n.language.de": "Deutsch",
+    "i18n.language.en": "English",
+    "i18n.language.es": "Español",
+    "i18n.language.fr": "Français",
+    "i18n.language.it": "Italiano",
+    "i18n.language.pl": "Polski"
 }
 export const i18nMessages = {
     // de: messages_de,

@@ -27,9 +27,9 @@ BACKLOG
 [x] Reduce search to fix i18n  
 [x] Legend is touching chart  
 [x] Improve Info | Settings (half, background, hover)  
-[ ] Relocate contact form reasons  
-[ ] Create text content for landing  
+[x] Relocate contact form reasons  
 [ ] Create i18n illustrations of code & graphs  
+[ ] Create text content for landing  
 [ ] Landing page  
 [ ] Privacy policy view  
 [ ] How it works menu  

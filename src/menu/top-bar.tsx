@@ -52,7 +52,7 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
             {!showingChart &&
                 <>
                     <ContactMenu screenSize={ScreenSize.LARGE} onContactClick={() => setContactModalOpen(true)}/>
-                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
+                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                     {/*<HowItWorksMenu screenSize={ScreenSize.LARGE} onHowItWorksClick={() => setHowItWorksModalOpen(true)}/>*/}
                     {/*<HowItWorks open={howItWorksModalOpen} onClose={() => setHowItWorksModalOpen(false)}/>*/}
                     <Menu.Item onClick={alert}>
@@ -86,7 +86,7 @@ export function TopBar({ showingChart, eventHandlers, data }: TopBarProps) {
                     />
                     {/* CONTACT */}
                     <ContactMenu screenSize={ScreenSize.SMALL} onContactClick={() => setContactModalOpen(true)}/>
-                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)}/>
+                    <ContactForm open={contactModalOpen} onClose={() => setContactModalOpen(false)} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                     {/* I18N LANGUAGE */}
                     <I18nLanguageMenu screenSize={ScreenSize.SMALL} onI18nLanguage={eventHandlers.onI18nLanguage}/>
                 </Dropdown.Menu>
