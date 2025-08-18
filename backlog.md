@@ -25,9 +25,10 @@ BACKLOG
 [x] Add gedcom examples marriage dates  
 [x] Review i18n gedcom examples IRL  
 [x] Reduce search to fix i18n  
+[x] Legend is touching chart  
+[x] Improve Info | Settings (half, background, hover)  
 [ ] Relocate contact form reasons  
-[ ] Improve Info | Settings (half, background, hover)  
-[ ] Legend is touching chart  
+[ ] Create text content for landing  
 [ ] Create i18n illustrations of code & graphs  
 [ ] Landing page  
 [ ] Privacy policy view  
@@ -36,6 +37,7 @@ BACKLOG
 [ ] Smoke mobile  
 [ ] Convert XLSX  
 [ ] Backend  
+[ ] Fix the dang hidden relatives box heights bug  
 [ ] PSP integration  
 [ ] Fat-trimming  
 [ ] Review the other language packs

@@ -331,12 +331,20 @@ export function App(props: AppProps) {
                 const sidePanelTabs = [
                     {
                         key: "info",
-                        menuItem: { icon: "info circle", content: intl.formatMessage({ id: "tab.info", defaultMessage: "Info" }) },
-                        render: () => <Details gedcom={data!.gedcom} indi={updatedSelection.id} />
+                        menuItem: {
+                            icon: "info circle",
+                            className: "config-tab-info",
+                            content: intl.formatMessage({ id: "tab.info", defaultMessage: "Info" })
+                        },
+                        render: () => <Details gedcom={data!.gedcom} indi={updatedSelection.id}/>
                     },
                     {
                         key: "settings",
-                        menuItem: { icon: "setting", content: intl.formatMessage({ id: "tab.settings", defaultMessage: "Settings" }) },
+                        menuItem: {
+                            icon: "setting",
+                            className: "config-tab-settings",
+                            content: intl.formatMessage({ id: "tab.settings", defaultMessage: "Settings" })
+                        },
                         render: () => (
                             <ConfigPanel config={config} onChange={(config) => {
                                 setConfig(config);

@@ -68,18 +68,15 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
                     name="checkboxRadioGroup"
                     value={i}
                     checked={props.config.selectedLanguage === language.id}
-                    onClick={
-                        () => {
-                            props.onChange({
-                                ...props.config,
-                                selectedLanguage: language.id,
-                                color: ChartColors.COLOR_BY_LANGUAGE,
-                                languages: LanguagesArg.SHOW,
-                            });
-                            setLanguagesEnabled(true);
-                        }
-                    }
-                />
+                    onClick={() => {
+                        props.onChange({
+                            ...props.config,
+                            selectedLanguage: language.id,
+                            color: ChartColors.COLOR_BY_LANGUAGE,
+                            languages: LanguagesArg.SHOW,
+                        });
+                        setLanguagesEnabled(true);
+                    }}/>
             </Form.Field>
         );
     }
@@ -94,127 +91,97 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
                         <Form.Field>
                             <Checkbox
                                 radio
-                                label={
-                                    <FormattedMessage tagName="label" id="config.colors.NO_COLOR"
-                                                      defaultMessage="none"/>
-                                }
+                                label={<FormattedMessage tagName="label" id="config.colors.NO_COLOR" defaultMessage="none"/>}
                                 name="checkboxRadioGroup"
                                 value="none"
                                 checked={props.config.color === ChartColors.NO_COLOR}
-                                onClick={
-                                    () => {
-                                        props.onChange({
-                                            ...props.config,
-                                            color: ChartColors.NO_COLOR,
-                                            languages: LanguagesArg.HIDE,
-                                            ethnicity: EthnicityArg.HIDE,
-                                            selectedLanguage: null
-                                        });
-                                        setEthnicityEnabled(false);
-                                        setLanguagesEnabled(false);
-                                    }
-                                }
-                            />
+                                onClick={() => {
+                                    props.onChange({
+                                        ...props.config,
+                                        color: ChartColors.NO_COLOR,
+                                        languages: LanguagesArg.HIDE,
+                                        ethnicity: EthnicityArg.HIDE,
+                                        selectedLanguage: null
+                                    });
+                                    setEthnicityEnabled(false);
+                                    setLanguagesEnabled(false);
+                                }}/>
                         </Form.Field>
                         <Form.Field>
                             <Checkbox
                                 radio
-                                label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_GENERATION"
-                                                      defaultMessage="by generation"/>
-                                }
+                                label={<FormattedMessage tagName="label" id="config.colors.COLOR_BY_GENERATION" defaultMessage="by generation"/>}
                                 name="checkboxRadioGroup"
                                 value="generation"
                                 checked={props.config.color === ChartColors.COLOR_BY_GENERATION}
-                                onClick={
-                                    () => {
-                                        props.onChange({
-                                            ...props.config,
-                                            color: ChartColors.COLOR_BY_GENERATION,
-                                            languages: LanguagesArg.HIDE,
-                                            ethnicity: EthnicityArg.HIDE,
-                                            selectedLanguage: null,
-                                        });
-                                        setEthnicityEnabled(false);
-                                        setLanguagesEnabled(false);
-                                    }
-                                }
-                            />
+                                onClick={() => {
+                                    props.onChange({
+                                        ...props.config,
+                                        color: ChartColors.COLOR_BY_GENERATION,
+                                        languages: LanguagesArg.HIDE,
+                                        ethnicity: EthnicityArg.HIDE,
+                                        selectedLanguage: null,
+                                    });
+                                    setEthnicityEnabled(false);
+                                    setLanguagesEnabled(false);
+                                }}/>
                         </Form.Field>
                         <Form.Field>
                             <Checkbox
                                 radio
-                                label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_SEX"
-                                                      defaultMessage="by gender"/>
-                                }
+                                label={<FormattedMessage tagName="label" id="config.colors.COLOR_BY_SEX" defaultMessage="by gender"/>}
                                 name="checkboxRadioGroup"
                                 value="gender"
                                 checked={props.config.color === ChartColors.COLOR_BY_SEX}
-                                onClick={
-                                    () => {
-                                        props.onChange({
-                                            ...props.config,
-                                            color: ChartColors.COLOR_BY_SEX,
-                                            languages: LanguagesArg.HIDE,
-                                            ethnicity: EthnicityArg.HIDE,
-                                            selectedLanguage: null,
-                                        });
-                                        setEthnicityEnabled(false);
-                                        setLanguagesEnabled(false);
-                                    }
-                                }
-                            />
+                                onClick={() => {
+                                    props.onChange({
+                                        ...props.config,
+                                        color: ChartColors.COLOR_BY_SEX,
+                                        languages: LanguagesArg.HIDE,
+                                        ethnicity: EthnicityArg.HIDE,
+                                        selectedLanguage: null,
+                                    });
+                                    setEthnicityEnabled(false);
+                                    setLanguagesEnabled(false);
+                                }}/>
                         </Form.Field>
                         <Form.Field className={!props.config.renderEthnicityOption ? "hidden" : ""}>
                             <Checkbox
                                 radio
-                                label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_ETHNICITY"
-                                                      defaultMessage="by ethnicity"/>
-                                }
+                                label={<FormattedMessage tagName="label" id="config.colors.COLOR_BY_ETHNICITY" defaultMessage="by ethnicity"/>}
                                 name="checkboxRadioGroup"
                                 value="ethnicity"
                                 checked={props.config.color === ChartColors.COLOR_BY_ETHNICITY}
-                                onClick={
-                                    () => {
-                                        props.onChange({
-                                            ...props.config,
-                                            color: ChartColors.COLOR_BY_ETHNICITY,
-                                            languages: LanguagesArg.HIDE,
-                                            ethnicity: EthnicityArg.SHOW,
-                                            selectedLanguage: null,
-                                        });
-                                        setEthnicityEnabled(true);
-                                        setLanguagesEnabled(false);
-                                    }
-                                }
-                            />
+                                onClick={() => {
+                                    props.onChange({
+                                        ...props.config,
+                                        color: ChartColors.COLOR_BY_ETHNICITY,
+                                        languages: LanguagesArg.HIDE,
+                                        ethnicity: EthnicityArg.SHOW,
+                                        selectedLanguage: null,
+                                    });
+                                    setEthnicityEnabled(true);
+                                    setLanguagesEnabled(false);
+                                }}/>
                         </Form.Field>
                         <Form.Field className={!props.config.renderLanguagesOption ? "hidden" : ""}>
                             <Checkbox
                                 radio
-                                label={
-                                    <FormattedMessage tagName="label" id="config.colors.COLOR_BY_LANGUAGES"
-                                                      defaultMessage="by no. languages"/>
-                                }
+                                label={<FormattedMessage tagName="label" id="config.colors.COLOR_BY_LANGUAGES" defaultMessage="by no. languages"/>}
                                 name="checkboxRadioGroup"
                                 value="languages"
                                 checked={props.config.color === ChartColors.COLOR_BY_NR_LANGUAGES}
-                                onClick={
-                                    () => {
-                                        props.onChange({
-                                            ...props.config,
-                                            color: ChartColors.COLOR_BY_NR_LANGUAGES,
-                                            languages: LanguagesArg.SHOW,
-                                            ethnicity: EthnicityArg.HIDE,
-                                            selectedLanguage: null,
-                                        });
-                                        setEthnicityEnabled(false);
-                                        setLanguagesEnabled(true);
-                                    }
-                                }
-                            />
+                                onClick={() => {
+                                    props.onChange({
+                                        ...props.config,
+                                        color: ChartColors.COLOR_BY_NR_LANGUAGES,
+                                        languages: LanguagesArg.SHOW,
+                                        ethnicity: EthnicityArg.HIDE,
+                                        selectedLanguage: null,
+                                    });
+                                    setEthnicityEnabled(false);
+                                    setLanguagesEnabled(true);
+                                }}/>
                         </Form.Field>
                         {languageOptions}
                     </Item.Content>
@@ -222,10 +189,11 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
 
                 <Item className={!props.config.renderLanguagesOption ? "hidden" : ""}>
                     <Item.Content>
-                        <Checkbox toggle
-                                  id="languages"
-                                  checked={languagesEnabled}
-                                  onClick={() => toggleLanguages(languagesEnabled ? LanguagesArg.HIDE : LanguagesArg.SHOW)}
+                        <Checkbox
+                            toggle
+                            id="languages"
+                            checked={languagesEnabled}
+                            onClick={() => toggleLanguages(languagesEnabled ? LanguagesArg.HIDE : LanguagesArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <label style={{verticalAlign: "top"}}>
@@ -233,18 +201,18 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
                             }
-                            {" "}
-                            <FormattedMessage id="config.languages" defaultMessage="languages"/>
+                            {" "}<FormattedMessage id="config.languages" defaultMessage="languages"/>
                         </label>
                     </Item.Content>
                 </Item>
 
                 <Item className={!props.config.renderEthnicityOption ? "hidden" : ""}>
                     <Item.Content>
-                        <Checkbox toggle
-                                  id="ethnicity"
-                                  checked={ethnicityEnabled}
-                                  onClick={() => toggleEthnicity(ethnicityEnabled ? EthnicityArg.HIDE : EthnicityArg.SHOW)}
+                        <Checkbox
+                            toggle
+                            id="ethnicity"
+                            checked={ethnicityEnabled}
+                            onClick={() => toggleEthnicity(ethnicityEnabled ? EthnicityArg.HIDE : EthnicityArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <label style={{verticalAlign: "top"}}>
@@ -252,18 +220,18 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
                             }
-                            {" "}
-                            <FormattedMessage id="config.ethnicity" defaultMessage="ethnicity"/>
+                            {" "}<FormattedMessage id="config.ethnicity" defaultMessage="ethnicity"/>
                         </label>
                     </Item.Content>
                 </Item>
 
                 <Item>
                     <Item.Content>
-                        <Checkbox toggle
-                                  id="ids"
-                                  checked={idsEnabled}
-                                  onClick={() => toggleIds(idsEnabled ? IdsArg.HIDE : IdsArg.SHOW)}
+                        <Checkbox
+                            toggle
+                            id="ids"
+                            checked={idsEnabled}
+                            onClick={() => toggleIds(idsEnabled ? IdsArg.HIDE : IdsArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <label style={{verticalAlign: "top"}}>
@@ -271,18 +239,18 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
                             }
-                            {" "}
-                            <FormattedMessage id="config.ids" defaultMessage="IDs"/>
+                            {" "}<FormattedMessage id="config.ids" defaultMessage="IDs"/>
                         </label>
                     </Item.Content>
                 </Item>
 
                 <Item>
                     <Item.Content>
-                        <Checkbox toggle
-                                  id="sex"
-                                  checked={sexEnabled}
-                                  onClick={() => toggleSex(sexEnabled ? SexArg.HIDE : SexArg.SHOW)}
+                        <Checkbox
+                            toggle
+                            id="sex"
+                            checked={sexEnabled}
+                            onClick={() => toggleSex(sexEnabled ? SexArg.HIDE : SexArg.SHOW)}
                         />
                         &nbsp;&nbsp;&nbsp;&nbsp;
                         <label style={{verticalAlign: "top"}}>
@@ -290,22 +258,19 @@ export function ConfigPanel(props: { config: Config; onChange: (config: Config) 
                                 <FormattedMessage id="config.toggle.HIDE" defaultMessage="Hide"/> :
                                 <FormattedMessage id="config.toggle.SHOW" defaultMessage="Show"/>
                             }
-                            {" "}
-                            <FormattedMessage id="config.sex" defaultMessage="sex"/>
+                            {" "}<FormattedMessage id="config.sex" defaultMessage="sex"/>
                         </label>
                     </Item.Content>
                 </Item>
             </Item.Group>
             <div style={{textAlign: "center"}}>
-                <Form.Button primary style={{ "marginLeft": "0" }} onClick={
-                    () => {
-                        props.onChange(DEFAULT_CONFIG);
-                        setEthnicityEnabled(false);
-                        setLanguagesEnabled(false);
-                        setIdsEnabled(true);
-                        setSexEnabled(true);
-                    }
-                }>
+                <Form.Button primary style={{ "marginLeft": "0" }} onClick={() => {
+                    props.onChange(DEFAULT_CONFIG);
+                    setEthnicityEnabled(false);
+                    setLanguagesEnabled(false);
+                    setIdsEnabled(true);
+                    setSexEnabled(true);
+                }}>
                     <FormattedMessage id="config.reset" defaultMessage="Reset"/>
                 </Form.Button>
             </div>

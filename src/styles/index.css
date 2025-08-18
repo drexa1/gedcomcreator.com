@@ -249,18 +249,38 @@ div.ui.icon.input {
     margin-top: 0;
     border: none !important;
 }
-.ui.tabular.menu .item .icon {
-    color: lightgray;
-}
-.ui.tabular.menu .item.active .icon {
-    color: black;
-}
 .ui.linkblue.menu .active.item,
 .ui.menu .linkblue.active.item,
 .ui.linkblue.menu > .item:hover,
 .ui.linkblue.menu .ui.dropdown .menu > .item:not(.active):hover {
     color: dodgerblue !important;
     background-color: transparent !important;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Config panel                                                                                                       */
+/* ------------------------------------------------------------------------------------------------------------------ */
+.config-tab-info.active,
+.config-tab-settings.active {
+    color: #000 !important;
+    background-color: white !important;
+    font-weight: 400 !important;
+}
+.config-tab-info,
+.config-tab-settings {
+    color: darkgray !important;
+    background-color: rgba(0, 0, 0, .05) !important;
+    border: none !important;
+}
+.config-tab-info:not(.active):hover,
+.config-tab-settings:not(.active):hover {
+    background-color: rgba(0, 0, 0, .15) !important;
+}
+.ui.tabular.menu .item .icon {
+    color: darkgray;
+}
+.ui.tabular.menu .item.active .icon {
+    color: black;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
@@ -294,8 +314,8 @@ div.ui.icon.input {
 /* ------------------------------------------------------------------------------------------------------------------ */
 .legend {
     position: absolute;
-    bottom: 15px;
-    right: 15px;
+    bottom: 0;
+    right: 0;
     background: rgba(255, 255, 255, 0.9);
     padding: 12px;
     border-radius: 6px;
@@ -304,24 +324,38 @@ div.ui.icon.input {
     align-items: center;
 }
 .legend:hover {
-    background: rgb(from deepskyblue r g b / 0.3);
+    background: rgba(0, 0, 0, .05);
     transition: background 0.3s ease;
     cursor: pointer;
 }
 .legend svg {
-    width: 280px;
+    width: 295px;
     height: 80px;
 }
 .legend-emoji {
     position: absolute;
-    bottom: 150px;
+    bottom: 140px;
     right: 15px;
     width: 320px;
     text-align: center;
     font-size: 50px;
-    pointer-events: none;
     user-select: none;
     z-index: 101;
+}
+.legend-emoji:hover {
+    animation: wave 2s ease-in-out infinite;
+    transform-origin: center center;
+}
+.wave-once {
+    animation: wave 2s ease-in-out 1;
+}
+@keyframes wave {
+    0%   { transform: translateX(0) rotate(0deg); }
+    20%  { transform: translateX(15px) rotate(10deg); }
+    40%  { transform: translateX(-15px) rotate(-10deg); }
+    60%  { transform: translateX(15px) rotate(10deg); }
+    80%  { transform: translateX(-15px) rotate(-10deg); }
+    100% { transform: translateX(0) rotate(0deg); }
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */

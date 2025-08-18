@@ -3,7 +3,7 @@ import {FormattedMessage, IntlShape, useIntl} from "react-intl";
 import {max, min} from "d3-array";
 import {Media} from "./utils/media-utils";
 import {select, Selection} from "d3-selection";
-import {useEffect, useRef} from "react";
+import {useEffect, useRef, useState} from "react";
 import "d3-transition";
 import {zoom, ZoomBehavior, zoomTransform,} from "d3-zoom";
 import {
@@ -180,6 +180,7 @@ class ChartWrapper {
 export function Chart(props: ChartProps) {
     const chartWrapper = useRef(new ChartWrapper());
     const prevProps = usePrevious(props);
+    const [waveOnce, setWaveOnce] = useState(false);
     const intl = useIntl();
 
     useEffect(() => {
@@ -210,6 +211,15 @@ export function Chart(props: ChartProps) {
         }
     });
 
+    /**
+     * If there is a hidden relatives case, animate the hint once
+     */
+    useEffect(() => {
+        setWaveOnce(true);
+        const timer = setTimeout(() => setWaveOnce(false), 2000);
+        return () => clearTimeout(timer);
+    }, []);
+
     function usePrevious<T>(value: T): T | undefined {
         const ref = useRef<T>();
         useEffect(() => {
@@ -230,15 +240,15 @@ export function Chart(props: ChartProps) {
             {enoughLegendSpace(props.languageOptions) && (
                 <Media greaterThanOrEqual="large">
                     <>
-                        <div id="legend-emoji" className="legend-emoji">👋</div>
+                        <div id="legend-emoji" className={`legend-emoji ${waveOnce ? "wave-once" : ""}`}>👋</div>
                         <div id="legend" className="legend">
                             <svg>
-                                <rect x="10" y="10" width="260" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
-                                <text x={10 + 260 / 2} y={35} fontSize="16" fill="black" textAnchor="middle">
-                                    <tspan x={10 + 260 / 2} dy="0">
+                                <rect x="10" y="10" width="275" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
+                                <text x={275} y={35} fontSize="16" fill="black" textAnchor="middle">
+                                    <tspan x={275 / 2} dy="0">
                                         <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
                                     </tspan>
-                                    <tspan x={10 + 260 / 2} dy="20">
+                                    <tspan x={275 / 2} dy="20">
                                         <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>
                                     </tspan>
                                 </text>
