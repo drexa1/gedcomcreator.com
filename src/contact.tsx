@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+
 import React, {useEffect, useRef, useState} from "react";
 import {useForm, ValidationError} from "@formspree/react";
 import {Button, Form, Grid, Icon, Image, Message, Modal,} from "semantic-ui-react";
@@ -176,7 +178,6 @@ export function ContactForm({ open, onClose, onI18nLanguage }: ContactFormProps)
                     <span key={lang}>
                         <a
                             // className={lang === intl.locale ? "selected-language" : ""}
-                            // eslint-disable-next-line jsx-a11y/anchor-is-valid
                             onClick={() => onI18nLanguage(lang)}
                         ><FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang}/></a>{idx < i18nLanguages.length - 1 ? ", " : ""}
                     </span>
