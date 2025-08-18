@@ -174,7 +174,7 @@ export function ContactForm({ open, onClose, onI18nLanguage }: ContactFormProps)
                 <FormattedMessage id="contact.we.speak" defaultMessage="We speak" />&nbsp;
                 {i18nLanguages.map((lang, idx) => (
                     <span key={lang}>
-                        <a onClick={() => onI18nLanguage(lang)} /* className={lang === intl.locale ? "selected-language" : ""} */ >
+                        <a href="#" onClick={() => onI18nLanguage(lang)} /* className={lang === intl.locale ? "selected-language" : ""} */ >
                             <FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang} />
                         </a>{idx < i18nLanguages.length - 1 ? ", " : ""}
                     </span>
