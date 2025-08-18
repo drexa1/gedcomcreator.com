@@ -172,13 +172,11 @@ export function ContactForm({ open, onClose, onI18nLanguage }: ContactFormProps)
             {/* We speak... */}
             <div id="we-speak">
                 <FormattedMessage id="contact.we.speak" defaultMessage="We speak" />&nbsp;
-                {i18nLanguages.map((lang) => (
+                {i18nLanguages.map((lang, idx) => (
                     <span key={lang}>
-                        {/*className={lang === intl.locale ? "selected-language" : ""}*/}
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                        <a href="#" onClick={(e) => { e.preventDefault(); onI18nLanguage(lang); }}>
-                            <FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang} />
-                        </a>
+                        <a onClick={() => onI18nLanguage(lang)}><FormattedMessage id={`i18n.language.${lang}`} defaultMessage={lang}/></a>
+                        {idx < i18nLanguages.length - 1 ? ", " : ""}
                     </span>
                 ))}
             </div>
