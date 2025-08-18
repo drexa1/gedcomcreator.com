@@ -33,7 +33,7 @@ export const i18nMessages = {
     pl: messages_pl,
     en: supportedLanguages
 };
-const defaultLang = navigator.language?.split(/[-_]/)[0];
+const defaultLang = navigator.language?.split(/[-_]/)[0] || "en";
 
 function Root() {
     const [i18nLanguage, setI18nLanguage] = React.useState(defaultLang);
