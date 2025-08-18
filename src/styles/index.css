@@ -523,6 +523,10 @@ div.ui.icon.input {
     min-height: 90vh;
 }
 
+.landing .ui.segment {
+    /* border: none; */
+    box-shadow: none;
+}
 .dropzone {
     border: 2px dashed #ccc;
     border-radius: 8px;
