@@ -13,7 +13,7 @@ export function Landing() {
             </Segment>
             <Grid stackable columns={2}>
 
-                {/* CREATOR */}
+                {/* Creator */}
                 <Grid.Column>
                     <Segment padded="very" textAlign="center">
                         <div>

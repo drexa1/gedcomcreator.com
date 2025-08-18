@@ -397,8 +397,11 @@ div.ui.icon.input {
 .ui.modal > .close {
     top: 0.5rem !important;
     right: 0.5rem !important;
-    color: dimgray !important;
-    opacity: 1 !important;
+    color: darkgray !important;
+    opacity: .6 !important;
+}
+.ui.modal > .close:hover {
+    opacity: .8 !important;
 }
 
 /* ------------------------------------------------------------------------------------------------------------------ */
