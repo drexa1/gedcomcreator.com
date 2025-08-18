@@ -10,8 +10,8 @@ import {detect} from "detect-browser";
 import {BrowserRouter as Router} from "react-router-dom";
 import {IntlProvider} from "react-intl";
 import {MediaContextProvider, mediaStyles} from "./utils/media-utils";
-import "./styles/index.css";
 import "semantic-ui-css/semantic.min.css";
+import "./styles/index.css";
 
 
 /**
