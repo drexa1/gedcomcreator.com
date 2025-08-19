@@ -237,7 +237,7 @@ export function TopolaChart(props: ChartProps) {
                                 <rect x="10" y="10" width="275" height="60" stroke="black" strokeDasharray="5,5" fill="none" strokeWidth="2"/>
                                 <text x={295} y={35} fontSize="16" fill="black" textAnchor="middle">
                                     <tspan x={295/2} dy="0">
-                                        <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with a dashed line"/>
+                                        <FormattedMessage id="legend.stroke.1" defaultMessage="Individuals with symbol"/>&nbsp;👥
                                     </tspan>
                                     <tspan x={295/2} dy="20">
                                         <FormattedMessage id="legend.stroke.2" defaultMessage="have more relatives"/>

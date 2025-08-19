@@ -621,7 +621,9 @@ const DetailedRenderer = /** @class */ (function (_super) {
                 return _this.getSelectedStroke(node.indi.id);
             })
             .attr("stroke-dasharray", function (node) {
-                return node.indi.hiddenRelatives ? "5, 5" : "0, 0";
+                // dashed border
+                // return node.indi.hiddenRelatives ? "5, 5" : "0, 0";
+                return false ? "5, 5" : "0, 0";
             })
             .merge(update.select("rect.border"));
         this.transition(border)
@@ -639,7 +641,7 @@ const DetailedRenderer = /** @class */ (function (_super) {
             .attr("x", function (node) {
                 return node.indi.width - 30;
             })
-            .attr("y", 5)
+            .attr("y", 3)
             .text(function (node) {
                 return node.indi.hiddenRelatives ? "‍👥" : "";
             })
@@ -648,7 +650,7 @@ const DetailedRenderer = /** @class */ (function (_super) {
             .attr("x", function (node) {
                 return node.indi.width - 30;
             })
-            .attr("y", 5);
+            .attr("y", 3);
     };
 
     DetailedRenderer.prototype.renderFamily = function (enter) {

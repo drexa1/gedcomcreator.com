@@ -110,6 +110,6 @@
   "extras.images": "Immages",
   "extras.sources": "Sources",
 
-  "legend.stroke.1": "Les individus avec ligne pointillée",
+  "legend.stroke.1": "Les individus avec symbole",
   "legend.stroke.2": "ont plus de parents"
 }

@@ -110,6 +110,6 @@
   "extras.images": "Imágenes",
   "extras.sources": "Fuentes",
 
-  "legend.stroke.1": "Los individuos con linea de puntos",
+  "legend.stroke.1": "Los individuos con símbolo",
   "legend.stroke.2": "tienen más parientes"
 }
