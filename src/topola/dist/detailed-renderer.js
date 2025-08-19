@@ -147,14 +147,16 @@ const DetailedRenderer = /** @class */ (function (_super) {
         const languagesHeight = indi.showLanguages() && indi.getLanguages().length > 0 ? LANGUAGES_HEIGHT : 0;
         const idAndSexHeight = indi.showId() || indi.showSex() ? DETAILS_HEIGHT : 0;
         const height = d3_array_1.max([
-            INDI_MIN_HEIGHT + languagesHeight + ethnicityHeight + (details.length * DETAILS_HEIGHT) + idAndSexHeight,
+            INDI_MIN_HEIGHT + languagesHeight  + ethnicityHeight +
+            (details.length * DETAILS_HEIGHT) +
+            idAndSexHeight,
             indi.getImageUrl() ? IMAGE_HEIGHT : 0,
         ]);
         // Width
         const maxDetailsWidth = d3_array_1.max(details.map(detail => getLength(detail.text, "details")));
         const width = d3_array_1.max([
             maxDetailsWidth + 22,
-            getLength(indi.getFirstName() || "", "name") + 8,
+            getLength(indi.getFirstName() || "", "name") + 28,
             getLength(indi.getLastName() || "", "name") + 8,
             indi.showLanguages() && indi.getLanguages().length > 0 ? (getLength(indi.getLanguagesLabel(), "languages") + 28) : 0,
             indi.showEthnicity() && indi.getEthnicity() != null ? (getLength(indi.getEthnicity(), "ethnicity") + 28) : 0,
@@ -629,6 +631,24 @@ const DetailedRenderer = /** @class */ (function (_super) {
             .attr("height", function (node) {
                 return node.indi.height;
             });
+
+        // Hidden relatives icon
+        const emoji = enter
+            .append("text")
+            .attr("class", "hidden-relatives-icon")
+            .attr("x", function (node) {
+                return node.indi.width - 30;
+            })
+            .attr("y", 5)
+            .text(function (node) {
+                return node.indi.hiddenRelatives ? "‍👥" : "";
+            })
+            .merge(update.select("text.hidden-relatives-icon"));
+        this.transition(emoji)
+            .attr("x", function (node) {
+                return node.indi.width - 30;
+            })
+            .attr("y", 5);
     };
 
     DetailedRenderer.prototype.renderFamily = function (enter) {

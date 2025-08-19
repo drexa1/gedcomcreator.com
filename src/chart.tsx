@@ -64,10 +64,7 @@ class ChartWrapper {
      * Renders the chart or performs a transition animation to a new state.
      * If indiInfo is not given, it means that it is the initial render and no animation is performed.
      */
-    renderChart(
-        props: ChartProps,
-        intl: IntlShape,
-        args: { initialRender: boolean; resetPosition: boolean } = {
+    renderChart(props: ChartProps, intl: IntlShape, args: { initialRender: boolean; resetPosition: boolean } = {
             initialRender: false,
             resetPosition: false,
         }
@@ -177,7 +174,7 @@ class ChartWrapper {
     }
 }
 
-export function Chart(props: ChartProps) {
+export function TopolaChart(props: ChartProps) {
     const chartWrapper = useRef(new ChartWrapper());
     const prevProps = usePrevious(props);
     const [waveOnce, setWaveOnce] = useState(false);
@@ -198,16 +195,10 @@ export function Chart(props: ChartProps) {
                 || props.data !== prevProps.data
                 || props.selection !== prevProps.selection;
             // non-first render
-            chartWrapper.current.renderChart(props, intl, {
-                initialRender,
-                resetPosition,
-            });
+            chartWrapper.current.renderChart(props, intl, { initialRender, resetPosition });
         } else {
             // first render
-            chartWrapper.current.renderChart(props, intl, {
-                initialRender: true,
-                resetPosition: true,
-            });
+            chartWrapper.current.renderChart(props, intl, { initialRender: true,  resetPosition: true });
         }
     });
 

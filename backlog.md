@@ -28,6 +28,7 @@ BACKLOG
 [x] Legend is touching chart  
 [x] Improve Info | Settings (half, background, hover)  
 [x] Relocate contact form reasons  
+[ ] Fix height to fit hidden relatives emoji  
 [ ] Create i18n illustrations of code & graphs  
 [ ] Create text content for landing  
 [ ] Landing page  

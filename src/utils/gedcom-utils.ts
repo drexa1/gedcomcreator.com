@@ -126,42 +126,35 @@ function strcmp(a: string, b: string) {
     return 0;
 }
 
-/** Birthdate comparator for individuals. */
+/**
+ * Birthdate comparator for individuals.
+ */
 function birthDatesComparator(gedcom: JsonGedcomData) {
     const indiMap = idToIndiMap(gedcom);
     return (indiId1: string, indiId2: string) => {
         const indi1: JsonIndi | undefined = indiMap.get(indiId1);
         const indi2: JsonIndi | undefined = indiMap.get(indiId2);
-        return (
-            compareDates(indi1 && indi1.birth, indi2 && indi2.birth) ||
-            strcmp(indiId1, indiId2)
-        );
+        return (compareDates(indi1 && indi1.birth, indi2 && indi2.birth) || strcmp(indiId1, indiId2));
     };
 }
 
-/** Marriage date comparator for families. */
+/**
+ * Marriage date comparator for families.
+ */
 function marriageDatesComparator(gedcom: JsonGedcomData) {
     const famMap = idToFamMap(gedcom);
     return (famId1: string, famId2: string) => {
         const fam1: JsonFam | undefined = famMap.get(famId1);
         const fam2: JsonFam | undefined = famMap.get(famId2);
-        return (
-            compareDates(fam1 && fam1.marriage, fam2 && fam2.marriage) ||
-            strcmp(famId1, famId2)
-        );
+        return (compareDates(fam1 && fam1.marriage, fam2 && fam2.marriage) || strcmp(famId1, famId2));
     };
 }
 
 /**
  * Sorts children by birthdate in the given family. Does not modify the input objects.
  */
-function sortFamilyChildren(
-    fam: JsonFam,
-    comparator: (id1: string, id2: string) => number,
-): JsonFam {
-    if (!fam.children) {
-        return fam;
-    }
+function sortFamilyChildren(fam: JsonFam, comparator: (id1: string, id2: string) => number): JsonFam {
+    if (!fam.children) return fam;
     const newChildren = fam.children.sort(comparator);
     return Object.assign({}, fam, {children: newChildren});
 }
@@ -178,22 +171,15 @@ function sortChildren(gedcom: JsonGedcomData): JsonGedcomData {
 /**
  * Sorts spouses by marriage date. Does not modify the input objects.
  */
-function sortIndiSpouses(
-    indi: JsonIndi,
-    comparator: (id1: string, id2: string) => number,
-): JsonFam {
-    if (!indi.fams) {
-        return indi;
-    }
+function sortIndiSpouses(indi: JsonIndi, comparator: (id1: string, id2: string) => number): JsonFam {
+    if (!indi.fams) return indi;
     const newFams = indi.fams.sort(comparator);
     return Object.assign({}, indi, {fams: newFams});
 }
 
 function sortSpouses(gedcom: JsonGedcomData): JsonGedcomData {
     const comparator = marriageDatesComparator(gedcom);
-    const newIndis = gedcom.indis.map((indi) =>
-        sortIndiSpouses(indi, comparator),
-    );
+    const newIndis = gedcom.indis.map((indi) => sortIndiSpouses(indi, comparator));
     return Object.assign({}, gedcom, {indis: newIndis});
 }
 
@@ -204,7 +190,7 @@ function sortSpouses(gedcom: JsonGedcomData): JsonGedcomData {
 export function dereference(
     entry: GedcomEntry,
     gedcom: GedcomData,
-    getterFunction: (gedcom: GedcomData) => { [key: string]: GedcomEntry },
+    getterFunction: (gedcom: GedcomData) => { [key: string]: GedcomEntry }
 ) {
     if (entry.data) {
         const dereferenced = getterFunction(gedcom)[pointerToId(entry.data)];
@@ -232,26 +218,29 @@ export function getData(entry: GedcomEntry) {
     return result;
 }
 
-/** Sorts children and spouses. */
+/**
+ * Sorts children and spouses.
+ */
 export function normalizeGedcom(gedcom: JsonGedcomData): JsonGedcomData {
     return sortSpouses(sortChildren(gedcom));
 }
 
 const IMAGE_EXTENSIONS = [".jpg", ".jpeg", ".png", ".gif"];
 
-/** Returns true if the given file name has a known image extension. */
+/**
+ * Returns true if the given file name has a known image extension.
+ */
 export function isImageFile(fileName: string): boolean {
     const lowerName = fileName.toLowerCase();
     return IMAGE_EXTENSIONS.some((ext) => lowerName.endsWith(ext));
 }
 
 /**
- * Removes images that are not HTTP links or do not have known image extensions. Does not modify the input object.
+ * Removes images that are not HTTP links or do not have known image extensions.
+ * Does not modify the input object.
  */
 function filterImage(indi: JsonIndi, images: Map<string, string>): JsonIndi {
-    if (!indi.images || indi.images.length === 0) {
-        return indi;
-    }
+    if (!indi.images || indi.images.length === 0) return indi;
     const newImages: JsonImage[] = [];
     indi.images.forEach((image) => {
         const filePath = image.url.replaceAll('\\', '/');
@@ -288,11 +277,7 @@ function filterImages(
  * @param images Map from file name to image URL. This is used to pass in uploaded images.
  * @param allLanguages
  */
-export function convertGedcom(
-    gedcom: string,
-    allLanguages: IndividualLanguage[],
-    images: Map<string, string>
-): TopolaData {
+export function convertGedcom(gedcom: string, allLanguages: IndividualLanguage[], images: Map<string, string>): TopolaData {
     const entries = parseGedcom(gedcom, allLanguages);
     const json = gedcomEntriesToJson(entries, allLanguages);
     if (

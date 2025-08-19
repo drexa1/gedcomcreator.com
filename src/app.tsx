@@ -8,7 +8,7 @@ import {ErrorPopupProps, getI18nMessage} from "./utils/error-i18n";
 import {IndiInfo} from "./topola";
 import {Loader, Message, Portal, Tab} from "semantic-ui-react";
 import {Media} from "./utils/media-utils";
-import { Routes, Route, Navigate } from 'react-router-dom';
+import {Navigate, Route, Routes} from 'react-router-dom';
 import {TopBar} from "./menu/top-bar";
 import {
     getEthnicities,
@@ -19,8 +19,8 @@ import {
     TopolaData
 } from "./utils/gedcom-utils";
 import {useEffect, useState} from "react";
-import {useNavigate, useLocation} from "react-router";
-import {Chart, ChartType} from "./chart";
+import {useLocation, useNavigate} from "react-router";
+import {TopolaChart, ChartType} from "./chart";
 import {
     GedcomUrlDataSource,
     getSelection,
@@ -33,8 +33,9 @@ import {configToArgs} from "./utils/config-utils";
 import CSVLoader from "./datasource/load-csv";
 import {getArguments} from "./utils/param-utils";
 import {downloadGedcom, downloadPdf, downloadPng, downloadSvg, getFilename} from "./utils/chart-utils";
-import {ConfigPanel, Config, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
+import {Config, ConfigPanel, DEFAULT_CONFIG, EthnicityArg, IdsArg, LanguagesArg, SexArg} from "./config";
 import {Landing} from "./landing";
+// import {DonatsoChart} from "./donatso";
 
 
 enum AppState {
@@ -358,20 +359,21 @@ export function App(props: AppProps) {
                     <div id="content">
                         <ErrorPopup open={showErrorPopup} message={error} onDismiss={onDismissErrorPopup}/>
                         {state === AppState.LOADING_MORE ? (<Loader active size="small" className="loading-more"/>) : null}
-                        <Chart
-                            data={data!.chartData}
-                            selection={updatedSelection}
-                            chartType={chartType}
-                            freezeAnimation={freezeAnimation}
-                            colors={config.color}
-                            selectedLanguage={config.selectedLanguage}
-                            hideLanguages={config.languages}
-                            hideEthnicity={config.ethnicity}
-                            hideIds={config.id}
-                            hideSex={config.sex}
-                            onSelection={onSelection}
-                            languageOptions={config.languageOptions}
-                        />
+                            <TopolaChart
+                                data={data!.chartData}
+                                selection={updatedSelection}
+                                chartType={chartType}
+                                freezeAnimation={freezeAnimation}
+                                colors={config.color}
+                                selectedLanguage={config.selectedLanguage}
+                                hideLanguages={config.languages}
+                                hideEthnicity={config.ethnicity}
+                                hideIds={config.id}
+                                hideSex={config.sex}
+                                onSelection={onSelection}
+                                languageOptions={config.languageOptions}
+                            />
+                            {/* <DonatsoChart data={data!.chartData} selection={selection!} onSelection={onSelection}/> */}
                         {showSidePanel ? (
                             <Media greaterThanOrEqual="large" className="sidePanel">
                                 <Tab panes={sidePanelTabs}/>

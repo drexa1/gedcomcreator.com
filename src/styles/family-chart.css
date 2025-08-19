@@ -1,0 +1,54 @@
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Donatso chart                                                                                                      */
+/* ------------------------------------------------------------------------------------------------------------------ */
+#FamilyChart {
+    --female-color: rgb(196, 138, 146);
+    --male-color: rgb(120, 159, 172);
+    --genderless-color: lightgray;
+    --background-color: rgb(33, 33, 33);
+    --text-color: #fff;
+}
+#FamilyChart {
+    flex: 1 1 auto;
+    overflow: auto;
+}
+#FamilyChart svg.main_svg {
+    width: 100%;
+    height: 100%;
+}
+#FamilyChart * {
+    border: none !important;
+}
+#FamilyChart rect.card-female,
+#FamilyChart .card-female .card-body-rect,
+#FamilyChart .card-female .text-overflow-mask {
+    fill: var(--female-color);
+}
+#FamilyChart rect.card-male,
+#FamilyChart .card-male .card-body-rect,
+#FamilyChart .card-male .text-overflow-mask {
+    fill: var(--male-color);
+}
+#FamilyChart .card-genderless .card-body-rect,
+#FamilyChart .card-genderless .text-overflow-mask {
+    fill: var(--genderless-color);
+}
+#FamilyChart g.card_add text {
+    fill: #fff;
+}
+#FamilyChart .card-main-outline {
+    stroke: lightseagreen;
+    stroke-width: 5px;
+}
+#FamilyChart .card_family_tree rect {
+    transition: 0.3s;
+}
+#FamilyChart .card_family_tree:hover rect {
+    transform: scale(1.1);
+}
+#FamilyChart .card_family_tree line {
+    stroke: var(--genderless-color);
+}
+#FamilyChart .link {
+    stroke: var(--genderless-color);
+}

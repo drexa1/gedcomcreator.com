@@ -26,6 +26,11 @@
     stroke-width: 2px;
 }
 
+.hidden-relatives-icon {
+    font-size: 20px !important;
+    pointer-events: none;
+}
+
 .detailed {
     stroke-width: 2px;
 }

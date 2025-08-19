@@ -519,21 +519,93 @@ div.ui.icon.input {
 /* Landing                                                                                                            */
 /* ------------------------------------------------------------------------------------------------------------------ */
 .landing {
-    padding: 5rem 20rem;
+    padding: 1rem 20rem;
     min-height: 90vh;
 }
-
 .landing .ui.segment {
     /* border: none; */
     box-shadow: none;
 }
+.landing-header {
+    min-height: 40%;
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Dropzone                                                                                                           */
+/* ------------------------------------------------------------------------------------------------------------------ */
+/*.dropzone {*/
+/*    border: 2px dashed #ccc;*/
+/*    border-radius: 8px;*/
+/*    color: #bbb;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
+/*    flex-grow: 1;*/
+/*    align-self: stretch;*/
+/*}*/
+.upload-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    gap: 20px;
+}
 .dropzone {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+    height: 250px;
     border: 2px dashed #ccc;
     border-radius: 8px;
     color: #bbb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-    align-self: stretch;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
+.dropzone:hover {
+    background-color: #f5f5f5;
+}
+.dropzone p {
+    margin-bottom: 5px;
+}
+.dropzone p:last-of-type {
+    margin-bottom: 20px;
+}
+.needed-files {
+    text-align: left;
+}
+.needed-files p {
+    font-weight: bold;
+}
+.needed-files-emojis p {
+    width: 30px;
+    height: 22px;
+}
+.needed-files-emoji {
+    cursor: pointer;
+}
+.needed-files-emoji[data-tooltip]:hover::after {
+    content: attr(data-tooltip);
+    color: coral;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 5px;
+}
+@media (max-width: 900px) {
+    .upload-container {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .dropzone {
+        max-width: 400px;
+        height: 100px;
+    }
+}
+
+/* ------------------------------------------------------------------------------------------------------------------ */
+/* Dropzone                                                                                                           */
+/* ------------------------------------------------------------------------------------------------------------------ */

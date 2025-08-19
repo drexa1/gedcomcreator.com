@@ -1,12 +1,13 @@
 import React from "react";
-import { Grid, Segment, Header, Button, Icon } from "semantic-ui-react";
+import {Grid, Segment, Header, Button, Icon, Image} from "semantic-ui-react";
+import {Dropzone} from "./dropzone";
 
 
 export function Landing() {
     return (
         <div className="landing">
             {/* Header */}
-            <Segment textAlign="center">
+            <Segment textAlign="center" className="landing-header">
                 <Header as="h1">
                     <Icon name="users" color="blue"/>Family
                 </Header>
@@ -15,26 +16,24 @@ export function Landing() {
 
                 {/* Creator */}
                 <Grid.Column>
-                    <Segment padded="very" textAlign="center">
-                        <div>
-                            <Icon name="file excel" size="huge" color="green" />
-                            <Header as="h2">Create XLS</Header>
-                            <div style={{
-                                display: "grid",
-                                gridTemplateColumns: "repeat(12, 40px)",
-                                gap: "4px",
-                                justifyContent: "center",
-                                margin: "1.5rem 0"
-                            }}>
-                                {[...Array(48)].map((_, i) => (
-                                    <div key={i} style={{
-                                        width: "40px",
-                                        height: "30px",
-                                        border: "1px solid #ccc",
-                                        backgroundColor: "#f9f9f9"
-                                    }}/>
-                                ))}
-                            </div>
+                    <Segment textAlign="center">
+                        <Image id="excel-file" size="tiny" src="/assets/excel-file.png"/>
+                        <Header as="h2">Create XLS</Header>
+                        <div style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(12, 40px)",
+                            gap: "4px",
+                            justifyContent: "center",
+                            margin: "1.5rem 0"
+                        }}>
+                            {[...Array(48)].map((_, i) => (
+                                <div key={i} style={{
+                                    width: "40px",
+                                    height: "30px",
+                                    border: "1px solid #ccc",
+                                    backgroundColor: "#f9f9f9"
+                                }}/>
+                            ))}
                         </div>
                         <Button fluid primary style={{ margin: "auto" }}>Create XLS</Button>
                     </Segment>
@@ -42,15 +41,10 @@ export function Landing() {
 
                 {/* Upload GEDCOM */}
                 <Grid.Column>
-                    <Segment padded="very" textAlign="center" style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        height: "100%",
-                        alignItems: "center"
-                    }}>
-                        <Icon name="upload" size="huge" color="yellow" />
+                    <Segment textAlign="center">
+                        <Image id="excel-file" size="tiny" src="/assets/gedcom-file.png"/>
                         <Header as="h2">Upload GEDCOM</Header>
-                        <div className="dropzone">Drop a GEDCOM file here</div>
+                        <Dropzone/>
                     </Segment>
                 </Grid.Column>
 
